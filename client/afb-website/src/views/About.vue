@@ -223,9 +223,6 @@ export default {
 
 <style scope>
 /* general styling for the page */
-#about {
-  padding-top: 80px;
-}
 
 .paddingSection {
   padding-left: 5%;
