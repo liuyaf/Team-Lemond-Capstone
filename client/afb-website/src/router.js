@@ -24,17 +24,17 @@ export default new Router({
     {
       path: '/resources',
       name: 'resources',
-      component: () => import(/* webpackChunkName: "about" */ './views/Resources.vue')
+      component: () => import(/* webpackChunkName: "resources" */ './views/Resources.vue')
     },
     {
       path: '/discount-program',
       name: 'discount',
-      component: () => import(/* webpackChunkName: "about" */ './views/DiscountProgram.vue')
+      component: () => import(/* webpackChunkName: "discount" */ './views/DiscountProgram.vue')
     },
     {
       path: '/contact-us',
       name: 'contact',
-      component: () => import(/* webpackChunkName: "about" */ './views/ContactUs.vue')
+      component: () => import(/* webpackChunkName: "contact" */ './views/ContactUs.vue')
     }
   ]
 })

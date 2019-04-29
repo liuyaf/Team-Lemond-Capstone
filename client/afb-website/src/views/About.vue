@@ -13,7 +13,7 @@
     </div>
 
     <!-- fact section -->
-    <div id="facts">
+    <div class="facts">
         <div class="row mx-auto paddingSection">
           <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
               <div class ="fact-body">
@@ -90,7 +90,6 @@ export default {
       errors: [],
       parser: new DOMParser(),
       parsedHTML: null,
-      divs: null,
       introSection: {
         image: null,
         heading: null,
@@ -117,12 +116,12 @@ export default {
   },
   mounted () {
     axios
+    // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
     .get('https://agefriendlysea.wpengine.com/wp-json/wp/v2/pages/37')
     .then(response => {
       // RAW HTML
       this.info = response.data.content.rendered 
       this.parsedHTML = this.parser.parseFromString(this.info, 'text/html')
-      this.divs = this.parsedHTML.getElementsByTagName("div")
 
       // INTRO SECTION
       // parsing the image src for the landing page cover
@@ -267,7 +266,7 @@ p {
   margin-left: 0;
 }
 
-#facts div div div span h3 span {
+.facts div div div span h3 span {
   color: #cc3e16;
   font-size: 4.4vw;
 }
