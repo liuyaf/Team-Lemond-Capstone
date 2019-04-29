@@ -7,7 +7,7 @@
                 <span v-html="introSection.heading"></span>
                 <span v-html="introSection.text"></span>
 
-                <button class="btn introTestButton">Assessment Test &#8594;</button>
+                <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
               <div>
                 <div class="information" v-html="missionSection.paragraphs"></div>
 
-                <button class="btn missionButton">Resource Guide &#8594;</button>
+                <DynamicButton v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"/>
               </div>    
             </div>
 
@@ -60,6 +60,11 @@
         <AssessmentCard v-for="(item) in howToBecomeAfbSection.assessmentCards" :key="item.id" v-bind:content="item"/>
       </div>
     </div>
+
+    <!-- apply for sticker -->
+    <div class="apply-for-sticker paddingSection">
+      <ApplyStickerCard v-bind:content="applyStickerSection"/>
+    </div>
   </div>
 </template>
 
@@ -68,12 +73,16 @@
 import axios from 'axios'
 import MediaTextCard from '@/components/MediaTextCard.vue'
 import AssessmentCard from '@/components/AssessmentCard.vue'
+import DynamicButton from '@/components/DynamicButton.vue'
+import ApplyStickerCard from '@/components/ApplyStickerCard.vue'
 
 export default {
   name: 'about',
   components: { 
     MediaTextCard,
-    AssessmentCard
+    AssessmentCard,
+    DynamicButton,
+    ApplyStickerCard
   },
   data () {
     return {
@@ -98,6 +107,11 @@ export default {
       howToBecomeAfbSection: {
         header: [],
         assessmentCards: []
+      },
+      applyStickerSection: {
+        header: null,
+        image: null,
+        paragraph: null
       }
     }
   },
@@ -134,39 +148,41 @@ export default {
         this.factSection.push(fact)
       }
 
-
-      // FIVE REASONS
       // contents for the mission section and the five reasons
       var mediaTextBlocks = this.parsedHTML.getElementsByClassName("wp-block-media-text alignwide")
-      
 
-      // grabbing the header image
-      this.fiveReasonsHeaderImage = this.parsedHTML.getElementsByClassName("five-reasons-header-image")[0].children[0].src
-      
+      // MISSION
       // parsing content for the mission section of the landing page
         // grabbing the image src
         this.missionSection.image = mediaTextBlocks[0].firstElementChild.children[0].src
         // grabbing the paragraph for the mission section
         this.missionSection.paragraphs = mediaTextBlocks[0].children[1].innerHTML
+      
+      // FIVE REASONS
+      // grabbing the header image
+      this.fiveReasonsHeaderImage = this.parsedHTML.getElementsByClassName("five-reasons-header-image")[0].children[0].src
+      
+        // getting the five reasons to age friendly section 
+        var reasonCardColors = ['#CC3E16', '#BBC437', '#EAA74B', '#6EAD94', '#155777']
 
-    
-      // getting the five reasons to age friendly section 
-      for (var s = 1; s <= 5; s++) {
-        var reason = {
-          className: null,
-          bigImage: null,
-          smallIcon: null,
-          header: null,
-          paragraph: null
+        for (var s = 1; s <= 5; s++) {
+          var reason = {
+            className: null,
+            bigImage: null,
+            smallIcon: null,
+            buttonColor: null,
+            header: null,
+            paragraph: null
+          }
+          reason.className = mediaTextBlocks[s].className
+          reason.bigImage = mediaTextBlocks[s].children[0].children[0].src
+          reason.smallIcon = mediaTextBlocks[s].children[1].getElementsByTagName("img")[0].src
+          reason.buttonColor = reasonCardColors[s-1]
+          reason.header = mediaTextBlocks[s].children[1].children[1].outerHTML
+          reason.paragraph = mediaTextBlocks[s].children[1].children[2].innerText
+
+          this.fiveReasonsSection.push(reason)
         }
-        reason.className = mediaTextBlocks[s].className
-        reason.bigImage = mediaTextBlocks[s].children[0].children[0].src
-        reason.smallIcon = mediaTextBlocks[s].children[1].getElementsByTagName("img")[0].src
-        reason.header = mediaTextBlocks[s].children[1].children[1].outerHTML
-        reason.paragraph = mediaTextBlocks[s].children[1].children[2].innerText
-
-        this.fiveReasonsSection.push(reason)
-      }
     
 
       // HOW TO BECOME AN AGE FRIENDLY BUSINESS
@@ -191,8 +207,13 @@ export default {
       }
 
       // AGE FRIENDLY STICKER
-      console.log(mediaTextBlocks[mediaTextBlocks.length-1])
-
+      // parsing content for teh apply for sticker section 
+        // header
+        this.applyStickerSection.header = mediaTextBlocks[mediaTextBlocks.length-1].children[1].children[0].outerHTML
+        // image
+        this.applyStickerSection.image = mediaTextBlocks[mediaTextBlocks.length-1].children[0].children[0].src
+        // paragraph
+        this.applyStickerSection.paragraph = mediaTextBlocks[mediaTextBlocks.length-1].children[1].children[1].innerHTML
     })
     .catch(e => {
       this.errors.push(e)
@@ -209,10 +230,6 @@ export default {
   padding-right: 5%;
   padding-top: 3%;
   padding-bottom: 3%;
-}
-
-.btn {
-  border-radius: 0;
 }
 
 p {
@@ -233,11 +250,6 @@ p {
   padding-right: 10%;
   margin-top: 25%;
   margin-right: 40%;
-}
-
-.introTestButton {
-  border: 2px solid white;
-  color: white;
 }
 
 #mainHeader > span > p {
@@ -282,11 +294,6 @@ p {
   margin-bottom: auto;
 }
 
-.missionButton {
-  border: 2px solid red;
-  color: red;
-}
-
 .missionImage img {
   display:block; /*remove inline-block spaces*/
   width:100%; /*make image streatch*/
@@ -307,6 +314,11 @@ p {
   background-color:#f8f8f8;
 }
 
+.five-reasons-image-header {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
 .testLine {
   height: 6px;
   color: #155777;
@@ -324,5 +336,11 @@ p {
 
 .textParagraphs {
   font-family: 'DDINRegular';
+}
+
+
+/* how to become an age friendly business */
+.apply-for-sticker {
+  background-color: #f8f8f8;
 }
 </style>

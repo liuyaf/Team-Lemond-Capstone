@@ -98,8 +98,21 @@
       </nav>
     </header>
     <router-view/>
+    <footer>
+      <Footer/>
+    </footer>
   </div>
 </template>
+
+<script>
+import Footer from '@/components/Footer.vue'
+export default {
+  components: {
+    Footer
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -134,6 +147,13 @@ nav {
   color: #42b983;
 }
 
+footer {
+  height: 300px;
+  background-color: black;
+  color: white;
+  padding-top: 30px;
+}
+
 @media (max-width: 991px) {
   .navImg {
     width: 100%;
@@ -162,4 +182,5 @@ nav {
     height: 50px;
   }
 }
+
 </style>
