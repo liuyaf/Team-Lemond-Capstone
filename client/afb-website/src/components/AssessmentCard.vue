@@ -1,23 +1,26 @@
 <template>
     <div class="col-lg-6 d-flex">
         <div class="testBoxes paddingSection">
-            <!-- <h2 class="testTextHeaders">Customer Service Self Assessment</h2> -->
             <span class="testTextHeaders" v-html="content.headerHTML"></span>
             <hr class="testHeaderLine">
             <br>
             <p class="textParagraphs" v-html="content.paragraph"></p>
             <br>
             <br>
-            <!-- <img src="img/csTestBtn.svg" class="svgButton"> -->
-            <button class="btn testButton">{{ buttonText }} &#8594;</button>
+            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/#' }"/>
         </div>
     </div>
 </template>
 
 <script>
+import DynamicButton from '@/components/DynamicButton.vue'
+
 export default {
     name: 'AssessmentCard',
     props: ['content'],
+    components: {
+        DynamicButton
+    },
     computed: {
         buttonText: function() {
             return this.content.headerText
@@ -27,7 +30,6 @@ export default {
 </script>
 
 <style scope>
-
 .testBoxes {
     box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
     background-color: #ffffff;
@@ -40,11 +42,6 @@ export default {
     padding-right: 5%;
     padding-top: 3%;
     padding-bottom: 3%;
-}
-
-.testButton {
-    border: 2px solid red;
-    color: red;
 }
 </style>
 

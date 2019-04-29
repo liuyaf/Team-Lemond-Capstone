@@ -8,8 +8,21 @@
       <router-link to="/contact-us">Contact Us</router-link>
     </div>
     <router-view/>
+    <footer>
+      <Footer/>
+    </footer>
   </div>
 </template>
+
+<script>
+import Footer from '@/components/Footer.vue'
+export default {
+  components: {
+    Footer
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -21,6 +34,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
 #nav {
   padding: 30px;
   background-color: white;
@@ -37,5 +51,12 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+footer {
+  height: 300px;
+  background-color: black;
+  color: white;
+  padding-top: 30px;
 }
 </style>
