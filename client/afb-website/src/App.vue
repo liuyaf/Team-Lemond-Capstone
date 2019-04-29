@@ -49,10 +49,10 @@
     </header> -->
     <header>
       <nav class="navbar fixed-top navbar-expand-lg d-flex pt-3 row">
-        <div class="container col-lg-3 col-md-3 text-lg-right align-self-center">
+        <div class="container-fluid col-lg-3 col-md-3 text-lg-right align-self-center" id="phoneDisplay">
           <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/headerImg-e1556491430371.png" class="navImg" alt="Age Friendly Business Logo">
 
-          <div class="hamburgerMenu justify-content-end navbar-light pr-2">
+          <div class="hamburgerMenu justify-content-end pr-2">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
               aria-expanded="false" aria-label="Toggle navigation">
           <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/hamburgerBtn-1-e1556496454518.png" class="svgButton" alt="Hamburger Button">
@@ -154,6 +154,11 @@ footer {
   padding-top: 30px;
 }
 
+#navbarSupportedContent {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
 @media (max-width: 991px) {
   .navImg {
     width: 100%;
@@ -170,16 +175,21 @@ footer {
     display: inline-flex;
   }
 
+  #phoneDisplay {
+    margin-left: 10px;
+  }
+
   .navImg {
     width: 250px;
     height: 55px;
   }
+
 }
 
 @media (max-width: 400px) {
   .navImg {
     width: 200px;
-    height: 50px;
+    height: auto;
   }
 }
 
