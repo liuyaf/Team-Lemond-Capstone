@@ -1,52 +1,5 @@
 <template>
   <div id="app">
-    <!-- <header class="d-flex">
-      <div class="container col-lg-3 col-md-3 text-lg-right align-self-center">
-            <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/headerImg-e1556491430371.png" class="navImg" alt="Age Friendly Business Logo">
-      </div>
-      <div class="container col-lg-5 col-md-6 align-self-center text-center pr-0 navItems">
-        <div id="nav">
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link> | 
-            <router-link to="/resources">Resources</router-link> | 
-            <router-link to="/discount-program">Discount Program</router-link> | 
-            <router-link to="/contact-us">Contact Us</router-link>
-        </div>
-      </div>
-    <div class="container d-flex col-lg-4 col-md-3 align-self-center px-0 navItems">
-      <div class="col-3 px-1 navItems">
-        <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navFontBtn.png" class="navImg svgButton" alt="Change font button">
-      </div>
-      <div class="col-9 px-1 navItems">
-        <a href=""><img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png" class="navImg svgButton" alt="Assessment test button"> </a>
-      </div>
-    </div>
-    <div class="hamburgerMenu justify-content-end navbar navbar-light pr-2">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/hamburgerBtn-1-e1556496454518.png" class="svgButton" alt="Hamburger Button">
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="nav navbar-nav extendedNav">
-          <li>
-            <router-link to="/">Home</router-link> 
-          </li>
-          <li>
-            <router-link to="/about">About</router-link> 
-          </li>
-          <li>
-            <router-link to="/resources">Resources</router-link> 
-          </li>
-          <li>
-            <router-link to="/discount-program">Discount Program</router-link>
-          </li>
-          <li>
-              <router-link to="/contact-us">Contact Us</router-link>
-          </li>       
-        </ul>
-      </div>
-    </div>
-    </header> -->
     <header>
       <nav class="navbar fixed-top navbar-expand-lg d-flex pt-3 row">
         <div class="container-fluid col-lg-3 col-md-3 text-lg-right align-self-center" id="phoneDisplay">
