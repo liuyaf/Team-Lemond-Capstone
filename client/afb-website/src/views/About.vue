@@ -2,12 +2,17 @@
   <div id="about">
     <!-- intro section -->
     <div id="mainImage" class="jumbotron jumbotron-fluid" v-bind:style="{ 'background-image': 'url('+ introSection.image +')' }">
-        <div class="container">
+        <div class="container mx-0">
             <div id="mainHeader">
-                <span v-html="introSection.heading"></span>
+              <div class="col-xl-9 col-lg-11 col-md-12">
+                <span v-html="introSection.heading" v-bind:class="textHeader"></span>
+              </div>
+              <div class="col-lg-12 col-md-12">
                 <span v-html="introSection.text"></span>
-
+              </div>
+              <div class="col-lg-7 col-md-8">
                 <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
+              </div>
             </div>
         </div>
     </div>
@@ -247,8 +252,10 @@ p {
 #mainHeader {
   color: white;
   padding-right: 10%;
-  margin-top: 25%;
-  margin-right: 40%;
+  margin-top: 275px;
+  margin-left: 10%;
+  margin-right: 25%;
+  line-height: 1.4;
 }
 
 #mainHeader > span > p {
@@ -342,4 +349,12 @@ p {
 .apply-for-sticker {
   background-color: #f8f8f8;
 }
+
+@media (max-width: 768px) {
+    #mainHeader {
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
 </style>

@@ -128,6 +128,26 @@ footer {
     margin-left: 10px;
   }
 
+  @media (max-width: 768px) {
+    .navDisplay {
+      display: none;
+    }
+
+    .hamburgerMenu {
+      display: inline-flex;
+    }
+
+    #phoneDisplay {
+      margin-left: 10px;
+    }
+
+    .navImg {
+      width: 200px;
+      height: auto;
+    }
+
+  }
+
 }
 
 </style>
