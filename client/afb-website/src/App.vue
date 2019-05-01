@@ -12,7 +12,7 @@
           </button>
         </div>
         </div>
-        <div class="container col-lg-5 col-md-6 align-self-center text-center px-2">
+        <div class="container col-lg-5 col-md-6 align-self-center justify-content-center px-2">
           <div id="nav">
             <router-link class="navSpacing navDisplay" to="/">Home</router-link> 
             <router-link class="navSpacing navDisplay" to="/about">About</router-link> 
@@ -21,12 +21,10 @@
             <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
           </div>
         </div>
-        <div class="container d-flex col-lg-4 col-md-3 align-self-center px-0">
-          <div class="col-3 px-1 navDisplay">
-            <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navFontBtn.png" class="navImg svgButton" alt="Change font button">
-          </div>
-          <div class="col-9 px-1 navDisplay">
-            <a href=""><img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png" class="navImg svgButton" alt="Assessment test button"> </a>
+        <div class="container d-flex col-lg-4 col-md-3 align-self-center pl-0">
+          <div class="col-12 px-1 d-flex justify-content-end">
+            <img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navFontBtn.png" class="navImg ml-2 svgButton navDisplay" alt="Change font button">
+            <a href=""><img src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png" class="navImg ml-2 svgButton navDisplay" alt="Assessment test button"> </a>
           </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -112,12 +110,10 @@ footer {
   padding-top: 10px;
 }
 
-@media (max-width: 991px) {
-  .navImg {
-    width: 100%;
+.navImg {
+    width: auto;
     height: auto;
   }
-}
 
 @media (max-width: 768px) {
   .navDisplay {
@@ -130,19 +126,15 @@ footer {
 
   #phoneDisplay {
     margin-left: 10px;
+    flex:none;
+    max-width: 100%;
   }
 
-  .navImg {
-    width: 250px;
-  }
-
-}
-
-@media (max-width: 400px) {
   .navImg {
     width: 200px;
     height: auto;
   }
+
 }
 
 </style>

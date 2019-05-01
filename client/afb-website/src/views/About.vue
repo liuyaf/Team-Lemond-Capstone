@@ -2,12 +2,17 @@
   <div id="about">
     <!-- intro section -->
     <div id="mainImage" class="jumbotron jumbotron-fluid" v-bind:style="{ 'background-image': 'url('+ introSection.image +')' }">
-        <div class="container">
+        <div class="container mx-0">
             <div id="mainHeader">
+              <div class="col-xl-9 col-lg-11 col-md-12">
                 <span v-html="introSection.heading"></span>
+              </div>
+              <div class="col-lg-12 col-md-12">
                 <span v-html="introSection.text"></span>
-
+              </div>
+              <div class="col-lg-7 col-md-8">
                 <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
+              </div>
             </div>
         </div>
     </div>
@@ -231,8 +236,13 @@ export default {
   padding-bottom: 3%;
 }
 
+h3 {
+  font-size: calc(18px + 1vw);
+}
+
 p {
   font-family: 'DDINRegular';
+  font-size: calc(12px + .8vw);
 }
 
 
@@ -247,14 +257,20 @@ p {
 #mainHeader {
   color: white;
   padding-right: 10%;
-  margin-top: 25%;
-  margin-right: 40%;
+  margin-top: 275px;
+  margin-left: 10%;
+  margin-right: 25%;
+  line-height: 1.4;
 }
 
-#mainHeader > span > p {
+#mainHeader div span h2 {
+  font-size: 34px;
+}
+
+#mainHeader div span p  {
   font-family: "Fjalla One";
+  font-size: 18px;
 }
-
 
 /* fact content */
 .factLine {
@@ -268,11 +284,7 @@ p {
 
 .facts div div div span h3 span {
   color: #cc3e16;
-  font-size: 4.4vw;
-}
-
-.fact-text {
-  font-family: 'DDINRegular';
+  font-size: calc(34px + 1vw);
 }
 
 
@@ -342,4 +354,35 @@ p {
 .apply-for-sticker {
   background-color: #f8f8f8;
 }
+
+@media (max-width: 992px) {
+  #mainHeader {
+    margin-right: 15%;
+  }
+}
+
+@media (max-width: 768px) {
+    #mainHeader {
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+
+  #mainHeader {
+      margin-top: 250px;
+    }
+
+  #mainHeader div span h2 {
+    font-size: 28px;
+  }
+
+  #mainHeader div span p  {
+    font-family: "Fjalla One";
+    font-size: 14px;
+  }
+
+}
+
 </style>
