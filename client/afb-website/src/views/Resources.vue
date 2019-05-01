@@ -1,22 +1,75 @@
 <template>
   <div class="resources">
-      {{ errors }}
-      {{ parsedHTML }}
+      <!-- intro section  -->
+      <div class="intro paddingSection">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+              <span v-html="introSection.header"></span>
+              <br>
+              <p>{{ introSection.paragraph }}</p>
+              <DynamicButton v-bind:buttonInfo="{ color: '#155777', text:'DOWNLOAD PDF', destination:'/#' }"/>
+            </div>
+            
+            <div class="col-sm-12 col-lg-6">
+                <img v-bind:src="introSection.image" class="introImage" alt="Mission Image: Young man greeting older adult in a wheel chair">
+            </div>
+        </div>
+    </div>
+
+    <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
+    <div class="age-friendly paddingSection">
+      <div class="row">
+        <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
+          <span v-html="item.header"></span>
+          <hr class="headerLine">
+          <p>
+            {{ item.paragraph }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- five reasons to be age friendly -->
+    <div class="five-reasons-to-become-afb paddingSection">
+      <span v-html="fiveReasonsSection.header"></span>
+      <hr class="headerLine">
+
+      <ReasonCard v-for="(item) in fiveReasonsSection.reasonContents" :key="item.id" v-bind:content="item"/>
+    </div>
+
+    <!-- download button -->
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from 'axios'
+import DynamicButton from '@/components/DynamicButton.vue'
+import ReasonCard from '@/components/ReasonCard.vue'
 
 export default {
   name: 'resources',
+  components: {
+    DynamicButton,
+    ReasonCard
+  },
   data () {
     return {
       info: null,
       errors: [],
       parser: new DOMParser(),
-      parsedHTML: null
+      parsedHTML: null,
+      introSection: {
+        header: null,
+        image: null,
+        paragraph: null
+      },
+      ageFriendlyTextBlocks: [],
+      fiveReasonsSection: {
+        header: null,
+        reasonContents: []
+      }
     }
   },
   mounted () {
@@ -29,7 +82,53 @@ export default {
       this.parsedHTML = this.parser.parseFromString(this.info, 'text/html')
 
 
-      console.log(this.parsedHTML)
+      // 'wp-block-media-text' alignwide containts contents for the first paragraph of the resources guide and the five reasons to become an age friendly business
+      var mediaTextBlocks = this.parsedHTML.getElementsByClassName('wp-block-media-text alignwide')
+
+
+      // AGE FRIENDLY BUSINESS SEATTLE RESOURCE GUIDE
+      // header
+      this.introSection.header = mediaTextBlocks[0].children[1].children[0].outerHTML
+      // image
+      this.introSection.image = mediaTextBlocks[0].children[0].children[0].src
+      // paragraph
+      this.introSection.paragraph = mediaTextBlocks[0].children[1].children[1].innerText
+
+
+      // AGE FRIENDLY SEATTLE AND AGE FRIENDLY BUSINESS SEATTLE
+      // tags with class name 'resource-header' contains the header "Age Friendly Seattle", "Age Friendly Business Seatlle", and "5 Reasons to be Age Friendly"
+      var headers = this.parsedHTML.getElementsByClassName('resource-header')
+
+      // tags with class name 'resource-paragraph' contains the paragraph for the header "Age Friendly Seattle" and "Age Friendly Business Seattle"
+      var paragraphs = this.parsedHTML.getElementsByClassName('resource-paragraph')
+
+      for (var i = 0; i < 2; i++) {
+        var textBlock = {
+          header: null,
+          paragraph: null
+        }
+        textBlock.header = headers[i].outerHTML
+        textBlock.paragraph = paragraphs[i].innerText
+
+        this.ageFriendlyTextBlocks.push(textBlock)
+      }
+
+      // 5 REASONS TO BE AGE FRIENDLY
+      this.fiveReasonsSection.header = headers[headers.length-1].outerHTML
+
+      for (var j = 1; j < mediaTextBlocks.length; j++) {
+        var card = {
+          className: null,
+          image: null,
+          content: null
+        }
+
+        card.className = mediaTextBlocks[j].className
+        card.image = mediaTextBlocks[j].children[0].children[0].src
+        card.content = mediaTextBlocks[j].children[1].innerHTML
+
+        this.fiveReasonsSection.reasonContents.push(card)
+      }
     })
     .catch(e => {
       this.errors.push(e)
@@ -39,7 +138,34 @@ export default {
 </script>
 
 <style scope>
+/* general styling on the resource guide page */
+.paddingSection {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+p {
+  font-family: 'DDINRegular';
+}
+
+/* intro section */
 .resources {
-  padding-top: 80px;
+  margin-top: 114px;
+}
+
+.introImage {
+  width: 100%;
+}
+
+/*  */
+.headerLine {
+  height: 6px;
+  background-color: #bbc437;
+  border: none;
+  max-width: 25%;
+  text-align: left;
+  margin-left: 0;
 }
 </style>

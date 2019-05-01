@@ -19,8 +19,7 @@
                         <span v-html="content.header"></span>
                     </div>
                     <div class="col-3"></div>
-                    <div class="col-3 d-flex">
-                        <!-- <button class="btn mediaTextButton">&#8594;</button> -->
+                    <div class="buttonDiv col-3 d-flex">
                         <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
                     </div>
                 </div>
@@ -86,11 +85,9 @@ export default {
     height: 100%;
 }
 
-.mediaTextButton {
-  border-radius: 0;
-  border: 2px solid black;
-  color: black;
-  height: 46px;
+.buttonDiv {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 </style>
 
