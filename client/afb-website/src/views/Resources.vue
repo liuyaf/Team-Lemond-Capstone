@@ -1,7 +1,7 @@
 <template>
   <div class="resources">
       <!-- intro section  -->
-      <div class="intro paddingSection">
+      <div class="intro resourcePaddingSection">
         <div class="row">
             <div class="col-sm-12 col-lg-6">
               <span v-html="introSection.header"></span>
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
-    <div class="age-friendly paddingSection">
+    <div class="age-friendly resourcePaddingSection">
       <div class="row">
         <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
           <span v-html="item.header"></span>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- five reasons to be age friendly -->
-    <div class="five-reasons-to-become-afb paddingSection">
+    <div class="five-reasons-to-become-afb resourcePaddingSection">
       <span v-html="fiveReasonsSection.header"></span>
       <hr class="headerLine">
 
@@ -139,9 +139,9 @@ export default {
 
 <style scope>
 /* general styling on the resource guide page */
-.paddingSection {
-  padding-left: 5%;
-  padding-right: 5%;
+.resourcePaddingSection {
+  padding-left: 9%;
+  padding-right: 9%;
   padding-top: 3%;
   padding-bottom: 3%;
 }

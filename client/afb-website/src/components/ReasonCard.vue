@@ -1,5 +1,5 @@
 <template>
-    <div class="row mt-5">
+    <div class="row mb-5">
         <!-- big image -->
         <div class="imageDiv" v-bind:class="figureClass">
             <img v-bind:style="{ float:imageFloat }" v-bind:src="this.content.image" alt="reson icon">
@@ -22,7 +22,6 @@ export default {
         },
         imageFloat: function() {
             return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'right' : '';
-
         }
     }
 }
