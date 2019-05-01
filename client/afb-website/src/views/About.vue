@@ -5,7 +5,7 @@
         <div class="container mx-0">
             <div id="mainHeader">
               <div class="col-xl-9 col-lg-11 col-md-12">
-                <span v-html="introSection.heading" v-bind:class="textHeader"></span>
+                <span v-html="introSection.heading"></span>
               </div>
               <div class="col-lg-12 col-md-12">
                 <span v-html="introSection.text"></span>
@@ -236,8 +236,13 @@ export default {
   padding-bottom: 3%;
 }
 
+h3 {
+  font-size: calc(18px + 1vw);
+}
+
 p {
   font-family: 'DDINRegular';
+  font-size: calc(12px + .8vw);
 }
 
 
@@ -258,10 +263,14 @@ p {
   line-height: 1.4;
 }
 
-#mainHeader > span > p {
-  font-family: "Fjalla One";
+#mainHeader div span h2 {
+  font-size: 34px;
 }
 
+#mainHeader div span p  {
+  font-family: "Fjalla One";
+  font-size: 18px;
+}
 
 /* fact content */
 .factLine {
@@ -275,11 +284,7 @@ p {
 
 .facts div div div span h3 span {
   color: #cc3e16;
-  font-size: 4.4vw;
-}
-
-.fact-text {
-  font-family: 'DDINRegular';
+  font-size: calc(34px + 1vw);
 }
 
 
@@ -350,11 +355,34 @@ p {
   background-color: #f8f8f8;
 }
 
+@media (max-width: 992px) {
+  #mainHeader {
+    margin-right: 15%;
+  }
+}
+
 @media (max-width: 768px) {
     #mainHeader {
         margin-right: 0;
         padding-right: 0;
     }
+}
+
+@media (max-width: 576px) {
+
+  #mainHeader {
+      margin-top: 250px;
+    }
+
+  #mainHeader div span h2 {
+    font-size: 28px;
+  }
+
+  #mainHeader div span p  {
+    font-family: "Fjalla One";
+    font-size: 14px;
+  }
+
 }
 
 </style>

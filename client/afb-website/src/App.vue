@@ -126,26 +126,13 @@ footer {
 
   #phoneDisplay {
     margin-left: 10px;
+    flex:none;
+    max-width: 100%;
   }
 
-  @media (max-width: 768px) {
-    .navDisplay {
-      display: none;
-    }
-
-    .hamburgerMenu {
-      display: inline-flex;
-    }
-
-    #phoneDisplay {
-      margin-left: 10px;
-    }
-
-    .navImg {
-      width: 200px;
-      height: auto;
-    }
-
+  .navImg {
+    width: 200px;
+    height: auto;
   }
 
 }
