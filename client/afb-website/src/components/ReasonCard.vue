@@ -7,7 +7,7 @@
         
 
         <!-- rest of content -->
-        <div class="col-sm-12 col-lg-6" v-html="this.content.content"></div>
+        <div class="col-7" v-html="this.content.content"></div>
     </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     props: ['content'],
     computed: {
         figureClass: function() {
-            return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'col-sm-12 col-lg-6 order-last' : 'col-sm-12 col-lg-6';
+            return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'col-5 order-last' : 'col-5';
         },
         imageFloat: function() {
             return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'right' : '';
