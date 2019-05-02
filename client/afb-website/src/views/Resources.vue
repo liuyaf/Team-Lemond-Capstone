@@ -7,7 +7,7 @@
               <span v-html="introSection.header"></span>
               <br>
               <p>{{ introSection.paragraph }}</p>
-              <DynamicButton v-bind:buttonInfo="{ color: '#155777', text:'DOWNLOAD PDF', destination:'/#' }"/>
+              <DynamicUrlButton v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
             </div>
             
             <div class="col-sm-12 col-lg-6">
@@ -38,6 +38,9 @@
     </div>
 
     <!-- download button -->
+    <div class="row paddingSection">
+      <DynamicUrlButton class="mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
+    </div>
 
   </div>
 </template>
@@ -45,14 +48,14 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
-import DynamicButton from '@/components/DynamicButton.vue'
 import ReasonCard from '@/components/ReasonCard.vue'
+import DynamicUrlButton from '@/components/DynamicUrlButton.vue'
 
 export default {
   name: 'resources',
   components: {
-    DynamicButton,
-    ReasonCard
+    ReasonCard,
+    DynamicUrlButton
   },
   data () {
     return {
@@ -63,12 +66,20 @@ export default {
       introSection: {
         header: null,
         image: null,
-        paragraph: null
+        paragraph: null,
+        button: {
+          url: null,
+          text: null
+        }
       },
       ageFriendlyTextBlocks: [],
       fiveReasonsSection: {
         header: null,
         reasonContents: []
+      },
+      downloadResGuide: {
+        url: null,
+        text: null
       }
     }
   },
@@ -82,8 +93,12 @@ export default {
       this.parsedHTML = this.parser.parseFromString(this.info, 'text/html')
 
 
+
       // 'wp-block-media-text' alignwide containts contents for the first paragraph of the resources guide and the five reasons to become an age friendly business
       var mediaTextBlocks = this.parsedHTML.getElementsByClassName('wp-block-media-text alignwide')
+
+      // buttons that are part of the page
+      var WPbuttons = this.parsedHTML.getElementsByClassName("wp-block-button__link")
 
 
       // AGE FRIENDLY BUSINESS SEATTLE RESOURCE GUIDE
@@ -93,6 +108,11 @@ export default {
       this.introSection.image = mediaTextBlocks[0].children[0].children[0].src
       // paragraph
       this.introSection.paragraph = mediaTextBlocks[0].children[1].children[1].innerText
+      // button
+      this.introSection.button.text = WPbuttons[0].innerText
+      this.introSection.button.url = WPbuttons[0].attributes[1].nodeValue
+      
+
 
 
       // AGE FRIENDLY SEATTLE AND AGE FRIENDLY BUSINESS SEATTLE
@@ -129,6 +149,11 @@ export default {
 
         this.fiveReasonsSection.reasonContents.push(card)
       }
+
+
+      // Download Resource Guide button
+      this.downloadResGuide.text = WPbuttons[1].innerText
+      this.downloadResGuide.url = WPbuttons[1].attributes[1].nodeValue
     })
     .catch(e => {
       this.errors.push(e)
@@ -159,7 +184,7 @@ p {
   width: 100%;
 }
 
-/*  */
+/* the line that lies under the header */
 .headerLine {
   height: 6px;
   background-color: #bbc437;

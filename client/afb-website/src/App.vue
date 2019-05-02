@@ -68,7 +68,6 @@ export default {
 <style>
 #app {
   width: 100%;
-  overflow-x: hidden;
   /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
   font-family: "Fjalla One", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

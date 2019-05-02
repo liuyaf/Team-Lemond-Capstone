@@ -363,14 +363,13 @@ p {
 }
 
 @media (max-width: 768px) {
-    #mainHeader {
-        margin-right: 0;
-        padding-right: 0;
-    }
+  #mainHeader {
+      margin-right: 0;
+      padding-right: 0;
+  }
 }
 
 @media (max-width: 576px) {
-
   #mainHeader {
       margin-top: 250px;
     }
