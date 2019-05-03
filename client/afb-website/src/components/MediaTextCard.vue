@@ -11,10 +11,19 @@
         <!-- rest of content -->
         <div class="col-lg-6 d-flex">
             <div class="reasons reasonDivs">
-                <div class="col-6 d-flex mt-3">
-                    <img v-bind:src="content.smallIcon">
-                </div>
-                <div id="reasonTitleButton" class="container-fluid row">
+                <!-- KEEP COMMENTED, WILL LOOK OVER AGAIN LATER -->
+                <!-- small icon and button -->
+                <!-- <div class="row">
+                    <div class="col-6 d-flex mt-3">
+                        <img v-bind:src="content.smallIcon">
+                    </div>
+                    <div class="buttonDiv col-3 d-flex">
+                        <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
+                    </div>
+                </div> -->
+                
+                <!-- content -->
+                <!-- <div id="reasonTitleButton" class="container-fluid row">
                     <div class="col-6 d-flex text-left">
                         <span v-html="content.header"></span>
                     </div>
@@ -22,12 +31,20 @@
                     <div class="buttonDiv col-3 d-flex">
                         <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
                     </div>
-                </div>
-                <div id="reasonTextLeft" class="container-fluid row">
+                </div> -->
+                <!-- <div id="reasonTextLeft" class="container-fluid row">
                     <div class="col-10 d-flex text-left">
                         <p class="textParagraphs">
                             {{ content.paragraph }}
                         </p>
+                    </div>
+                </div> -->
+                
+                <!-- small icon and button -->
+                <div class="paddingSection container-fluid row">
+                    <div class="paddingSection" v-html="content.content"></div>
+                    <div class="paddingSection">
+                        <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
                     </div>
                 </div>
             </div>
