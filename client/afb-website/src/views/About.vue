@@ -161,7 +161,8 @@ export default {
         this.missionSection.image = mediaTextBlocks[0].firstElementChild.children[0].src
         // grabbing the paragraph for the mission section
         this.missionSection.paragraphs = mediaTextBlocks[0].children[1].innerHTML
-      
+
+
       // FIVE REASONS
       // grabbing the header image
       this.fiveReasonsHeaderImage = this.parsedHTML.getElementsByClassName("five-reasons-header-image")[0].children[0].src
@@ -362,14 +363,13 @@ p {
 }
 
 @media (max-width: 768px) {
-    #mainHeader {
-        margin-right: 0;
-        padding-right: 0;
-    }
+  #mainHeader {
+      margin-right: 0;
+      padding-right: 0;
+  }
 }
 
 @media (max-width: 576px) {
-
   #mainHeader {
       margin-top: 250px;
     }
