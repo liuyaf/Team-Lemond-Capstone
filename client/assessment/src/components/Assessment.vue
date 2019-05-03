@@ -187,20 +187,20 @@ export default {
             questions: [
               {
                 questionID: 1,
-                type: "dropdown",
-                title: "What's your business type?",
+                type: "radio",
+                title: "yes or no question",
                 questionContent: {}
               },
               {
                 questionID: 2,
-                type: "input",
-                title: "What's your business's zipcode?",
+                type: "radio",
+                title: "asdasdasd",
                 questionContent: {}
               },
               {
                 questionID: 3,
                 type: "radio",
-                title: "This is a test title?",
+                title: "This is a test title2?",
                 questionContent: {}
               }
             ]
