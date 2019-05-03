@@ -34,7 +34,7 @@
           <div id="nav">
             <router-link class="navSpacing navDisplay" to="/">About</router-link>
             <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
-            <router-link class="navSpacing navDisplay" to="/discount-program">Discount Program</router-link>
+            <a href="https://www.seattle.gov/agefriendly/about/discount-program" class="navSpacing navDisplay">Discount Program</a>
             <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
           </div>
         </div>
@@ -66,7 +66,7 @@
               <router-link to="/resources">Resources</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/discount-program">Discount Program</router-link>
+              <a href="https://www.seattle.gov/agefriendly/about/discount-program" class="navSpacing navDisplay">Discount Program</a>
             </li>
             <li class="nav-item">
               <router-link to="/contact-us">Contact Us</router-link>
