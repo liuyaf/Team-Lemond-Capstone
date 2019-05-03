@@ -7,16 +7,16 @@
                     <h3 class="footerTag footerText">Working to make Seattle a great place to grow up and grow old!</h3>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 footerLinks footerContent">
-                <ul class="leftList pr-3">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
+                <ul class="leftList">
                     <li id="listHeader">Local Resources</li>
                     <li>Age Friendly Seattle</li>
                     <li>Community Living Connections</li>
                 </ul>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 footerLinks footerContent">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
 
-                <ul class="rightList pr-3">
+                <ul class="rightList">
                     <li id="listHeader">Community Partners</li>
                     <li>Acknowledgements</li>
                     <li>Age Friendly Coalition for Seattle and King County</li>
@@ -48,7 +48,7 @@ ul {
 }
 
 li {
-    font-size: calc(10px + .4vw);
+    font-size: calc(11px + .4vw);
 }
 
 .footerHeader {
@@ -67,20 +67,45 @@ li {
     margin-top: 4rem;
 }
 
+.rightList .leftList {
+    padding-right: 15px;
+}
+
 @media (max-width: 992px) {
 
     .leftList {
-        padding-top: 5px;
         padding-left: 20%;
-    }
-
-    .rightList {
-        padding-top: 5px;
     }
 
     .footerLinks {
         border-left: 1px solid white;
         margin-top: 15px;
+    }
+
+}
+
+
+@media (max-width: 572px) {
+
+    .leftList , .rightList {
+        padding-top: 5px;
+        border-top: 1px solid white;
+        margin-right: 10%;
+        margin-left: 10%;
+        padding-left: 0;
+    }
+
+    .footerLinks {
+        border-left: 1px solid white;
+        margin-top: 15px;
+    }
+
+    li {
+        font-size: 13px;
+    }
+
+    .copyrightSection {
+        margin-top: 10px;
     }
 
 
