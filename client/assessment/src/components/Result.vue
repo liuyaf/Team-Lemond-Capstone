@@ -5,7 +5,7 @@
         <img src="../assets/AgeFriendlyBusinessLogo1.svg" alt="logo">
         <h1>Age Friendly Business</h1>
       </div>
-      <button @click="enlargeFont=!enlargeFont">font change</button>
+      <!-- <button @click="enlargeFont=!enlargeFont">font change</button> -->
     </div>
     <div class="score-section">
       <div class="left-section">
@@ -19,10 +19,19 @@
           <button>download tips</button>
         </div>
       </div>
-      <el-progress type="circle" :percentage="correctCount" color="#8e71c7" status="text">4/5</el-progress>
+
+      <el-progress
+        type="circle"
+        :percentage="correctPercent"
+        color="#8e71c7"
+        status="text"
+      >{{correctCount}}/{{totalQ}}</el-progress>
     </div>
-    <el-tabs v-model="activeName">
+    <el-tabs class="tabs" v-model="activeName">
       <el-tab-pane label="test" name="first">
+        <ResultDetail></ResultDetail>
+      </el-tab-pane>
+      <el-tab-pane label="asdasd" name="asdasdasdasdasd">
         <ResultDetail></ResultDetail>
       </el-tab-pane>
     </el-tabs>
@@ -41,24 +50,28 @@ export default {
       testType: "Employer",
       result: this.Result,
       summary: "Your business is very age-friendly!",
-      activeName: "first"
+      activeName: "first",
+      totalQ: 0,
+      correctCount: 0
     };
   },
   computed: {
-    correctCount: function() {
+    correctPercent: function() {
       let count = 0;
-      let ynCOunt = 0;
+      let ynCount = 0;
       for (let i = 0; i < this.result.length; i++) {
         for (let j = 0; j < this.result[i].length; j++) {
           if (this.result[i][j] == "yes" || this.result[i][j] == "no") {
-            ynCOunt++;
+            ynCount++;
             if (this.result[i][j] == "yes") {
               count++;
             }
           }
         }
       }
-      return (count / ynCOunt) * 100;
+      this.totalQ = ynCount;
+      this.correctCount = count;
+      return (count / ynCount) * 100;
     }
   }
 };
@@ -79,5 +92,9 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+.tabs {
+  width: 90%;
+  margin: auto;
 }
 </style>
