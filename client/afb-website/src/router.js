@@ -27,11 +27,6 @@ export default new Router({
       component: () => import(/* webpackChunkName: "resources" */ './views/Resources.vue')
     },
     {
-      path: '/discount-program',
-      name: 'discount',
-      component: () => import(/* webpackChunkName: "discount" */ './views/DiscountProgram.vue')
-    },
-    {
       path: '/contact-us',
       name: 'contact',
       component: () => import(/* webpackChunkName: "contact" */ './views/ContactUs.vue')
