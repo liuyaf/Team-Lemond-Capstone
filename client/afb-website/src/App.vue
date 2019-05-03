@@ -32,8 +32,7 @@
         </div>
         <div class="container col-lg-5 col-md-6 align-self-center justify-content-center px-2">
           <div id="nav">
-            <router-link class="navSpacing navDisplay" to="/">Home</router-link>
-            <router-link class="navSpacing navDisplay" to="/about">About</router-link>
+            <router-link class="navSpacing navDisplay" to="/">About</router-link>
             <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
             <a href="https://www.seattle.gov/agefriendly/about/discount-program" class="navSpacing navDisplay">Discount Program</a>
             <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
@@ -101,6 +100,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  overflow-x: hidden;
 }
 
 .navSpacing {

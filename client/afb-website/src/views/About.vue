@@ -177,7 +177,8 @@ export default {
             smallIcon: null,
             buttonColor: null,
             header: null,
-            paragraph: null
+            paragraph: null,
+            content: null,
           }
           reason.className = mediaTextBlocks[s].className
           reason.bigImage = mediaTextBlocks[s].children[0].children[0].src
@@ -185,6 +186,7 @@ export default {
           reason.buttonColor = reasonCardColors[s-1]
           reason.header = mediaTextBlocks[s].children[1].children[1].outerHTML
           reason.paragraph = mediaTextBlocks[s].children[1].children[2].innerText
+          reason.content = mediaTextBlocks[s].children[1].innerHTML
 
           this.fiveReasonsSection.push(reason)
         }
