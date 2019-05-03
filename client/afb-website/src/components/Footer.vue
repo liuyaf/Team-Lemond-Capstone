@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="copyrightSection container-fluid row justify-content-center">
-            <p class="text-center">© Copyright 2019 City of Seattle
+            <p class="copyrightText text-center">© Copyright 2019 City of Seattle
                 <br> ADA Notice | Notice of Non-discrimination | Accessibility </p>
         </div>
     </div>
@@ -47,7 +47,7 @@ ul {
     line-height: 2.5em;
 }
 
-li {
+li , .copyrightText {
     font-size: calc(11px + .4vw);
 }
 
@@ -56,7 +56,7 @@ li {
 }
 
 .footerTag {
-    font-size: 16px;
+    font-size: calc(12px + .4vw);
 }
 
 .footerText {

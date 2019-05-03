@@ -187,7 +187,6 @@ export default {
           reason.header = mediaTextBlocks[s].children[1].children[1].outerHTML
           reason.paragraph = mediaTextBlocks[s].children[1].children[2].innerText
           reason.content = mediaTextBlocks[s].children[1].innerHTML
-
           this.fiveReasonsSection.push(reason)
         }
     
