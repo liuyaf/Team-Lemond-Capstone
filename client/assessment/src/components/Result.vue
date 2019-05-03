@@ -27,8 +27,8 @@
         status="text"
       >{{correctCount}}/{{totalQ}}</el-progress>
     </div>
-    <el-tabs class="tabs" v-model="activeName">
-      <el-tab-pane label="test" name="first">
+    <el-tabs class="tabs" v-model="activeName" stretch="true">
+      <el-tab-pane label="test" name="first" class="tab-pane">
         <ResultDetail></ResultDetail>
       </el-tab-pane>
       <el-tab-pane label="asdasd" name="asdasdasdasdasd">
