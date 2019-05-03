@@ -25,7 +25,7 @@
         </div>
         <div class="copyrightSection container-fluid row justify-content-center">
             <p class="copyrightText text-center">© Copyright 2019 City of Seattle
-                <br> ADA Notice | Notice of Non-discrimination | Accessibility </p>
+                <br> <a href="http://www.seattle.gov/americans-with-disabilities-act">ADA Notice</a> | <a href="http://www.seattle.gov/civilrights/civil-rights/title-vi-notice-of-nondiscrimination">Notice of Non-discrimination</a> | Accessibility </p>
         </div>
     </div>
 </template>
