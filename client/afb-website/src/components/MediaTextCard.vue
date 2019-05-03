@@ -74,6 +74,13 @@ export default {
     font-family: 'DDINRegular'; 
 }
 
+ul {
+    font-family: 'DDINRegular'; 
+    list-style-type: initial;
+    padding-left: 1rem;
+    line-height: 1.5rem;
+}
+
 .reasonRow {
     margin-top: 3%;
 }
@@ -106,6 +113,8 @@ export default {
     margin-top: auto;
     margin-bottom: auto;
 }
+
+
 </style>
 
 
