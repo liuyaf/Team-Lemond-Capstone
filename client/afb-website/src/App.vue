@@ -92,6 +92,7 @@ nav {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  font-size: 18px;
 }
 
 #nav a.router-link-exact-active {
@@ -99,7 +100,8 @@ nav {
 }
 
 footer {
-  height: 300px;
+  min-height: 300px;
+  height: auto;
   background-color: black;
   color: white;
   padding-top: 30px;
