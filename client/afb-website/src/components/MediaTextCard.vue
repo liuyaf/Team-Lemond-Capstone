@@ -82,7 +82,8 @@ ul {
 }
 
 li {
-    font-size: calc(20px + .4vw);
+    font-family: 'DDINRegular';
+    font-size: calc(12px + .8vw);
     margin-bottom: 5px;
 }
 

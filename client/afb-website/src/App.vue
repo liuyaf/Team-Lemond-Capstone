@@ -129,7 +129,7 @@ nav {
 footer {
   min-height: 300px;
   height: auto;
-  background-color: black;
+  background-color: #363636;
   color: white;
   padding-top: 30px;
 }
