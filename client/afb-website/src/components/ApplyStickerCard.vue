@@ -1,11 +1,11 @@
 <template>
     <div class="stickerCard container-fluid row py-5">
-        <div class="col-4 d-flex">
+        <div class="col-lg-4 col-sm-12 d-flex">
             <div class="mx-auto">
                 <img v-bind:src="content.image" class="stickerImage">
             </div>
         </div>
-        <div class="col-7 d-flex">
+        <div class="col-lg-7 col-sm-12 d-flex">
             <div class="applySticker">
                 <span v-html="content.header"></span>
                 <br>
