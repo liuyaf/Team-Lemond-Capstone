@@ -8,18 +8,18 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
-                <ul class="leftList">
-                    <li id="listHeader">Local Resources</li>
-                    <li>Age Friendly Seattle</li>
-                    <li>Community Living Connections</li>
+                <ul id="leftList">
+                    <li id="listHeader" class="footerListText">Local Resources</li>
+                    <li class="footerListText">Age Friendly Seattle</li>
+                    <li class="footerListText">Community Living Connections</li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
 
-                <ul class="rightList">
-                    <li id="listHeader">Community Partners</li>
-                    <li>Acknowledgements</li>
-                    <li>Age Friendly Coalition for Seattle and King County</li>
+                <ul id="rightList">
+                    <li id="listHeader" class="footerListText">Community Partners</li>
+                    <li class="footerListText">Acknowledgements</li>
+                    <li class="footerListText">Age Friendly Coalition for Seattle and King County</li>
                 </ul>
             </div>
         </div>
@@ -39,12 +39,6 @@ export default {
 <style>
 .footerLinks {
     border-left: 1px solid white;
-}
-
-ul {
-    padding-left: 0;
-    list-style-type: none;
-    line-height: 2.5em;
 }
 
 li , .copyrightText {
@@ -67,13 +61,20 @@ li , .copyrightText {
     margin-top: 4rem;
 }
 
-.rightList .leftList {
+#rightList , #leftList {
     padding-right: 15px;
+    padding-left: 0;
+    list-style-type: none;
+    line-height: 2rem;
+}
+
+.footerListText {
+    font-size: calc(12px + .2vw);
 }
 
 @media (max-width: 992px) {
 
-    .leftList {
+    #leftList {
         padding-left: 20%;
     }
 
@@ -87,21 +88,18 @@ li , .copyrightText {
 
 @media (max-width: 572px) {
 
-    .leftList , .rightList {
+    #leftList , #rightList {
         padding-top: 5px;
         border-top: 1px solid white;
         margin-right: 10%;
         margin-left: 10%;
         padding-left: 0;
+        font-size: 13px;
     }
 
     .footerLinks {
         border-left: 1px solid white;
         margin-top: 15px;
-    }
-
-    li {
-        font-size: 13px;
     }
 
     .copyrightSection {

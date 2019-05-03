@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style>
 .textParagraphs {
     font-family: 'DDINRegular'; 
 }
@@ -78,7 +78,12 @@ ul {
     font-family: 'DDINRegular'; 
     list-style-type: initial;
     padding-left: 1rem;
-    line-height: 1.5rem;
+    line-height: 2rem;
+}
+
+li {
+    font-size: calc(20px + .4vw);
+    margin-bottom: 5px;
 }
 
 .reasonRow {
