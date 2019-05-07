@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// assessment
+// import assessment components here
 
 
 Vue.use(Router)
@@ -27,6 +27,12 @@ export default new Router({
       path: '/contact-us',
       name: 'contact',
       component: () => import(/* webpackChunkName: "contact" */ './views/ContactUs.vue')
+    },
+    {
+      path: '/customer-service-self-assessment'
+    },
+    {
+      path: '/employer-assessment-self-assessment'
     }
   ]
 })

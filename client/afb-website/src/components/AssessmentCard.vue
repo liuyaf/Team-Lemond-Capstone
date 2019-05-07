@@ -7,7 +7,7 @@
             <p class="textParagraphs" v-html="content.paragraph"></p>
             <br>
             <br>
-            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/#' }"/>
+            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route }"/>
         </div>
     </div>
 </template>

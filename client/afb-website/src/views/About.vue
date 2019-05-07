@@ -192,6 +192,9 @@ export default {
     
 
       // HOW TO BECOME AN AGE FRIENDLY BUSINESS
+      // assessment routes
+      var assessmentRoutes = ['customer-service-self-assessment', 'employer-assessment-self-assessment']
+
       // headers
       var howToAfbHeaders = this.parsedHTML.getElementsByClassName("how-to-afb-header")
       for (var j = 0; j < howToAfbHeaders.length; j++) {
@@ -202,13 +205,16 @@ export default {
       var assessmentCardsContents = this.parsedHTML.getElementsByClassName("assessment-div")
       for (var t = 0; t < assessmentCardsContents.length; t++) {
         var assessment = {
-          headerHTML:null,
+          headerHTML: null,
           headerText: null,
-          paragraph:null
+          paragraph: null,
+          route: null
         }
         assessment.headerHTML = assessmentCardsContents[t].children[0].outerHTML
         assessment.headerText = assessmentCardsContents[t].children[0].innerText
         assessment.paragraph = assessmentCardsContents[t].children[1].innerHTML
+        assessment.route = assessmentRoutes[t]
+
         this.howToBecomeAfbSection.assessmentCards.push(assessment)
       }
 
