@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import about from './views/About.vue'
 import resources from './views/Resources.vue'
 import contact from './views/ContactUs.vue'
+import assessment from './components/Assessment.vue'
 
 // import assessment components here
 
@@ -13,8 +14,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'about',
       // route level code-splitting
@@ -34,10 +34,14 @@ export default new Router({
       component: contact
     },
     {
-      path: '/customer-service-self-assessment'
+      path: '/customer-service-self-assessment',
+      name: 'customer-service-test',
+      component: assessment
     },
     {
-      path: '/employer-assessment-self-assessment'
+      path: '/employer-assessment-self-assessment',
+      name: 'employer-test',
+      component: assessment
     }
   ]
 })
