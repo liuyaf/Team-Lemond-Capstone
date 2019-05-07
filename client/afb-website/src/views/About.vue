@@ -298,11 +298,6 @@ p {
 
 /* mission content */
 .mission {
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  display: inline-block;
   position: relative;
   background-color: #f8f8f8;
 }
@@ -390,5 +385,4 @@ p {
   }
 
 }
-
 </style>

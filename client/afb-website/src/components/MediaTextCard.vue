@@ -1,5 +1,5 @@
 <template>
-    <div class="reasonRow container-fluid row mx-auto">
+    <div class="reasonRow row mx-auto">
         <!-- big image -->
         <div v-bind:class="figureClass">
             <div class="reasonDivs">
