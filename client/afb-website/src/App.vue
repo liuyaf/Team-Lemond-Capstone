@@ -56,11 +56,8 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <router-link to="/">Home</router-link>
-            </li>
             <li class="nav-item">
-              <router-link to="/about">About</router-link>
+              <router-link to="/">About</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/resources">Resources</router-link>
@@ -75,7 +72,20 @@
         </div>
       </nav>
     </header>
-    <router-view/>
+
+    <main>
+      <transition
+        name="fade"
+        mode="out-in"
+        @beforeLeave="beforeLeave"
+        @enter="enter"
+        @afterEnter="afterEnter"
+      >
+        <router-view/>
+      </transition>
+    </main>
+    
+
     <footer>
       <Footer/>
     </footer>
@@ -87,12 +97,35 @@ import Footer from "@/components/Footer.vue";
 export default {
   components: {
     Footer
+  },
+  data() {
+    return {
+      prevHeight: 0
+    }
+  },
+  methods: {
+    beforeLeave(element) {
+      this.prevHeight = getComputedStyle(element).height;
+    },
+    enter(element) {
+      const { height } = getComputedStyle(element);
+
+      element.style.height = this.prevHeight;
+
+      setTimeout(() => {
+        element.style.height = height;
+      });
+    },
+    afterEnter(element) {
+      element.style.height = 'auto';
+    }
   }
 };
 </script>
 
 
 <style>
+/* general styling */
 #app {
   width: 100%;
   /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
@@ -103,6 +136,8 @@ export default {
   overflow-x: hidden;
 }
 
+
+/* navbar styling */
 .navSpacing {
   margin-right: 10px;
 }
@@ -123,15 +158,7 @@ nav {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-footer {
-  min-height: 300px;
-  height: auto;
-  background-color: #363636;
-  color: white;
-  padding-top: 30px;
+  color: lightblue;
 }
 
 #navbarSupportedContent {
@@ -163,5 +190,30 @@ footer {
     width: 200px;
     height: auto;
   }
+}
+
+
+/* footer styling */
+footer {
+  min-height: 300px;
+  height: auto;
+  background-color: #363636;
+  color: white;
+  padding-top: 30px;
+}
+
+
+/* transition animation */
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: height, opacity;
+  transition-timing-function: ease;
+  overflow: hidden;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
 </style>

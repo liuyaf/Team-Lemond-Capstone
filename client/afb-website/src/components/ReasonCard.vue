@@ -31,6 +31,7 @@ export default {
 ul {
     list-style-type: initial;
     line-height: 1.5rem;
+    margin-left: 1rem;
     font-family: 'DDINRegular';
 }
 

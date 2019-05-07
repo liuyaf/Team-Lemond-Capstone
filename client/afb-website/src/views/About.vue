@@ -32,7 +32,7 @@
 
     <!-- misson section -->
     <div class="mission paddingSection">
-        <div class="container-fluid row">
+        <div class="container-fluid row mx-auto">
             <div class="col-sm-12 col-md-6 d-flex">
               <div>
                 <div class="information" v-html="missionSection.paragraphs"></div>
@@ -303,8 +303,7 @@ p {
 
 .missionImage {
   overflow: hidden;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto;
 }
 
 .missionImage img {
