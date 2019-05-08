@@ -1,85 +1,98 @@
 <template>
   <div id="about">
-    <!-- intro section -->
-    <div id="mainImage" class="jumbotron jumbotron-fluid" v-bind:style="{ 'background-image': 'url('+ introSection.image +')' }">
-        <div class="container mx-0">
-            <div id="mainHeader">
-              <div class="col-xl-9 col-lg-11 col-md-12">
-                <span v-html="introSection.heading"></span>
-              </div>
-              <div class="col-lg-12 col-md-12">
-                <span v-html="introSection.text"></span>
-              </div>
-              <div class="col-lg-7 col-md-8">
-                <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
-              </div>
-            </div>
-        </div>
-    </div>
+    <!-- navbar -->
+    <NavBar/>
 
-    <!-- fact section -->
-    <div class="facts">
-        <div class="row mx-auto paddingSection">
-          <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
-              <div class ="fact-body">
-                <hr class="factLine">
-                <span v-html="item.header"></span>
-                <p class="fact-text"><span v-html="item.text"></span></p>
+    <main>
+      <!-- intro section -->
+      <div class="mainImage jumbotron jumbotron-fluid" v-bind:style="{ 'background-image': 'url('+ introSection.image +')' }">
+          <div class="container mx-0">
+              <div class="mainHeader">
+                <div class="col-xl-9 col-lg-11 col-md-12">
+                  <span v-html="introSection.heading"></span>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                  <span v-html="introSection.text"></span>
+                </div>
+                <div class="col-lg-7 col-md-8">
+                  <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
+                </div>
               </div>
           </div>
-        </div>
-    </div>
+      </div>
 
-    <!-- misson section -->
-    <div class="mission paddingSection">
-        <div class="container-fluid row mx-auto">
-            <div class="col-sm-12 col-md-6 d-flex">
-              <div>
-                <div class="information" v-html="missionSection.paragraphs"></div>
-
-                <DynamicButton v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"/>
-              </div>    
-            </div>
-
-            <div class="col d-flex">
-                <div class="missionImage">
-                    <img v-bind:src="missionSection.image">
+      <!-- fact section -->
+      <div class="facts">
+          <div class="row mx-auto paddingSection">
+            <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
+                <div class ="fact-body">
+                  <hr class="factLine">
+                  <span v-html="item.header"></span>
+                  <p class="fact-text"><span v-html="item.text"></span></p>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- 5 reasons to become age friendly -->
-    <div class="five-reasons paddingSection">
-      <img class="five-reasons-image-header" v-bind:src="fiveReasonsHeaderImage" alt="five reasons to become age friendly">
-      <MediaTextCard v-for="(item) in fiveReasonsSection" :key="item.id" v-bind:content="item"/>
-    </div>
-
-    <!-- how to become an age friendly business -->
-    <div class="how-to-become-an-afb paddingSection">
-      <hr class="testLine">
-      <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
-      <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
-      <br>
-      <div class="row pl-0">
-        <AssessmentCard v-for="(item) in howToBecomeAfbSection.assessmentCards" :key="item.id" v-bind:content="item"/>
+          </div>
       </div>
-    </div>
 
-    <!-- apply for sticker -->
-    <div class="apply-for-sticker paddingSection">
-      <ApplyStickerCard v-bind:content="applyStickerSection"/>
-    </div>
+      <!-- misson section -->
+      <div class="mission paddingSection">
+          <div class="container-fluid row mx-auto">
+              <div class="col-sm-12 col-md-6 d-flex">
+                <div>
+                  <div class="information" v-html="missionSection.paragraphs"></div>
+
+                  <DynamicButton v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"/>
+                </div>    
+              </div>
+
+              <div class="col d-flex">
+                  <div class="missionImage">
+                      <img v-bind:src="missionSection.image">
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- 5 reasons to become age friendly -->
+      <div class="five-reasons paddingSection">
+        <img class="five-reasons-image-header" v-bind:src="fiveReasonsHeaderImage" alt="five reasons to become age friendly">
+        <MediaTextCard v-for="(item) in fiveReasonsSection" :key="item.id" v-bind:content="item"/>
+      </div>
+
+      <!-- how to become an age friendly business -->
+      <div class="how-to-become-an-afb paddingSection">
+        <hr class="testLine">
+        <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
+        <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
+        <br>
+        <div class="row pl-0">
+          <AssessmentCard v-for="(item) in howToBecomeAfbSection.assessmentCards" :key="item.id" v-bind:content="item"/>
+        </div>
+      </div>
+
+      <!-- apply for sticker -->
+      <div class="apply-for-sticker paddingSection">
+        <ApplyStickerCard v-bind:content="applyStickerSection"/>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <Footer/>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from 'axios'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import MediaTextCard from '@/components/MediaTextCard.vue'
 import AssessmentCard from '@/components/AssessmentCard.vue'
 import DynamicButton from '@/components/DynamicButton.vue'
 import ApplyStickerCard from '@/components/ApplyStickerCard.vue'
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'about',
@@ -87,7 +100,9 @@ export default {
     MediaTextCard,
     AssessmentCard,
     DynamicButton,
-    ApplyStickerCard
+    ApplyStickerCard,
+    NavBar,
+    Footer
   },
   data () {
     return {
@@ -234,9 +249,8 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 /* general styling for the page */
-
 .paddingSection {
   padding-left: 5%;
   padding-right: 5%;
@@ -255,14 +269,14 @@ p {
 
 
 /* intro content */
-#mainImage {
+.mainImage {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 600px;
 }
 
-#mainHeader {
+.mainHeader {
   color: white;
   padding-right: 10%;
   margin-top: 275px;
@@ -271,11 +285,11 @@ p {
   line-height: 1.4;
 }
 
-#mainHeader div span h2 {
+.mainHeader div span h2 {
   font-size: 34px;
 }
 
-#mainHeader div span p  {
+.mainHeader div span p  {
   font-family: "Fjalla One";
   font-size: 18px;
 }
@@ -358,31 +372,30 @@ p {
 }
 
 @media (max-width: 992px) {
-  #mainHeader {
+  .mainHeader {
     margin-right: 15%;
   }
 }
 
 @media (max-width: 768px) {
-  #mainHeader {
+  .mainHeader {
       margin-right: 0;
       padding-right: 0;
   }
 }
 
 @media (max-width: 576px) {
-  #mainHeader {
+  .mainHeader {
       margin-top: 250px;
     }
 
-  #mainHeader div span h2 {
+  .mainHeader div span h2 {
     font-size: 28px;
   }
 
-  #mainHeader div span p  {
+  .mainHeader div span p  {
     font-family: "Fjalla One";
     font-size: 14px;
   }
-
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <div class="resources">
+  <div id="resources">
+    <!-- NavBar-->
+    <NavBar/>
+
+    <main>
       <!-- intro section  -->
       <div class="intro paddingSection">
         <div class="row">
@@ -14,33 +18,37 @@
                 <img v-bind:src="introSection.image" class="introImage" alt="5 adults sitting and smiling at the camera">
             </div>
         </div>
-    </div>
+      </div>
 
-    <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
-    <div class="age-friendly paddingSection">
-      <div class="row">
-        <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
-          <span v-html="item.header"></span>
-          <hr class="headerLine">
-          <p>
-            {{ item.paragraph }}
-          </p>
+      <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
+      <div class="age-friendly paddingSection">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
+            <span v-html="item.header"></span>
+            <hr class="headerLine">
+            <p>
+              {{ item.paragraph }}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- five reasons to be age friendly -->
-    <div class="five-reasons-to-become-afb paddingSection">
-      <span v-html="fiveReasonsSection.header"></span>
-      <hr class="headerLine">
+      <!-- five reasons to be age friendly -->
+      <div class="five-reasons-to-become-afb paddingSection">
+        <span v-html="fiveReasonsSection.header"></span>
+        <hr class="headerLine">
 
-      <ReasonCard v-for="(item) in fiveReasonsSection.reasonContents" :key="item.id" v-bind:content="item"/>
-    </div>
+        <ReasonCard v-for="(item) in fiveReasonsSection.reasonContents" :key="item.id" v-bind:content="item"/>
+      </div>
 
-    <!-- download button -->
-    <div class="row paddingSection">
-      <DynamicUrlButton class="mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
-    </div>
+      <!-- download button -->
+      <div class="row paddingSection">
+        <DynamicUrlButton class="mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <Footer/>
 
   </div>
 </template>
@@ -48,14 +56,20 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import ReasonCard from '@/components/ReasonCard.vue'
 import DynamicUrlButton from '@/components/DynamicUrlButton.vue'
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'resources',
   components: {
     ReasonCard,
-    DynamicUrlButton
+    DynamicUrlButton,
+    NavBar,
+    Footer
   },
   data () {
     return {
@@ -162,7 +176,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 /* general styling on the resource guide page */
 .paddingSection {
   padding-left: 5%;
@@ -176,7 +190,7 @@ p {
 }
 
 /* intro section */
-.resources {
+#resources {
   margin-top: 114px;
 }
 

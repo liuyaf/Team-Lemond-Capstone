@@ -35,6 +35,10 @@ ul {
     font-family: 'DDINRegular';
 }
 
+p {
+  font-family: 'DDINRegular';
+}
+
 .imageDiv {
     margin-top: auto;
     margin-bottom: auto;

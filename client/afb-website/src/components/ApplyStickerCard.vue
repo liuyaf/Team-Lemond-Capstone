@@ -1,5 +1,5 @@
 <template>
-    <div class="stickerCard container-fluid row py-5">
+    <div class="stickerCard container-fluid row py-5 mx-auto">
         <div class="col-lg-4 col-sm-12 d-flex">
             <div class="mx-auto">
                 <img v-bind:src="content.image" class="stickerImage">
