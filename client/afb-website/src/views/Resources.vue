@@ -15,7 +15,7 @@
             </div>
             
             <div class="col-sm-12 col-lg-6">
-                <img v-bind:src="introSection.image" class="introImage" alt="Mission Image: Young man greeting older adult in a wheel chair">
+                <img v-bind:src="introSection.image" class="introImage" alt="5 adults sitting and smiling at the camera">
             </div>
         </div>
       </div>
