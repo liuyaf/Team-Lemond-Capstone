@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import about from './views/About.vue'
 import resources from './views/Resources.vue'
 import contact from './views/ContactUs.vue'
+import assessmentSelection from './views/AssessmentSelection'
 import assessment from './components/Assessment.vue'
 
 // import assessment components here
@@ -32,6 +33,11 @@ export default new Router({
       path: '/contact-us',
       name: 'contact',
       component: contact
+    },
+    {
+      path: '/assessment-selection',
+      name: 'selection',
+      component: assessmentSelection
     },
     {
       path: '/customer-service-self-assessment',

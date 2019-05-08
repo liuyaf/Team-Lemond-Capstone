@@ -46,13 +46,13 @@
               class="navImg ml-2 svgButton navDisplay"
               alt="Change font button"
             >
-            <a href>
+            <router-link class="navSpacing navDisplay" to="/assessment-selection">
               <img
                 src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png"
                 class="navImg ml-2 svgButton navDisplay"
                 alt="Assessment test button"
               >
-            </a>
+            </router-link>
           </div>
         </div>
 

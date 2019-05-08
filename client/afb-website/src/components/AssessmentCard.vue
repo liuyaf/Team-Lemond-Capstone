@@ -37,6 +37,11 @@ export default {
     padding-bottom: 3%;
 }
 
+.testBoxes {
+  box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
+
 .testTextHeaders >>> h4 {
     font-size: calc(18px + 1vw);
 }

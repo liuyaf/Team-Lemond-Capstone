@@ -448,10 +448,6 @@ export default {
   font-size: calc(10px + 0.8vw);
 }
 
-.testBoxes {
-  box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
 /* sticker */
 .apply-for-sticker {
   background-color: #f8f8f8;
