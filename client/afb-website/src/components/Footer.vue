@@ -2,9 +2,8 @@
   <footer>
     <div>
       <div class="row">
-
         <!-- Bulma Modal for Accessbility information -->
-        <div class="modal" v-bind:class="{ 'is-active': showModal }">
+        <div class="modal" v-bind:class="{ 'is-active': showModalAccessbility }">
           <div class="modal-background"></div>
           <div class="modal-content p-5">
             <p>
@@ -41,12 +40,38 @@
               call 1-800-677-1116.
             </p>
           </div>
-          <button class="modal-close is-large" @click="showModal = false" aria-label="close"></button>
+          <button class="modal-close is-large" @click="showModalAccessbility = false" aria-label="close"></button>
         </div>
 
+        <!-- Bulma Modal for Acknowledgement Modal -->
+        <div class="modal" v-bind:class="{ 'is-active': showModalAcknowledgements }">
+          <div class="modal-background"></div>
+          <div class="modal-content p-5">
+            <h1> Special thanks to the following organizations and people: </h1>
+            <br>
 
+            <ul>
+              <li>AARP Network of Age-friendly States and Communities</li>
+              <li>AARP Washington</li>
+              <li>Age Friendly Coalition for Seattle and King County</li>
+              <li>Age-Friendly NYC</li>
+              <li>Aging and Disability Services, Seattle Human Services Department</li>
+              <li>Muhammad Hariz</li>
+              <li>Davis (Based) Huynh</li>
+              <li>IlluminAge Communication Partners</li>
+              <li>Yicheng (Estelle) Jiang</li>
+              <li>Liuyang Fu</li>
+              <li>The New York Academy of Medicine</li>
+              <li>Seattle Office of Economic Development</li>
+              <li>University of Washington Information School</li>
+              <li>Workforce Development Council of Seattle-King County</li>
+            </ul>
+            <br>
+          </div>
+          <button class="modal-close is-large" @click="showModalAcknowledgements = false" aria-label="close"></button>
+        </div>
 
-    <!-- Footer content -->
+        <!-- Footer content -->
         <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
           <h1 class="footerHeader footerText">Age Friendly Seattle</h1>
           <div>
@@ -58,15 +83,23 @@
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
           <ul id="leftList">
             <li id="listHeader" class="footerListText">Local Resources</li>
-            <li class="footerListText">Age Friendly Seattle</li>
-            <li class="footerListText">Community Living Connections</li>
+            <li class="footerListText">
+                <a href="http://www.seattle.gov/agefriendly/">Age Friendly Seattle</a>
+            </li>
+            <li class="footerListText">
+                <a href="https://www.communitylivingconnections.org/">Community Living Connections</a>
+            </li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
           <ul id="rightList">
             <li id="listHeader" class="footerListText">Community Partners</li>
-            <li class="footerListText">Acknowledgements</li>
-            <li class="footerListText">Age Friendly Coalition for Seattle and King County</li>
+            <li class="footerListText">
+                <a @click="showModalAcknowledgements = true">Acknowledgements</a>
+            </li>
+            <li class="footerListText">
+                <a href="https://www.agingkingcounty.org/age-friendly-coalition/">Age Friendly Coalition for Seattle and King County</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -78,7 +111,7 @@
           <a
             href="http://www.seattle.gov/civilrights/civil-rights/title-vi-notice-of-nondiscrimination"
           >Notice of Non-discrimination</a> |
-          <a @click="showModal = true">Accessibility</a>
+          <a @click="showModalAccessbility = true">Accessibility</a>
         </p>
       </div>
     </div>
@@ -86,17 +119,17 @@
 </template>
 
 <script>
-
 export default {
   name: "Footer",
   data() {
-    return { showModal: false };
+    return { showModalAccessbility: false,
+             showModalAcknowledgements: false
+        };
   }
 };
 </script>
 
 <style scoped>
-
 .modal-content {
   color: black;
 }
@@ -108,11 +141,22 @@ export default {
 
 .modal-cotent li,
 p {
+  color: black;
   font-size: 18px;
 }
 
+.modal-content p a {
+  color: blue;
+}
+
 a {
-    color: white;
+  color: white;
+  padding: 5px 0;
+}
+
+.copyrightText a:hover {
+  color: black;
+  background-color: white;
 }
 
 footer {
@@ -130,6 +174,10 @@ footer {
 li,
 .copyrightText {
   font-size: calc(11px + 0.4vw);
+}
+
+.copyrightText {
+  color: white;
 }
 
 .footerHeader {
@@ -154,6 +202,22 @@ li,
   padding-left: 0;
   list-style-type: none;
   line-height: 2rem;
+}
+
+#rightList a, #leftList a {
+    color: white;
+    padding: 5px 0;
+}
+
+#rightList a:hover, #leftList a:hover {
+    color: black;
+  background-color: white;
+}
+
+
+#listHeader {
+  font-size: calc(16px + 0.2vw);
+  font-weight: 600;
 }
 
 .footerListText {
