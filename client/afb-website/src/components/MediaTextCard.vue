@@ -50,19 +50,20 @@ export default {
     padding-bottom: 3%;
 }
 
-.textParagraphs {
-    font-family: 'DDINRegular'; 
+.mediaContent >>> h3 {
+    font-size: calc(18px + 1vw);
 }
 
 .mediaContent >>> p {
     font-family: 'DDINRegular';
-    /* font-size: calc(12px + .8vw); */
+    font-size: calc(10px + .8vw);
 }
 
 .mediaContent >>> ul {
     font-family: 'DDINRegular'; 
     list-style-type: initial;
-    /* line-height: 1.5rem; */
+    font-size: calc(10px + .8vw);
+    line-height: 2rem;
 }
 
 .reasonRow {

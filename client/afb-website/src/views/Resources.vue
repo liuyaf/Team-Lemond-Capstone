@@ -8,9 +8,9 @@
       <div class="intro paddingSection">
         <div class="row">
             <div class="col-sm-12 col-lg-6">
-              <span v-html="introSection.header"></span>
+              <span class="intro-h" v-html="introSection.header"></span>
               <br>
-              <p>{{ introSection.paragraph }}</p>
+              <p class="intro-p">{{ introSection.paragraph }}</p>
               <DynamicUrlButton class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
             </div>
             
@@ -26,7 +26,7 @@
           <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
             <span v-html="item.header"></span>
             <hr class="headerLine">
-            <p>
+            <p class="intro-p">
               {{ item.paragraph }}
             </p>
           </div>
@@ -189,18 +189,18 @@ main {
   padding-bottom: 3%;
 }
 
-p {
-  font-family: 'DDINRegular';
+.intro-h >>> h2 {
+  font-size: calc(18px + 1vw);
 }
 
-.content[data-v-f0542a4a] >>> ul {
+.intro-p, .content >>> .reasonContent p, .content >>> .reasonContent ul {
   font-family: 'DDINRegular';
+  font-size: calc(10px + .8vw);
 }
 
-.content[data-v-f0542a4a] >>> p {
-  font-family: 'DDINRegular';
+.content >>> .reasonContent h3 {
+  font-size: calc(18px + 1vw);
 }
-
 
 /* intro section */
 .introImage {

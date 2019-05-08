@@ -37,9 +37,13 @@ export default {
     padding-bottom: 3%;
 }
 
+.testTextHeaders >>> h4 {
+    font-size: calc(18px + 1vw);
+}
+
 .textParagraphs {
     font-family: 'DDINRegular';
-
+    font-size: calc(10px + .8vw);
 }
 </style>
 

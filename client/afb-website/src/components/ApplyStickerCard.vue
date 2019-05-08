@@ -7,7 +7,7 @@
         </div>
         <div class="discountContent col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div class="applySticker">
-                <span v-html="content.header"></span>
+                <span class="sticker-h" v-html="content.header"></span>
                 <br>
                 <p class="textParagraphs">{{ content.paragraph }}</p>
                 <br>
@@ -40,6 +40,16 @@ export default {
     box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
+    background-color:white;
+}
+
+.sticker-h >>> h3 {
+    font-size: calc(18px + 1vw);
+}
+
+.textParagraphs {
+    font-size: calc(10px + .8vw);
+    font-family: 'DDINRegular';
 }
 
 .discountContent {
@@ -47,14 +57,6 @@ export default {
     margin-bottom: auto;
 }
 
-.stickerImage {
-    width: auto;
-    height: auto;
-}
-
-.textParagraphs {
-  font-family: 'DDINRegular';
-}
 </style>
 
 
