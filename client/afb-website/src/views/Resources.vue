@@ -11,7 +11,7 @@
               <span v-html="introSection.header"></span>
               <br>
               <p>{{ introSection.paragraph }}</p>
-              <DynamicUrlButton v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
+              <DynamicUrlButton class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
             </div>
             
             <div class="col-sm-12 col-lg-6">
@@ -38,12 +38,12 @@
         <span v-html="fiveReasonsSection.header"></span>
         <hr class="headerLine">
 
-        <ReasonCard v-for="(item) in fiveReasonsSection.reasonContents" :key="item.id" v-bind:content="item"/>
+        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.id" v-bind:content="item"/>
       </div>
 
       <!-- download button -->
       <div class="row paddingSection">
-        <DynamicUrlButton class="mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
+        <DynamicUrlButton class="mb-4 mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
       </div>
     </main>
 
@@ -189,6 +189,15 @@ p {
   font-family: 'DDINRegular';
 }
 
+.content[data-v-f0542a4a] >>> ul {
+  font-family: 'DDINRegular';
+}
+
+.content[data-v-f0542a4a] >>> p {
+  font-family: 'DDINRegular';
+}
+
+
 /* intro section */
 #resources {
   margin-top: 114px;
@@ -197,6 +206,7 @@ p {
 .introImage {
   width: 100%;
 }
+
 
 /* the line that lies under the header */
 .headerLine {

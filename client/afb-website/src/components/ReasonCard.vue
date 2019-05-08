@@ -7,7 +7,7 @@
         
 
         <!-- rest of content -->
-        <div class="col-sm-10 col-lg-7" v-html="this.content.content"></div>
+        <div class="reasonContent col-sm-10 col-lg-7" v-html="this.content.content"></div>
     </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 ul {
     list-style-type: initial;
     line-height: 1.5rem;
@@ -40,6 +40,11 @@ p {
 }
 
 .imageDiv {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.reasonContent {
     margin-top: auto;
     margin-bottom: auto;
 }

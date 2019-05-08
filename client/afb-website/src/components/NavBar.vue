@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+          <ul class="hamburgerNav navbar-nav mr-auto">
             <li class="nav-item">
               <router-link to="/">About</router-link>
             </li>
@@ -75,11 +75,15 @@
 
 <script>
 export default {
-    name: 'NavBar',
+  name: 'NavBar',
 }
 </script>
 
 <style scoped>
+.hamburgerNav[data-v-4295d220] {
+  font-family: "Fjalla One";
+}
+
 .navSpacing {
   margin-right: 10px;
 }

@@ -36,16 +36,15 @@
 
       <!-- misson section -->
       <div class="mission paddingSection">
-          <div class="container-fluid row mx-auto">
-              <div class="col-sm-12 col-md-6 d-flex">
+          <div class="row mx-auto">
+              <div class="col-sm-12 col-md-6">
                 <div>
-                  <div class="information" v-html="missionSection.paragraphs"></div>
-
-                  <DynamicButton v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"/>
-                </div>    
+                  <div v-html="missionSection.paragraphs"></div>
+                  <DynamicButton class="mb-4" v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"/>
+                </div>
               </div>
 
-              <div class="col d-flex">
+              <div class="col-sm-12 col-md-6">
                   <div class="missionImage">
                       <img v-bind:src="missionSection.image">
                   </div>
@@ -65,7 +64,7 @@
         <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
         <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
         <br>
-        <div class="row pl-0">
+        <div class="row mx-auto">
           <AssessmentCard v-for="(item) in howToBecomeAfbSection.assessmentCards" :key="item.id" v-bind:content="item"/>
         </div>
       </div>
@@ -189,18 +188,12 @@ export default {
           var reason = {
             className: null,
             bigImage: null,
-            smallIcon: null,
             buttonColor: null,
-            header: null,
-            paragraph: null,
             content: null,
           }
           reason.className = mediaTextBlocks[s].className
           reason.bigImage = mediaTextBlocks[s].children[0].children[0].src
-          reason.smallIcon = mediaTextBlocks[s].children[1].getElementsByTagName("img")[0].src
           reason.buttonColor = reasonCardColors[s-1]
-          reason.header = mediaTextBlocks[s].children[1].children[1].outerHTML
-          reason.paragraph = mediaTextBlocks[s].children[1].children[2].innerText
           reason.content = mediaTextBlocks[s].children[1].innerHTML
           this.fiveReasonsSection.push(reason)
         }
@@ -262,9 +255,14 @@ h3 {
   font-size: calc(18px + 1vw);
 }
 
-p {
+[data-v-039c5b43] >>> p {
   font-family: 'DDINRegular';
-  font-size: calc(12px + .8vw);
+  font-size: calc(10px + .8vw);
+}
+
+[data-v-039c5b43] >>> ul {
+  font-family: 'DDINRegular';
+  font-size: calc(10px + .8vw);
 }
 
 
@@ -292,6 +290,33 @@ p {
 .intro-p[data-v-039c5b43] >>> p {
   font-family: "Fjalla One";
   font-size: 18px;
+}
+
+@media (max-width: 992px) {
+  .mainHeader {
+    margin-right: 15%;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainHeader {
+      margin-right: 0;
+      padding-right: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .mainHeader {
+      margin-top: 250px;
+    }
+
+  .intro-h[data-v-039c5b43] >>> h2 {
+    font-size: 28px;
+  }
+
+  .intro-p[data-v-039c5b43] >>> p  {
+    font-size: 14px;
+  }
 }
 
 
@@ -358,7 +383,6 @@ p {
 }
 
 .textHeaders {
-  /* font-size: 2.1vw; */
   font-weight: 600;
 }
 
@@ -366,36 +390,18 @@ p {
   font-family: 'DDINRegular';
 }
 
+.testBoxes[data-v-039c5b43] {
+  box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
 
-/* how to become an age friendly business */
-.apply-for-sticker {
+
+/* sticker */
+.apply-for-sticker[data-v-039c5b43] {
   background-color: #f8f8f8;
+  box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 992px) {
-  .mainHeader {
-    margin-right: 15%;
-  }
-}
-
-@media (max-width: 768px) {
-  .mainHeader {
-      margin-right: 0;
-      padding-right: 0;
-  }
-}
-
-@media (max-width: 576px) {
-  .mainHeader {
-      margin-top: 250px;
-    }
-
-  .intro-h[data-v-039c5b43] >>> h2 {
-    font-size: 28px;
-  }
-
-  .intro-p[data-v-039c5b43] >>> p  {
-    font-size: 14px;
-  }
+.stickerCard[data-v-039c5b43] >>> img {
+  width: 100%;
 }
 </style>

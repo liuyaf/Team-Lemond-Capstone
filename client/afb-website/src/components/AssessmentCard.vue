@@ -1,6 +1,6 @@
 <template>
-    <div class="col-lg-6 d-flex">
-        <div class="testBoxes paddingSection">
+    <div class="paddingSection testBoxes col-lg-6 d-flex">
+        <div>
             <span class="testTextHeaders" v-html="content.headerHTML"></span>
             <hr class="testHeaderLine">
             <br>
@@ -29,14 +29,7 @@ export default {
 }
 </script>
 
-<style scope>
-.testBoxes {
-    box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
-    background-color: #ffffff;
-    width: 100%;
-    height: 100%;
-}
-
+<style scoped>
 .paddingSection {
     padding-left: 5%;
     padding-right: 5%;

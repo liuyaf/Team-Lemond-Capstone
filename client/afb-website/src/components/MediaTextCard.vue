@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
@@ -40,21 +42,27 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.paddingSection {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
 .textParagraphs {
     font-family: 'DDINRegular'; 
 }
 
 p {
-  font-family: 'DDINRegular';
-  font-size: calc(12px + .8vw);
+    font-family: 'DDINRegular';
+    font-size: calc(12px + .8vw);
 }
 
 ul {
     font-family: 'DDINRegular'; 
     list-style-type: initial;
-    padding-left: 1rem;
-    line-height: 2rem;
+    line-height: 1.5rem;
 }
 
 li {
@@ -63,11 +71,11 @@ li {
     margin-bottom: 5px;
 }
 
-.reasonRow {
+.reasonRow[data-v-039c5b43] {
     margin-top: 3%;
 }
 
-.reasons {
+.reasons[data-v-0dcdb161] {
     box-shadow: 2px -2.5px 2px 0
         rgba(0, 0, 0, 0.15), 0 1px 2px 0
         rgba(0, 0, 0, 0.25);
@@ -76,24 +84,9 @@ li {
     height: 100%;
 }
 
-#reasonTitleButton {
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.reasonLogosRight {
-    margin-top: 5%;
-    margin-left: 85%;
-}
-
-.reasonDivs {
+.reasonDivs[data-v-0dcdb161] {
     width: 100%;
     height: 100%;
-}
-
-.buttonDiv {
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 img {
