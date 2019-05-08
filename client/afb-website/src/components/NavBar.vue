@@ -29,6 +29,7 @@
             </button>
           </div>
         </div>
+
         <div class="container col-lg-5 col-md-6 align-self-center justify-content-center px-2">
           <div id="nav">
             <router-link class="navSpacing navDisplay" to="/">About</router-link>
@@ -37,6 +38,7 @@
             <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
           </div>
         </div>
+
         <div class="container d-flex col-lg-4 col-md-3 align-self-center pl-0">
           <div class="col-12 px-1 d-flex justify-content-end">
             <img
@@ -53,6 +55,7 @@
             </a>
           </div>
         </div>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="hamburgerNav navbar-nav mr-auto">
             <li class="nav-item">
@@ -74,12 +77,21 @@
 </template>
 
 <script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 export default {
   name: 'NavBar',
 }
 </script>
 
 <style scoped>
+header {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+}
+
 .hamburgerNav[data-v-4295d220] {
   font-family: "Fjalla One";
 }
@@ -95,6 +107,11 @@ export default {
 nav {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
   background-color: white;
+}
+
+#nav {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #nav a {

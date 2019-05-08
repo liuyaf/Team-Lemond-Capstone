@@ -15,6 +15,9 @@
 </template>
 
 <script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 export default {
     name: 'DynamicButton',
     props: ['buttonInfo']
@@ -22,5 +25,8 @@ export default {
 </script>
 
 <style scoped>
+    button {
+        font-family: "Fjalla One";
+    }
 </style>
 

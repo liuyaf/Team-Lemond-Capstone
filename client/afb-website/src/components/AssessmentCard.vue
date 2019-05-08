@@ -36,6 +36,11 @@ export default {
     padding-top: 3%;
     padding-bottom: 3%;
 }
+
+.textParagraphs {
+    font-family: 'DDINRegular';
+
+}
 </style>
 
 

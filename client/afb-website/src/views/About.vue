@@ -11,10 +11,10 @@
                 <div class="col-xl-9 col-lg-11 col-md-12">
                   <span class="intro-h" v-html="introSection.heading"></span>
                 </div>
-                <div class="col-lg-12 col-md-12">
+                <div class="col-lg-12 col-md-12 mt-3">
                   <span class="intro-p" v-html="introSection.text"></span>
                 </div>
-                <div class="col-lg-7 col-md-8">
+                <div class="col-lg-7 col-md-8 mt-3">
                   <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
                 </div>
               </div>
@@ -28,7 +28,8 @@
                 <div class ="fact-body">
                   <hr class="factLine">
                   <span class="fact-h" v-html="item.header"></span>
-                  <p><span v-html="item.text"></span></p>
+                  <!-- <p><span v-html="item.text"></span></p> -->
+                  <p>{{ item.text }}</p>
                 </div>
             </div>
           </div>
@@ -39,7 +40,7 @@
           <div class="row mx-auto">
               <div class="col-sm-12 col-md-6">
                 <div>
-                  <div v-html="missionSection.paragraphs"></div>
+                  <div class="missionContent" v-html="missionSection.paragraphs"></div>
                   <DynamicButton class="mb-4" v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"/>
                 </div>
               </div>
@@ -162,7 +163,7 @@ export default {
           text: null
         } 
         fact.header = this.parsedHTML.getElementsByClassName("age-friendly-fact")[i].children[0].outerHTML
-        fact.text = this.parsedHTML.getElementsByClassName("age-friendly-fact")[i].children[1].outerHTML
+        fact.text = this.parsedHTML.getElementsByClassName("age-friendly-fact")[i].children[1].innerText
         this.factSection.push(fact)
       }
 
@@ -251,19 +252,19 @@ export default {
   padding-bottom: 3%;
 }
 
-h3 {
+/* h3 {
   font-size: calc(18px + 1vw);
-}
+} */
 
-[data-v-039c5b43] >>> p {
+/* [data-v-039c5b43] >>> p {
   font-family: 'DDINRegular';
   font-size: calc(10px + .8vw);
-}
+} */
 
-[data-v-039c5b43] >>> ul {
+/* [data-v-039c5b43] >>> ul {
   font-family: 'DDINRegular';
   font-size: calc(10px + .8vw);
-}
+} */
 
 
 /* intro content */
@@ -283,11 +284,11 @@ h3 {
   line-height: 1.4;
 }
 
-.intro-h[data-v-039c5b43] >>> h2 {
+.intro-h >>> h2 {
   font-size: 34px;
 }
 
-.intro-p[data-v-039c5b43] >>> p {
+.intro-p >>> p {
   font-family: "Fjalla One";
   font-size: 18px;
 }
@@ -310,11 +311,11 @@ h3 {
       margin-top: 250px;
     }
 
-  .intro-h[data-v-039c5b43] >>> h2 {
+  .intro-h >>> h2 {
     font-size: 28px;
   }
 
-  .intro-p[data-v-039c5b43] >>> p  {
+  .intro-p >>> p  {
     font-size: 14px;
   }
 }
@@ -330,9 +331,13 @@ h3 {
   margin-left: 0;
 }
 
-.fact-h[data-v-039c5b43] >>> span {
+.fact-h >>> span {
   color: #cc3e16;
   font-size: calc(34px + 1vw);
+}
+
+.fact-body > p {
+  font-family: 'DDINRegular';
 }
 
 
@@ -343,13 +348,16 @@ h3 {
 }
 
 .missionImage {
-  overflow: hidden;
   margin: auto;
 }
 
 .missionImage img {
-  display:block; /*remove inline-block spaces*/
+  display: block; /*remove inline-block spaces*/
   width:100%; /*make image streatch*/
+}
+
+.missionContent >>> p {
+  font-family: 'DDINRegular';
 }
  
 
@@ -390,18 +398,14 @@ h3 {
   font-family: 'DDINRegular';
 }
 
-.testBoxes[data-v-039c5b43] {
+.testBoxes {
   box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
 
 
 /* sticker */
-.apply-for-sticker[data-v-039c5b43] {
+.apply-for-sticker {
   background-color: #f8f8f8;
   box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-.stickerCard[data-v-039c5b43] >>> img {
-  width: 100%;
 }
 </style>

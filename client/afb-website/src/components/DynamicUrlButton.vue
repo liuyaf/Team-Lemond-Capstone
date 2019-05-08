@@ -17,6 +17,9 @@
 </template>
 
 <script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 export default {
     // A button components that goes to an external website
     // parameters:
@@ -33,6 +36,8 @@ export default {
 </script>
 
 <style scoped>
-
+    button {
+        font-family: "Fjalla One";
+    }
 </style>
 

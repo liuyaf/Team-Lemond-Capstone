@@ -13,7 +13,7 @@
             <div class="reasons reasonDivs">
                 <!-- small icon and button -->
                 <div class="paddingSection container-fluid row">
-                    <div class="paddingSection" v-html="content.content"></div>
+                    <div class="mediaContent paddingSection" v-html="content.content"></div>
                     <div class="paddingSection">
                         <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
                     </div>
@@ -54,28 +54,22 @@ export default {
     font-family: 'DDINRegular'; 
 }
 
-p {
+.mediaContent >>> p {
     font-family: 'DDINRegular';
-    font-size: calc(12px + .8vw);
+    /* font-size: calc(12px + .8vw); */
 }
 
-ul {
+.mediaContent >>> ul {
     font-family: 'DDINRegular'; 
     list-style-type: initial;
-    line-height: 1.5rem;
+    /* line-height: 1.5rem; */
 }
 
-li {
-    font-family: 'DDINRegular';
-    font-size: calc(12px + .8vw);
-    margin-bottom: 5px;
-}
-
-.reasonRow[data-v-039c5b43] {
+.reasonRow {
     margin-top: 3%;
 }
 
-.reasons[data-v-0dcdb161] {
+.reasons {
     box-shadow: 2px -2.5px 2px 0
         rgba(0, 0, 0, 0.15), 0 1px 2px 0
         rgba(0, 0, 0, 0.25);
@@ -84,7 +78,7 @@ li {
     height: 100%;
 }
 
-.reasonDivs[data-v-0dcdb161] {
+.reasonDivs {
     width: 100%;
     height: 100%;
 }

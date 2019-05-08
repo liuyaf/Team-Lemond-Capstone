@@ -3,7 +3,7 @@
         <div class="stickerDiv col-xs-12 col-sm-5 col-md-5 col-lg-5">
             <img class="stickerImage" v-bind:src="content.image">
         </div>
-        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+        <div class="discountContent col-xs-12 col-sm-7 col-md-7 col-lg-7">
             <div class="applySticker">
                 <span v-html="content.header"></span>
                 <br>
@@ -40,6 +40,11 @@ export default {
     margin-right: auto;
 }
 
+.discountContent {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .stickerDiv {
     margin-top: auto;
     margin-bottom: auto;
@@ -47,6 +52,10 @@ export default {
 
 .stickerImage {
     width: 100%;
+}
+
+.textParagraphs {
+  font-family: 'DDINRegular';
 }
 </style>
 

@@ -178,6 +178,10 @@ export default {
 
 <style scoped>
 /* general styling on the resource guide page */
+main {
+  padding-top: 100px;
+}
+
 .paddingSection {
   padding-left: 5%;
   padding-right: 5%;
@@ -199,10 +203,6 @@ p {
 
 
 /* intro section */
-#resources {
-  margin-top: 114px;
-}
-
 .introImage {
   width: 100%;
 }
