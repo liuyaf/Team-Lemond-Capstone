@@ -45,7 +45,12 @@ export default {
     font-family: 'DDINRegular'; 
 }
 
-.reasons div div ul {
+p {
+  font-family: 'DDINRegular';
+  font-size: calc(12px + .8vw);
+}
+
+ul {
     font-family: 'DDINRegular'; 
     list-style-type: initial;
     padding-left: 1rem;
