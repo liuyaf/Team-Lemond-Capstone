@@ -2,6 +2,7 @@
   <footer>
     <div>
       <div class="row">
+        
         <!-- Bootstrap Modal for Accessibility information -->
         <div class="modal" id="accessibilityModal">
           <div class="modal-dialog modal-lg">
@@ -55,38 +56,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Bulma Modal for Acknowledgement Modal -->
-        <div class="modal" v-bind:class="{ 'is-active': showModalAcknowledgements }">
-          <div class="modal-background"></div>
-          <div class="modal-content p-5">
-            <h1>Special thanks to the following organizations and people:</h1>
-            <br>
-
-            <ul>
-              <li>AARP Network of Age-friendly States and Communities</li>
-              <li>AARP Washington</li>
-              <li>Age Friendly Coalition for Seattle and King County</li>
-              <li>Age-Friendly NYC</li>
-              <li>Aging and Disability Services, Seattle Human Services Department</li>
-              <li>Muhammad Hariz</li>
-              <li>Davis (Based) Huynh</li>
-              <li>IlluminAge Communication Partners</li>
-              <li>Yicheng (Estelle) Jiang</li>
-              <li>Liuyang Fu</li>
-              <li>The New York Academy of Medicine</li>
-              <li>Seattle Office of Economic Development</li>
-              <li>University of Washington Information School</li>
-              <li>Workforce Development Council of Seattle-King County</li>
-            </ul>
-            <br>
-          </div>
-          <button
-            class="modal-close is-large"
-            @click="showModalAcknowledgements = false"
-            aria-label="close"
-          ></button>
         </div>
 
         <div class="modal" id="acknowledgementModal">
