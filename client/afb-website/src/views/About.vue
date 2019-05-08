@@ -9,10 +9,10 @@
           <div class="container mx-0">
               <div class="mainHeader">
                 <div class="col-xl-9 col-lg-11 col-md-12">
-                  <span v-html="introSection.heading"></span>
+                  <span class="intro-h" v-html="introSection.heading"></span>
                 </div>
                 <div class="col-lg-12 col-md-12">
-                  <span v-html="introSection.text"></span>
+                  <span class="intro-p" v-html="introSection.text"></span>
                 </div>
                 <div class="col-lg-7 col-md-8">
                   <DynamicButton v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"/>
@@ -27,8 +27,8 @@
             <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
                 <div class ="fact-body">
                   <hr class="factLine">
-                  <span v-html="item.header"></span>
-                  <p class="fact-text"><span v-html="item.text"></span></p>
+                  <span class="fact-h" v-html="item.header"></span>
+                  <p><span v-html="item.text"></span></p>
                 </div>
             </div>
           </div>
@@ -285,14 +285,15 @@ p {
   line-height: 1.4;
 }
 
-.mainHeader div span h2 {
+.intro-h[data-v-039c5b43] >>> h2 {
   font-size: 34px;
 }
 
-.mainHeader div span p  {
+.intro-p[data-v-039c5b43] >>> p {
   font-family: "Fjalla One";
   font-size: 18px;
 }
+
 
 /* fact content */
 .factLine {
@@ -304,7 +305,7 @@ p {
   margin-left: 0;
 }
 
-.facts div div div span h3 span {
+.fact-h[data-v-039c5b43] >>> span {
   color: #cc3e16;
   font-size: calc(34px + 1vw);
 }
@@ -389,12 +390,11 @@ p {
       margin-top: 250px;
     }
 
-  .mainHeader div span h2 {
+  .intro-h[data-v-039c5b43] >>> h2 {
     font-size: 28px;
   }
 
-  .mainHeader div span p  {
-    font-family: "Fjalla One";
+  .intro-p[data-v-039c5b43] >>> p  {
     font-size: 14px;
   }
 }
