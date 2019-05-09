@@ -189,7 +189,7 @@ export default {
                 questionID: 1,
                 type: "radio",
                 title:
-                  "Do you know the age profile of your workforce and what percentage of your employees is age 50+? ",
+                  "Do you know the age profile of your workforce and what percentage of your employees is age 50+?",
                 questionContent: {
                   yes:
                     "Excellent—this is important information for both employee retention and succession planning. ",
