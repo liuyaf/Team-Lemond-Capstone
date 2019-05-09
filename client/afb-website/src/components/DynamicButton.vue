@@ -1,9 +1,9 @@
 <template>
     <div>
-        <button class="btn" v-bind:style="{ border: '2px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color }">
+        <button class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
             <router-link v-bind:style="{ color: this.buttonInfo.color }" v-bind:to="this.buttonInfo.destination">
                 {{ this.buttonInfo.text }}
-                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                <svg v-bind:style="{ width: '40px', height: '30px', padding: '0' }" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 31.49 31.49" style="enable-background:new 0 0 31.49 31.49;" xml:space="preserve">
                 <path v-bind:style="{ fill: this.buttonInfo.color }" d="M21.205,5.007c-0.429-0.444-1.143-0.444-1.587,0c-0.429,0.429-0.429,1.143,0,1.571l8.047,8.047H1.111
                 C0.492,14.626,0,15.118,0,15.737c0,0.619,0.492,1.127,1.111,1.127h26.554l-8.047,8.032c-0.429,0.444-0.429,1.159,0,1.587
@@ -15,21 +15,18 @@
 </template>
 
 <script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 export default {
     name: 'DynamicButton',
     props: ['buttonInfo']
 }
 </script>
 
-<style scope>
-svg {
-    width: 40px;
-    height: 30px;
-    padding: 0;
-}
-
-.btn {
-    border-radius: 0px;
-}
+<style scoped>
+    button {
+        font-family: "Fjalla One";
+    }
 </style>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="reasonRow container-fluid row mx-auto">
+    <div class="reasonRow row mx-auto">
         <!-- big image -->
         <div v-bind:class="figureClass">
             <div class="reasonDivs">
@@ -11,23 +11,11 @@
         <!-- rest of content -->
         <div class="col-lg-6 d-flex">
             <div class="reasons reasonDivs">
-                <div class="col-6 d-flex mt-3">
-                    <img v-bind:src="content.smallIcon">
-                </div>
-                <div id="reasonTitleButton" class="container-fluid row">
-                    <div class="col-6 d-flex text-left">
-                        <span v-html="content.header"></span>
-                    </div>
-                    <div class="col-3"></div>
-                    <div class="buttonDiv col-3 d-flex">
+                <!-- small icon and button -->
+                <div class="paddingSection container-fluid row">
+                    <div class="mediaContent paddingSection" v-html="content.content"></div>
+                    <div class="paddingSection">
                         <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
-                    </div>
-                </div>
-                <div id="reasonTextLeft" class="container-fluid row">
-                    <div class="col-10 d-flex text-left">
-                        <p class="textParagraphs">
-                            {{ content.paragraph }}
-                        </p>
                     </div>
                 </div>
             </div>
@@ -36,6 +24,8 @@
 </template>
 
 <script>
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
@@ -52,9 +42,28 @@ export default {
 }
 </script>
 
-<style scope>
-.textParagraphs {
+<style scoped>
+.paddingSection {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.mediaContent >>> h3 {
+    font-size: calc(18px + 1vw);
+}
+
+.mediaContent >>> p {
+    font-family: 'DDINRegular';
+    font-size: calc(10px + .8vw);
+}
+
+.mediaContent >>> ul {
     font-family: 'DDINRegular'; 
+    list-style-type: initial;
+    font-size: calc(10px + .8vw);
+    line-height: 2rem;
 }
 
 .reasonRow {
@@ -70,24 +79,13 @@ export default {
     height: 100%;
 }
 
-#reasonTitleButton {
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.reasonLogosRight {
-    margin-top: 5%;
-    margin-left: 85%;
-}
-
 .reasonDivs {
     width: 100%;
     height: 100%;
 }
 
-.buttonDiv {
-    margin-top: auto;
-    margin-bottom: auto;
+img {
+    object-fit: cover;
 }
 </style>
 

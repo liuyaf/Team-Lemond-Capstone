@@ -1,13 +1,13 @@
 <template>
-    <div class="stickerCard container-fluid row py-5">
-        <div class="col-4 d-flex">
+    <div class="discountCard row py-5">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 d-flex">
             <div class="mx-auto">
-                <img v-bind:src="content.image" class="stickerImage">
+                <img class="stickerImage" v-bind:src="content.image">
             </div>
         </div>
-        <div class="col-7 d-flex">
+        <div class="discountContent col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div class="applySticker">
-                <span v-html="content.header"></span>
+                <span class="sticker-h" v-html="content.header"></span>
                 <br>
                 <p class="textParagraphs">{{ content.paragraph }}</p>
                 <br>
@@ -35,13 +35,28 @@ export default {
 }
 </script>
 
-<style scope>
-.stickerCard {
+<style scoped>
+.discountCard {
     box-shadow: -2.5px 2px 4px 0 rgba(0, 0, 0, 0.15);
-    background-color: #ffffff;
     margin-left: auto;
     margin-right: auto;
+    background-color:white;
 }
+
+.sticker-h >>> h3 {
+    font-size: calc(18px + 1vw);
+}
+
+.textParagraphs {
+    font-size: calc(10px + .8vw);
+    font-family: 'DDINRegular';
+}
+
+.discountContent {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 </style>
 
 
