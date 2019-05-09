@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="btn" v-bind:style="{ border: '2px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
+        <button class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
             <router-link v-bind:style="{ color: this.buttonInfo.color }" v-bind:to="this.buttonInfo.destination">
                 {{ this.buttonInfo.text }}
                 <svg v-bind:style="{ width: '40px', height: '30px', padding: '0' }" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

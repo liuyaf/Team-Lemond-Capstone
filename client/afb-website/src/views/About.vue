@@ -11,7 +11,7 @@
       >
         <div class="container mx-0">
           <div class="mainHeader">
-            <div class="col-xl-9 col-lg-11 col-md-12">
+            <div class="col-xl-8 col-lg-9 col-md-11">
               <span class="intro-h" v-html="introSection.heading"></span>
             </div>
             <div class="col-lg-12 col-md-12 mt-3">
@@ -364,7 +364,7 @@ export default {
 
 /* fact content */
 .factLine {
-  height: 6px;
+  height: 10px;
   background-color: #bbc437;
   border: none;
   max-width: 25%;
@@ -429,7 +429,7 @@ export default {
 }
 
 .testLine {
-  height: 6px;
+  height: 10px;
   color: #155777;
   background-color: #155777;
   border: none;
@@ -439,7 +439,6 @@ export default {
 }
 
 .textHeaders {
-  font-weight: 600;
   font-size: calc(18px + 1vw);
 }
 
