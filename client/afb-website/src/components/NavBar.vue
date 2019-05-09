@@ -5,11 +5,13 @@
           class="container-fluid col-lg-3 col-md-3 text-lg-right align-self-center"
           id="phoneDisplay"
         >
+        <router-link to="/">
           <img
             src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/headerImg-e1556491430371.png"
             class="navImg"
             alt="Age Friendly Business Logo"
           >
+        </router-link>
 
           <div class="hamburgerMenu justify-content-end pr-2">
             <button
@@ -65,10 +67,13 @@
               <router-link to="/resources">Resources</router-link>
             </li>
             <li class="nav-item">
-              <a href="https://www.seattle.gov/agefriendly/about/discount-program" class="navSpacing navDisplay">Discount Program</a>
+              <a href="https://www.seattle.gov/agefriendly/about/discount-program">Discount Program</a>
             </li>
             <li class="nav-item">
               <router-link to="/contact-us">Contact Us</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/assessment-selection">Assessment Test</router-link>
             </li>
           </ul>
         </div>
@@ -118,10 +123,13 @@ nav {
   font-weight: bold;
   color: #2c3e50;
   font-size: 18px;
+  padding-bottom: 18px;
 }
 
 #nav a.router-link-exact-active {
   color: lightblue;
+  border-bottom: 8px solid #6EAD94;
+  
 }
 
 #navbarSupportedContent {

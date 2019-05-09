@@ -9,10 +9,6 @@
             <span class="intro-h" v-html="introSection.header"></span>
             <br>
             <p class="intro-p">{{ introSection.paragraph }}</p>
-            <DynamicUrlButton
-              class="mb-4"
-              v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"
-            />
           </div>
 
           <div class="col-sm-12 col-lg-6">
@@ -51,13 +47,11 @@ import axios from "axios";
 import AssessmentCard from "@/components/AssessmentCard.vue";
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
-import DynamicUrlButton from "@/components/DynamicUrlButton.vue";
 
 export default {
   name: "assessmentSelection",
   components: {
     AssessmentCard,
-    DynamicUrlButton,
     NavBar,
     Footer
   },
@@ -164,7 +158,7 @@ main {
 
 /* intro section */
 .assessmentSelection {
-  margin-top: 114px;
+  margin-top: 80px;
 }
 
 .introImage {
