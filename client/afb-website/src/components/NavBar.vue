@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="container col-lg-5 col-md-6 align-self-center justify-content-center px-2">
+        <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
           <div id="nav">
             <router-link class="navSpacing navDisplay" to="/">About</router-link>
             <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
@@ -41,17 +41,17 @@
           </div>
         </div>
 
-        <div class="container d-flex col-lg-4 col-md-3 align-self-center pl-0">
+        <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
           <div class="col-12 px-1 d-flex justify-content-end">
             <img
               src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navFontBtn.png"
-              class="navImg ml-2 svgButton navDisplay"
+              class="navBtnImg ml-2 svgButton navDisplay"
               alt="Change font button"
             >
             <router-link class="navSpacing navDisplay" to="/assessment-selection">
               <img
                 src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png"
-                class="navImg ml-2 svgButton navDisplay"
+                class="navBtnImg ml-2 svgButton navDisplay"
                 alt="Assessment test button"
               >
             </router-link>
@@ -137,7 +137,7 @@ nav {
   padding-top: 10px;
 }
 
-.navImg {
+.navImg, .navBtnImg {
   width: auto;
   height: auto;
 }
@@ -160,6 +160,16 @@ nav {
   .navImg {
     width: 200px;
     height: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .navBtnImg {
+    width: 150px;
+  }
+
+  .navImg {
+    width: 200px;
   }
 }
 </style>
