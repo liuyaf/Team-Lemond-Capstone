@@ -28,12 +28,21 @@
       >{{correctCount}}/{{totalQ}}</el-progress>
     </div>
     <el-tabs class="tabs" v-model="activeName" :stretch="true">
+      <el-tab-pane
+        class="tab-pane"
+        v-for="(section, index) in questions"
+        :key="index"
+        :label="section.sectionTitle"
+        :name="section.sectionTitle"
+      >
+        <ResultDetail :Tips="section"></ResultDetail>
+      </el-tab-pane>
       <el-tab-pane label="test" name="first" class="tab-pane">
         <ResultDetail></ResultDetail>
       </el-tab-pane>
-      <el-tab-pane label="asdasd" name="asdasdasdasdasd">
+      <!-- <el-tab-pane label="asdasd" name="asdasdasdasdasd">
         <ResultDetail></ResultDetail>
-      </el-tab-pane>
+      </el-tab-pane>-->
     </el-tabs>
   </div>
 </template>
@@ -44,7 +53,7 @@ export default {
   components: {
     ResultDetail
   },
-  props: ["Result"],
+  props: ["Result", "Questions"],
   data() {
     return {
       testType: "Employer",
@@ -52,14 +61,15 @@ export default {
       summary: "Your business is very age-friendly!",
       activeName: "first",
       totalQ: 0,
-      correctCount: 0
+      correctCount: 0,
+      questions: this.Questions
     };
   },
   computed: {
     correctPercent: function() {
       let count = 0;
       let ynCount = 0;
-      for (let i = 0; i < this.result.length; i++) {
+      for (let i = 1; i < this.result.length; i++) {
         for (let j = 0; j < this.result[i].length; j++) {
           if (this.result[i][j] == "yes" || this.result[i][j] == "no") {
             ynCount++;

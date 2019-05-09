@@ -1,9 +1,12 @@
 <template>
-  <div class="container">
+  <div class="result-container">
     <div class="review-side">
       <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
+      <!-- <ReviewCard v-for="(tip, index) in tips" :key="index"
+      :correct=></ReviewCard>-->
       <ReviewCard :correct="!correct" :question="question" :tips="tips"></ReviewCard>
-      <ReviewCard :correct="correct" :question="question" :tips="tips"></ReviewCard>
+      <!-- <ReviewCard :correct="correct" :question="question" :tips="tips"></ReviewCard>
+      <ReviewCard :correct="!correct" :question="question" :tips="tips"></ReviewCard>-->
     </div>
     <div class="tips">
       <h1>Tips for {{sectionName}}</h1>
@@ -20,19 +23,26 @@
 import ReviewCard from "./ReviewCard";
 export default {
   name: "result-detail",
+
   components: {
     ReviewCard
   },
   props: {
     color: String,
-    tipsObj1: Object
+    tipsObj1: Object,
+    Tips: Object
   },
   data() {
     return {
-      sectionName: "Recruitment",
+      // tips: this.Tips,
+      sectionName: "Workforce planning",
       correct: true,
-      question: "test title",
-      tips: ["correct tip", "wrong tip"],
+      question:
+        "Do you know the age profile of your workforce and what percentage of your employees is age 50+?",
+      tips: [
+        "Excellent—this is important information for both employee retention and succession planning.",
+        "Experienced workers carry institutional knowledge and wisdom that is beneficial to your organization."
+      ],
       tipsObj: [
         {
           tipsTitle: "Recruit Effectively",
@@ -63,7 +73,7 @@ export default {
 };
 </script>
 <style scoped>
-.container {
+.result-container {
   min-height: 1000px;
   display: flex;
 }

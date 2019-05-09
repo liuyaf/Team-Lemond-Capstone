@@ -163,6 +163,11 @@ export default {
         this.introSection.image = this.parsedHTML.getElementsByClassName(
           "wp-block-image"
         )[0].children[0].src;
+        // this.introSection.image = this.introSection.image.replace(
+        //   "http://",
+        //   "https://"
+        // );
+        console.log(this.introSection.image);
 
         // parsing the content that contains the heading and the text
         this.introSection.content = this.parsedHTML.getElementsByClassName(
@@ -383,7 +388,7 @@ export default {
 
 .fact-body > p {
   font-family: "DDINRegular";
-  font-size: calc(10px + .8vw);
+  font-size: calc(10px + 0.8vw);
 }
 
 /* mission content */

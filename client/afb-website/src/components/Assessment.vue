@@ -10,7 +10,6 @@
               {{sectionTitle}}
             </p>
           </div>
-
           <div class="control-panel">
             <button @click="enlargeFont=!enlargeFont">font change</button>
           </div>
@@ -94,7 +93,7 @@
           >Submit</el-button>
         </div>
       </div>
-      <Result v-else :Result="result"></Result>
+      <Result v-else :Result="result" :Questions="content.sections"></Result>
     </transition>
   </div>
 </template>
@@ -160,7 +159,7 @@ export default {
         sections: [
           {
             sectionID: 1,
-            sectionTitle: "section 1",
+            sectionTitle: "Business information",
             questions: [
               {
                 questionID: 1,
@@ -184,29 +183,87 @@ export default {
           },
           {
             sectionID: 2,
-            sectionTitle: "section 2",
+            sectionTitle: "Workforce Planning",
             questions: [
               {
                 questionID: 1,
                 type: "radio",
-                title: "yes or no question",
-                questionContent: {}
+                title:
+                  "Do you know the age profile of your workforce and what percentage of your employees is age 50+? ",
+                questionContent: {
+                  yes:
+                    "Excellent—this is important information for both employee retention and succession planning. ",
+                  no:
+                    "Experienced workers carry institutional knowledge and wisdom that is beneficial to your organization."
+                }
               },
               {
                 questionID: 2,
                 type: "radio",
-                title: "asdasdasd",
-                questionContent: {}
+                title:
+                  "Do you have a method to get feedback about the needs and interests of mature and other workers?",
+                questionContent: {
+                  yes:
+                    "Great—it’s always good to know what motivates your employees.",
+                  no: "Sometimes the best course of action is to just ask! "
+                }
               },
               {
                 questionID: 3,
                 type: "radio",
-                title: "This is a test title2?",
-                questionContent: {}
+                title:
+                  "Have you determined the timing and impact of retirements and identified knowledge gaps to be filled?",
+                questionContent: {
+                  yes:
+                    "Excellent—with this information, you can invite older employees to share and contribute knowledge during their remaining years in your organization.",
+                  no:
+                    "Don’t miss the opportunity to involve older employees in planning for their eventual transition. "
+                }
+              }
+            ]
+          },
+          {
+            sectionID: 3,
+            sectionTitle: "Retention: Flexible Work Arrangements",
+            questions: [
+              {
+                questionID: 1,
+                type: "radio",
+                title:
+                  "Do you have flexible work arrangements that give employees increased control over work hours or location?",
+                questionContent: {
+                  yes:
+                    "Excellent—flexibility will help you retain the wisdom and experience of older workers.",
+                  no:
+                    "Older workers have wisdom and experience that is valuable to your organization. Flexibility is essential for retention."
+                }
+              },
+              {
+                questionID: 2,
+                type: "radio",
+                title:
+                  "Do you offer transitional work options for retirement-eligible employees such as lateral transfers, bridge employment, or phased retirement?",
+                questionContent: {
+                  yes:
+                    "Great—you recognize the value of your older employees’ wisdom and experience.",
+                  no:
+                    "Older workers have wisdom and experience that is valuable to your organization. Flexibility is essential for retention."
+                }
+              },
+              {
+                questionID: 3,
+                type: "radio",
+                title:
+                  "Do you have postretirement work options such as consulting or temporary work?",
+                questionContent: {
+                  yes:
+                    "Very good—short-term rehiring can save a fortune on training costs!",
+                  no:
+                    "This would be good to consider since it saves on onboarding and training costs."
+                }
               }
             ]
           }
-          // { sectionTitle: "section 3", questions: [] },
           // { sectionTitle: "section 4", questions: [] },
           // { sectionTitle: "section 5", questions: [] },
           // { sectionTitle: "section 6", questions: [] }
