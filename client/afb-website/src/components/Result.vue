@@ -40,9 +40,6 @@
       <el-tab-pane label="test" name="first" class="tab-pane">
         <ResultDetail></ResultDetail>
       </el-tab-pane>
-      <!-- <el-tab-pane label="asdasd" name="asdasdasdasdasd">
-        <ResultDetail></ResultDetail>
-      </el-tab-pane>-->
     </el-tabs>
   </div>
 </template>

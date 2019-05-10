@@ -6,7 +6,9 @@
           <div class="title-panel">
             <p id="title-vertical" :style="{background: color[currentSectionNum]}"></p>
             <p class="section-title" :style="{color:color[currentSectionNum]}">
-              <span v-if="TOADone">section {{currentSectionNum+1}}/6</span>
+              <span
+                v-if="TOADone & currentSectionNum!==0"
+              >section {{currentSectionNum+1}}/{{sectionCount}}</span>
               {{sectionTitle}}
             </p>
           </div>
@@ -79,7 +81,7 @@
           >prev section</el-button>
           <el-button
             class="next-section"
-            v-if="currentSectionNum != sectionCount-1"
+            v-if="currentSectionNum != sectionLength-1"
             size="medium"
             :disabled="!finishCurrentSection"
             @click="moveToNextSection"
@@ -88,12 +90,12 @@
             @click="isFinished=true"
             class="submit"
             size="medium"
-            v-if="currentSectionNum == sectionCount-1"
+            v-if="currentSectionNum == sectionLength-1"
             :disabled="!finishCurrentSection"
           >Submit</el-button>
         </div>
       </div>
-      <Result v-else :Result="result" :Questions="content.sections"></Result>
+      <Result v-else :Result="result" :Questions="content.sections.slice(1)"></Result>
     </transition>
   </div>
 </template>
@@ -289,7 +291,7 @@ export default {
     isAtTOA: function() {
       return !this.TOADone;
     },
-    sectionCount: function() {
+    sectionLength: function() {
       return this.content.sections.length;
     },
     currentSection: function() {
@@ -327,6 +329,9 @@ export default {
         return temp.length === this.currentSectionLength;
       }
       return false;
+    },
+    sectionCount: function() {
+      return this.content.sections.length - 1;
     }
   },
   methods: {
