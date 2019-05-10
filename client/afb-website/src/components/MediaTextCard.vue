@@ -15,7 +15,7 @@
                 <div class="paddingSection container-fluid row">
                     <div class="mediaContent paddingSection" v-html="content.content"></div>
                     <div class="paddingSection">
-                        <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text:'', destination:'/resources' }" />
+                        <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources'+'#' + content.reasonId }" />
                     </div>
                 </div>
             </div>

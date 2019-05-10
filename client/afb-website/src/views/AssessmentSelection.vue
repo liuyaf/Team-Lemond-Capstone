@@ -1,7 +1,6 @@
 <template>
   <div class="assessmentSelection">
-    <NavBar/>
-    <main>
+    
       <!-- intro section  -->
       <div class="intro paddingSection">
         <div class="row">
@@ -35,9 +34,7 @@
           />
         </div>
       </div>
-    </main>
-
-    <Footer/>
+    
   </div>
 </template>
 
@@ -45,15 +42,12 @@
 // @ is an alias to /src
 import axios from "axios";
 import AssessmentCard from "@/components/AssessmentCard.vue";
-import NavBar from '@/components/NavBar.vue'
-import Footer from '@/components/Footer.vue'
+
 
 export default {
   name: "assessmentSelection",
   components: {
-    AssessmentCard,
-    NavBar,
-    Footer
+    AssessmentCard
   },
   data() {
     return {
