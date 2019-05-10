@@ -1,9 +1,6 @@
 <template>
   <div id="about">
-    <!-- navbar -->
-    <NavBar/>
-
-    <main>
+    
       <!-- intro section -->
       <div
         class="mainImage jumbotron jumbotron-fluid"
@@ -19,13 +16,13 @@
             </div>
             <div class="col-lg-7 col-md-8 mt-3">
               <DynamicButton
-                v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/#' }"
+                v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection' }"
               />
             </div>
           </div>
         </div>
       </div>
-
+      
       <!-- fact section -->
       <div class="facts">
         <div class="row mx-auto paddingSection">
@@ -48,7 +45,7 @@
               <div class="missionContent" v-html="missionSection.paragraphs"></div>
               <DynamicButton
                 class="mb-4"
-                v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/#' }"
+                v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources' }"
               />
             </div>
           </div>
@@ -68,7 +65,7 @@
           v-bind:src="fiveReasonsHeaderImage"
           alt="five reasons to become age friendly"
         >
-        <MediaTextCard v-for="(item) in fiveReasonsSection" :key="item.id" v-bind:content="item"/>
+        <MediaTextCard v-for="(item) in fiveReasonsSection" :key="item.reasonId" v-bind:content="item"/>
       </div>
 
       <!-- how to become an age friendly business -->
@@ -90,10 +87,7 @@
       <div class="apply-for-sticker paddingSection">
         <ApplyStickerCard v-bind:content="applyStickerSection"/>
       </div>
-    </main>
-
-    <!-- Footer -->
-    <Footer/>
+    
   </div>
 </template>
 
@@ -106,8 +100,6 @@ import MediaTextCard from "@/components/MediaTextCard.vue";
 import AssessmentCard from "@/components/AssessmentCard.vue";
 import DynamicButton from "@/components/DynamicButton.vue";
 import ApplyStickerCard from "@/components/ApplyStickerCard.vue";
-import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   name: "about",
@@ -115,9 +107,7 @@ export default {
     MediaTextCard,
     AssessmentCard,
     DynamicButton,
-    ApplyStickerCard,
-    NavBar,
-    Footer
+    ApplyStickerCard
   },
   data() {
     return {
@@ -226,11 +216,13 @@ export default {
 
         for (var s = 1; s <= 5; s++) {
           var reason = {
+            reasonId: null,
             className: null,
             bigImage: null,
             buttonColor: null,
             content: null
           };
+          reason.reasonId = 'reason-' + s
           reason.className = mediaTextBlocks[s].className;
           reason.bigImage = mediaTextBlocks[s].children[0].children[0].src;
           reason.buttonColor = reasonCardColors[s - 1];

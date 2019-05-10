@@ -1,9 +1,6 @@
 <template>
   <div id="resources">
-    <!-- NavBar-->
-    <NavBar/>
-
-    <main>
+    
       <!-- intro section  -->
       <div class="intro paddingSection">
         <div class="row">
@@ -13,13 +10,12 @@
               <p class="intro-p">{{ introSection.paragraph }}</p>
               <DynamicUrlButton class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
             </div>
-            
             <div class="col-sm-12 col-lg-6">
                 <img v-bind:src="introSection.image" class="introImage" alt="5 adults sitting and smiling at the camera">
             </div>
         </div>
       </div>
-
+      
       <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
       <div class="age-friendly paddingSection">
         <div class="row">
@@ -38,18 +34,14 @@
         <span v-html="fiveReasonsSection.header"></span>
         <hr class="headerLine">
 
-        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.id" v-bind:content="item"/>
+        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.reasonId" v-bind:content="item"/>
       </div>
 
       <!-- download button -->
       <div class="row paddingSection">
         <DynamicUrlButton class="mb-4 mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
       </div>
-    </main>
-
-    <!-- Footer -->
-    <Footer/>
-
+    
   </div>
 </template>
 
@@ -60,16 +52,12 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ReasonCard from '@/components/ReasonCard.vue'
 import DynamicUrlButton from '@/components/DynamicUrlButton.vue'
-import NavBar from '@/components/NavBar.vue'
-import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'resources',
   components: {
     ReasonCard,
-    DynamicUrlButton,
-    NavBar,
-    Footer
+    DynamicUrlButton
   },
   data () {
     return {
@@ -152,11 +140,13 @@ export default {
 
       for (var j = 1; j < mediaTextBlocks.length; j++) {
         var card = {
+          reasonId: null,
           className: null,
           image: null,
           content: null
         }
 
+        card.reasonId = 'reason-' + j
         card.className = mediaTextBlocks[j].className
         card.image = mediaTextBlocks[j].children[0].children[0].src
         card.content = mediaTextBlocks[j].children[1].innerHTML
@@ -178,8 +168,8 @@ export default {
 
 <style scoped>
 /* general styling on the resource guide page */
-main {
-  padding-top: 100px;
+#resources {
+  margin-top: 100px;
 }
 
 .paddingSection {
