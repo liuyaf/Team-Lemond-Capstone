@@ -34,7 +34,7 @@
         <span v-html="fiveReasonsSection.header"></span>
         <hr class="headerLine">
 
-        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.reasonId" v-bind:content="item" v-bind:id="item.reasonId"/>
+        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.reasonId" v-bind:content="item"/>
       </div>
 
       <!-- download button -->

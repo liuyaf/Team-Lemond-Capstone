@@ -2,7 +2,8 @@
   <div id="app">
     <!-- nav bar -->
     <NavBar v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"/>
-    
+    <LandingNav v-if="$route.name == 'notFound'"/>
+
     <!-- the views -->
     <main>
       <transition
@@ -21,7 +22,7 @@
 
     <!-- back to top button -->
     <back-to-top visibleoffset="1500">
-      <img class="btt-button" src="./assets/back-to-top-icon.svg" alt="">
+      <img class="btt-button" src="./assets/back-to-top-icon.svg" alt="scroll to top button">
     </back-to-top>
     
   </div>
@@ -30,11 +31,13 @@
 <script>
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import LandingNav from '@/components/LandingNav.vue'
 
 export default {
   components: {
     NavBar,
-    Footer
+    Footer,
+    LandingNav
   },
   data() {
     return {
