@@ -9,6 +9,11 @@
     >
       <router-view/>
     </transition>
+
+    <!-- back to top button -->
+    <back-to-top visibleoffset="1500">
+      <img class="btt-button" src="./assets/back-to-top-icon.svg" alt="">
+    </back-to-top>
   </div>
 </template>
 
@@ -64,5 +69,16 @@ export default {
 .fade-enter,
 .fade-leave-active {
   opacity: 0
+}
+
+.btt-button {
+  width: 100px;
+}
+
+/* back to top button */
+@media (max-width: 768px) {
+  .btt-button {
+    width: 15vw;
+  }
 }
 </style>

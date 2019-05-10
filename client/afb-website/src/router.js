@@ -49,5 +49,8 @@ export default new Router({
       name: 'employer-test',
       component: assessment
     }
-  ]
+  ],
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
