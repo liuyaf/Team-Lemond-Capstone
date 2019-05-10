@@ -97,7 +97,7 @@ header {
   width: 100%;
 }
 
-.hamburgerNav[data-v-4295d220] {
+.hamburgerNav {
   font-family: "Fjalla One";
 }
 

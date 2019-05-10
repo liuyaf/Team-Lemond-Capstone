@@ -12,7 +12,7 @@
                 <p class="textParagraphs">{{ content.paragraph }}</p>
                 <br>
                 <br>
-                <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'APPLY', destination:'/#' }"/>
+                <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'/#' }"/>
             </div>
         </div>
     </div>

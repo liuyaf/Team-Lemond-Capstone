@@ -16,6 +16,7 @@
     "jquery": "^3.4.0",
     "popper.js": "^1.15.0",
     "vue": "^2.6.6",
+    "vue-backtotop": "^1.6.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
