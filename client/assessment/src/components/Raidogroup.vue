@@ -4,7 +4,11 @@
     <div>
       <el-radio
         v-model="radio1"
+<<<<<<< HEAD
         label="1"
+=======
+        label="yes"
+>>>>>>> development
         border
         class="test"
         @change="$emit('continue', radio1, Content.questionID)"
@@ -16,7 +20,11 @@
     <div>
       <el-radio
         v-model="radio1"
+<<<<<<< HEAD
         label="2"
+=======
+        label="no"
+>>>>>>> development
         border
         class="test"
         @change="$emit('continue', radio1, Content.questionID)"

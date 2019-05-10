@@ -163,11 +163,6 @@ export default {
         this.introSection.image = this.parsedHTML.getElementsByClassName(
           "wp-block-image"
         )[0].children[0].src;
-        // this.introSection.image = this.introSection.image.replace(
-        //   "http://",
-        //   "https://"
-        // );
-        console.log(this.introSection.image);
 
         // parsing the content that contains the heading and the text
         this.introSection.content = this.parsedHTML.getElementsByClassName(
@@ -397,13 +392,22 @@ export default {
   background-color: #f8f8f8;
 }
 
-.missionImage {
-  margin: auto;
-}
-
 .missionImage img {
   display: block; /*remove inline-block spaces*/
-  width: 100%; /*make image streatch*/
+  width: 80%; /*make image streatch*/
+}
+
+@media (max-width: 1200px) {
+  .missionImage img {
+    width: 100%; /*make image streatch*/
+  }
+}
+
+@media (max-width: 771px) {
+  .missionImage img {
+    width: 70%; /*make image streatch*/
+    margin: auto;
+  }
 }
 
 .missionContent >>> h3 {
