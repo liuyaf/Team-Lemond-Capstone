@@ -4,9 +4,7 @@
       <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
       <!-- <ReviewCard v-for="(tip, index) in tips" :key="index"
       :correct=></ReviewCard>-->
-      <ReviewCard :correct="!correct" :question="question" :tips="tips"></ReviewCard>
-      <!-- <ReviewCard :correct="correct" :question="question" :tips="tips"></ReviewCard>
-      <ReviewCard :correct="!correct" :question="question" :tips="tips"></ReviewCard>-->
+      <ReviewCard v-for="(response, index) in tipsAndResponse" :key="index" :Response="response"></ReviewCard>
     </div>
     <div class="tips">
       <h1>Tips for {{sectionName}}</h1>
@@ -28,20 +26,13 @@ export default {
   },
   props: {
     color: String,
-    tipsObj1: Object,
-    Tips: Object
+    TipsAndResponse: Array,
+    sectionTitle: String
   },
   data() {
     return {
-      // tips: this.Tips,
-      sectionName: "Workforce planning",
-      correct: true,
-      question:
-        "Do you know the age profile of your workforce and what percentage of your employees is age 50+?",
-      tips: [
-        "Excellent—this is important information for both employee retention and succession planning.",
-        "Experienced workers carry institutional knowledge and wisdom that is beneficial to your organization."
-      ],
+      tipsAndResponse: this.TipsAndResponse,
+      sectionName: this.sectionTitle,
       tipsObj: [
         {
           tipsTitle: "Recruit Effectively",

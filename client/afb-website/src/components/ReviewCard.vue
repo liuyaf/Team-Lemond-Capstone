@@ -1,13 +1,13 @@
 <template>
   <el-card class="box-card" :body-style="{padding: '0px'}">
-    <div class="question-title" style="padding-top: 20px;">{{question}}</div>
+    <div class="question-title" style="padding-top: 20px;">{{Response.question}}</div>
     <div class="answer-area">
-      <img src="../assets/result-correct.svg" alt="correct" v-if="correct">
+      <img src="../assets/result-correct.svg" alt="correct" v-if="Response.response=='yes'">
       <img src="../assets/result-wrong.svg" alt="wrong" v-else>
-      <h3>Your Answer: {{correct? "YES":"NO"}}</h3>
+      <h3>Your Answer: {{Response.response=="yes"? "YES":"NO"}}</h3>
     </div>
     <div class="card-tips">
-      <p>{{correct? tips[0] : tips[1]}}</p>
+      <p>{{Response.response=="yes"? Response.tips.yes : Response.tips.no}}</p>
     </div>
   </el-card>
 </template>
@@ -15,9 +15,7 @@
 export default {
   name: "review-card",
   props: {
-    correct: Boolean,
-    question: String,
-    tips: Array
+    Response: Object
   },
   data() {
     return {};

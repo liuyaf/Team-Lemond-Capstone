@@ -22,7 +22,7 @@
             :style="[reachHead?{'visibility': 'hidden'}:{'visibility': 'visible'}]"
             @click="currentQuestionNum--"
           >
-            <img src="../assets/triangle-left.svg" alt="triangle left">
+            <i class="el-icon-caret-left"></i>
           </button>
           <el-button
             size="mini"
@@ -40,7 +40,7 @@
             :style="[reachTail?{'visibility': 'hidden'}:{'visibility': 'visible'}]"
             @click="currentQuestionNum++"
           >
-            <img src="../assets/triangle-right.svg" alt="triangle right">
+            <i class="el-icon-caret-right"></i>
           </button>
         </div>
         <transition name="slide-fade" mode="out-in">

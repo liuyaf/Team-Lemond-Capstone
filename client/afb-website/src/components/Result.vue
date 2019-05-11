@@ -33,12 +33,12 @@
         v-for="(section, index) in questions"
         :key="index"
         :label="section.sectionTitle"
-        :name="section.sectionTitle"
+        :name="'n' + index"
       >
-        <ResultDetail :Tips="section"></ResultDetail>
-      </el-tab-pane>
-      <el-tab-pane label="test" name="first" class="tab-pane">
-        <ResultDetail></ResultDetail>
+        <ResultDetail
+          :TipsAndResponse="combinedQuestionAndResponse[index]"
+          :sectionTitle="section.sectionTitle"
+        ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -54,9 +54,8 @@ export default {
   data() {
     return {
       testType: "Employer",
-      result: this.Result,
       summary: "Your business is very age-friendly!",
-      activeName: "first",
+      activeName: "n0",
       totalQ: 0,
       correctCount: 0,
       questions: this.Questions
@@ -65,21 +64,55 @@ export default {
   computed: {
     correctPercent: function() {
       let count = 0;
-      let ynCount = 0;
-      for (let i = 1; i < this.result.length; i++) {
-        for (let j = 0; j < this.result[i].length; j++) {
-          if (this.result[i][j] == "yes" || this.result[i][j] == "no") {
-            ynCount++;
-            if (this.result[i][j] == "yes") {
-              count++;
-            }
+      let total = 0;
+      for (let i = 0; i < this.questionResponse.length; i++) {
+        for (let j = 0; j < this.questionResponse[i].length; j++) {
+          if (this.questionResponse[i][j] == "yes") {
+            count++;
+          }
+          total++;
+        }
+      }
+      this.updateNumber(count, total);
+      return (count / total) * 100;
+    },
+    questionResponse: function() {
+      return this.Result.slice(1);
+    },
+    combinedQuestionAndResponse: function() {
+      let output = [];
+      for (let i = 0; i < this.questionResponse.length; i++) {
+        let tempArr = [];
+        for (let j = 0; j < this.questionResponse[i].length; j++) {
+          let QApair = {};
+          QApair.question = this.questions[i].questions[j].title;
+          QApair.tips = this.questions[i].questions[j].questionContent;
+          QApair.response = this.questionResponse[i][j];
+          tempArr.push(QApair);
+        }
+        output.push(tempArr);
+      }
+      return output;
+    }
+  },
+  methods: {
+    updateNumber: function(count, total) {
+      this.totalQ = total;
+      this.correctCount = count;
+    },
+    reorderArray: function(input) {
+      for (let i = 0; i < input.length; i++) {
+        for (let j = 0; j < input[i].length; j++) {
+          if (input[i][j].response == "yes") {
+            input[i].push(input[i].splice(j, 1)[0]);
           }
         }
       }
-      this.totalQ = ynCount;
-      this.correctCount = count;
-      return (count / ynCount) * 100;
+      return input;
     }
+  },
+  mounted: function() {
+    this.reorderArray(this.combinedQuestionAndResponse);
   }
 };
 </script>
