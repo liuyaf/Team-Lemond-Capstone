@@ -59,7 +59,9 @@ export default new Router({
       return savedPosition
     } else if (to.hash) {
       return {
-        selector: to.hash
+        selector: to.hash,
+        behavior: 'smooth',
+        offset: { x: 0, y: 150 }
       }
     } else {
       return { x: 0, y: 0 }
