@@ -19,6 +19,15 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default {
+    // A button components that goes to another page on the website
+    // parameters:
+    //  - color
+    //  - text
+    //  - destination
+
+    // how to use:
+    //      <DynamicButton v-bind:buttonInfo="{ color:'black', text: 'button text', destination:'the route' }"/>
+
     name: 'DynamicButton',
     props: ['buttonInfo']
 }

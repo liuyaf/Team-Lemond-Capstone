@@ -3,7 +3,7 @@
         <a v-bind:id="this.content.reasonId"></a>
         <!-- big image -->
         <div class="imageDiv" v-bind:class="figureClass">
-            <img v-bind:style="{ float:imageFloat }" v-bind:src="this.content.image" alt="reson icon">
+            <img v-bind:style="{ float:imageFloat }" v-bind:src="this.content.image" alt="reason icon">
         </div>
         
 
