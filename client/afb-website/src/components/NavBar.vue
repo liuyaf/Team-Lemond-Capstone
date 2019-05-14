@@ -1,18 +1,21 @@
 <template>
     <header>
       <nav class="navbar fixed-top navbar-expand-lg d-flex pt-3 row">
+        <!-- one row for home button and hamburger button -->
         <div
           class="container-fluid col-lg-3 col-md-3 text-lg-right align-self-center"
           id="phoneDisplay"
         >
-        <router-link to="/">
-          <img
-            src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/headerImg-e1556491430371.png"
-            class="navImg"
-            alt="Age Friendly Business Logo"
-          >
-        </router-link>
+          <!-- home button -->
+          <router-link to="/">
+            <img
+              src="@/assets/AgeFriendlyBusinessLogo2.svg"
+              class="navImg"
+              alt="Age Friendly Business Logo"
+            >
+          </router-link>
 
+          <!-- hamburger menu button -->
           <div class="hamburgerMenu justify-content-end pr-2">
             <button
               class="navbar-toggler"
@@ -24,7 +27,7 @@
               aria-label="Toggle navigation"
             >
               <img
-                src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/hamburgerBtn-1-e1556496454518.png"
+                src="@/assets/hamburger-menu.svg"
                 class="svgButton"
                 alt="Hamburger Button"
               >
@@ -32,6 +35,7 @@
           </div>
         </div>
 
+        <!-- desktop navbar -->
         <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
           <div id="nav">
             <router-link class="navSpacing navDisplay" to="/">About</router-link>
@@ -41,23 +45,25 @@
           </div>
         </div>
 
+        <!-- change font button and take assessment button -->
         <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
           <div class="col-12 px-1 d-flex justify-content-end">
             <img
-              src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navFontBtn.png"
+              src="@/assets/font-change-button.svg"
               class="navBtnImg ml-2 svgButton navDisplay"
               alt="Change font button"
             >
             <router-link class="navSpacing navDisplay" to="/assessment-selection">
               <img
-                src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png"
+                src="@/assets/navbar-assessment-button.svg"
                 class="navBtnImg ml-2 svgButton navDisplay"
                 alt="Assessment test button"
               >
             </router-link>
           </div>
         </div>
-
+        
+        <!-- collapsing on the mobile navbar -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="hamburgerNav navbar-nav mr-auto">
             <li class="nav-item">
@@ -78,6 +84,21 @@
           </ul>
         </div>
       </nav>
+
+      <!-- sub tab -->
+      <div v-if="$route.name == 'about'" class="div_top_hypers">
+        <ul class="ul_top_hypers">
+          <li>
+              <router-link to="#about-1" class="a_top_hypers"> What is Age Friendly ?</router-link>
+          </li>
+          <li>
+              <router-link to="#about-2" class="a_top_hypers"> 5 reasons to become Age Friendly</router-link>
+          </li>
+          <li>
+              <router-link to="#about-3" class="a_top_hypers"> How to become Age Friendly</router-link>
+          </li>
+        </ul>
+      </div>
     </header>
 </template>
 
@@ -137,12 +158,16 @@ nav {
   padding-top: 10px;
 }
 
-.navImg, .navBtnImg {
+.navBtnImg {
   width: auto;
   height: auto;
 }
 
-@media (max-width: 768px) {
+.navImg {
+  width: 240px;
+}
+
+@media (max-width: 930px) {
   .navDisplay {
     display: none;
   }
@@ -156,11 +181,6 @@ nav {
     flex: none;
     max-width: 100%;
   }
-
-  .navImg {
-    width: 200px;
-    height: auto;
-  }
 }
 
 @media (max-width: 992px) {
@@ -168,9 +188,38 @@ nav {
     width: 150px;
   }
 
-  .navImg {
-    width: 200px;
+  #phoneDisplay {
+    padding-left: 10px;
   }
+}
+
+/* the sub tab */
+.div_top_hypers {
+    background-color: white;
+}
+
+.ul_top_hypers {
+    padding-left: 0;
+    text-align: center;
+    margin-bottom: 0;
+    padding-top: 95px;
+    padding-bottom: 8px;
+}
+
+@media (max-width: 690px) {
+    .ul_top_hypers {
+        display: none;
+    }
+}
+
+.ul_top_hypers li {
+    display: inline;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.ul_top_hypers li a {
+  color: black;
 }
 </style>
 
