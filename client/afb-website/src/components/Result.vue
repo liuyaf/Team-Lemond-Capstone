@@ -3,29 +3,33 @@
     <div class="top-bar">
       <div class="logo-bar">
         <img src="../assets/AgeFriendlyBusinessLogo1.svg" alt="logo">
-        <h1>Age Friendly Business</h1>
+        <h1 class="logo-text">Age Friendly Business</h1>
       </div>
-      <!-- <button @click="enlargeFont=!enlargeFont">font change</button> -->
+      <el-button size="mini" @click="enlarge=!enlarge">
+        <img class="font-change-icon" src="../assets/font-change-icon.svg" alt="change font icon">
+      </el-button>
     </div>
     <div class="score-section">
       <div class="left-section">
         <div class="text-area">
-          <h1>Here's your {{testType}} score</h1>
-          <h2>{{summary}}</h2>
-          <h2>Congratulations! You finished the test!</h2>
+          <h1 :style="enlarge? {fontSize:'42px'}:{}">Here's your {{testType}} score</h1>
+          <h2 :style="enlarge? {fontSize:'38px'}:{}">{{summary}}</h2>
+          <h2 :style="enlarge? {fontSize:'38px'}:{}">Congratulations! You finished the test!</h2>
         </div>
         <div class="btn-section">
-          <button>retry</button>
-          <button>download tips</button>
+          <el-button size="mini">retry</el-button>
+          <el-button size="mini">download tips</el-button>
         </div>
       </div>
 
-      <el-progress
-        type="circle"
-        :percentage="correctPercent"
-        color="#8e71c7"
-        status="text"
-      >{{correctCount}}/{{totalQ}}</el-progress>
+      <dir class="score-circle">
+        <el-progress
+          type="circle"
+          :percentage="correctPercent"
+          color="#8e71c7"
+          status="text"
+        >{{correctCount}} / {{totalQ}}</el-progress>
+      </dir>
     </div>
     <el-tabs class="tabs" v-model="activeName" :stretch="true">
       <el-tab-pane
@@ -38,17 +42,21 @@
         <ResultDetail
           :TipsAndResponse="combinedQuestionAndResponse[index]"
           :sectionTitle="section.sectionTitle"
+          :enlarge="enlarge"
         ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import ResultDetail from "./ResultDetail";
+import Footer from "./Footer";
 export default {
   name: "result",
   components: {
-    ResultDetail
+    ResultDetail,
+    Footer
   },
   props: ["Result", "Questions"],
   data() {
@@ -58,7 +66,8 @@ export default {
       activeName: "n0",
       totalQ: 0,
       correctCount: 0,
-      questions: this.Questions
+      questions: this.Questions,
+      enlarge: false
     };
   },
   computed: {
@@ -116,8 +125,12 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .top-bar {
+  padding-top: 50px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -130,11 +143,38 @@ export default {
 }
 .score-section {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  padding-bottom: 30px;
 }
 .tabs {
   width: 90%;
   margin: auto;
+}
+.font-change-icon {
+  width: 20px;
+  height: 20px;
+}
+.logo-text {
+  padding-left: 10px;
+}
+.left-section {
+  padding-left: 100px;
+}
+
+.score-circle {
+  padding-right: 100px;
+}
+
+.text-area {
+  font-family: "DDINRegular";
+}
+.text-area h1 {
+  font-size: 36px;
+  display: block;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 </style>

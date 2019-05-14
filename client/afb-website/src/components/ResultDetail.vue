@@ -4,10 +4,15 @@
       <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
       <!-- <ReviewCard v-for="(tip, index) in tips" :key="index"
       :correct=></ReviewCard>-->
-      <ReviewCard v-for="(response, index) in tipsAndResponse" :key="index" :Response="response"></ReviewCard>
+      <ReviewCard
+        v-for="(response, index) in tipsAndResponse"
+        :key="index"
+        :Response="response"
+        :enlarge="enlarge"
+      ></ReviewCard>
     </div>
     <div class="tips">
-      <h1>Tips for {{sectionName}}</h1>
+      <h1 style="{fontSize: 48px}" :style="enlarge? {fontSize:'56px'}:{}">Tips for {{sectionName}}</h1>
       <div class="tips-detail" v-for="tip in tipsObj" :key="tip.tipsTitle">
         <h3 class="tips-title">{{tip.tipsTitle}}</h3>
         <ul>
@@ -27,7 +32,8 @@ export default {
   props: {
     color: String,
     TipsAndResponse: Array,
-    sectionTitle: String
+    sectionTitle: String,
+    enlarge: Boolean
   },
   data() {
     return {
@@ -66,6 +72,7 @@ export default {
 .result-container {
   min-height: 1000px;
   display: flex;
+  font-family: "DDINRegular";
 }
 .review-side {
   min-width: 365px;
@@ -73,13 +80,26 @@ export default {
   flex-direction: column;
   align-items: center;
   background: #f5f7fe;
-  height: 1000px;
+  min-height: 1000px;
+}
+
+.review-side-title {
+  padding-left: 20px;
+  padding-top: 20px;
+  font-size: 36px;
+  margin-bottom: 0;
 }
 .tips {
   /* display: flex; */
+  padding-left: 25px;
   justify-content: center;
   flex-grow: 1;
 }
+
+.tips-detail {
+  margin-top: 30px;
+}
+
 .tips-li {
   text-align: left;
 }

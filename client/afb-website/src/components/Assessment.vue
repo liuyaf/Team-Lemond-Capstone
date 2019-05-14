@@ -1,19 +1,28 @@
 <template>
-  <div id="app">
+  <div id="assessment">
     <transition name="slide-fade" mode="out-in">
-      <div class="container" v-if="!isFinished" :style="[enlargeFont? {fontSize:'32px'}:{}]">
+      <div class="main-container" v-if="!isFinished">
         <div class="top-panel">
           <div class="title-panel">
             <p id="title-vertical" :style="{background: color[currentSectionNum]}"></p>
-            <p class="section-title" :style="{color:color[currentSectionNum]}">
+            <p
+              class="section-title"
+              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}]"
+            >
               <span
                 v-if="TOADone & currentSectionNum!==0"
-              >section {{currentSectionNum+1}}/{{sectionCount}}</span>
+              >section {{currentSectionNum}}/{{sectionCount}}</span>
               {{sectionTitle}}
             </p>
           </div>
           <div class="control-panel">
-            <button @click="enlargeFont=!enlargeFont">font change</button>
+            <el-button size="mini" @click="enlargeFont=!enlargeFont">
+              <img
+                class="font-change-icon"
+                src="../assets/font-change-icon.svg"
+                alt="change font icon"
+              >
+            </el-button>
           </div>
         </div>
         <div class="question-select" v-if="currentSectionLength>0">
@@ -48,20 +57,23 @@
             <TermOA
               v-if="isAtTOA"
               @continue="TOADone=true"
-              :key="content.TOA.id"
-              :TOAContent="content.TOA.content"
+              :key="TOA.id"
+              :TOAContent="TOA.content"
+              :enlarge="enlargeFont"
             ></TermOA>
             <Dropdown
               v-if="currentQuestion.type === 'dropdown'"
               :key="currentQuestionID"
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
+              :enlarge="enlargeFont"
             ></Dropdown>
             <InputForm
               v-if="currentQuestion.type === 'input'"
               :key="currentQuestionID"
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
+              :enlarge="enlargeFont"
             ></InputForm>
             <Radiogroup
               v-if="currentQuestion.type === 'radio'"
@@ -69,14 +81,16 @@
               :key="currentQuestionID"
               :Content="currentQuestion"
               :fill="color[currentSectionNum]"
+              :enlarge="enlargeFont"
             ></Radiogroup>
           </keep-alive>
         </transition>
-        <div v-if="TOADone">
+        <div class="section-control" v-if="TOADone">
           <el-button
             size="medium"
-            v-if="!reachSectionHead"
+            :style="reachSectionHead?{visibility: 'hidden'}:{}"
             @click="moveToPrevSection"
+            :disabled="reachSectionHead"
             class="prev-section"
           >prev section</el-button>
           <el-button
@@ -95,7 +109,7 @@
           >Submit</el-button>
         </div>
       </div>
-      <Result v-else :Result="result" :Questions="content.sections.slice(1)"></Result>
+      <Result v-else :Result="result" :Questions="sections.slice(1)" :enlarge="enlargeFont"></Result>
     </transition>
   </div>
 </template>
@@ -108,6 +122,7 @@ import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 export default {
   name: "assessment",
+  props: ["TOA", "sections"],
   components: {
     TermOA,
     Dropdown,
@@ -134,143 +149,7 @@ export default {
       currentQuestionNum: 0,
       selected: "",
       TOADone: false,
-      result: [],
-      content: {
-        TOA: {
-          id: "toa",
-          // name: "terms of agreement",
-          title: "Assessment Terms of Agreement",
-          content: [
-            {
-              title: "Terms of Agreement and Condition",
-              content:
-                "<p>The Age Friendly Business website and assessments may contain links to third-party sites that are not owned and we cannot control. We assume no responsibility for the content, privacy policies, or practices of any third part websites or services. By acknowledging that you have received this information, you are agreeing that Age Friendly Business and the City of Seattle shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any content, goods, or services available on or through this website.</p>"
-            },
-            {
-              title: "Changes",
-              content:
-                "<p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time.</p>"
-            },
-            {
-              title: "Information & Privacy",
-              content:
-                '<p>Your assessment score, personal information, and details about your business will not be stored. If you wish to keep your assessment score and related tips or resources, please save the material as a PDF or JPG before you leave the page. \nIf you have comments or questions about content or functionality of this website, you are welcome to e-mail <a href = "mailto: agefriendly@seattle.gov">agefriendly@seattle.gov</a>. Please include a link to the specific webpage.</p>'
-            }
-          ]
-        },
-        sections: [
-          {
-            sectionID: 1,
-            sectionTitle: "Business information",
-            questions: [
-              {
-                questionID: 1,
-                type: "dropdown",
-                title: "What's your business type?",
-                questionContent: {}
-              },
-              {
-                questionID: 2,
-                type: "input",
-                title: "What's your business's zipcode?",
-                questionContent: {}
-              },
-              {
-                questionID: 3,
-                type: "radio",
-                title: "This is a test title?",
-                questionContent: {}
-              }
-            ]
-          },
-          {
-            sectionID: 2,
-            sectionTitle: "Workforce Planning",
-            questions: [
-              {
-                questionID: 1,
-                type: "radio",
-                title:
-                  "Do you know the age profile of your workforce and what percentage of your employees is age 50+?",
-                questionContent: {
-                  yes:
-                    "Excellent—this is important information for both employee retention and succession planning. ",
-                  no:
-                    "Experienced workers carry institutional knowledge and wisdom that is beneficial to your organization."
-                }
-              },
-              {
-                questionID: 2,
-                type: "radio",
-                title:
-                  "Do you have a method to get feedback about the needs and interests of mature and other workers?",
-                questionContent: {
-                  yes:
-                    "Great—it’s always good to know what motivates your employees.",
-                  no: "Sometimes the best course of action is to just ask! "
-                }
-              },
-              {
-                questionID: 3,
-                type: "radio",
-                title:
-                  "Have you determined the timing and impact of retirements and identified knowledge gaps to be filled?",
-                questionContent: {
-                  yes:
-                    "Excellent—with this information, you can invite older employees to share and contribute knowledge during their remaining years in your organization.",
-                  no:
-                    "Don’t miss the opportunity to involve older employees in planning for their eventual transition. "
-                }
-              }
-            ]
-          },
-          {
-            sectionID: 3,
-            sectionTitle: "Retention: Flexible Work Arrangements",
-            questions: [
-              {
-                questionID: 1,
-                type: "radio",
-                title:
-                  "Do you have flexible work arrangements that give employees increased control over work hours or location?",
-                questionContent: {
-                  yes:
-                    "Excellent—flexibility will help you retain the wisdom and experience of older workers.",
-                  no:
-                    "Older workers have wisdom and experience that is valuable to your organization. Flexibility is essential for retention."
-                }
-              },
-              {
-                questionID: 2,
-                type: "radio",
-                title:
-                  "Do you offer transitional work options for retirement-eligible employees such as lateral transfers, bridge employment, or phased retirement?",
-                questionContent: {
-                  yes:
-                    "Great—you recognize the value of your older employees’ wisdom and experience.",
-                  no:
-                    "Older workers have wisdom and experience that is valuable to your organization. Flexibility is essential for retention."
-                }
-              },
-              {
-                questionID: 3,
-                type: "radio",
-                title:
-                  "Do you have postretirement work options such as consulting or temporary work?",
-                questionContent: {
-                  yes:
-                    "Very good—short-term rehiring can save a fortune on training costs!",
-                  no:
-                    "This would be good to consider since it saves on onboarding and training costs."
-                }
-              }
-            ]
-          }
-          // { sectionTitle: "section 4", questions: [] },
-          // { sectionTitle: "section 5", questions: [] },
-          // { sectionTitle: "section 6", questions: [] }
-        ]
-      }
+      result: []
     };
   },
   computed: {
@@ -283,20 +162,20 @@ export default {
     // TODO: fix numbering;
     sectionTitle: function() {
       if (this.isAtTOA) {
-        return this.content.TOA.title;
+        return this.TOA.title;
       } else {
-        return this.content.sections[this.currentSectionNum].sectionTitle;
+        return this.sections[this.currentSectionNum].sectionTitle;
       }
     },
     isAtTOA: function() {
       return !this.TOADone;
     },
     sectionLength: function() {
-      return this.content.sections.length;
+      return this.sections.length;
     },
     currentSection: function() {
       if (!this.isAtTOA) {
-        return this.content.sections[this.currentSectionNum];
+        return this.sections[this.currentSectionNum];
       }
       return "";
     },
@@ -308,7 +187,7 @@ export default {
     },
     currentSectionLength: function() {
       if (this.currentSection != "") {
-        return this.content.sections[this.currentSectionNum].questions.length;
+        return this.sections[this.currentSectionNum].questions.length;
       }
       return 0;
     },
@@ -331,7 +210,7 @@ export default {
       return false;
     },
     sectionCount: function() {
-      return this.content.sections.length - 1;
+      return this.sections.length - 1;
     }
   },
   methods: {
@@ -370,14 +249,15 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.main-container {
+  align-items: center;
   overflow: scroll;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 90%;
+  width: 94%;
   max-height: 80%;
   margin: auto;
   font-family: "DDINRegular";
@@ -406,10 +286,10 @@ export default {
 
 .question-select .selected,
 .question-select .selecting {
-  background-color: #409eff;
   color: #fff;
 }
 .top-panel {
+  padding-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -440,12 +320,6 @@ export default {
   cursor: pointer;
 }
 
-#triangle-left img,
-#triangle-right img {
-  height: 21px;
-  width: 20px;
-}
-
 .question-select {
   padding-bottom: 20px;
   padding-top: 100px;
@@ -461,20 +335,21 @@ export default {
   color: #000000;
 }
 
-.prev-section {
+/* .prev-section {
   position: absolute;
-  bottom: 30px;
-  left: 57.5px;
-}
+  bottom: 5%;
+  left: 5%;
+} */
 .next-section {
-  position: absolute;
+  align-self: flex-end;
+  /* position: absolute;
+  bottom: 5%;
+  right: 5%;
   bottom: 30px;
-  right: 57.5px;
+  right: 57.5px; */
 }
 .submit {
-  position: absolute;
-  bottom: 30px;
-  right: 57.5px;
+  align-self: flex-end;
 }
 
 .result-logo-title {
@@ -486,5 +361,30 @@ export default {
   font-size: 30px;
   font-family: "Fjalla One", sans-serif;
   color: #155777;
+}
+.component-area {
+  display: flex;
+  justify-content: center;
+}
+.font-change-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.section-control {
+  padding-top: 60px;
+  width: 100%;
+  position: absolute;
+  /* bottom: 30px; */
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+@media (min-width: 768px) {
+  .section-control {
+    bottom: 30px;
+  }
 }
 </style>

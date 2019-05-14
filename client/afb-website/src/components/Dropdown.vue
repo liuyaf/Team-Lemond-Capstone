@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <h3>{{Content.title}}</h3>
+  <div class="dropdown">
+    <h3 :style="enlarge? {fontSize:'32px'}:{}">{{Content.title}}</h3>
     <el-select
       v-model="value"
       placeholder="Select"
       @change="$emit('continue', value, Content.questionID)"
     >
       <el-option
-        v-for="item in options"
+        v-for="item in Content.options"
         :key="item.value"
         :label="item.label"
         :value="item.value"
@@ -21,39 +21,26 @@
 export default {
   name: "dropdown",
   props: {
-    Content: Object
+    Content: Object,
+    enlarge: Boolean
   },
   data() {
     return {
       selected: false,
-      options: [
-        {
-          value: "Option1",
-          label: "Option1"
-        },
-        {
-          value: "Option2",
-          label: "Option2",
-          disabled: true
-        },
-        {
-          value: "Option3",
-          label: "Option3"
-        },
-        {
-          value: "Option4",
-          label: "Option4"
-        },
-        {
-          value: "Option5",
-          label: "Option5"
-        }
-      ],
+
       value: ""
     };
   }
 };
 </script>
 
-<style>
+<style scoped>
+h3 {
+  text-align: center;
+}
+.dropdown {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 </style>
