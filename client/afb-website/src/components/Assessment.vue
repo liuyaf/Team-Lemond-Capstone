@@ -109,7 +109,13 @@
           >Submit</el-button>
         </div>
       </div>
-      <Result v-else :Result="result" :Questions="sections.slice(1)" :enlarge="enlargeFont"></Result>
+      <Result
+        v-else
+        :Result="result"
+        :Questions="sections.slice(1)"
+        :enlarge="enlargeFont"
+        :generalTips="generalTips"
+      ></Result>
     </transition>
   </div>
 </template>
@@ -122,7 +128,7 @@ import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 export default {
   name: "assessment",
-  props: ["TOA", "sections"],
+  props: ["TOA", "sections", "generalTips"],
   components: {
     TermOA,
     Dropdown,

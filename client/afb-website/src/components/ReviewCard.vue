@@ -36,7 +36,7 @@ export default {
   width: 350px;
   display: flex;
   flex-flow: column nowrap;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 .answer-area {
   display: flex;

@@ -10,13 +10,19 @@
         :Response="response"
         :enlarge="enlarge"
       ></ReviewCard>
+      <br class="white-space">
     </div>
     <div class="tips">
       <h1 style="{fontSize: 48px}" :style="enlarge? {fontSize:'56px'}:{}">Tips for {{sectionName}}</h1>
-      <div class="tips-detail" v-for="tip in tipsObj" :key="tip.tipsTitle">
-        <h3 class="tips-title">{{tip.tipsTitle}}</h3>
+      <div class="tips-detail" v-for="tip in generalTips" :key="tip.tipsTitle">
+        <h3 class="tips-title" :style="enlarge? {fontSize:'32px'}:{}">{{tip.tipsTitle}}</h3>
         <ul>
-          <li class="tips-li" v-for="(tipLi, index) in tip.tipsLi" :key="index">{{tipLi}}</li>
+          <li
+            class="tips-li"
+            v-for="(tipLi, index) in tip.tipsLi"
+            :key="index"
+            :style="enlarge? {fontSize:'24px'}:{}"
+          >{{tipLi}}</li>
         </ul>
       </div>
     </div>
@@ -29,17 +35,12 @@ export default {
   components: {
     ReviewCard
   },
-  props: {
-    color: String,
-    TipsAndResponse: Array,
-    sectionTitle: String,
-    enlarge: Boolean
-  },
+  props: ["color", "TipsAndResponse", "sectionTitle", "enlarge", "generalTips"],
   data() {
     return {
       tipsAndResponse: this.TipsAndResponse,
       sectionName: this.sectionTitle,
-      tipsObj: [
+      GeneralTips1: [
         {
           tipsTitle: "Recruit Effectively",
           tipsLi: [
@@ -75,7 +76,8 @@ export default {
   font-family: "DDINRegular";
 }
 .review-side {
-  min-width: 365px;
+  min-width: 400px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,4 +105,8 @@ export default {
 .tips-li {
   text-align: left;
 }
+/* .white-space {
+  display: block;
+  margin-bottom: 50px;
+} */
 </style>

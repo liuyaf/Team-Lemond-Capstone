@@ -43,6 +43,7 @@
           :TipsAndResponse="combinedQuestionAndResponse[index]"
           :sectionTitle="section.sectionTitle"
           :enlarge="enlarge"
+          :generalTips="findTipsFromMap(section.sectionTitle)"
         ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
@@ -58,7 +59,7 @@ export default {
     ResultDetail,
     Footer
   },
-  props: ["Result", "Questions"],
+  props: ["Result", "Questions", "generalTips"],
   data() {
     return {
       testType: "Employer",
@@ -111,13 +112,19 @@ export default {
     },
     reorderArray: function(input) {
       for (let i = 0; i < input.length; i++) {
+        let pointer = 0;
         for (let j = 0; j < input[i].length; j++) {
-          if (input[i][j].response == "yes") {
-            input[i].push(input[i].splice(j, 1)[0]);
+          if (input[i][pointer].response == "yes") {
+            input[i].push(input[i].splice(pointer, 1)[0]);
+            pointer--;
           }
+          pointer++;
         }
       }
       return input;
+    },
+    findTipsFromMap: function(key) {
+      return this.generalTips.get(key);
     }
   },
   mounted: function() {
