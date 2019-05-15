@@ -658,7 +658,7 @@ export default new Router({
       component: notFound
     },
     {
-      path: '/assessment-onboard', 
+      path: '/assessment-onboard',
       name: 'assessmentOboard',
       component: assessmentOnboard
     }
@@ -670,7 +670,10 @@ export default new Router({
       return {
         selector: to.hash,
         behavior: 'smooth',
-        offset: { x: 0, y: 150 }
+        offset: {
+          x: 0,
+          y: 150
+        }
       }
     } else {
       return {

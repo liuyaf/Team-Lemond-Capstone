@@ -109,6 +109,7 @@
           >Submit</el-button>
         </div>
       </div>
+      <!-- <Onbard v-else-if="T"></Onbard> -->
       <Result
         v-else
         :Result="result"
@@ -126,6 +127,7 @@ import Dropdown from "./Dropdown";
 import InputForm from "./Input";
 import Radiogroup from "./Raidogroup";
 import Result from "./Result";
+import Onboard from "../views/AssessmentOnboard";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -134,11 +136,13 @@ export default {
     Dropdown,
     InputForm,
     Radiogroup,
-    Result
+    Result,
+    Onboard
   },
 
   data() {
     return {
+      showOnbard: true,
       color: [
         "#292929",
         "#9F2B00",
@@ -249,12 +253,9 @@ export default {
         return true;
       }
     },
-    hello: function() {
-      window.alert("asdasd");
+    checkCookie: function() {
+      return true;
     }
-  },
-  beforeDestory() {
-    this.hello();
   }
 };
 </script>
