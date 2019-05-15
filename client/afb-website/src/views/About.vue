@@ -389,7 +389,7 @@ export default {
 
 .fact-body > p {
   font-family: "DDINRegular";
-  font-size: calc(10px + .8vw);
+  font-size: calc(10px + 0.8vw);
 }
 
 /* mission content */
@@ -403,12 +403,10 @@ export default {
   width: 80%; /*make image streatch*/
 }
 
-
 @media (max-width: 1200px) {
   .missionImage img {
     width: 100%; /*make image streatch*/
   }
-  
 }
 
 @media (max-width: 771px) {
@@ -416,7 +414,6 @@ export default {
     width: 70%; /*make image streatch*/
     margin: auto;
   }
-  
 }
 
 .missionContent >>> h3 {

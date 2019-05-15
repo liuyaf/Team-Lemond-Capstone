@@ -3,81 +3,141 @@
     <div class="top-bar">
       <div class="logo-bar">
         <img src="../assets/AgeFriendlyBusinessLogo1.svg" alt="logo">
-        <h1>Age Friendly Business</h1>
+        <h1 class="logo-text">Age Friendly Business</h1>
       </div>
-      <!-- <button @click="enlargeFont=!enlargeFont">font change</button> -->
+      <el-button size="mini" @click="enlarge=!enlarge">
+        <img class="font-change-icon" src="../assets/font-change-icon.svg" alt="change font icon">
+      </el-button>
     </div>
     <div class="score-section">
       <div class="left-section">
         <div class="text-area">
-          <h1>Here's your {{testType}} score</h1>
-          <h2>{{summary}}</h2>
-          <h2>Congratulations! You finished the test!</h2>
+          <h1 :style="enlarge? {fontSize:'42px'}:{}">Here's your {{testType}} score</h1>
+          <h2 :style="enlarge? {fontSize:'38px'}:{}">{{summary}}</h2>
+          <h2 :style="enlarge? {fontSize:'38px'}:{}">Congratulations! You finished the test!</h2>
         </div>
         <div class="btn-section">
-          <button>retry</button>
-          <button>download tips</button>
+          <el-button size="mini">retry</el-button>
+          <el-button size="mini">download tips</el-button>
         </div>
       </div>
 
-      <el-progress
-        type="circle"
-        :percentage="correctPercent"
-        color="#8e71c7"
-        status="text"
-      >{{correctCount}}/{{totalQ}}</el-progress>
+      <dir class="score-circle">
+        <el-progress
+          type="circle"
+          :percentage="correctPercent"
+          color="#8e71c7"
+          status="text"
+        >{{correctCount}} / {{totalQ}}</el-progress>
+      </dir>
     </div>
     <el-tabs class="tabs" v-model="activeName" :stretch="true">
-      <el-tab-pane label="test" name="first" class="tab-pane">
-        <ResultDetail></ResultDetail>
-      </el-tab-pane>
-      <el-tab-pane label="asdasd" name="asdasdasdasdasd">
-        <ResultDetail></ResultDetail>
+      <el-tab-pane
+        class="tab-pane"
+        v-for="(section, index) in questions"
+        :key="index"
+        :label="section.sectionTitle"
+        :name="'n' + index"
+      >
+        <ResultDetail
+          :TipsAndResponse="combinedQuestionAndResponse[index]"
+          :sectionTitle="section.sectionTitle"
+          :enlarge="enlarge"
+          :generalTips="findTipsFromMap(section.sectionTitle)"
+        ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import ResultDetail from "./ResultDetail";
+import Footer from "./Footer";
 export default {
   name: "result",
   components: {
-    ResultDetail
+    ResultDetail,
+    Footer
   },
-  props: ["Result"],
+  props: ["Result", "Questions", "generalTips"],
   data() {
     return {
       testType: "Employer",
-      result: this.Result,
       summary: "Your business is very age-friendly!",
-      activeName: "first",
+      activeName: "n0",
       totalQ: 0,
-      correctCount: 0
+      correctCount: 0,
+      questions: this.Questions,
+      enlarge: false
     };
   },
   computed: {
     correctPercent: function() {
       let count = 0;
-      let ynCount = 0;
-      for (let i = 0; i < this.result.length; i++) {
-        for (let j = 0; j < this.result[i].length; j++) {
-          if (this.result[i][j] == "yes" || this.result[i][j] == "no") {
-            ynCount++;
-            if (this.result[i][j] == "yes") {
-              count++;
-            }
+      let total = 0;
+      for (let i = 0; i < this.questionResponse.length; i++) {
+        for (let j = 0; j < this.questionResponse[i].length; j++) {
+          if (this.questionResponse[i][j] == "yes") {
+            count++;
           }
+          total++;
         }
       }
-      this.totalQ = ynCount;
-      this.correctCount = count;
-      return (count / ynCount) * 100;
+      this.updateNumber(count, total);
+      return (count / total) * 100;
+    },
+    questionResponse: function() {
+      return this.Result.slice(1);
+    },
+    combinedQuestionAndResponse: function() {
+      let output = [];
+      for (let i = 0; i < this.questionResponse.length; i++) {
+        let tempArr = [];
+        for (let j = 0; j < this.questionResponse[i].length; j++) {
+          let QApair = {};
+          QApair.question = this.questions[i].questions[j].title;
+          QApair.tips = this.questions[i].questions[j].questionContent;
+          QApair.response = this.questionResponse[i][j];
+          tempArr.push(QApair);
+        }
+        output.push(tempArr);
+      }
+      return output;
     }
+  },
+  methods: {
+    updateNumber: function(count, total) {
+      this.totalQ = total;
+      this.correctCount = count;
+    },
+    reorderArray: function(input) {
+      for (let i = 0; i < input.length; i++) {
+        let pointer = 0;
+        for (let j = 0; j < input[i].length; j++) {
+          if (input[i][pointer].response == "yes") {
+            input[i].push(input[i].splice(pointer, 1)[0]);
+            pointer--;
+          }
+          pointer++;
+        }
+      }
+      return input;
+    },
+    findTipsFromMap: function(key) {
+      return this.generalTips.get(key);
+    }
+  },
+  mounted: function() {
+    this.reorderArray(this.combinedQuestionAndResponse);
   }
 };
 </script>
-<style>
+<style scoped>
 .top-bar {
+  padding-top: 50px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,11 +150,38 @@ export default {
 }
 .score-section {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  padding-bottom: 30px;
 }
 .tabs {
   width: 90%;
   margin: auto;
+}
+.font-change-icon {
+  width: 20px;
+  height: 20px;
+}
+.logo-text {
+  padding-left: 10px;
+}
+.left-section {
+  padding-left: 100px;
+}
+
+.score-circle {
+  padding-right: 100px;
+}
+
+.text-area {
+  font-family: "DDINRegular";
+}
+.text-area h1 {
+  font-size: 36px;
+  display: block;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 </style>

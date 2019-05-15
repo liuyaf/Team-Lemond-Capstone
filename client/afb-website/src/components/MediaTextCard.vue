@@ -7,17 +7,17 @@
       </div>
     </div>
 
-        <!-- rest of content -->
-        <div class="col-lg-6 d-flex">
-            <div class="reasons reasonDivs">
-                <!-- small icon and button -->
-                <div class="paddingSection container-fluid row">
-                    <div class="mediaContent paddingSection" v-html="content.content"></div>
-                    <div class="paddingSection">
-                        <DynamicButton v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources'+'#' + content.reasonId }" />
-                    </div>
-                </div>
-            </div>
+    <!-- rest of content -->
+    <div class="col-lg-6 d-flex">
+      <div class="reasons reasonDivs">
+        <!-- small icon and button -->
+        <div class="paddingSection container-fluid row">
+          <div class="mediaContent paddingSection" v-html="content.content"></div>
+          <div class="paddingSection">
+            <DynamicButton
+              v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources'+'#' + content.reasonId }"
+            ></DynamicButton>
+          </div>
         </div>
       </div>
     </div>

@@ -93,7 +93,11 @@
           >Submit</el-button>
         </div>
       </div>
+<<<<<<< HEAD
+      <Result v-else></Result>
+=======
       <Result v-else :Result="result"></Result>
+>>>>>>> development
     </transition>
   </div>
 </template>
@@ -187,20 +191,34 @@ export default {
             questions: [
               {
                 questionID: 1,
+<<<<<<< HEAD
+                type: "dropdown",
+                title: "What's your business type?",
+=======
                 type: "radio",
                 title: "yes or no question",
+>>>>>>> development
                 questionContent: {}
               },
               {
                 questionID: 2,
+<<<<<<< HEAD
+                type: "input",
+                title: "What's your business's zipcode?",
+=======
                 type: "radio",
                 title: "asdasdasd",
+>>>>>>> development
                 questionContent: {}
               },
               {
                 questionID: 3,
                 type: "radio",
+<<<<<<< HEAD
+                title: "This is a test title?",
+=======
                 title: "This is a test title2?",
+>>>>>>> development
                 questionContent: {}
               }
             ]
