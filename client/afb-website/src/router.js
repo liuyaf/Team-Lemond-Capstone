@@ -651,6 +651,7 @@ export default new Router({
         sections: employerTest,
         generalTips: customerGeneralTips
       }
+
     },
     {
       path: '*',

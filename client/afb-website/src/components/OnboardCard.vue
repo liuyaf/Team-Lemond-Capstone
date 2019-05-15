@@ -4,7 +4,7 @@
     :style="{ 'background-image': 'url(' + require(`@/assets/onboard-background.svg`) + ')'}"
   >
     <span class="skip">
-      <el-button size="medium">Skip</el-button>
+      <el-button size="medium" @click="$emit('skipOnboard')">Skip</el-button>
     </span>
 
     <img class="pl-3 pr-3" :src="require(`@/assets/${imgName}`)" alt="onboard image">

@@ -2,6 +2,7 @@
   <div class="onboard-container">
     <!-- the card with onboard contents -->
     <OnboardCard
+      @skipOnboard="$emit('skipOnboard')"
       class="current-element"
       :headline="currentElement.headline"
       :text="currentElement.text"
@@ -38,6 +39,7 @@
 
       <!-- the start button that shows on the last onboard card -->
       <el-button
+        @click="$emit('skipOnboard')"
         v-if="this.currentElementIndex == this.cards.length-1"
         size="medium"
         class="onboard-button ml-auto"

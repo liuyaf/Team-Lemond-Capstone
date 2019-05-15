@@ -1,7 +1,7 @@
 <template>
   <div id="assessment">
     <transition name="slide-fade" mode="out-in">
-      <div class="main-container" v-if="!isFinished">
+      <div class="main-container" v-if="!isFinished & !showOnbard">
         <div class="top-panel">
           <div class="title-panel">
             <p id="title-vertical" :style="{background: color[currentSectionNum]}"></p>
@@ -56,7 +56,7 @@
           <keep-alive>
             <TermOA
               v-if="isAtTOA"
-              @continue="TOADone=true"
+              @continue="TOADone=true, showOnbard=true"
               :key="TOA.id"
               :TOAContent="TOA.content"
               :enlarge="enlargeFont"
@@ -109,7 +109,7 @@
           >Submit</el-button>
         </div>
       </div>
-      <!-- <Onbard v-else-if="T"></Onbard> -->
+      <Onboard v-if="showOnbard" @skipOnboard="showOnbard=false"></Onboard>
       <Result
         v-else
         :Result="result"
@@ -142,7 +142,7 @@ export default {
 
   data() {
     return {
-      showOnbard: true,
+      showOnbard: false,
       color: [
         "#292929",
         "#9F2B00",
