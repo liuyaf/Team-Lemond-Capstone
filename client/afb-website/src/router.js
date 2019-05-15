@@ -9,7 +9,7 @@ import assessment from './components/Assessment.vue'
 import notFound from './views/NotFound.vue'
 import about from './views/About.vue'
 
-// import assessment components here
+import assessmentOnboard from '@/views/AssessmentOnboard.vue'
 
 
 Vue.use(Router)
@@ -52,6 +52,11 @@ export default new Router({
       path: '*', 
       name: 'notFound',
       component: notFound
+    },
+    {
+      path: '/assessment-onboard', 
+      name: 'assessmentOboard',
+      component: assessmentOnboard
     }
   ],
   scrollBehavior (to, from, savedPosition) {
