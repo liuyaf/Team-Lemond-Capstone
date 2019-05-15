@@ -248,9 +248,14 @@ export default {
       } else {
         return true;
       }
+    },
+    hello: function() {
+      window.alert("asdasd");
     }
   },
-  beforeMount() {}
+  beforeDestory() {
+    this.hello();
+  }
 };
 </script>
 
