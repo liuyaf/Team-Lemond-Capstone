@@ -1,16 +1,28 @@
 <template>
-  <div class="container">
+  <div class="result-container">
     <div class="review-side">
       <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
-      <ReviewCard :correct="!correct" :question="question" :tips="tips"></ReviewCard>
-      <ReviewCard :correct="correct" :question="question" :tips="tips"></ReviewCard>
+      <!-- <ReviewCard v-for="(tip, index) in tips" :key="index"
+      :correct=></ReviewCard>-->
+      <ReviewCard
+        v-for="(response, index) in tipsAndResponse"
+        :key="index"
+        :Response="response"
+        :enlarge="enlarge"
+      ></ReviewCard>
+      <br class="white-space">
     </div>
     <div class="tips">
-      <h1>Tips for {{sectionName}}</h1>
-      <div class="tips-detail" v-for="tip in tipsObj" :key="tip.tipsTitle">
-        <h3 class="tips-title">{{tip.tipsTitle}}</h3>
+      <h1 style="{fontSize: 48px}" :style="enlarge? {fontSize:'56px'}:{}">Tips for {{sectionName}}</h1>
+      <div class="tips-detail" v-for="tip in generalTips" :key="tip.tipsTitle">
+        <h3 class="tips-title" :style="enlarge? {fontSize:'32px'}:{}">{{tip.tipsTitle}}</h3>
         <ul>
-          <li class="tips-li" v-for="(tipLi, index) in tip.tipsLi" :key="index">{{tipLi}}</li>
+          <li
+            class="tips-li"
+            v-for="(tipLi, index) in tip.tipsLi"
+            :key="index"
+            :style="enlarge? {fontSize:'24px'}:{}"
+          >{{tipLi}}</li>
         </ul>
       </div>
     </div>
@@ -23,17 +35,12 @@ export default {
   components: {
     ReviewCard
   },
-  props: {
-    color: String,
-    tipsObj1: Object
-  },
+  props: ["color", "TipsAndResponse", "sectionTitle", "enlarge", "generalTips"],
   data() {
     return {
-      sectionName: "Recruitment",
-      correct: true,
-      question: "test title",
-      tips: ["correct tip", "wrong tip"],
-      tipsObj: [
+      tipsAndResponse: this.TipsAndResponse,
+      sectionName: this.sectionTitle,
+      GeneralTips1: [
         {
           tipsTitle: "Recruit Effectively",
           tipsLi: [
@@ -63,24 +70,43 @@ export default {
 };
 </script>
 <style scoped>
-.container {
+.result-container {
   min-height: 1000px;
   display: flex;
+  font-family: "DDINRegular";
 }
 .review-side {
-  min-width: 365px;
+  min-width: 400px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #f5f7fe;
-  height: 1000px;
+  min-height: 1000px;
+}
+
+.review-side-title {
+  padding-left: 20px;
+  padding-top: 20px;
+  font-size: 36px;
+  margin-bottom: 0;
 }
 .tips {
   /* display: flex; */
+  padding-left: 25px;
   justify-content: center;
   flex-grow: 1;
 }
+
+.tips-detail {
+  margin-top: 30px;
+}
+
 .tips-li {
   text-align: left;
 }
+/* .white-space {
+  display: block;
+  margin-bottom: 50px;
+} */
 </style>

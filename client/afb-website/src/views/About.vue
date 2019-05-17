@@ -39,6 +39,7 @@
 
       <!-- misson section -->
       <div class="mission paddingSection">
+        <a id="about-1"></a>
         <div class="row mx-auto">
           <div class="col-sm-12 col-md-6">
             <div>
@@ -60,6 +61,7 @@
 
       <!-- 5 reasons to become age friendly -->
       <div class="five-reasons paddingSection">
+        <a id="about-2"></a>
         <img
           class="five-reasons-image-header"
           v-bind:src="fiveReasonsHeaderImage"
@@ -69,7 +71,8 @@
       </div>
 
       <!-- how to become an age friendly business -->
-      <div class="how-to-become-an-afb paddingSection">
+      <a id="about-3"></a>
+      <div class="how-to-become-afb paddingSection">
         <hr class="testLine">
         <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
         <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
@@ -135,7 +138,11 @@ export default {
       applyStickerSection: {
         header: null,
         image: null,
-        paragraph: null
+        paragraph: null,
+        button: {
+          text: null,
+          url: null
+        }
       }
     };
   },
@@ -284,6 +291,13 @@ export default {
           mediaTextBlocks[
             mediaTextBlocks.length - 1
           ].children[1].children[1].innerHTML;
+
+        // button
+        var stickerButton = mediaTextBlocks[
+          mediaTextBlocks.length - 1
+        ].children[1].children[2]
+        this.applyStickerSection.button.text = stickerButton.children[0].innerText
+        this.applyStickerSection.button.url = stickerButton.children[0].attributes[1].nodeValue
       })
       .catch(e => {
         this.errors.push(e);
@@ -375,7 +389,7 @@ export default {
 
 .fact-body > p {
   font-family: "DDINRegular";
-  font-size: calc(10px + .8vw);
+  font-size: calc(10px + 0.8vw);
 }
 
 /* mission content */
@@ -389,12 +403,10 @@ export default {
   width: 80%; /*make image streatch*/
 }
 
-
 @media (max-width: 1200px) {
   .missionImage img {
     width: 100%; /*make image streatch*/
   }
-  
 }
 
 @media (max-width: 771px) {
@@ -402,7 +414,6 @@ export default {
     width: 70%; /*make image streatch*/
     margin: auto;
   }
-  
 }
 
 .missionContent >>> h3 {
@@ -423,7 +434,7 @@ export default {
 }
 
 /* how to become an age friendly business */
-.how-to-become-an-afb {
+.how-to-become-afb {
   background-color: #f8f8f8;
 }
 

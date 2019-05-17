@@ -1,93 +1,113 @@
 <template>
-    <header>
-      <nav class="navbar fixed-top navbar-expand-lg d-flex pt-3 row">
-        <div
-          class="container-fluid col-lg-3 col-md-3 text-lg-right align-self-center"
-          id="phoneDisplay"
-        >
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg d-flex pt-3 row">
+      <!-- one row for home button and hamburger button -->
+      <div
+        class="container-fluid col-lg-3 col-md-3 text-lg-right align-self-center"
+        id="phoneDisplay"
+      >
+        <!-- home button -->
         <router-link to="/">
           <img
-            src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/headerImg-e1556491430371.png"
+            src="@/assets/AgeFriendlyBusinessLogo2.svg"
             class="navImg"
             alt="Age Friendly Business Logo"
           >
         </router-link>
 
-          <div class="hamburgerMenu justify-content-end pr-2">
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <img
-                src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/hamburgerBtn-1-e1556496454518.png"
-                class="svgButton"
-                alt="Hamburger Button"
-              >
-            </button>
-          </div>
+        <!-- hamburger menu button -->
+        <div class="hamburgerMenu justify-content-end pr-2">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <img src="@/assets/hamburger-menu.svg" class="svgButton" alt="Hamburger Button">
+          </button>
         </div>
+      </div>
 
-        <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
-          <div id="nav">
-            <router-link class="navSpacing navDisplay" to="/">About</router-link>
-            <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
-            <a href="https://www.seattle.gov/agefriendly/about/discount-program" class="navSpacing navDisplay">Discount Program</a>
-            <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
-          </div>
+      <!-- desktop navbar -->
+      <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
+        <div id="nav">
+          <router-link class="navSpacing navDisplay" to="/">About</router-link>
+          <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
+          <a
+            href="https://www.seattle.gov/agefriendly/about/discount-program"
+            class="navSpacing navDisplay"
+          >Discount Program</a>
+          <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
         </div>
+      </div>
 
-        <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
-          <div class="col-12 px-1 d-flex justify-content-end">
+      <!-- change font button and take assessment button -->
+      <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
+        <div class="col-12 px-1 d-flex justify-content-end">
+          <img
+            src="@/assets/font-change-button.svg"
+            class="navBtnImg ml-2 svgButton navDisplay"
+            alt="Assessment test button"
+          >
+          <router-link class="navSpacing navDisplay" to="/assessment-selection">
             <img
-              src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navFontBtn.png"
+              src="@/assets/navbar-assessment-button.svg"
               class="navBtnImg ml-2 svgButton navDisplay"
-              alt="Change font button"
+              alt="Assessment test button"
             >
-            <router-link class="navSpacing navDisplay" to="/assessment-selection">
-              <img
-                src="http://agefriendlysea.wpengine.com/wp-content/uploads/2019/04/navTestBtn.png"
-                class="navBtnImg ml-2 svgButton navDisplay"
-                alt="Assessment test button"
-              >
-            </router-link>
-          </div>
+          </router-link>
         </div>
+      </div>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="hamburgerNav navbar-nav mr-auto">
-            <li class="nav-item">
-              <router-link to="/">About</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/resources">Resources</router-link>
-            </li>
-            <li class="nav-item">
-              <a href="https://www.seattle.gov/agefriendly/about/discount-program">Discount Program</a>
-            </li>
-            <li class="nav-item">
-              <router-link to="/contact-us">Contact Us</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/assessment-selection">Assessment Test</router-link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+      <!-- collapsing on the mobile navbar -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="hamburgerNav navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link to="/">About</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/resources">Resources</router-link>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.seattle.gov/agefriendly/about/discount-program">Discount Program</a>
+          </li>
+          <li class="nav-item">
+            <router-link to="/contact-us">Contact Us</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/assessment-selection">Assessment Test</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- sub tab -->
+    <div v-if="$route.name == 'about'" class="div_top_hypers">
+      <ul class="ul_top_hypers">
+        <li>
+          <router-link to="#about-1" class="a_top_hypers">What is Age Friendly ?</router-link>
+        </li>
+        <li>
+          <router-link to="#about-2" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
+        </li>
+        <li>
+          <router-link to="#about-3" class="a_top_hypers">How to become Age Friendly</router-link>
+        </li>
+      </ul>
+    </div>
+  </header>
 </template>
 
 <script>
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
-  name: 'NavBar',
-}
+  name: "NavBar"
+};
 </script>
 
 <style scoped>
@@ -128,8 +148,7 @@ nav {
 
 #nav a.router-link-exact-active {
   color: lightblue;
-  border-bottom: 8px solid #6EAD94;
-  
+  border-bottom: 8px solid #6ead94;
 }
 
 #navbarSupportedContent {
@@ -137,12 +156,16 @@ nav {
   padding-top: 10px;
 }
 
-.navImg, .navBtnImg {
+.navBtnImg {
   width: auto;
   height: auto;
 }
 
-@media (max-width: 768px) {
+.navImg {
+  width: 240px;
+}
+
+@media (max-width: 930px) {
   .navDisplay {
     display: none;
   }
@@ -156,11 +179,6 @@ nav {
     flex: none;
     max-width: 100%;
   }
-
-  .navImg {
-    width: 200px;
-    height: auto;
-  }
 }
 
 @media (max-width: 992px) {
@@ -168,9 +186,42 @@ nav {
     width: 150px;
   }
 
+  #phoneDisplay {
+    padding-left: 10px;
+  }
+}
+
+/* the sub tab */
+.div_top_hypers {
+  background-color: white;
+}
+
+.ul_top_hypers {
+  padding-left: 0;
+  text-align: center;
+  margin-bottom: 0;
+  padding-top: 95px;
+  padding-bottom: 8px;
+}
+
+@media (max-width: 690px) {
+  .ul_top_hypers {
+    display: none;
+  }
+
   .navImg {
     width: 200px;
   }
+}
+
+.ul_top_hypers li {
+  display: inline;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ul_top_hypers li a {
+  color: black;
 }
 </style>
 

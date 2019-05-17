@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3>{{Content.title}}</h3>
+  <div class="input-container">
+    <h3 :style="enlarge? {fontSize:'32px'}:{}">{{Content.title}}</h3>
     <el-input
       class="input"
       v-model="response"
@@ -15,7 +15,8 @@
 export default {
   name: "input-form",
   props: {
-    Content: Object
+    Content: Object,
+    enlarge: Boolean
   },
   data() {
     return {
@@ -30,8 +31,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h3 {
+  text-align: center;
+}
 .input {
-  width: 350px;
+  width: 350px !important;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

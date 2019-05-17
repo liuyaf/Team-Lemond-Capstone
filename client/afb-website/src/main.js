@@ -6,12 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
+
 // back to top button installed through npm 
 // more info can be found here: https://github.com/caiofsouza/vue-backtotop
 import BackToTop from 'vue-backtotop'
+Vue.use(BackToTop);
 
 Vue.use(ElementUI);
-Vue.use(BackToTop);
+
 
 Vue.config.productionTip = false
 

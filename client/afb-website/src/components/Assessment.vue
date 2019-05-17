@@ -1,18 +1,28 @@
 <template>
-  <div id="app">
+  <div id="assessment">
     <transition name="slide-fade" mode="out-in">
-      <div class="container" v-if="!isFinished" :style="[enlargeFont? {fontSize:'32px'}:{}]">
+      <div class="main-container" v-if="!isFinished & !showOnbard">
         <div class="top-panel">
           <div class="title-panel">
             <p id="title-vertical" :style="{background: color[currentSectionNum]}"></p>
-            <p class="section-title" :style="{color:color[currentSectionNum]}">
-              <span v-if="TOADone">section {{currentSectionNum+1}}/6</span>
+            <p
+              class="section-title"
+              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}]"
+            >
+              <span
+                v-if="TOADone & currentSectionNum!==0"
+              >section {{currentSectionNum}}/{{sectionCount}}</span>
               {{sectionTitle}}
             </p>
           </div>
-
           <div class="control-panel">
-            <button @click="enlargeFont=!enlargeFont">font change</button>
+            <el-button size="mini" @click="enlargeFont=!enlargeFont">
+              <img
+                class="font-change-icon"
+                src="../assets/font-change-icon.svg"
+                alt="change font icon"
+              >
+            </el-button>
           </div>
         </div>
         <div class="question-select" v-if="currentSectionLength>0">
@@ -21,7 +31,7 @@
             :style="[reachHead?{'visibility': 'hidden'}:{'visibility': 'visible'}]"
             @click="currentQuestionNum--"
           >
-            <img src="../assets/triangle-left.svg" alt="triangle left">
+            <i class="el-icon-caret-left"></i>
           </button>
           <el-button
             size="mini"
@@ -39,28 +49,31 @@
             :style="[reachTail?{'visibility': 'hidden'}:{'visibility': 'visible'}]"
             @click="currentQuestionNum++"
           >
-            <img src="../assets/triangle-right.svg" alt="triangle right">
+            <i class="el-icon-caret-right"></i>
           </button>
         </div>
         <transition name="slide-fade" mode="out-in">
           <keep-alive>
             <TermOA
               v-if="isAtTOA"
-              @continue="TOADone=true"
-              :key="content.TOA.id"
-              :TOAContent="content.TOA.content"
+              @continue="TOADone=true, showOnbard=true"
+              :key="TOA.id"
+              :TOAContent="TOA.content"
+              :enlarge="enlargeFont"
             ></TermOA>
             <Dropdown
               v-if="currentQuestion.type === 'dropdown'"
               :key="currentQuestionID"
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
+              :enlarge="enlargeFont"
             ></Dropdown>
             <InputForm
               v-if="currentQuestion.type === 'input'"
               :key="currentQuestionID"
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
+              :enlarge="enlargeFont"
             ></InputForm>
             <Radiogroup
               v-if="currentQuestion.type === 'radio'"
@@ -68,19 +81,21 @@
               :key="currentQuestionID"
               :Content="currentQuestion"
               :fill="color[currentSectionNum]"
+              :enlarge="enlargeFont"
             ></Radiogroup>
           </keep-alive>
         </transition>
-        <div v-if="TOADone">
+        <div class="section-control" v-if="TOADone">
           <el-button
             size="medium"
-            v-if="!reachSectionHead"
+            :style="reachSectionHead?{visibility: 'hidden'}:{}"
             @click="moveToPrevSection"
+            :disabled="reachSectionHead"
             class="prev-section"
           >prev section</el-button>
           <el-button
             class="next-section"
-            v-if="currentSectionNum != sectionCount-1"
+            v-if="currentSectionNum != sectionLength-1"
             size="medium"
             :disabled="!finishCurrentSection"
             @click="moveToNextSection"
@@ -89,12 +104,19 @@
             @click="isFinished=true"
             class="submit"
             size="medium"
-            v-if="currentSectionNum == sectionCount-1"
+            v-if="currentSectionNum == sectionLength-1"
             :disabled="!finishCurrentSection"
           >Submit</el-button>
         </div>
       </div>
-      <Result v-else :Result="result"></Result>
+      <OnboardCard v-if="showOnbard" @skipOnboard="showOnbard=false"></OnboardCard>
+      <Result
+        v-else
+        :Result="result"
+        :Questions="sections.slice(1)"
+        :enlarge="enlargeFont"
+        :generalTips="generalTips"
+      ></Result>
     </transition>
   </div>
 </template>
@@ -105,18 +127,22 @@ import Dropdown from "./Dropdown";
 import InputForm from "./Input";
 import Radiogroup from "./Raidogroup";
 import Result from "./Result";
+import OnboardCard from "./OnboardCard";
 export default {
   name: "assessment",
+  props: ["TOA", "sections", "generalTips"],
   components: {
     TermOA,
     Dropdown,
     InputForm,
     Radiogroup,
-    Result
+    Result,
+    OnboardCard
   },
 
   data() {
     return {
+      showOnbard: false,
       color: [
         "#292929",
         "#9F2B00",
@@ -133,85 +159,7 @@ export default {
       currentQuestionNum: 0,
       selected: "",
       TOADone: false,
-      result: [],
-      content: {
-        TOA: {
-          id: "toa",
-          // name: "terms of agreement",
-          title: "Assessment Terms of Agreement",
-          content: [
-            {
-              title: "Terms of Agreement and Condition",
-              content:
-                "<p>The Age Friendly Business website and assessments may contain links to third-party sites that are not owned and we cannot control. We assume no responsibility for the content, privacy policies, or practices of any third part websites or services. By acknowledging that you have received this information, you are agreeing that Age Friendly Business and the City of Seattle shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any content, goods, or services available on or through this website.</p>"
-            },
-            {
-              title: "Changes",
-              content:
-                "<p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time.</p>"
-            },
-            {
-              title: "Information & Privacy",
-              content:
-                '<p>Your assessment score, personal information, and details about your business will not be stored. If you wish to keep your assessment score and related tips or resources, please save the material as a PDF or JPG before you leave the page. \nIf you have comments or questions about content or functionality of this website, you are welcome to e-mail <a href = "mailto: agefriendly@seattle.gov">agefriendly@seattle.gov</a>. Please include a link to the specific webpage.</p>'
-            }
-          ]
-        },
-        sections: [
-          {
-            sectionID: 1,
-            sectionTitle: "section 1",
-            questions: [
-              {
-                questionID: 1,
-                type: "dropdown",
-                title: "What's your business type?",
-                questionContent: {}
-              },
-              {
-                questionID: 2,
-                type: "input",
-                title: "What's your business's zipcode?",
-                questionContent: {}
-              },
-              {
-                questionID: 3,
-                type: "radio",
-                title: "This is a test title?",
-                questionContent: {}
-              }
-            ]
-          },
-          {
-            sectionID: 2,
-            sectionTitle: "section 2",
-            questions: [
-              {
-                questionID: 1,
-                type: "radio",
-                title: "yes or no question",
-                questionContent: {}
-              },
-              {
-                questionID: 2,
-                type: "radio",
-                title: "asdasdasd",
-                questionContent: {}
-              },
-              {
-                questionID: 3,
-                type: "radio",
-                title: "This is a test title2?",
-                questionContent: {}
-              }
-            ]
-          }
-          // { sectionTitle: "section 3", questions: [] },
-          // { sectionTitle: "section 4", questions: [] },
-          // { sectionTitle: "section 5", questions: [] },
-          // { sectionTitle: "section 6", questions: [] }
-        ]
-      }
+      result: []
     };
   },
   computed: {
@@ -224,20 +172,20 @@ export default {
     // TODO: fix numbering;
     sectionTitle: function() {
       if (this.isAtTOA) {
-        return this.content.TOA.title;
+        return this.TOA.title;
       } else {
-        return this.content.sections[this.currentSectionNum].sectionTitle;
+        return this.sections[this.currentSectionNum].sectionTitle;
       }
     },
     isAtTOA: function() {
       return !this.TOADone;
     },
-    sectionCount: function() {
-      return this.content.sections.length;
+    sectionLength: function() {
+      return this.sections.length;
     },
     currentSection: function() {
       if (!this.isAtTOA) {
-        return this.content.sections[this.currentSectionNum];
+        return this.sections[this.currentSectionNum];
       }
       return "";
     },
@@ -249,7 +197,7 @@ export default {
     },
     currentSectionLength: function() {
       if (this.currentSection != "") {
-        return this.content.sections[this.currentSectionNum].questions.length;
+        return this.sections[this.currentSectionNum].questions.length;
       }
       return 0;
     },
@@ -270,6 +218,9 @@ export default {
         return temp.length === this.currentSectionLength;
       }
       return false;
+    },
+    sectionCount: function() {
+      return this.sections.length - 1;
     }
   },
   methods: {
@@ -301,21 +252,24 @@ export default {
       } else {
         return true;
       }
+    },
+    checkCookie: function() {
+      return true;
     }
-  },
-  beforeMount() {}
+  }
 };
 </script>
 
 <style scoped>
-.container {
+.main-container {
+  align-items: center;
   overflow: scroll;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 90%;
+  width: 94%;
   max-height: 80%;
   margin: auto;
   font-family: "DDINRegular";
@@ -344,10 +298,10 @@ export default {
 
 .question-select .selected,
 .question-select .selecting {
-  background-color: #409eff;
   color: #fff;
 }
 .top-panel {
+  padding-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -378,12 +332,6 @@ export default {
   cursor: pointer;
 }
 
-#triangle-left img,
-#triangle-right img {
-  height: 21px;
-  width: 20px;
-}
-
 .question-select {
   padding-bottom: 20px;
   padding-top: 100px;
@@ -399,20 +347,21 @@ export default {
   color: #000000;
 }
 
-.prev-section {
+/* .prev-section {
   position: absolute;
-  bottom: 30px;
-  left: 57.5px;
-}
+  bottom: 5%;
+  left: 5%;
+} */
 .next-section {
-  position: absolute;
+  align-self: flex-end;
+  /* position: absolute;
+  bottom: 5%;
+  right: 5%;
   bottom: 30px;
-  right: 57.5px;
+  right: 57.5px; */
 }
 .submit {
-  position: absolute;
-  bottom: 30px;
-  right: 57.5px;
+  align-self: flex-end;
 }
 
 .result-logo-title {
@@ -424,5 +373,30 @@ export default {
   font-size: 30px;
   font-family: "Fjalla One", sans-serif;
   color: #155777;
+}
+.component-area {
+  display: flex;
+  justify-content: center;
+}
+.font-change-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.section-control {
+  padding-top: 60px;
+  width: 100%;
+  position: absolute;
+  /* bottom: 30px; */
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+@media (min-width: 768px) {
+  .section-control {
+    bottom: 30px;
+  }
 }
 </style>

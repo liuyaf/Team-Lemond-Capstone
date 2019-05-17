@@ -1,4 +1,12 @@
 <template>
+<<<<<<< HEAD
+  <div></div>
+</template>
+<script>
+export default {};
+</script>
+<style>
+=======
   <div>
     <div class="top-bar">
       <div class="logo-bar">
@@ -97,4 +105,5 @@ export default {
   width: 90%;
   margin: auto;
 }
+>>>>>>> development
 </style>
