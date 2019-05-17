@@ -2,6 +2,7 @@
   <div id="resources">
     
       <!-- intro section  -->
+      <a id="resource-1"></a>
       <div class="intro paddingSection">
         <div class="row">
             <div class="col-sm-12 col-lg-6">
@@ -17,6 +18,7 @@
       </div>
       
       <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
+      <a id="resource-2"></a>
       <div class="age-friendly paddingSection">
         <div class="row">
           <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
@@ -30,6 +32,7 @@
       </div>
 
       <!-- five reasons to be age friendly -->
+      <a id="resource-3"></a>
       <div class="five-reasons-to-become-afb paddingSection">
         <span v-html="fiveReasonsSection.header"></span>
         <hr class="headerLine">
