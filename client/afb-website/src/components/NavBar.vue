@@ -34,7 +34,7 @@
       <!-- desktop navbar -->
       <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
         <div id="nav">
-          <router-link class="navSpacing navDisplay" to="/">About</router-link>
+          <router-link class="navSpacing navDisplay" to="/" exact>About</router-link>
           <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
           <a
             href="https://www.seattle.gov/agefriendly/about/discount-program"
@@ -66,7 +66,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="hamburgerNav navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/">About</router-link>
+            <router-link to="/" exact>About</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/resources">Resources</router-link>
@@ -84,20 +84,36 @@
       </div>
     </nav>
 
-    <!-- sub tab -->
+    <!-- sub tab for about -->
     <div v-if="$route.name == 'about'" class="div_top_hypers">
       <ul class="ul_top_hypers">
         <li>
-          <router-link to="#about-1" class="a_top_hypers">What is Age Friendly ?</router-link>
+          <router-link to="/" v-scroll-to="'#about-1'" class="a_top_hypers">What is Age Friendly ?</router-link>
         </li>
         <li>
-          <router-link to="#about-2" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="'#about-2'" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
         </li>
         <li>
-          <router-link to="#about-3" class="a_top_hypers">How to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="'#about-3'" class="a_top_hypers">How to become Age Friendly</router-link>
         </li>
       </ul>
     </div>
+
+    <!-- sub tab for resource -->
+    <div v-if="$route.name == 'resources'" class="div_top_hypers">
+      <ul class="ul_top_hypers">
+        <li>
+          <router-link to="#" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
+        </li>
+        <li>
+          <router-link to="#" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
+        </li>
+        <li>
+          <router-link to="#" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+        </li>
+      </ul>
+    </div>
+
   </header>
 </template>
 
@@ -146,7 +162,7 @@ nav {
   padding-bottom: 18px;
 }
 
-#nav a.router-link-exact-active {
+#nav a.router-link-active {
   color: lightblue;
   border-bottom: 8px solid #6ead94;
 }

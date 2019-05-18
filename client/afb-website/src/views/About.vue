@@ -38,8 +38,8 @@
       </div>
 
       <!-- misson section -->
+      <a id="about-1"></a>
       <div class="mission paddingSection">
-        <a id="about-1"></a>
         <div class="row mx-auto">
           <div class="col-sm-12 col-md-6">
             <div>

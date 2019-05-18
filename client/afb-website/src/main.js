@@ -5,7 +5,9 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import VueScrollTo from 'vue-scrollto';
 
+Vue.use(VueScrollTo);
 
 // back to top button installed through npm 
 // more info can be found here: https://github.com/caiofsouza/vue-backtotop
