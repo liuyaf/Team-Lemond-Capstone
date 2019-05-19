@@ -255,11 +255,7 @@ export default {
       }
     }
   },
-  mounted() {
-    localStorage.getItem(this.name)
-      ? window.alert("fount it")
-      : window.alert("nope");
-  },
+  mounted() {},
   watch: {}
 };
 </script>
