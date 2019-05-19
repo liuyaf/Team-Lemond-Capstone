@@ -6,7 +6,8 @@
       v-model="response"
       placeholder="Please enter your zipcode"
       type="number"
-      @keyup.enter.native="$emit('continue', response, Content.questionID)"
+      @keyup.enter.native="response.length >= 5? $emit('continue', response, Content.questionID):''"
+      @blur="response.length >= 5? $emit('continue', response, Content.questionID):''"
     ></el-input>
   </div>
 </template>
@@ -16,16 +17,17 @@ export default {
   name: "input-form",
   props: {
     Content: Object,
-    enlarge: Boolean
+    enlarge: Boolean,
+    oldVal: String
   },
   data() {
     return {
       response: ""
     };
   },
-  method: {
-    alert: function() {
-      window.alert("hi");
+  activated() {
+    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+      this.response = this.oldVal;
     }
   }
 };

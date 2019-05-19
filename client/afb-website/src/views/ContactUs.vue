@@ -1,33 +1,33 @@
 <template>
   <div class="contact">
-    <form>
+    <form method="POST" action="https://formspree.io/muhammadhariz206@gmail.com">
       <div class="form-group row justify-content-center d-flex">
         <div class="col-md-6 justify-content-center">
           <label class="offset-md-5 col-md-7 col-form-label phoneDisplay" for="text">First Name:</label>
           <div class="offset-md-5 col-md-7 phoneDisplay">
-            <input id="FName" name="text" type="text" required="required" class="form-control">
+            <input id="FName" name="name" type="text" required="required" class="form-control">
           </div>
         </div>
         <div class="col-md-6">
           <label class="col-md-7 col-form-label phoneDisplay" for="text">Last Name:</label>
           <div class="col-md-7 phoneDisplay">
-            <input id="LName" name="text" type="text" required="required" class="form-control">
+            <input id="LName" name="name" type="text" required="required" class="form-control">
           </div>
         </div>
       </div>
       <div class="form-group row justify-content-center">
-        <label for="text1" class="col-md-7 col-sm-12 col-form-label">Company/Organization</label>
+        <label for="text1" class="col-md-7 col-sm-12 col-form-label">Company/Organization:</label>
         <div class="col-md-7 col-sm-12 ">
-          <input id="text1" name="text1" type="text" class="form-control">
+          <input id="org" name="org" type="text" class="form-control">
         </div>
       </div>
       <div class="form-group row justify-content-center">
-        <label for="text2" class="col-md-7 col-sm-12  col-form-label">Phone</label>
+        <label for="text2" class="col-md-7 col-sm-12  col-form-label">Phone:</label>
         <div class="col-md-7 col-sm-12 ">
           <input
-            id="text2"
-            name="text2"
-            placeholder="(123)-456-7890"
+            id="phone"
+            name="phone"
+            placeholder="123-456-7890"
             type="text"
             class="form-control"
             required="required"
@@ -35,15 +35,15 @@
         </div>
       </div>
       <div class="form-group row justify-content-center">
-        <label for="text3" class="col-md-7 col-sm-12  col-form-label">Email</label>
+        <label for="text3" class="col-md-7 col-sm-12  col-form-label">Your Email:</label>
         <div class="col-md-7 col-sm-12 ">
-          <input id="text3" name="text3" type="text" class="form-control" required="required">
+          <input id="senderEmail" name="_replyto" type="text" class="form-control" required="required">
         </div>
       </div>
       <div class="form-group row justify-content-center">
-        <label for="textarea" class="col-md-7 col-sm-12 col-form-label">Comments or Questions</label>
+        <label for="textarea" class="col-md-7 col-sm-12 col-form-label">Comments or Questions:</label>
         <div class="col-md-7 col-sm-12 ">
-          <textarea id="textarea" name="textarea" cols="40" rows="5" class="form-control"></textarea>
+          <textarea id="textarea" name="message" cols="40" rows="5" class="form-control"></textarea>
         </div>
       </div>
       <div class="form-group row">

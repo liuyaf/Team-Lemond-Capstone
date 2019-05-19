@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown">
-    <h3 :style="enlarge? {fontSize:'32px'}:{}">{{Content.title}}</h3>
+    <h3 :style="enlarge? {fontSize:'36px'}:{}">{{Content.title}}</h3>
     <el-select
       v-model="value"
       placeholder="Select"
@@ -22,7 +22,8 @@ export default {
   name: "dropdown",
   props: {
     Content: Object,
-    enlarge: Boolean
+    enlarge: Boolean,
+    oldVal: String
   },
   data() {
     return {
@@ -30,6 +31,11 @@ export default {
 
       value: ""
     };
+  },
+  activated() {
+    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+      this.value = this.oldVal;
+    }
   }
 };
 </script>
@@ -37,6 +43,7 @@ export default {
 <style scoped>
 h3 {
   text-align: center;
+  padding-bottom: 15px;
 }
 .dropdown {
   display: flex;

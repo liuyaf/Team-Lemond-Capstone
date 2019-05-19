@@ -2,10 +2,11 @@
   <div>
     <div class="top-bar">
       <div class="logo-bar">
-        <img src="../assets/AgeFriendlyBusinessLogo1.svg" alt="logo">
-        <h1 class="logo-text">Age Friendly Business</h1>
+        <router-link to="/">
+          <img class="logo-image" src="../assets/AgeFriendlyBusinessLogo2.svg" alt="logo">
+        </router-link>
       </div>
-      <el-button size="mini" @click="enlarge=!enlarge">
+      <el-button class="font-change-btn" @click="enlarge=!enlarge">
         <img class="font-change-icon" src="../assets/font-change-icon.svg" alt="change font icon">
       </el-button>
     </div>
@@ -148,9 +149,12 @@ export default {
   color: #155777;
   font-family: "DDINRegular";
 }
+.logo-image {
+  height: 80px;
+}
 .score-section {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding-bottom: 30px;
 }
@@ -167,6 +171,7 @@ export default {
 }
 .left-section {
   padding-left: 100px;
+  padding-right: 100px;
 }
 
 .score-circle {
@@ -183,5 +188,9 @@ export default {
   margin-block-end: 0.67em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+}
+
+.font-change-btn {
+  margin-right: 30px;
 }
 </style>

@@ -1,96 +1,98 @@
 <template>
   <div id="about">
-    
-      <!-- intro section -->
-      <div
-        class="mainImage jumbotron jumbotron-fluid"
-        v-bind:style="{ 'background-image': 'url('+ introSection.image +')' }"
+    <!-- intro section -->
+    <div
+      class="mainImage jumbotron jumbotron-fluid"
+      v-bind:style="{ 'background-image': 'url('+ introSection.image +')' }"
+    >
+      <div class="container mx-0">
+        <div class="mainHeader">
+          <div class="col-xl-8 col-lg-9 col-md-11">
+            <span class="intro-h" v-html="introSection.heading"></span>
+          </div>
+          <div class="col-lg-12 col-md-12 mt-3">
+            <span class="intro-p" v-html="introSection.text"></span>
+          </div>
+          <div class="col-lg-7 col-md-8 mt-3">
+            <DynamicButton
+              v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection' }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- fact section -->
+    <div class="facts">
+      <div class="row mx-auto paddingSection">
+        <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
+          <div class="fact-body">
+            <hr class="factLine">
+            <div class="fact-h enlarge" v-html="item.header"></div>
+            <!-- <p><span v-html="item.text"></span></p> -->
+            <p class="fact-p">{{ item.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- misson section -->
+    <a id="about-1"></a>
+    <div class="mission paddingSection">
+      <div class="row mx-auto">
+        <div class="col-sm-12 col-md-6">
+          <div>
+            <div class="missionContent" v-html="missionSection.paragraphs"></div>
+            <DynamicButton
+              class="mb-4"
+              v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources' }"
+            />
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+          <div class="missionImage">
+            <img v-bind:src="missionSection.image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 reasons to become age friendly -->
+    <div class="five-reasons paddingSection">
+      <a id="about-2"></a>
+      <img
+        class="five-reasons-image-header"
+        v-bind:src="fiveReasonsHeaderImage"
+        alt="five reasons to become age friendly"
       >
-        <div class="container mx-0">
-          <div class="mainHeader">
-            <div class="col-xl-8 col-lg-9 col-md-11">
-              <span class="intro-h" v-html="introSection.heading"></span>
-            </div>
-            <div class="col-lg-12 col-md-12 mt-3">
-              <span class="intro-p" v-html="introSection.text"></span>
-            </div>
-            <div class="col-lg-7 col-md-8 mt-3">
-              <DynamicButton
-                v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection' }"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- fact section -->
-      <div class="facts">
-        <div class="row mx-auto paddingSection">
-          <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
-            <div class="fact-body">
-              <hr class="factLine">
-              <span class="fact-h" v-html="item.header"></span>
-              <!-- <p><span v-html="item.text"></span></p> -->
-              <p class="fact-p">{{ item.text }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <MediaTextCard
+        v-for="(item) in fiveReasonsSection"
+        :key="item.reasonId"
+        v-bind:content="item"
+      />
+    </div>
 
-      <!-- misson section -->
-      <a id="about-1"></a>
-      <div class="mission paddingSection">
-        <div class="row mx-auto">
-          <div class="col-sm-12 col-md-6">
-            <div>
-              <div class="missionContent" v-html="missionSection.paragraphs"></div>
-              <DynamicButton
-                class="mb-4"
-                v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources' }"
-              />
-            </div>
-          </div>
-
-          <div class="col-sm-12 col-md-6">
-            <div class="missionImage">
-              <img v-bind:src="missionSection.image">
-            </div>
-          </div>
-        </div>
+    <!-- how to become an age friendly business -->
+    <a id="about-3"></a>
+    <div class="how-to-become-afb paddingSection">
+      <hr class="testLine">
+      <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
+      <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
+      <br>
+      <div class="row mx-auto">
+        <AssessmentCard
+          v-for="(item) in howToBecomeAfbSection.assessmentCards"
+          :key="item.id"
+          v-bind:content="item"
+        />
       </div>
+    </div>
 
-      <!-- 5 reasons to become age friendly -->
-      <div class="five-reasons paddingSection">
-        <a id="about-2"></a>
-        <img
-          class="five-reasons-image-header"
-          v-bind:src="fiveReasonsHeaderImage"
-          alt="five reasons to become age friendly"
-        >
-        <MediaTextCard v-for="(item) in fiveReasonsSection" :key="item.reasonId" v-bind:content="item"/>
-      </div>
-
-      <!-- how to become an age friendly business -->
-      <a id="about-3"></a>
-      <div class="how-to-become-afb paddingSection">
-        <hr class="testLine">
-        <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
-        <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
-        <br>
-        <div class="row mx-auto">
-          <AssessmentCard
-            v-for="(item) in howToBecomeAfbSection.assessmentCards"
-            :key="item.id"
-            v-bind:content="item"
-          />
-        </div>
-      </div>
-
-      <!-- apply for sticker -->
-      <div class="apply-for-sticker paddingSection">
-        <ApplyStickerCard v-bind:content="applyStickerSection"/>
-      </div>
-    
+    <!-- apply for sticker -->
+    <div class="apply-for-sticker paddingSection">
+      <ApplyStickerCard v-bind:content="applyStickerSection"/>
+    </div>
   </div>
 </template>
 
@@ -229,7 +231,7 @@ export default {
             buttonColor: null,
             content: null
           };
-          reason.reasonId = 'reason-' + s
+          reason.reasonId = "reason-" + s;
           reason.className = mediaTextBlocks[s].className;
           reason.bigImage = mediaTextBlocks[s].children[0].children[0].src;
           reason.buttonColor = reasonCardColors[s - 1];
@@ -293,11 +295,12 @@ export default {
           ].children[1].children[1].innerHTML;
 
         // button
-        var stickerButton = mediaTextBlocks[
-          mediaTextBlocks.length - 1
-        ].children[1].children[2]
-        this.applyStickerSection.button.text = stickerButton.children[0].innerText
-        this.applyStickerSection.button.url = stickerButton.children[0].attributes[1].nodeValue
+        var stickerButton =
+          mediaTextBlocks[mediaTextBlocks.length - 1].children[1].children[2];
+        this.applyStickerSection.button.text =
+          stickerButton.children[0].innerText;
+        this.applyStickerSection.button.url =
+          stickerButton.children[0].attributes[1].nodeValue;
       })
       .catch(e => {
         this.errors.push(e);

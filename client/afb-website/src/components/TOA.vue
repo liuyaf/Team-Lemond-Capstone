@@ -9,16 +9,15 @@
       ></p>
     </div>
     <div class="text-center confirm" :style="enlarge? {fontSize:'28px'}:{}">
-      <input
-        class="confirm-text"
-        type="radio"
-        name="agree"
-        id="agree-radio"
-        value="agreed"
-        v-model="selected"
-      >
-      <label for="agree-radio">I have read and agree with the information above.</label>
-      <el-button size="mini" :disabled="!selected" @click="$emit('continue')">start</el-button>
+      <div class="radio-text">
+        <input type="radio" name="agree" id="agree-radio" value="agreed" v-model="selected">
+        <label
+          for="agree-radio"
+          class="confirm-text"
+        >I have read and agree with the information above.</label>
+      </div>
+
+      <el-button class="start-btn" :disabled="!selected" @click="$emit('continue')">start</el-button>
     </div>
   </div>
 </template>
@@ -39,13 +38,35 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  font-weight: bold;
+}
 .toa-container {
   padding-left: 40px;
   padding-right: 40px;
 }
 .confirm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
-</style>
+.radio-text {
+  display: flex;
+  align-items: center;
+}
 
+.confirm-text {
+  padding-left: 10px;
+  margin: 0;
+}
+
+.start-btn {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #fff;
+  background: #cc3e16;
+  border-color: #cc3e16;
+}
+</style>
 
