@@ -3,7 +3,8 @@
     <h2>it appears that you have unfinished test, resume?</h2>
     <div class="btn-group">
       <el-button type="danger" @click="$emit('startover')">Start Over</el-button>
-      <el-button type="success">Resume</el-button>
+      <el-button type="success" @click="$emit('resumeTest')">Resume</el-button>
+      <el-button type="success" @click="$emit('del')">del</el-button>
     </div>
   </div>
 </template>

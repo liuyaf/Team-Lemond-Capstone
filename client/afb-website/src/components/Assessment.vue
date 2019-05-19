@@ -1,7 +1,12 @@
 <template>
   <div id="assessment">
     <transition name="slide-fade" mode="out-in">
-      <ResumeTest v-if="hello"></ResumeTest>
+      <ResumeTest
+        v-if="hasUnfinished"
+        @startover="restartTest"
+        @resumeTest="hasUnfinished=false"
+        @del="clearTest"
+      ></ResumeTest>
       <div class="main-container" v-else-if="!isFinished & !showOnboard">
         <div class="top-panel">
           <div class="title-panel">
@@ -150,7 +155,8 @@ export default {
 
   data() {
     return {
-      hello: true,
+      testType: "employer",
+      hasUnfinished: true,
       name: "customer",
       showOnboard: false,
       color: [
@@ -245,7 +251,6 @@ export default {
   },
   methods: {
     recordResponseAndMoveToNextQuestion: function(response, id) {
-      debugger;
       if (this.result[this.currentSectionNum] === undefined) {
         let newArr = [];
         this.$set(this.result, this.currentSectionNum, newArr);
@@ -291,13 +296,55 @@ export default {
         Math.floor(new Date().getTime() / 1000.0)
       );
       this.showOnboard = false;
+    },
+    restartTest: function() {
+      let obj = {
+        timestamp: Math.floor(new Date().getTime() / 1000.0),
+        result: []
+      };
+      localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+    },
+    // unfinished test means tests that happends within a timespan (e.g. 24 hours)
+    checkUnfinishedTest: function() {
+      let obj = localStorage.getItem(this.testType + "TestCache");
+      if (obj == null) this.hasUnfinished = false;
+      else {
+        obj = JSON.parse(obj);
+        let ts = obj.timestamp;
+        let curTimeStamp = Math.floor(new Date().getTime() / 1000.0);
+        // old test starts a day ago
+        if (curTimeStamp - ts >= 86400) {
+          this.hasUnfinished = false;
+          localStorage.removeItem(this.testType + "TestCache");
+        } else {
+          console.log(obj);
+        }
+      }
+    },
+    clearTest: function() {
+      localStorage.removeItem(this.testType + "TestCache");
     }
+  },
+  beforeMount: function() {
+    this.checkUnfinishedTest();
   },
   mounted() {
     document.onkeyup = this.arrowKeyChangeQuestion;
   },
   watch: {
-    result: () => {}
+    result: function() {
+      if (localStorage.getItem(this.testType + "TestCache") == null) {
+        let obj = {
+          timestamp: Math.floor(new Date().getTime() / 1000.0),
+          result: this.result
+        };
+        localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      } else {
+        let obj = JSON.parse(localStorage.getItem(this.testType + "TestCache"));
+        obj.result = this.result;
+        localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      }
+    }
   }
 };
 </script>
