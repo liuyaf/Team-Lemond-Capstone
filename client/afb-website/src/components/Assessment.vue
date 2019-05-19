@@ -1,7 +1,8 @@
 <template>
   <div id="assessment">
     <transition name="slide-fade" mode="out-in">
-      <div class="main-container" v-if="!isFinished & !showOnbard">
+      <ResumeTest v-if="hello"></ResumeTest>
+      <div class="main-container" v-else-if="!isFinished & !showOnboard">
         <div class="top-panel">
           <div class="title-panel">
             <p
@@ -19,6 +20,7 @@
             </p>
           </div>
           <div class="control-panel">
+            <button @click="removeTimeStamp">clear TimeStamp</button>
             <el-button size="mini" @click="enlargeFont=!enlargeFont">
               <img
                 class="font-change-icon"
@@ -60,7 +62,7 @@
           <keep-alive>
             <TermOA
               v-if="isAtTOA"
-              @continue="TOADone=true, showOnbard=true"
+              @continue="TOADone=true, skipOnboardNextTime?showOnboard=false:showOnboard=true"
               :key="TOA.id"
               :TOAContent="TOA.content"
               :enlarge="enlargeFont"
@@ -110,7 +112,10 @@
           >Submit</el-button>
         </div>
       </div>
-      <OnboardCard v-else-if="showOnbard" @skipOnboard="showOnbard=false"></OnboardCard>
+      <OnboardCard
+        v-else-if="showOnboard & !skipOnboardNextTime"
+        @skipOnboard="setSkipOnboardTimeStamp"
+      ></OnboardCard>
       <Result
         v-else
         :Result="result"
@@ -129,6 +134,7 @@ import InputForm from "./Input";
 import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 import OnboardCard from "./OnboardCard";
+import ResumeTest from "./ResumeTest";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -138,13 +144,15 @@ export default {
     InputForm,
     Radiogroup,
     Result,
-    OnboardCard
+    OnboardCard,
+    ResumeTest
   },
 
   data() {
     return {
+      hello: true,
       name: "customer",
-      showOnbard: false,
+      showOnboard: false,
       color: [
         "#292929",
         "#9F2B00",
@@ -223,10 +231,21 @@ export default {
     },
     sectionCount: function() {
       return this.sections.length - 1;
+    },
+    skipOnboardNextTime: function() {
+      let curTimeStamp = Math.floor(new Date().getTime() / 1000.0);
+      if (localStorage.getItem("onboardTimeStamp") == null) {
+        return false;
+      }
+      return (
+        // one day limit
+        curTimeStamp - localStorage.getItem("onboardTimeStamp") <= 86400
+      );
     }
   },
   methods: {
     recordResponseAndMoveToNextQuestion: function(response, id) {
+      debugger;
       if (this.result[this.currentSectionNum] === undefined) {
         let newArr = [];
         this.$set(this.result, this.currentSectionNum, newArr);
@@ -252,10 +271,34 @@ export default {
       } else {
         return true;
       }
+    },
+    arrowKeyChangeQuestion: function(e) {
+      if (this.TOADone & !this.isFinished & !this.showOnboard) {
+        if (e.keyCode == 37) {
+          if (this.currentQuestionNum > 0) this.currentQuestionNum--;
+        } else if (e.keyCode == 39) {
+          if (this.currentQuestionNum < this.currentSectionLength - 1)
+            this.currentQuestionNum++;
+        }
+      }
+    },
+    removeTimeStamp: function() {
+      localStorage.removeItem("onboardTimeStamp");
+    },
+    setSkipOnboardTimeStamp: function() {
+      localStorage.setItem(
+        "onboardTimeStamp",
+        Math.floor(new Date().getTime() / 1000.0)
+      );
+      this.showOnboard = false;
     }
   },
-  mounted() {},
-  watch: {}
+  mounted() {
+    document.onkeyup = this.arrowKeyChangeQuestion;
+  },
+  watch: {
+    result: () => {}
+  }
 };
 </script>
 
