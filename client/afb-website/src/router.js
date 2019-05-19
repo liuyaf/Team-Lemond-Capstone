@@ -81,37 +81,37 @@ const businessInfo = {
         label: "Other"
       }]
     },
-    // {
-    //   questionID: 2,
-    //   type: "dropdown",
-    //   title: "How many employees does your business have?",
-    //   options: [{
-    //       value: "0 employees (self-employed)",
-    //       label: "0 employees (self-employed)"
-    //     },
-    //     {
-    //       value: "1–9 employees",
-    //       label: "1–9 employees"
-    //     }, {
-    //       value: "10–49 employees",
-    //       label: "10–49 employees"
-    //     }, {
-    //       value: "50–249 employees",
-    //       label: "50–249 employees"
-    //     }, {
-    //       value: "250–499 employees",
-    //       label: "250–499 employees"
-    //     }, {
-    //       value: "500 or more employees",
-    //       label: "500 or more employees"
-    //     }
-    //   ]
-    // },
-    // {
-    //   questionID: 3,
-    //   type: "input",
-    //   title: "What's your business's zipcode?",
-    // }
+    {
+      questionID: 2,
+      type: "dropdown",
+      title: "How many employees does your business have?",
+      options: [{
+          value: "0 employees (self-employed)",
+          label: "0 employees (self-employed)"
+        },
+        {
+          value: "1–9 employees",
+          label: "1–9 employees"
+        }, {
+          value: "10–49 employees",
+          label: "10–49 employees"
+        }, {
+          value: "50–249 employees",
+          label: "50–249 employees"
+        }, {
+          value: "250–499 employees",
+          label: "250–499 employees"
+        }, {
+          value: "500 or more employees",
+          label: "500 or more employees"
+        }
+      ]
+    },
+    {
+      questionID: 3,
+      type: "input",
+      title: "What's your business's zipcode?",
+    }
   ]
 }
 const employerTest = [businessInfo,

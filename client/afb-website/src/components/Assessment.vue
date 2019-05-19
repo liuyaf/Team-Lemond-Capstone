@@ -4,10 +4,10 @@
       <ResumeTest
         v-if="hasUnfinished"
         @startover="restartTest"
-        @resumeTest="hasUnfinished=false"
+        @resumeTest="resumeTest"
         @del="clearTest"
       ></ResumeTest>
-      <div class="main-container" v-else-if="!isFinished & !showOnboard">
+      <div class="main-container" v-else-if="!isFinished && !showOnboard">
         <div class="top-panel">
           <div class="title-panel">
             <p
@@ -19,7 +19,7 @@
               :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}, isAtTOA? {color:'#9F2B00'}:{}]"
             >
               <span
-                v-if="TOADone & currentSectionNum!==0"
+                v-if="TOADone && currentSectionNum!==0"
               >section {{currentSectionNum}}/{{sectionCount}}</span>
               {{sectionTitle}}
             </p>
@@ -78,6 +78,7 @@
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
               :enlarge="enlargeFont"
+              :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></Dropdown>
             <InputForm
               v-if="currentQuestion.type === 'input'"
@@ -85,6 +86,7 @@
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
               :enlarge="enlargeFont"
+              :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></InputForm>
             <Radiogroup
               v-if="currentQuestion.type === 'radio'"
@@ -93,6 +95,7 @@
               :Content="currentQuestion"
               :fill="color[currentSectionNum]"
               :enlarge="enlargeFont"
+              :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></Radiogroup>
           </keep-alive>
         </transition>
@@ -118,7 +121,7 @@
         </div>
       </div>
       <OnboardCard
-        v-else-if="showOnboard & !skipOnboardNextTime"
+        v-else-if="showOnboard && !skipOnboardNextTime"
         @skipOnboard="setSkipOnboardTimeStamp"
       ></OnboardCard>
       <Result
@@ -155,8 +158,9 @@ export default {
 
   data() {
     return {
+      cachedResult: "",
       testType: "employer",
-      hasUnfinished: true,
+      hasUnfinished: "",
       name: "customer",
       showOnboard: false,
       color: [
@@ -278,7 +282,7 @@ export default {
       }
     },
     arrowKeyChangeQuestion: function(e) {
-      if (this.TOADone & !this.isFinished & !this.showOnboard) {
+      if (this.TOADone && !this.isFinished && !this.showOnboard) {
         if (e.keyCode == 37) {
           if (this.currentQuestionNum > 0) this.currentQuestionNum--;
         } else if (e.keyCode == 39) {
@@ -303,6 +307,7 @@ export default {
         result: []
       };
       localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      this.hasUnfinished = false;
     },
     // unfinished test means tests that happends within a timespan (e.g. 24 hours)
     checkUnfinishedTest: function() {
@@ -317,12 +322,27 @@ export default {
           this.hasUnfinished = false;
           localStorage.removeItem(this.testType + "TestCache");
         } else {
-          console.log(obj);
+          this.hasUnfinished = true;
         }
       }
     },
+    resumeTest: function() {
+      (this.hasUnfinished = false), (this.TOADone = true);
+      this.result = JSON.parse(
+        localStorage.getItem(this.testType + "TestCache")
+      ).result;
+
+      this.currentSectionNum = this.result.length - 1;
+      this.currentQuestionNum = this.result[this.currentSectionNum].length - 1;
+    },
     clearTest: function() {
       localStorage.removeItem(this.testType + "TestCache");
+    },
+    hasOldVal: function(sectionIndex, questionIndex) {
+      if (this.result[sectionIndex] !== undefined) {
+        return this.result[sectionIndex][questionIndex] !== undefined;
+      }
+      return false;
     }
   },
   beforeMount: function() {

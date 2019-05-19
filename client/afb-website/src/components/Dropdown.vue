@@ -22,7 +22,8 @@ export default {
   name: "dropdown",
   props: {
     Content: Object,
-    enlarge: Boolean
+    enlarge: Boolean,
+    oldVal: String
   },
   data() {
     return {
@@ -30,6 +31,11 @@ export default {
 
       value: ""
     };
+  },
+  activated() {
+    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+      this.value = this.oldVal;
+    }
   }
 };
 </script>

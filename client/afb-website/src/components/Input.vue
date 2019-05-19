@@ -17,16 +17,17 @@ export default {
   name: "input-form",
   props: {
     Content: Object,
-    enlarge: Boolean
+    enlarge: Boolean,
+    oldVal: String
   },
   data() {
     return {
       response: ""
     };
   },
-  method: {
-    alert: function() {
-      window.alert("hi");
+  activated() {
+    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+      this.response = this.oldVal;
     }
   }
 };

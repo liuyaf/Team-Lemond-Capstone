@@ -27,7 +27,8 @@ export default {
   props: {
     Content: Object,
     fill: String,
-    enlarge: Boolean
+    enlarge: Boolean,
+    oldVal: String
   },
   data() {
     return {
@@ -47,6 +48,9 @@ export default {
   },
   activated() {
     document.onkeypress = this.keypressListener;
+    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+      this.radio1 = this.oldVal;
+    }
   }
 };
 </script>
