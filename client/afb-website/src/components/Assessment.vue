@@ -109,7 +109,7 @@
           >Submit</el-button>
         </div>
       </div>
-      <Onboard v-if="showOnbard" @skipOnboard="showOnbard=false"></Onboard>
+      <Onboard v-else-if="showOnbard" @skipOnboard="showOnbard=false"></Onboard>
       <Result
         v-else
         :Result="result"
@@ -142,6 +142,7 @@ export default {
 
   data() {
     return {
+      name: "customer",
       showOnbard: false,
       color: [
         "#292929",
@@ -252,11 +253,14 @@ export default {
       } else {
         return true;
       }
-    },
-    checkCookie: function() {
-      return true;
     }
-  }
+  },
+  mounted() {
+    localStorage.getItem(this.name)
+      ? window.alert("fount it")
+      : window.alert("nope");
+  },
+  watch: {}
 };
 </script>
 
