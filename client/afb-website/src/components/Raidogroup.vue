@@ -1,12 +1,11 @@
 <template>
-  <div class="radio-group-container">
+  <div class="radio-group-container" id="radio-group">
     <h3 :style="enlarge? {fontSize:'32px'}:{}">{{Content.title}}</h3>
     <div class="radio-btn-c">
       <el-radio
         v-model="radio1"
         label="yes"
         border
-        class="test"
         @change="$emit('continue', radio1, Content.questionID)"
       >Yes</el-radio>
     </div>
@@ -15,7 +14,6 @@
         v-model="radio1"
         label="no"
         border
-        class="test"
         @change="$emit('continue', radio1, Content.questionID)"
       >No</el-radio>
     </div>
@@ -35,6 +33,20 @@ export default {
     return {
       radio1: ""
     };
+  },
+  methods: {
+    keypressListener: function(e) {
+      if (String.fromCharCode(e.keyCode) == "y") {
+        this.radio1 = "yes";
+        this.$emit("continue", this.radio1, this.Content.questionID);
+      } else if (String.fromCharCode(e.keyCode) == "n") {
+        this.radio1 = "no";
+        this.$emit("continue", this.radio1, this.Content.questionID);
+      }
+    }
+  },
+  activated() {
+    document.onkeypress = this.keypressListener;
   }
 };
 </script>

@@ -4,10 +4,13 @@
       <div class="main-container" v-if="!isFinished & !showOnbard">
         <div class="top-panel">
           <div class="title-panel">
-            <p id="title-vertical" :style="{background: color[currentSectionNum]}"></p>
+            <p
+              id="title-vertical"
+              :style="[{background: color[currentSectionNum]},  isAtTOA? {background:'#9F2B00'}:{}]"
+            ></p>
             <p
               class="section-title"
-              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}]"
+              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}, isAtTOA? {color:'#9F2B00'}:{}]"
             >
               <span
                 v-if="TOADone & currentSectionNum!==0"
@@ -34,11 +37,12 @@
             <i class="el-icon-caret-left"></i>
           </button>
           <el-button
-            size="mini"
+            type="mini"
             class="question-btn"
             :style="[isSelected(x)?{'background-color':color[currentSectionNum]}:{},
                       currentQuestionNum===x-1?{'background-color':color[currentSectionNum]}:{},
-                      {'border-color': color[currentSectionNum]}]"
+                      {'border-color': color[currentSectionNum]},
+                      enlargeFont?{'width':'50px', 'height':'50px', 'fontSize':'22px'}:{}]"
             :class="{selected: isSelected(x), selecting: currentQuestionNum===x-1}"
             v-for="x in currentSectionLength"
             :key="x"
@@ -87,29 +91,26 @@
         </transition>
         <div class="section-control" v-if="TOADone">
           <el-button
-            size="medium"
             :style="reachSectionHead?{visibility: 'hidden'}:{}"
             @click="moveToPrevSection"
             :disabled="reachSectionHead"
-            class="prev-section"
+            class="prev-section selection-btn"
           >prev section</el-button>
           <el-button
-            class="next-section"
+            class="next-section selection-btn"
             v-if="currentSectionNum != sectionLength-1"
-            size="medium"
             :disabled="!finishCurrentSection"
             @click="moveToNextSection"
           >next section</el-button>
           <el-button
             @click="isFinished=true"
-            class="submit"
-            size="medium"
+            class="submit selection-btn"
             v-if="currentSectionNum == sectionLength-1"
             :disabled="!finishCurrentSection"
           >Submit</el-button>
         </div>
       </div>
-      <Onboard v-else-if="showOnbard" @skipOnboard="showOnbard=false"></Onboard>
+      <OnboardCard v-else-if="showOnbard" @skipOnboard="showOnbard=false"></OnboardCard>
       <Result
         v-else
         :Result="result"
@@ -226,8 +227,6 @@ export default {
   },
   methods: {
     recordResponseAndMoveToNextQuestion: function(response, id) {
-      // this.result[id - 1] = response;
-      // vm.$set(this.result, id - 1, response);
       if (this.result[this.currentSectionNum] === undefined) {
         let newArr = [];
         this.$set(this.result, this.currentSectionNum, newArr);
@@ -310,6 +309,7 @@ export default {
 .section-title {
   /* border-left: 5px solid black; */
   padding-left: 0.5rem;
+  font-weight: bold;
   /* border-left-color: black;
   font-size: 5rem; */
 }
@@ -333,7 +333,7 @@ export default {
 }
 
 .question-select {
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   padding-top: 100px;
   display: flex;
   align-items: center;
@@ -347,18 +347,8 @@ export default {
   color: #000000;
 }
 
-/* .prev-section {
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-} */
 .next-section {
   align-self: flex-end;
-  /* position: absolute;
-  bottom: 5%;
-  right: 5%;
-  bottom: 30px;
-  right: 57.5px; */
 }
 .submit {
   align-self: flex-end;
@@ -387,11 +377,16 @@ export default {
   padding-top: 60px;
   width: 100%;
   position: absolute;
-  /* bottom: 30px; */
   display: flex;
   justify-content: space-between;
   padding-left: 5%;
   padding-right: 5%;
+}
+
+.selection-btn {
+  color: #fff;
+  background: #155777;
+  border-color: #155777;
 }
 
 @media (min-width: 768px) {

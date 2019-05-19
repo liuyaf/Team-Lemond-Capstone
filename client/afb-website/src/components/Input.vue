@@ -6,7 +6,8 @@
       v-model="response"
       placeholder="Please enter your zipcode"
       type="number"
-      @keyup.enter.native="$emit('continue', response, Content.questionID)"
+      @keyup.enter.native="response.length >= 5? $emit('continue', response, Content.questionID):''"
+      @blur="response.length >= 5? $emit('continue', response, Content.questionID):''"
     ></el-input>
   </div>
 </template>
