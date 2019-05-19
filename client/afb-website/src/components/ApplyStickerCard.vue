@@ -1,18 +1,26 @@
 <template>
     <div class="discountCard row py-5">
+
+        <!-- sticker image -->
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 d-flex">
             <div class="mx-auto">
                 <img class="stickerImage" v-bind:src="content.image">
             </div>
         </div>
+
+        <!-- the card content -->
         <div class="discountContent col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div class="applySticker">
+
+                <!-- header -->
                 <span class="sticker-h" v-html="content.header"></span>
                 <br>
+
+                <!-- paragraph -->
                 <p class="textParagraphs">{{ content.paragraph }}</p>
                 <br>
                 <br>
-                <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'/#' }"/>
+                <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'https://www.seattle.gov/agefriendly/about/discount-program', isUrl: true }"/>
             </div>
         </div>
     </div>
@@ -20,6 +28,12 @@
 
 <script>
 import DynamicButton from '@/components/DynamicButton.vue'
+
+// This components receives props that were parsed from the Wordpress API. 
+// See About.vue to see how the contents were parsed
+
+// Components that uses it:
+//  - About.vue
 
 export default {
     name: 'ApplyStickerCard',

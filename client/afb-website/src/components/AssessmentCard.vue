@@ -1,19 +1,31 @@
 <template>
     <div class="paddingSection testBoxes col-lg-6 d-flex">
         <div>
+            <!-- header -->
             <span class="testTextHeaders" v-html="content.headerHTML"></span>
             <hr class="testHeaderLine">
             <br>
+            
+            <!-- paragraph -->
             <p class="textParagraphs" v-html="content.paragraph"></p>
             <br>
             <br>
-            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route }"/>
+            
+            <!-- DynamicButton component that leads to the 'resources' route -->
+            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route, isUrl: false }"/>
         </div>
     </div>
 </template>
 
 <script>
 import DynamicButton from '@/components/DynamicButton.vue'
+
+// This components receives props that were parsed from the WordPress API
+// See About.vue to see how the contents were parsed
+
+// Components that use it
+//  - About.vue
+//  - AssessmentSelection.vue
 
 export default {
     name: 'AssessmentCard',

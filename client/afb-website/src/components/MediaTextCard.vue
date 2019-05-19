@@ -15,7 +15,7 @@
           <div class="mediaContent paddingSection" v-html="content.content"></div>
           <div class="paddingSection">
             <DynamicButton
-              v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources'}"
+              v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources', isUrl: false}"
             ></DynamicButton>
           </div>
         </div>
@@ -28,6 +28,12 @@
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DynamicButton from "@/components/DynamicButton.vue";
+
+// This component receives props that were parsed from the Wordpress API
+// See About.vue to see how the contents were parsed
+
+// Components that use it:
+//  - About.vue
 
 export default {
   name: "MediaTextCard",

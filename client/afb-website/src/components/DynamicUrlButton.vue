@@ -22,16 +22,19 @@
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default {
-    // A button components that goes to an external website
+// A button components that goes to an external website
     // parameters:
-    //  - color
-    //  - text
-    //  - Url
+    //  - color: String
+    //  - text: String
+    //  - Url: String
 
     // how to use:
     //      <DynamicUrlButton v-bind:buttonInfo="{ color:'black', text: 'button text', Url:'the url' }"/>
 
+    // Components that uses it
+    //  - Resources.vue
+
+export default {
     name: 'DynamicUrlButton',
     props: ['buttonInfo']
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="about">
-    
+
       <!-- intro section -->
       <div
         class="mainImage jumbotron jumbotron-fluid"
@@ -16,7 +16,7 @@
             </div>
             <div class="col-lg-7 col-md-8 mt-3">
               <DynamicButton
-                v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection' }"
+                v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection', isUrl: false }"
               />
             </div>
           </div>
@@ -46,7 +46,7 @@
               <div class="missionContent" v-html="missionSection.paragraphs"></div>
               <DynamicButton
                 class="mb-4"
-                v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources' }"
+                v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources', isUrl: false }"
               />
             </div>
           </div>

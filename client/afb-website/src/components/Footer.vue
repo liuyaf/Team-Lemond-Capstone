@@ -145,6 +145,15 @@
 </template>
 
 <script>
+
+// This component is present in all the landing pages routes, and the assessment result page
+// It is at the bottom of the page
+
+// Componets that use it:
+//  - App.vue
+//  - Result.vue
+
+
 export default {
   name: "Footer"
 };

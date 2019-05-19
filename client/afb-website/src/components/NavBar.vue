@@ -121,6 +121,11 @@
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// This components is visible in all the landing page routes
+
+// Components that use it:
+//  - App.vue
+
 export default {
   name: "NavBar"
 };
