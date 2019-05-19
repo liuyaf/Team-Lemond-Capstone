@@ -127,7 +127,7 @@ import Dropdown from "./Dropdown";
 import InputForm from "./Input";
 import Radiogroup from "./Raidogroup";
 import Result from "./Result";
-import Onboard from "../views/AssessmentOnboard";
+import OnboardCard from "./OnboardCard";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -137,7 +137,7 @@ export default {
     InputForm,
     Radiogroup,
     Result,
-    Onboard
+    OnboardCard
   },
 
   data() {

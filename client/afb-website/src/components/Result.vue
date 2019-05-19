@@ -2,8 +2,9 @@
   <div>
     <div class="top-bar">
       <div class="logo-bar">
-        <img src="../assets/AgeFriendlyBusinessLogo1.svg" alt="logo">
-        <h1 class="logo-text">Age Friendly Business</h1>
+        <router-link to="/">
+          <img class="logo-image" src="../assets/AgeFriendlyBusinessLogo2.svg" alt="logo">
+        </router-link>
       </div>
       <el-button size="mini" @click="enlarge=!enlarge">
         <img class="font-change-icon" src="../assets/font-change-icon.svg" alt="change font icon">
@@ -147,6 +148,9 @@ export default {
   align-items: center;
   color: #155777;
   font-family: "DDINRegular";
+}
+.logo-image {
+  height: 80px;
 }
 .score-section {
   display: flex;

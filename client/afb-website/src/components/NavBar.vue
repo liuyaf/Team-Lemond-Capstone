@@ -224,6 +224,10 @@ nav {
   .ul_top_hypers {
     display: none;
   }
+
+  .navImg {
+    width: 200px;
+  }
 }
 
 .ul_top_hypers li {
