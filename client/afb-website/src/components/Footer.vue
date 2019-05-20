@@ -108,10 +108,10 @@
           <ul id="leftList">
             <li id="listHeader" class="footerListText">Local Resources</li>
             <li class="footerListText">
-              <a href="http://www.seattle.gov/agefriendly/">Age Friendly Seattle</a>
+              <a href="http://www.seattle.gov/agefriendly/" target="_blank">Age Friendly Seattle</a>
             </li>
             <li class="footerListText">
-              <a href="https://www.communitylivingconnections.org/">Community Living Connections</a>
+              <a href="https://www.communitylivingconnections.org/" target="_blank">Community Living Connections</a>
             </li>
           </ul>
         </div>
@@ -123,7 +123,7 @@
             </li>
             <li class="footerListText">
               <a
-                href="https://www.agingkingcounty.org/age-friendly-coalition/"
+                href="https://www.agingkingcounty.org/age-friendly-coalition/" target="_blank"
               >Age Friendly Coalition for Seattle and King County</a>
             </li>
           </ul>
@@ -133,9 +133,9 @@
         <p class="copyrightText text-center">
           © Copyright 2019 City of Seattle
           <br>
-          <a href="http://www.seattle.gov/americans-with-disabilities-act">ADA Notice</a> |
+          <a href="http://www.seattle.gov/americans-with-disabilities-act" target="_blank">ADA Notice</a> |
           <a
-            href="http://www.seattle.gov/civilrights/civil-rights/title-vi-notice-of-nondiscrimination"
+            href="http://www.seattle.gov/civilrights/civil-rights/title-vi-notice-of-nondiscrimination" target="_blank"
           >Notice of Non-discrimination</a> |
           <a data-toggle="modal" data-target="#accessibilityModal">Accessibility</a>
         </p>
