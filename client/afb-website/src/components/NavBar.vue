@@ -34,8 +34,8 @@
       <!-- desktop navbar -->
       <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
         <div id="nav">
-          <router-link class="navSpacing navDisplay" to="/" exact v-on:click.native="aboutIsHidden = !aboutIsHidden">About</router-link>
-          <router-link class="navSpacing navDisplay" to="/resources" v-on:click.native="resourceIsHidden = !resourceIsHidden">Resources</router-link>
+          <router-link class="navSpacing navDisplay" to="/" exact v-on:click.native="aboutIsHidden = !aboutIsHidden, resourceIsHidden = false">About</router-link>
+          <router-link class="navSpacing navDisplay" to="/resources" v-on:click.native="resourceIsHidden = !resourceIsHidden, aboutIsHidden = false">Resources</router-link>
           <a
             href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank"
             class="navSpacing navDisplay"
@@ -131,7 +131,7 @@ export default {
   data() {
     return {
       aboutIsHidden: true,
-      resourceIsHidden: true
+      resourceIsHidden: false
     }
   }
 };
