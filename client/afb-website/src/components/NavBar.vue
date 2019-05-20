@@ -103,13 +103,13 @@
     <div v-if="$route.name == 'resources'" class="div_top_hypers">
       <ul class="ul_top_hypers">
         <li>
-          <router-link to="#" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
+          <router-link to="/resources" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
         </li>
         <li>
-          <router-link to="#" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
+          <router-link to="/resources" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
         </li>
         <li>
-          <router-link to="#" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+          <router-link to="/resources" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
         </li>
       </ul>
     </div>
