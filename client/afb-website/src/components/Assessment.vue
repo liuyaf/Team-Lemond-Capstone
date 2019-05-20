@@ -2,10 +2,13 @@
   <div id="assessment">
     <transition name="slide-fade" mode="out-in">
       <ResumeTest
-        v-if="hasUnfinished"
+        v-if="hasStoredResult"
         @startover="restartTest"
         @resumeTest="resumeTest"
         @del="clearTest"
+        @viewPreviousResult="viewPreviousResult"
+        :testType="testType"
+        :Result="isPreviousTestFinished"
       ></ResumeTest>
       <div class="main-container" v-else-if="!isFinished && !showOnboard">
         <div class="top-panel">
@@ -113,7 +116,7 @@
             @click="moveToNextSection"
           >next section</el-button>
           <el-button
-            @click="isFinished=true"
+            @click="submitAndMoveToResult"
             class="submit selection-btn"
             v-if="currentSectionNum == sectionLength-1"
             :disabled="!finishCurrentSection"
@@ -130,6 +133,7 @@
         :Questions="sections.slice(1)"
         :enlarge="enlargeFont"
         :generalTips="generalTips"
+        @retryWithBusInfo="retryWithBusInfo"
       ></Result>
     </transition>
   </div>
@@ -160,7 +164,7 @@ export default {
     return {
       cachedResult: "",
       testType: "employer",
-      hasUnfinished: "",
+      hasStoredResult: "",
       name: "customer",
       showOnboard: false,
       color: [
@@ -179,7 +183,8 @@ export default {
       currentQuestionNum: 0,
       selected: "",
       TOADone: false,
-      result: []
+      result: [],
+      isPreviousTestFinished: false
     };
   },
   computed: {
@@ -304,30 +309,36 @@ export default {
     restartTest: function() {
       let obj = {
         timestamp: Math.floor(new Date().getTime() / 1000.0),
-        result: []
+        result: [],
+        finished: false
       };
       localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-      this.hasUnfinished = false;
+      console.log("set from restartTEst", this.getStoredTest());
+      this.hasStoredResult = false;
     },
     // unfinished test means tests that happends within a timespan (e.g. 24 hours)
     checkUnfinishedTest: function() {
+      // debugger;
       let obj = localStorage.getItem(this.testType + "TestCache");
-      if (obj == null) this.hasUnfinished = false;
+      if (obj == null) this.hasStoredResult = false;
       else {
         obj = JSON.parse(obj);
         let ts = obj.timestamp;
         let curTimeStamp = Math.floor(new Date().getTime() / 1000.0);
         // old test starts a day ago
         if (curTimeStamp - ts >= 86400) {
-          this.hasUnfinished = false;
+          this.hasStoredResult = false;
           localStorage.removeItem(this.testType + "TestCache");
         } else {
-          this.hasUnfinished = true;
+          this.hasStoredResult = true;
         }
+
+        this.isPreviousTestFinished = obj.finished;
       }
     },
     resumeTest: function() {
-      (this.hasUnfinished = false), (this.TOADone = true);
+      // debugger;
+      (this.hasStoredResult = false), (this.TOADone = true);
       this.result = JSON.parse(
         localStorage.getItem(this.testType + "TestCache")
       ).result;
@@ -343,6 +354,39 @@ export default {
         return this.result[sectionIndex][questionIndex] !== undefined;
       }
       return false;
+    },
+    retryWithBusInfo: function(BusInfo) {
+      let obj = {
+        timestamp: Math.floor(new Date().getTime() / 1000.0),
+        result: [BusInfo],
+        finished: false
+      };
+      this.result = [BusInfo];
+      this.isFinished = false;
+      this.currentSectionNum = 1;
+      this.currentQuestionNum = 0;
+      localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+    },
+    submitAndMoveToResult: function() {
+      let obj = this.getStoredTest();
+      obj.finished = true;
+      this.updateStoredTest(obj);
+
+      this.isFinished = true;
+    },
+    getStoredTest: function() {
+      return JSON.parse(localStorage.getItem(this.testType + "TestCache"));
+    },
+    updateStoredTest: function(obj) {
+      localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      console.log("set from updateStoredTest", this.getStoredTest());
+    },
+    viewPreviousResult: function() {
+      this.result = this.getStoredTest().result;
+      this.hasStoredResult = false;
+      this.TOADone = true;
+
+      this.isFinished = true;
     }
   },
   beforeMount: function() {
@@ -356,13 +400,17 @@ export default {
       if (localStorage.getItem(this.testType + "TestCache") == null) {
         let obj = {
           timestamp: Math.floor(new Date().getTime() / 1000.0),
-          result: this.result
+          result: this.result,
+          finished: false
         };
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+        console.log("set from resultWatcher if", this.getStoredTest());
       } else {
         let obj = JSON.parse(localStorage.getItem(this.testType + "TestCache"));
         obj.result = this.result;
+        // obj.finished = false;
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+        console.log("set from resultWatcher else", this.getStoredTest());
       }
     }
   }

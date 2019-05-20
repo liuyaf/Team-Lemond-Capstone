@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="result-container">
     <div class="top-bar">
       <div class="logo-bar">
         <router-link to="/">
@@ -18,7 +18,7 @@
           <h2 :style="enlarge? {fontSize:'38px'}:{}">Congratulations! You finished the test!</h2>
         </div>
         <div class="btn-section">
-          <el-button size="mini">retry</el-button>
+          <el-button size="mini" @click="$emit('retryWithBusInfo', Result[0])">retry</el-button>
           <el-button size="mini">download tips</el-button>
         </div>
       </div>
@@ -29,6 +29,7 @@
           :percentage="correctPercent"
           color="#8e71c7"
           status="text"
+          :width="circleSize"
         >{{correctCount}} / {{totalQ}}</el-progress>
       </dir>
     </div>
@@ -69,7 +70,8 @@ export default {
       totalQ: 0,
       correctCount: 0,
       questions: this.Questions,
-      enlarge: false
+      enlarge: false,
+      circleSize: 200
     };
   },
   computed: {
@@ -134,6 +136,9 @@ export default {
 };
 </script>
 <style scoped>
+.result-container {
+  overflow: scroll;
+}
 .top-bar {
   padding-top: 50px;
   padding-left: 80px;
@@ -154,7 +159,7 @@ export default {
 }
 .score-section {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: center;
   align-items: center;
   padding-bottom: 30px;
 }
@@ -171,11 +176,12 @@ export default {
 }
 .left-section {
   padding-left: 100px;
-  padding-right: 100px;
+  padding-right: 50px;
 }
 
 .score-circle {
   padding-right: 100px;
+  font-weight: bold;
 }
 
 .text-area {
