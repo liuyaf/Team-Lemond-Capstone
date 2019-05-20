@@ -541,15 +541,17 @@ export default {
   padding-right: 5%;
 }
 
-.selection-btn {
-  color: #fff;
-  background: #155777;
-  border-color: #155777;
-}
-
 @media (min-width: 768px) {
   .section-control {
     bottom: 30px;
   }
+}
+</style>
+
+<style>
+.selection-btn {
+  color: #fff;
+  background: #155777;
+  border-color: #155777;
 }
 </style>
