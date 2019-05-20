@@ -7,52 +7,55 @@
       <el-button size="medium" @click="$emit('skipOnboard')">Skip</el-button>
     </span>
 
-    <img class="pl-3 pr-3" :src="require(`@/assets/${this.currentElement.imgName}`)" alt="onboard image">
+    <img
+      class="pl-3 pr-3"
+      :src="require(`@/assets/${this.currentElement.imgName}`)"
+      alt="onboard image"
+    >
 
     <div class="card-content mt-4">
       <h3 class="headline text-center">{{this.currentElement.headline}}</h3>
       <p class="text-center mt-4">{{this.currentElement.text}}</p>
     </div>
 
+    <div class="bottom-control">
+      <!-- the dot indicators -->
+      <div class="row">
+        <ul class="indicator pl-0 mx-auto">
+          <li
+            v-for="(item, index) in this.cards"
+            :key="index"
+            class="dot"
+            :class="{'dot-selected': currentElementIndex === index}"
+          >&#9679;</li>
+        </ul>
+      </div>
 
-    <!-- the dot indicators -->
-    <div class="row">
-      <ul class="indicator pl-0 mx-auto">
-        <li
-          v-for="(item, index) in this.cards"
-          :key="index"
-          class="dot"
-          :class="{'dot-selected': currentElementIndex === index}"
-        >&#9679;</li>
-      </ul>
-    </div>
+      <div class="navigation">
+        <!-- back button -->
+        <el-button
+          v-if="this.currentElementIndex != 0"
+          size="medium"
+          class="onboard-button"
+          @click="showPrevElement"
+        >Back</el-button>
 
+        <!-- the next button -->
+        <el-button
+          v-if="this.currentElementIndex != this.cards.length-1"
+          size="medium"
+          class="onboard-button ml-auto"
+          @click="showNextElement"
+        >Next</el-button>
 
-    <div class="navigation">
-      <!-- back button -->
-      <el-button
-        v-if="this.currentElementIndex != 0"
-        size="medium"
-        class="onboard-button"
-        @click="showPrevElement"
-      >Back</el-button>
-
-
-      <!-- the next button -->
-      <el-button
-        v-if="this.currentElementIndex != this.cards.length-1"
-        size="medium"
-        class="onboard-button ml-auto"
-        @click="showNextElement"
-      >Next</el-button>
-
-      <!-- the start button that shows on the last onboard card -->
-      <el-button
-        @click="$emit('skipOnboard')"
-        v-if="this.currentElementIndex == this.cards.length-1"
-        size="medium"
-        class="onboard-button ml-auto"
-      >Start</el-button>
+        <!-- the start button that shows on the last onboard card -->
+        <el-button
+          @click="$emit('skipOnboard')"
+          v-if="this.currentElementIndex == this.cards.length-1"
+          size="medium"
+          class="onboard-button ml-auto"
+        >Start</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -123,6 +126,11 @@ export default {
   background-size: cover;
 }
 
+.skip {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
 .headline {
   font-weight: bold;
 }
@@ -169,7 +177,12 @@ img {
 }
 
 .onboard-button {
-  margin: 1%;
+  margin-right: 2%;
+}
+
+.row {
+  padding-top: 45px;
+  width: 100%;
 }
 </style>
 

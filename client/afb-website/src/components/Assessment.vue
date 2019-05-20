@@ -1,21 +1,31 @@
 <template>
   <div id="assessment">
     <transition name="slide-fade" mode="out-in">
-      <div class="main-container" v-if="!isFinished & !showOnbard">
+      <ResumeTest
+        v-if="hasUnfinished"
+        @startover="restartTest"
+        @resumeTest="resumeTest"
+        @del="clearTest"
+      ></ResumeTest>
+      <div class="main-container" v-else-if="!isFinished && !showOnboard">
         <div class="top-panel">
           <div class="title-panel">
-            <p id="title-vertical" :style="{background: color[currentSectionNum]}"></p>
+            <p
+              id="title-vertical"
+              :style="[{background: color[currentSectionNum]},  isAtTOA? {background:'#9F2B00'}:{}]"
+            ></p>
             <p
               class="section-title"
-              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}]"
+              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}, isAtTOA? {color:'#9F2B00'}:{}]"
             >
               <span
-                v-if="TOADone & currentSectionNum!==0"
+                v-if="TOADone && currentSectionNum!==0"
               >section {{currentSectionNum}}/{{sectionCount}}</span>
               {{sectionTitle}}
             </p>
           </div>
           <div class="control-panel">
+            <button @click="removeTimeStamp">clear TimeStamp</button>
             <el-button size="mini" @click="enlargeFont=!enlargeFont">
               <img
                 class="font-change-icon"
@@ -34,11 +44,12 @@
             <i class="el-icon-caret-left"></i>
           </button>
           <el-button
-            size="mini"
+            type="mini"
             class="question-btn"
             :style="[isSelected(x)?{'background-color':color[currentSectionNum]}:{},
                       currentQuestionNum===x-1?{'background-color':color[currentSectionNum]}:{},
-                      {'border-color': color[currentSectionNum]}]"
+                      {'border-color': color[currentSectionNum]},
+                      enlargeFont?{'width':'50px', 'height':'50px', 'fontSize':'22px'}:{}]"
             :class="{selected: isSelected(x), selecting: currentQuestionNum===x-1}"
             v-for="x in currentSectionLength"
             :key="x"
@@ -56,7 +67,7 @@
           <keep-alive>
             <TermOA
               v-if="isAtTOA"
-              @continue="TOADone=true, showOnbard=true"
+              @continue="TOADone=true, skipOnboardNextTime?showOnboard=false:showOnboard=true"
               :key="TOA.id"
               :TOAContent="TOA.content"
               :enlarge="enlargeFont"
@@ -67,6 +78,7 @@
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
               :enlarge="enlargeFont"
+              :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></Dropdown>
             <InputForm
               v-if="currentQuestion.type === 'input'"
@@ -74,6 +86,7 @@
               :Content="currentQuestion"
               @continue="recordResponseAndMoveToNextQuestion"
               :enlarge="enlargeFont"
+              :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></InputForm>
             <Radiogroup
               v-if="currentQuestion.type === 'radio'"
@@ -82,34 +95,35 @@
               :Content="currentQuestion"
               :fill="color[currentSectionNum]"
               :enlarge="enlargeFont"
+              :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></Radiogroup>
           </keep-alive>
         </transition>
         <div class="section-control" v-if="TOADone">
           <el-button
-            size="medium"
             :style="reachSectionHead?{visibility: 'hidden'}:{}"
             @click="moveToPrevSection"
             :disabled="reachSectionHead"
-            class="prev-section"
+            class="prev-section selection-btn"
           >prev section</el-button>
           <el-button
-            class="next-section"
+            class="next-section selection-btn"
             v-if="currentSectionNum != sectionLength-1"
-            size="medium"
             :disabled="!finishCurrentSection"
             @click="moveToNextSection"
           >next section</el-button>
           <el-button
             @click="isFinished=true"
-            class="submit"
-            size="medium"
+            class="submit selection-btn"
             v-if="currentSectionNum == sectionLength-1"
             :disabled="!finishCurrentSection"
           >Submit</el-button>
         </div>
       </div>
-      <OnboardCard v-if="showOnbard" @skipOnboard="showOnbard=false"></OnboardCard>
+      <OnboardCard
+        v-else-if="showOnboard && !skipOnboardNextTime"
+        @skipOnboard="setSkipOnboardTimeStamp"
+      ></OnboardCard>
       <Result
         v-else
         :Result="result"
@@ -128,6 +142,7 @@ import InputForm from "./Input";
 import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 import OnboardCard from "./OnboardCard";
+import ResumeTest from "./ResumeTest";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -137,12 +152,17 @@ export default {
     InputForm,
     Radiogroup,
     Result,
-    OnboardCard
+    OnboardCard,
+    ResumeTest
   },
 
   data() {
     return {
-      showOnbard: false,
+      cachedResult: "",
+      testType: "employer",
+      hasUnfinished: "",
+      name: "customer",
+      showOnboard: false,
       color: [
         "#292929",
         "#9F2B00",
@@ -221,12 +241,20 @@ export default {
     },
     sectionCount: function() {
       return this.sections.length - 1;
+    },
+    skipOnboardNextTime: function() {
+      let curTimeStamp = Math.floor(new Date().getTime() / 1000.0);
+      if (localStorage.getItem("onboardTimeStamp") == null) {
+        return false;
+      }
+      return (
+        // one day limit
+        curTimeStamp - localStorage.getItem("onboardTimeStamp") <= 86400
+      );
     }
   },
   methods: {
     recordResponseAndMoveToNextQuestion: function(response, id) {
-      // this.result[id - 1] = response;
-      // vm.$set(this.result, id - 1, response);
       if (this.result[this.currentSectionNum] === undefined) {
         let newArr = [];
         this.$set(this.result, this.currentSectionNum, newArr);
@@ -253,8 +281,89 @@ export default {
         return true;
       }
     },
-    checkCookie: function() {
-      return true;
+    arrowKeyChangeQuestion: function(e) {
+      if (this.TOADone && !this.isFinished && !this.showOnboard) {
+        if (e.keyCode == 37) {
+          if (this.currentQuestionNum > 0) this.currentQuestionNum--;
+        } else if (e.keyCode == 39) {
+          if (this.currentQuestionNum < this.currentSectionLength - 1)
+            this.currentQuestionNum++;
+        }
+      }
+    },
+    removeTimeStamp: function() {
+      localStorage.removeItem("onboardTimeStamp");
+    },
+    setSkipOnboardTimeStamp: function() {
+      localStorage.setItem(
+        "onboardTimeStamp",
+        Math.floor(new Date().getTime() / 1000.0)
+      );
+      this.showOnboard = false;
+    },
+    restartTest: function() {
+      let obj = {
+        timestamp: Math.floor(new Date().getTime() / 1000.0),
+        result: []
+      };
+      localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      this.hasUnfinished = false;
+    },
+    // unfinished test means tests that happends within a timespan (e.g. 24 hours)
+    checkUnfinishedTest: function() {
+      let obj = localStorage.getItem(this.testType + "TestCache");
+      if (obj == null) this.hasUnfinished = false;
+      else {
+        obj = JSON.parse(obj);
+        let ts = obj.timestamp;
+        let curTimeStamp = Math.floor(new Date().getTime() / 1000.0);
+        // old test starts a day ago
+        if (curTimeStamp - ts >= 86400) {
+          this.hasUnfinished = false;
+          localStorage.removeItem(this.testType + "TestCache");
+        } else {
+          this.hasUnfinished = true;
+        }
+      }
+    },
+    resumeTest: function() {
+      (this.hasUnfinished = false), (this.TOADone = true);
+      this.result = JSON.parse(
+        localStorage.getItem(this.testType + "TestCache")
+      ).result;
+
+      this.currentSectionNum = this.result.length - 1;
+      this.currentQuestionNum = this.result[this.currentSectionNum].length - 1;
+    },
+    clearTest: function() {
+      localStorage.removeItem(this.testType + "TestCache");
+    },
+    hasOldVal: function(sectionIndex, questionIndex) {
+      if (this.result[sectionIndex] !== undefined) {
+        return this.result[sectionIndex][questionIndex] !== undefined;
+      }
+      return false;
+    }
+  },
+  beforeMount: function() {
+    this.checkUnfinishedTest();
+  },
+  mounted() {
+    document.onkeyup = this.arrowKeyChangeQuestion;
+  },
+  watch: {
+    result: function() {
+      if (localStorage.getItem(this.testType + "TestCache") == null) {
+        let obj = {
+          timestamp: Math.floor(new Date().getTime() / 1000.0),
+          result: this.result
+        };
+        localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      } else {
+        let obj = JSON.parse(localStorage.getItem(this.testType + "TestCache"));
+        obj.result = this.result;
+        localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      }
     }
   }
 };
@@ -310,6 +419,7 @@ export default {
 .section-title {
   /* border-left: 5px solid black; */
   padding-left: 0.5rem;
+  font-weight: bold;
   /* border-left-color: black;
   font-size: 5rem; */
 }
@@ -333,7 +443,7 @@ export default {
 }
 
 .question-select {
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   padding-top: 100px;
   display: flex;
   align-items: center;
@@ -347,18 +457,8 @@ export default {
   color: #000000;
 }
 
-/* .prev-section {
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-} */
 .next-section {
   align-self: flex-end;
-  /* position: absolute;
-  bottom: 5%;
-  right: 5%;
-  bottom: 30px;
-  right: 57.5px; */
 }
 .submit {
   align-self: flex-end;
@@ -387,11 +487,16 @@ export default {
   padding-top: 60px;
   width: 100%;
   position: absolute;
-  /* bottom: 30px; */
   display: flex;
   justify-content: space-between;
   padding-left: 5%;
   padding-right: 5%;
+}
+
+.selection-btn {
+  color: #fff;
+  background: #155777;
+  border-color: #155777;
 }
 
 @media (min-width: 768px) {
