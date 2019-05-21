@@ -1,5 +1,5 @@
 <template>
-  <div class="result-container">
+  <div class="result-container" v-if="!isMobile">
     <div class="review-side">
       <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
       <!-- <ReviewCard v-for="(tip, index) in tips" :key="index"
@@ -27,6 +27,21 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <transition>
+      <div class="cards-mobile">
+        <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
+        <ReviewCard
+          v-for="(response, index) in tipsAndResponse"
+          :key="index"
+          :Response="response"
+          :enlarge="enlarge"
+          :isMobile="isMobile"
+        ></ReviewCard>
+        <br>
+      </div>
+    </transition>
+  </div>
 </template>
 <script>
 import ReviewCard from "./ReviewCard";
@@ -39,33 +54,13 @@ export default {
   data() {
     return {
       tipsAndResponse: this.TipsAndResponse,
-      sectionName: this.sectionTitle,
-      GeneralTips1: [
-        {
-          tipsTitle: "Recruit Effectively",
-          tipsLi: [
-            "Ensure that your HR staff is aware of the benefits of hiring mature workers.",
-            "Include older workers on recruitment teams and hiring panels.",
-            "Reach out to recently retired workers when you need consultants, part-time workers,project-based employees, or “on-call” staff."
-          ]
-        },
-        {
-          tipsTitle: "Retain mature workers",
-          tipsLi: [
-            "Assess your company and your workforce. What percent of your organization is age 50 or older? How will retirements impact your business? How will you fill potential knowledge gaps?",
-            "Ask your employees! Survey employees who are age 50+ to learn what motivates them on the job (e.g., friendly work environment, ability to apply their expertise or experiences, staying engaged, having a flexible work schedule, health care benefits, pay)."
-          ]
-        },
-        {
-          tipsTitle: "Provide trainings and learning opportunities",
-          tipsLi: [
-            "Train staff about age-related biases and intergenerational workplace awareness issues. Include age topics in your diversity trainings.",
-            "Offer skills training and lifelong learning opportunities of interest to all ages, including programs that are attractive to mature workers.",
-            "• Provide opportunities for mature workers to share and contribute knowledge to the business (e.g., initiate mentoring programs or peer trainings that pair older and younger employees)."
-          ]
-        }
-      ]
+      sectionName: this.sectionTitle
     };
+  },
+  computed: {
+    isMobile: function() {
+      return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
+    }
   }
 };
 </script>
@@ -83,6 +78,13 @@ export default {
   align-items: center;
   background: #f5f7fe;
   min-height: 1000px;
+}
+
+.cards-mobile {
+  background: #f5f7fe;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .review-side-title {

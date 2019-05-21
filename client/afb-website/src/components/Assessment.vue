@@ -125,6 +125,13 @@
         v-else-if="showOnboard && !skipOnboardNextTime"
         @skipOnboard="setSkipOnboardTimeStamp"
       ></OnboardCard>
+      <ResultMobile
+        v-else-if="isMobile"
+        :Result="result"
+        :Questions="sections.slice(1)"
+        :enlarge="enlargeFont"
+        :generalTips="generalTips"
+      ></ResultMobile>
       <Result
         v-else
         :Result="result"
@@ -145,6 +152,7 @@ import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 import OnboardCard from "./OnboardCard";
 import ResumeTest from "./ResumeTest";
+import ResultMobile from "./ResultMobile";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -155,7 +163,8 @@ export default {
     Radiogroup,
     Result,
     OnboardCard,
-    ResumeTest
+    ResumeTest,
+    ResultMobile
   },
 
   data() {
@@ -186,6 +195,9 @@ export default {
     };
   },
   computed: {
+    isMobile: function() {
+      return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
+    },
     reachHead: function() {
       return this.currentQuestionNum === 0;
     },
@@ -310,7 +322,7 @@ export default {
             this.currentSectionNum < this.sectionLength - 1 &&
             this.finishCurrentSection
           ) {
-            this.moveToNextSection;
+            this.moveToNextSection();
           }
         }
       }
