@@ -29,8 +29,7 @@
         <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
           <div class="fact-body">
             <hr class="factLine">
-            <div class="fact-h enlarge" v-html="item.header"></div>
-            <!-- <p><span v-html="item.text"></span></p> -->
+            <div class="fact-h" v-html="item.header"></div>
             <p class="fact-p">{{ item.text }}</p>
           </div>
         </div>
@@ -107,8 +106,14 @@ import AssessmentCard from "@/components/AssessmentCard.vue";
 import DynamicButton from "@/components/DynamicButton.vue";
 import ApplyStickerCard from "@/components/ApplyStickerCard.vue";
 
+// This component has parsed content coming from the WordPress API.
+// It represents the About page in the landing page.
+// More info about WordPress API: https://developer.wordpress.org/rest-api/
+// URL to the page content on the WordPress API: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
+
 export default {
   name: "about",
+  props: ['enlargeFont'],
   components: {
     MediaTextCard,
     AssessmentCard,
@@ -312,6 +317,10 @@ export default {
 
 <style scoped>
 /* general styling for the page */
+.fontSize {
+  font-size: 32px;
+}
+
 .paddingSection {
   padding-left: 5%;
   padding-right: 5%;

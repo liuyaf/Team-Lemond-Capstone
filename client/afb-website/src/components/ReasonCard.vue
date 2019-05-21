@@ -13,6 +13,12 @@
 </template>
 
 <script>
+// This component is used in the resources page under the 'resources' route.
+// This component also has props that were parsed from the WordPress API.
+// See Resources.vue to see how content were parsed
+
+// Components that use this:
+//  - Resources.vue
 
 export default {
     name: 'ReasonCard',

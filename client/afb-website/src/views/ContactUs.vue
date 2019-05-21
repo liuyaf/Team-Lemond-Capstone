@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <form method="POST" action="https://formspree.io/muhammadhariz206@gmail.com">
+    <!-- <form method="POST" action="https://formspree.io/muhammadhariz206@gmail.com">
       <div class="form-group row justify-content-center d-flex">
         <div class="col-md-6 justify-content-center">
           <label class="offset-md-5 col-md-7 col-form-label phoneDisplay" for="text">First Name:</label>
@@ -51,15 +51,120 @@
           <button name="submit" type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
+    </form> -->
+
+    <form method="POST" action="https://agefriendlysea.wpengine.com/wp-json/contact-form-7/v1/contact-forms/215/feedback">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label> First Name (required)<br />
+            <span class="wpcf7-form-control-wrap firstname">
+              <input type="text" name="firstname" value="hello" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" v-model="formData.firstname" required/>
+            </span> 
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label> Last Name (required)<br />
+            <span class="wpcf7-form-control-wrap lastname">
+              <input type="text" name="lastname" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" v-model="formData.lastname" required/>
+            </span> 
+          </label>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label> Your Email (required)<br />
+            <span class="wpcf7-form-control-wrap email">
+              <input type="email" name="email" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" v-model="formData.email" required/>
+            </span> 
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label> Phone (required)<br />
+            <span class="wpcf7-form-control-wrap phone">
+              <input type="tel" name="phone" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control" aria-invalid="false" v-model="formData.phone" required/>
+            </span> 
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label> Company/Organization<br />
+            <span class="wpcf7-form-control-wrap orgs">
+              <input type="text" name="orgs" size="40" class="wpcf7-form-control wpcf7-text form-control" aria-invalid="false" v-model="formData.orgs"/>
+            </span> 
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label> Your Message<br />
+            <span class="wpcf7-form-control-wrap yourmessage">
+              <textarea name="yourmessage" cols="100" rows="10" class="wpcf7-form-control wpcf7-textarea form-control" aria-invalid="false" v-model="formData.yourmessage"></textarea>
+            </span> 
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-12 d-flex">
+          <button name="submit" type="submit" class="wpcf7-form-control wpcf7-submit btn btn-primary">Submit</button>
+        </div>
+      </div>
     </form>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import axios from 'axios'
 
 export default {
-  name: "contact"
+  name: "contact",
+  data() {
+    return {
+      info: null,
+      errors: [],
+      message: null,
+      formData: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        phone: '',
+        orgs: '',
+        yourmessage: '',
+      }
+    }
+  },
+  mounted() {
+    axios.get("https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/32", this.formData)
+    .then(response => {
+      this.info = response.data.content.rendered;
+      console.log(this.info)
+    })
+    .catch(e => {
+      this.errors.push(e);
+    })
+  },
+  methods: {
+    submitForm: function() {
+      axios.post("https://agefriendlysea.wpengine.com/wp-json/contact-form-7/v1/contact-forms/215/feedback")
+      .then(function (response) {
+        console.log(response);
+        this.message = response;
+      })
+      .catch(e => {
+        console.log(e)
+        this.errors.push(e);
+      })
+    }
+  }
 };
 </script>
 

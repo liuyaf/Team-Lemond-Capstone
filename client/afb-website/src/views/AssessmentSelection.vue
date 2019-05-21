@@ -43,6 +43,10 @@
 import axios from "axios";
 import AssessmentCard from "@/components/AssessmentCard.vue";
 
+// This component has parsed content coming from the WordPress API.
+// It represents the Assessment Selection page in the landing page.
+// More info about WordPress API: https://developer.wordpress.org/rest-api/
+// URL to the page content on the WordPress API: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/206
 
 export default {
   name: "assessmentSelection",
@@ -72,7 +76,7 @@ export default {
   },
   mounted() {
     axios
-      // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/30
+      // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/206
       .get("https://agefriendlysea.wpengine.com/wp-json/wp/v2/pages/206")
       .then(response => {
         // RAW HTML

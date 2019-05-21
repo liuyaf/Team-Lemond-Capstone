@@ -47,18 +47,23 @@
       <!-- change font button and take assessment button -->
       <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
         <div class="col-12 px-1 d-flex justify-content-end">
-          <img
-            src="@/assets/font-change-button.svg"
-            class="navBtnImg ml-2 svgButton navDisplay"
-            alt="Assessment test button"
-          >
-          <router-link class="navSpacing navDisplay" to="/assessment-selection">
+          <button class="font-enlarge"  v-on:click="toggleFontSize">
             <img
-              src="@/assets/navbar-assessment-button.svg"
+              src="@/assets/font-change-button.svg"
               class="navBtnImg ml-2 svgButton navDisplay"
               alt="Assessment test button"
             >
-          </router-link>
+          </button>
+          
+          <button class="take-assessment">
+            <router-link class="navSpacing navDisplay" to="/assessment-selection">
+              <img
+                src="@/assets/navbar-assessment-button.svg"
+                class="navBtnImg ml-2 svgButton navDisplay"
+                alt="Assessment test button"
+              >
+            </router-link>
+          </button>
         </div>
       </div>
 
@@ -103,13 +108,13 @@
     <div v-if="$route.name == 'resources'" class="div_top_hypers">
       <ul class="ul_top_hypers">
         <li>
-          <router-link to="#" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
+          <router-link to="/resources" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
         </li>
         <li>
-          <router-link to="#" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
+          <router-link to="/resources" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
         </li>
         <li>
-          <router-link to="#" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+          <router-link to="/resources" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
         </li>
       </ul>
     </div>
@@ -127,7 +132,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //  - App.vue
 
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  data () {
+    return {
+      enlargeFont: false
+    }
+  },
+  methods: {
+    toggleFontSize: function() {
+      this.enlargeFont = !this.enlargeFont
+      this.$emit('fontToggled', this.enlargeFont)
+    }
+  }
 };
 </script>
 
@@ -203,10 +219,6 @@ nav {
 }
 
 @media (max-width: 992px) {
-  .navBtnImg {
-    width: 150px;
-  }
-
   #phoneDisplay {
     padding-left: 10px;
   }
@@ -243,6 +255,12 @@ nav {
 
 .ul_top_hypers li a {
   color: black;
+}
+
+.take-assessment, .font-enlarge {
+  border: none;
+  padding: 0;
+  background-color: white;
 }
 </style>
 

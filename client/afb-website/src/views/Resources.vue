@@ -56,6 +56,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import ReasonCard from '@/components/ReasonCard.vue'
 import DynamicUrlButton from '@/components/DynamicUrlButton.vue'
 
+// This component has parsed content coming from the WordPress API.
+// It represents the Resources page in the landing page.
+// More info about WordPress API: https://developer.wordpress.org/rest-api/
+// URL to the page content on the WordPress API: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/30
+
 export default {
   name: 'resources',
   components: {
