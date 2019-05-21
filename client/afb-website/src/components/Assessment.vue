@@ -290,9 +290,20 @@ export default {
       if (this.TOADone && !this.isFinished && !this.showOnboard) {
         if (e.keyCode == 37) {
           if (this.currentQuestionNum > 0) this.currentQuestionNum--;
+          else if (this.currentSectionNum > 0) {
+            this.currentSectionNum--;
+            this.currentQuestionNum = this.currentSectionLength - 1;
+          }
         } else if (e.keyCode == 39) {
           if (this.currentQuestionNum < this.currentSectionLength - 1)
             this.currentQuestionNum++;
+          else if (
+            this.currentSectionNum < this.sectionLength - 1 &&
+            this.finishCurrentSection
+          ) {
+            this.currentSectionNum++;
+            this.currentQuestionNum = 0;
+          }
         }
       }
     },
@@ -313,8 +324,9 @@ export default {
         finished: false
       };
       localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-      console.log("set from restartTEst", this.getStoredTest());
+      //console.log("set from restartTEst", this.getStoredTest());
       this.hasStoredResult = false;
+      this.TOADone = true;
     },
     // unfinished test means tests that happends within a timespan (e.g. 24 hours)
     checkUnfinishedTest: function() {
@@ -379,7 +391,7 @@ export default {
     },
     updateStoredTest: function(obj) {
       localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-      console.log("set from updateStoredTest", this.getStoredTest());
+      //console.log("set from updateStoredTest", this.getStoredTest());
     },
     viewPreviousResult: function() {
       this.result = this.getStoredTest().result;
@@ -404,13 +416,13 @@ export default {
           finished: false
         };
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-        console.log("set from resultWatcher if", this.getStoredTest());
+        //console.log("set from resultWatcher if", this.getStoredTest());
       } else {
         let obj = JSON.parse(localStorage.getItem(this.testType + "TestCache"));
         obj.result = this.result;
         // obj.finished = false;
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-        console.log("set from resultWatcher else", this.getStoredTest());
+        //console.log("set from resultWatcher else", this.getStoredTest());
       }
     }
   }
@@ -540,18 +552,14 @@ export default {
   padding-left: 5%;
   padding-right: 5%;
 }
-
-@media (min-width: 768px) {
-  .section-control {
-    bottom: 30px;
-  }
-}
-</style>
-
-<style>
 .selection-btn {
   color: #fff;
   background: #155777;
   border-color: #155777;
+}
+@media (min-width: 768px) {
+  .section-control {
+    bottom: 30px;
+  }
 }
 </style>

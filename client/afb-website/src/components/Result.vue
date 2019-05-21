@@ -13,7 +13,9 @@
     <div class="score-section">
       <div class="left-section">
         <div class="text-area">
-          <h1 :style="enlarge? {fontSize:'42px'}:{}">Here's your {{testType}} score</h1>
+          <h1
+            :style="enlarge? {fontSize:'42px'}:{}"
+          >Here's your {{isMobile?"mobile":"computer"}} {{testType}} score</h1>
           <h2 :style="enlarge? {fontSize:'38px'}:{}">{{summary}}</h2>
           <h2 :style="enlarge? {fontSize:'38px'}:{}">Congratulations! You finished the test!</h2>
         </div>
@@ -106,6 +108,9 @@ export default {
         output.push(tempArr);
       }
       return output;
+    },
+    isMobile: function() {
+      return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
     }
   },
   methods: {
