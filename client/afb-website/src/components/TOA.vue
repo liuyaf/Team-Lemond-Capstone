@@ -60,6 +60,10 @@ h3 {
   padding-left: 10px;
   margin: 0;
 }
+</style>
+
+
+<style>
 .start-btn {
   margin-top: 5px;
   margin-bottom: 10px;
@@ -68,5 +72,3 @@ h3 {
   border-color: #cc3e16;
 }
 </style>
-
-

@@ -5,7 +5,6 @@
         v-if="hasStoredResult"
         @startover="restartTest"
         @resumeTest="resumeTest"
-        @del="clearTest"
         @viewPreviousResult="viewPreviousResult"
         :testType="testType"
         :Result="isPreviousTestFinished"
@@ -28,7 +27,6 @@
             </p>
           </div>
           <div class="control-panel">
-            <button @click="removeTimeStamp">clear TimeStamp</button>
             <el-button size="mini" @click="enlargeFont=!enlargeFont">
               <img
                 class="font-change-icon"
@@ -87,7 +85,7 @@
               v-if="currentQuestion.type === 'input'"
               :key="currentQuestionID"
               :Content="currentQuestion"
-              @continue="recordResponseAndMoveToNextQuestion"
+              @continue-input="checkAndRecordInputAnswer"
               :enlarge="enlargeFont"
               :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></InputForm>
@@ -259,6 +257,13 @@ export default {
     }
   },
   methods: {
+    checkAndRecordInputAnswer: function(response, id, title) {
+      if (
+        id - 1 == this.currentQuestionNum &&
+        title == this.currentQuestion.title
+      )
+        this.recordResponseAndMoveToNextQuestion(response, id);
+    },
     recordResponseAndMoveToNextQuestion: function(response, id) {
       if (this.result[this.currentSectionNum] === undefined) {
         let newArr = [];
@@ -276,11 +281,15 @@ export default {
     },
     moveToPrevSection: function() {
       this.currentSectionNum--;
+      this.currentQuestionNum = this.currentSectionLength - 1;
     },
     isSelected: function(x) {
       if (this.result[this.currentSectionNum] === undefined) {
         return false;
-      } else if (this.result[this.currentSectionNum][x - 1] === undefined) {
+      } else if (
+        this.result[this.currentSectionNum][x - 1] == null ||
+        this.result[this.currentSectionNum][x - 1] == undefined
+      ) {
         return false;
       } else {
         return true;
@@ -291,24 +300,20 @@ export default {
         if (e.keyCode == 37) {
           if (this.currentQuestionNum > 0) this.currentQuestionNum--;
           else if (this.currentSectionNum > 0) {
-            this.currentSectionNum--;
-            this.currentQuestionNum = this.currentSectionLength - 1;
+            this.moveToPrevSection();
           }
         } else if (e.keyCode == 39) {
+          // debugger;
           if (this.currentQuestionNum < this.currentSectionLength - 1)
             this.currentQuestionNum++;
           else if (
             this.currentSectionNum < this.sectionLength - 1 &&
             this.finishCurrentSection
           ) {
-            this.currentSectionNum++;
-            this.currentQuestionNum = 0;
+            this.moveToNextSection;
           }
         }
       }
-    },
-    removeTimeStamp: function() {
-      localStorage.removeItem("onboardTimeStamp");
     },
     setSkipOnboardTimeStamp: function() {
       localStorage.setItem(
@@ -318,12 +323,7 @@ export default {
       this.showOnboard = false;
     },
     restartTest: function() {
-      let obj = {
-        timestamp: Math.floor(new Date().getTime() / 1000.0),
-        result: [],
-        finished: false
-      };
-      localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
+      localStorage.removeItem(this.testType + "TestCache");
       //console.log("set from restartTEst", this.getStoredTest());
       this.hasStoredResult = false;
       this.TOADone = true;
@@ -357,9 +357,6 @@ export default {
 
       this.currentSectionNum = this.result.length - 1;
       this.currentQuestionNum = this.result[this.currentSectionNum].length - 1;
-    },
-    clearTest: function() {
-      localStorage.removeItem(this.testType + "TestCache");
     },
     hasOldVal: function(sectionIndex, questionIndex) {
       if (this.result[sectionIndex] !== undefined) {
@@ -552,14 +549,18 @@ export default {
   padding-left: 5%;
   padding-right: 5%;
 }
-.selection-btn {
-  color: #fff;
-  background: #155777;
-  border-color: #155777;
-}
+
 @media (min-width: 768px) {
   .section-control {
     bottom: 30px;
   }
+}
+</style>
+
+<style>
+.selection-btn {
+  color: #fff;
+  background: #155777;
+  border-color: #155777;
 }
 </style>

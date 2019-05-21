@@ -6,8 +6,8 @@
       v-model="response"
       placeholder="Please enter your zipcode"
       type="number"
-      @keyup.enter.native="response.length >= 5? $emit('continue', response, Content.questionID):''"
-      @blur="response.length >= 5? $emit('continue', response, Content.questionID):''"
+      @keyup.enter.native="$event.target.blur"
+      @blur="response.length >= 5? $emit('continue-input', response, Content.questionID, Content.title):''"
     ></el-input>
   </div>
 </template>
@@ -26,7 +26,11 @@ export default {
     };
   },
   activated() {
-    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+    if (
+      this.oldVal !== undefined &&
+      this.oldVal !== null &&
+      this.oldVal.length !== 0
+    ) {
       this.response = this.oldVal;
     }
   }
