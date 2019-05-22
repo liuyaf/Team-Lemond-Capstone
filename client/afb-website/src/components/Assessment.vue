@@ -562,8 +562,8 @@ export default {
   align-self: flex-end;
   padding-top: 60px;
   width: 100%;
-  /* height: 50px; */
-  /* position: absolute; */
+  margin-top: auto;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
   padding-left: 5%;
