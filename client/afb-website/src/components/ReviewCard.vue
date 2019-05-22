@@ -1,5 +1,9 @@
 <template>
-  <el-card class="box-card" :body-style="{padding: '0px'}">
+  <el-card
+    class="box-card"
+    :body-style="{padding: '0px'}"
+    :style="isMobile?{marginLeft: '10px', marginRight:'10px'}:{ width: '350px'}"
+  >
     <div
       class="question-title"
       style="padding: 8px;"
@@ -20,7 +24,8 @@ export default {
   name: "review-card",
   props: {
     Response: Object,
-    enlarge: Boolean
+    enlarge: Boolean,
+    isMobile: Boolean
   },
   data() {
     return {};
@@ -33,7 +38,6 @@ export default {
 }
 .box-card {
   margin-top: 15px;
-  width: 350px;
   display: flex;
   flex-flow: column nowrap;
   /* margin-bottom: 20px; */

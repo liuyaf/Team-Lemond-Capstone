@@ -557,7 +557,7 @@ let customerGeneralTips = new Map([
             "Accept orders by phone, on your website, or at an easily accessible counter at the front of your business. "
         ]
     }, {
-        tipsTitle: "TIps",
+        tipsTitle: "Tips",
         tipsLi: [
             "Learn about ADA Title III requirements for small businesses.",
             "Outdoor seating is a great place to encourage lingering conversations and refills.",

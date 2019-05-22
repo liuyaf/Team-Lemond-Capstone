@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <!-- nav bar -->
-    <NavBar
-      v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"
-    />
+    <NavBar @fontToggled="setEnlargeBoolean($event)" v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"/>
 
     <!-- the views -->
     <main>
@@ -13,8 +11,8 @@
         @beforeLeave="beforeLeave"
         @enter="enter"
         @afterEnter="afterEnter"
-      >
-        <router-view/>
+       >
+        <router-view :enlargeFont="enlargeFont"/>
       </transition>
     </main>
 
@@ -41,7 +39,8 @@ export default {
   },
   data() {
     return {
-      prevHeight: 0
+      prevHeight: 0,
+      enlargeFont: false
     };
   },
   methods: {
@@ -58,7 +57,10 @@ export default {
       });
     },
     afterEnter(element) {
-      element.style.height = "auto";
+      element.style.height = 'auto';
+    },
+    setEnlargeBoolean(e) {
+      this.enlargeFont = e;
     }
   }
 };

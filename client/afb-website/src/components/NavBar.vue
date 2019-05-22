@@ -47,18 +47,23 @@
       <!-- change font button and take assessment button -->
       <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
         <div class="col-12 px-1 d-flex justify-content-end">
-          <img
-            src="@/assets/font-change-button.svg"
-            class="navBtnImg ml-2 svgButton navDisplay"
-            alt="Assessment font change button"
-          >
-          <router-link class="navSpacing navDisplay" to="/assessment-selection">
+          <button class="font-enlarge"  v-on:click="toggleFontSize">
             <img
-              src="@/assets/navbar-assessment-button.svg"
+              src="@/assets/font-change-button.svg"
               class="navBtnImg ml-2 svgButton navDisplay"
               alt="Assessment test button"
             >
-          </router-link>
+          </button>
+          
+          <button class="take-assessment">
+            <router-link class="navSpacing navDisplay" to="/assessment-selection">
+              <img
+                src="@/assets/navbar-assessment-button.svg"
+                class="navBtnImg ml-2 svgButton navDisplay"
+                alt="Assessment test button"
+              >
+            </router-link>
+          </button>
         </div>
       </div>
 
@@ -128,10 +133,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
   name: "NavBar",
-  data() {
+  data () {
     return {
+      enlargeFont: false,
       aboutIsHidden: true,
       resourceIsHidden: false
+    }
+  },
+  methods: {
+    toggleFontSize: function() {
+      this.enlargeFont = !this.enlargeFont
+      // console.log(this.enlargeFont)
+      this.$emit('fontToggled', this.enlargeFont)
     }
   }
 };
@@ -209,10 +222,6 @@ nav {
 }
 
 @media (max-width: 992px) {
-  .navBtnImg {
-    width: 150px;
-  }
-
   #phoneDisplay {
     padding-left: 10px;
   }
@@ -249,6 +258,12 @@ nav {
 
 .ul_top_hypers li a {
   color: black;
+}
+
+.take-assessment, .font-enlarge {
+  border: none;
+  padding: 0;
+  background-color: white;
 }
 </style>
 

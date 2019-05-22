@@ -1,24 +1,31 @@
 <template>
+  <!-- onboard card -->
   <div
     class="card"
     :style="{ 'background-image': 'url(' + require(`@/assets/onboard-background.svg`) + ')'}"
   >
+
+    <!-- a skip button that goes straight tot he assessment -->
     <span class="skip">
       <el-button size="medium" @click="$emit('skipOnboard')">Skip</el-button>
     </span>
 
+    <!-- a dynamic onboard image -->
     <img
       class="pl-3 pr-3"
       :src="require(`@/assets/${this.currentElement.imgName}`)"
       alt="onboard image"
     >
 
+    <!-- a dynamic onboard card content -->
     <div class="card-content mt-4">
       <h3 class="headline text-center">{{this.currentElement.headline}}</h3>
       <p class="text-center mt-4">{{this.currentElement.text}}</p>
     </div>
 
+    <!-- onboard navigation -->
     <div class="bottom-control">
+      
       <!-- the dot indicators -->
       <div class="row">
         <ul class="indicator pl-0 mx-auto">
@@ -31,6 +38,7 @@
         </ul>
       </div>
 
+      <!-- back button, next button, and start button -->
       <div class="navigation">
         <!-- back button -->
         <el-button
@@ -61,6 +69,11 @@
 </template>
 
 <script>
+// This component is used for the assessment and it is rendered at the beginning of the assessment after the terms of agreement.
+
+// Components that use it:
+//  - Assessment.vue
+
 export default {
   name: "OnboardCard",
   data() {
@@ -120,8 +133,6 @@ export default {
   position: absolute;
   font-family: "DDINRegular";
   font-size: 24px;
-  /* -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -174,6 +185,10 @@ img {
 
 .navigation {
   display: flex;
+}
+
+.onboard-button:first-child {
+  margin-left: 2%;
 }
 
 .onboard-button {

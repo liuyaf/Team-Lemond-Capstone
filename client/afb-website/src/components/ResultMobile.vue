@@ -1,6 +1,6 @@
 <template>
   <div class="result-container">
-    <!-- <div class="top-bar-mobile" v-if="isMobile">
+    <div class="top-bar-mobile">
       <div class="logo-bar">
         <router-link to="/">
           <img class="logo-image" src="../assets/AgeFriendlyBusinessLogo2.svg" alt="logo">
@@ -11,46 +11,18 @@
         class="navBtnImg ml-2 svgButton navDisplay font-change-icon-mobile"
         alt="Assessment font change button"
       >
-    </div>-->
-    <div class="top-bar">
-      <div class="logo-bar">
-        <router-link to="/">
-          <img class="logo-image" src="../assets/AgeFriendlyBusinessLogo2.svg" alt="logo">
-        </router-link>
-      </div>
-
-      <img
-        class="font-change-icon"
-        src="@/assets/font-change-button.svg"
-        alt="change font icon"
-        @click="enlarge=!enlarge"
-      >
     </div>
-
     <div class="score-section">
-      <div class="left-section">
-        <div class="text-area">
-          <h1 :style="enlarge? {fontSize:'42px'}:{}">Here's your {{testType}} score</h1>
-          <h2 :style="enlarge? {fontSize:'38px'}:{}">{{summary}}</h2>
-          <h2 :style="enlarge? {fontSize:'38px'}:{}">Congratulations! You finished the test!</h2>
-        </div>
-        <div class="btn-section">
-          <el-button size="mini" @click="$emit('retryWithBusInfo', Result[0])">retry</el-button>
-          <el-button size="mini">download tips</el-button>
-        </div>
+      <div class="text-section">
+        <h3>asd</h3>
+        <p>asdasd</p>
+        <p>asdasdasd</p>
       </div>
-
       <dir class="score-circle">
-        <el-progress
-          type="circle"
-          :percentage="correctPercent"
-          color="#8e71c7"
-          status="text"
-          :width="circleSize"
-        >{{correctCount}} / {{totalQ}}</el-progress>
+        <el-progress type="circle" :percentage="80" color="#8e71c7" status="text">123/ 456</el-progress>
       </dir>
     </div>
-    <el-tabs class="tabs" v-model="activeName" :stretch="true">
+    <el-tabs v-model="activeName" class="tabs" :stretch="true">
       <el-tab-pane
         class="tab-pane"
         v-for="(section, index) in questions"
@@ -66,29 +38,26 @@
         ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
-    <Footer></Footer>
   </div>
 </template>
+
 <script>
 import ResultDetail from "./ResultDetail";
-import Footer from "./Footer";
+
 export default {
-  name: "result",
-  components: {
-    ResultDetail,
-    Footer
-  },
+  name: "resultmobile",
   props: ["Result", "Questions", "generalTips"],
+  components: {
+    ResultDetail
+  },
   data() {
     return {
       testType: "Employer",
-      summary: "Your business is very age-friendly!",
       activeName: "n0",
       totalQ: 0,
       correctCount: 0,
       questions: this.Questions,
-      enlarge: false,
-      circleSize: 200
+      enlarge: false
     };
   },
   computed: {
@@ -150,70 +119,15 @@ export default {
       return this.generalTips.get(key);
     }
   },
-  mounted: function() {
+  mounted() {
     this.reorderArray(this.combinedQuestionAndResponse);
   }
 };
 </script>
+
 <style scoped>
-.result-container {
-  /* overflow: scroll; */
-}
-.top-bar {
-  padding-top: 50px;
-  padding-left: 80px;
-  padding-right: 80px;
-  padding-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo-bar {
-  display: flex;
-  align-items: center;
-  color: #155777;
-  font-family: "DDINRegular";
-}
-.logo-image {
-  height: 80px;
-}
-.score-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 30px;
-}
-.tabs {
-  width: 90%;
-  margin: auto;
-}
-.font-change-icon {
-  width: 50px;
-  height: 50px;
-}
-.logo-text {
-  padding-left: 10px;
-}
-.left-section {
-  padding-left: 100px;
-  padding-right: 50px;
-}
-
-.score-circle {
-  padding-right: 100px;
-  font-weight: bold;
-}
-
-.text-area {
-  font-family: "DDINRegular";
-}
-.text-area h1 {
-  font-size: 36px;
-  display: block;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+.logo-bar img {
+  width: 230px;
 }
 
 .top-bar-mobile {
@@ -229,5 +143,10 @@ export default {
 .font-change-icon-mobile {
   width: 40px;
   height: 40px;
+}
+
+.tabs {
+  width: 95%;
+  margin: auto;
 }
 </style>

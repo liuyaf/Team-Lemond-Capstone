@@ -33,7 +33,11 @@ export default {
     };
   },
   activated() {
-    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+    if (
+      this.oldVal !== undefined &&
+      this.oldVal !== null &&
+      this.oldVal.length !== 0
+    ) {
       this.value = this.oldVal;
     }
   }

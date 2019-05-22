@@ -5,7 +5,6 @@
         v-if="hasStoredResult"
         @startover="restartTest"
         @resumeTest="resumeTest"
-        @del="clearTest"
         @viewPreviousResult="viewPreviousResult"
         :testType="testType"
         :Result="isPreviousTestFinished"
@@ -28,7 +27,6 @@
             </p>
           </div>
           <div class="control-panel">
-            <button @click="removeTimeStamp">clear TimeStamp</button>
             <el-button size="mini" @click="enlargeFont=!enlargeFont">
               <img
                 class="font-change-icon"
@@ -87,7 +85,7 @@
               v-if="currentQuestion.type === 'input'"
               :key="currentQuestionID"
               :Content="currentQuestion"
-              @continue="recordResponseAndMoveToNextQuestion"
+              @continue-input="checkAndRecordInputAnswer"
               :enlarge="enlargeFont"
               :oldVal="hasOldVal(currentSectionNum, currentQuestionNum)? result[currentSectionNum][currentQuestionNum]:''"
             ></InputForm>
@@ -127,6 +125,13 @@
         v-else-if="showOnboard && !skipOnboardNextTime"
         @skipOnboard="setSkipOnboardTimeStamp"
       ></OnboardCard>
+      <ResultMobile
+        v-else-if="isMobile"
+        :Result="result"
+        :Questions="sections.slice(1)"
+        :enlarge="enlargeFont"
+        :generalTips="generalTips"
+      ></ResultMobile>
       <Result
         v-else
         :Result="result"
@@ -147,6 +152,7 @@ import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 import OnboardCard from "./OnboardCard";
 import ResumeTest from "./ResumeTest";
+import ResultMobile from "./ResultMobile";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -157,7 +163,8 @@ export default {
     Radiogroup,
     Result,
     OnboardCard,
-    ResumeTest
+    ResumeTest,
+    ResultMobile
   },
 
   data() {
@@ -188,6 +195,9 @@ export default {
     };
   },
   computed: {
+    isMobile: function() {
+      return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
+    },
     reachHead: function() {
       return this.currentQuestionNum === 0;
     },
@@ -259,6 +269,13 @@ export default {
     }
   },
   methods: {
+    checkAndRecordInputAnswer: function(response, id, title) {
+      if (
+        id - 1 == this.currentQuestionNum &&
+        title == this.currentQuestion.title
+      )
+        this.recordResponseAndMoveToNextQuestion(response, id);
+    },
     recordResponseAndMoveToNextQuestion: function(response, id) {
       if (this.result[this.currentSectionNum] === undefined) {
         let newArr = [];
@@ -276,11 +293,15 @@ export default {
     },
     moveToPrevSection: function() {
       this.currentSectionNum--;
+      this.currentQuestionNum = this.currentSectionLength - 1;
     },
     isSelected: function(x) {
       if (this.result[this.currentSectionNum] === undefined) {
         return false;
-      } else if (this.result[this.currentSectionNum][x - 1] === undefined) {
+      } else if (
+        this.result[this.currentSectionNum][x - 1] == null ||
+        this.result[this.currentSectionNum][x - 1] == undefined
+      ) {
         return false;
       } else {
         return true;
@@ -290,14 +311,21 @@ export default {
       if (this.TOADone && !this.isFinished && !this.showOnboard) {
         if (e.keyCode == 37) {
           if (this.currentQuestionNum > 0) this.currentQuestionNum--;
+          else if (this.currentSectionNum > 0) {
+            this.moveToPrevSection();
+          }
         } else if (e.keyCode == 39) {
+          // debugger;
           if (this.currentQuestionNum < this.currentSectionLength - 1)
             this.currentQuestionNum++;
+          else if (
+            this.currentSectionNum < this.sectionLength - 1 &&
+            this.finishCurrentSection
+          ) {
+            this.moveToNextSection();
+          }
         }
       }
-    },
-    removeTimeStamp: function() {
-      localStorage.removeItem("onboardTimeStamp");
     },
     setSkipOnboardTimeStamp: function() {
       localStorage.setItem(
@@ -307,14 +335,10 @@ export default {
       this.showOnboard = false;
     },
     restartTest: function() {
-      let obj = {
-        timestamp: Math.floor(new Date().getTime() / 1000.0),
-        result: [],
-        finished: false
-      };
-      localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-      console.log("set from restartTEst", this.getStoredTest());
+      localStorage.removeItem(this.testType + "TestCache");
+      //console.log("set from restartTEst", this.getStoredTest());
       this.hasStoredResult = false;
+      this.TOADone = true;
     },
     // unfinished test means tests that happends within a timespan (e.g. 24 hours)
     checkUnfinishedTest: function() {
@@ -346,9 +370,6 @@ export default {
       this.currentSectionNum = this.result.length - 1;
       this.currentQuestionNum = this.result[this.currentSectionNum].length - 1;
     },
-    clearTest: function() {
-      localStorage.removeItem(this.testType + "TestCache");
-    },
     hasOldVal: function(sectionIndex, questionIndex) {
       if (this.result[sectionIndex] !== undefined) {
         return this.result[sectionIndex][questionIndex] !== undefined;
@@ -379,7 +400,7 @@ export default {
     },
     updateStoredTest: function(obj) {
       localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-      console.log("set from updateStoredTest", this.getStoredTest());
+      //console.log("set from updateStoredTest", this.getStoredTest());
     },
     viewPreviousResult: function() {
       this.result = this.getStoredTest().result;
@@ -404,13 +425,13 @@ export default {
           finished: false
         };
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-        console.log("set from resultWatcher if", this.getStoredTest());
+        //console.log("set from resultWatcher if", this.getStoredTest());
       } else {
         let obj = JSON.parse(localStorage.getItem(this.testType + "TestCache"));
         obj.result = this.result;
         // obj.finished = false;
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-        console.log("set from resultWatcher else", this.getStoredTest());
+        //console.log("set from resultWatcher else", this.getStoredTest());
       }
     }
   }
@@ -419,7 +440,11 @@ export default {
 
 <style scoped>
 .main-container {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* justify-content: space-evenly; */
+  /* align-items: stretch; */
   overflow: scroll;
   position: absolute;
   top: 0;
@@ -499,10 +524,12 @@ export default {
 }
 
 .question-btn {
-  border-color: #409eff;
   width: 40px;
   height: 40px;
   color: #000000;
+}
+.prev-section {
+  align-self: flex-start;
 }
 
 .next-section {
@@ -532,9 +559,11 @@ export default {
 }
 
 .section-control {
+  align-self: flex-end;
   padding-top: 60px;
   width: 100%;
-  position: absolute;
+  margin-top: auto;
+  margin-bottom: 15px;
   display: flex;
   justify-content: space-between;
   padding-left: 5%;
@@ -544,6 +573,15 @@ export default {
 @media (min-width: 768px) {
   .section-control {
     bottom: 30px;
+  }
+}
+
+@media (max-width: 414px) {
+  .question-select {
+    padding-top: 40px;
+  }
+  .section-control {
+    padding-top: 20px;
   }
 }
 </style>
