@@ -6,9 +6,16 @@
       <div class="intro paddingSection">
         <div class="row">
             <div class="col-sm-12 col-lg-6">
-              <span class="intro-h" v-html="introSection.header"></span>
+              <span 
+                :class="{ introEnlarge: enlargeFont }"
+                class="intro-h" 
+                v-html="introSection.header"
+              ></span>
               <br>
-              <p class="intro-p">{{ introSection.paragraph }}</p>
+              <p 
+                :class="{ introEnlarge: enlargeFont }"
+                class="intro-p"
+              >{{ introSection.paragraph }}</p>
               <DynamicUrlButton class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
             </div>
             <div class="col-sm-12 col-lg-6">
@@ -22,9 +29,14 @@
       <div class="age-friendly paddingSection">
         <div class="row">
           <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
-            <span v-html="item.header"></span>
+            <span 
+              :class="{ agefriendlyEnlarge: enlargeFont }"
+              v-html="item.header"
+            ></span>
             <hr class="headerLine">
-            <p class="intro-p">
+            <p 
+              :class="{ introEnlarge: enlargeFont }"
+              class="intro-p">
               {{ item.paragraph }}
             </p>
           </div>
@@ -34,10 +46,18 @@
       <!-- five reasons to be age friendly -->
       <a id="resource-3"></a>
       <div class="five-reasons-to-become-afb paddingSection">
-        <span v-html="fiveReasonsSection.header"></span>
+        <span 
+          :class="{ agefriendlyEnlarge: enlargeFont }"
+          v-html="fiveReasonsSection.header"
+        ></span>
         <hr class="headerLine">
 
-        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.reasonId" v-bind:content="item"/>
+        <ReasonCard 
+          :enlargeFont="enlargeFont"
+          class="content" 
+          v-for="(item) in fiveReasonsSection.reasonContents" 
+          :key="item.reasonId" 
+          :content="item"/>
       </div>
 
       <!-- download button -->
@@ -63,6 +83,7 @@ import DynamicUrlButton from '@/components/DynamicUrlButton.vue'
 
 export default {
   name: 'resources',
+  props: ['enlargeFont'],
   components: {
     ReasonCard,
     DynamicUrlButton
@@ -187,10 +208,6 @@ export default {
   padding-bottom: 3%;
 }
 
-.intro-h >>> h2 {
-  font-size: calc(18px + 1vw);
-}
-
 .intro-p, .content >>> .reasonContent p, .content >>> .reasonContent ul {
   font-family: 'DDINRegular';
   font-size: calc(10px + .8vw);
@@ -200,9 +217,25 @@ export default {
   font-size: calc(18px + 1vw);
 }
 
+.agefriendlyEnlarge >>> .resource-header { /* on enlarge button */
+  font-size: calc(24px + 1vw);
+}
+
 /* intro section */
 .introImage {
   width: 100%;
+}
+
+.intro-h >>> h2 {
+  font-size: calc(18px + 1vw);
+}
+
+.introEnlarge >>> h2 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.introEnlarge.intro-p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 

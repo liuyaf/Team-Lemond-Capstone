@@ -56,66 +56,84 @@
 
     <!-- contact form 7 version -->
     <form method="POST" action="https://agefriendlysea.wpengine.com/wp-json/contact-form-7/v1/contact-forms/215/feedback">
-      <div class="container form-group row">
-        <div class="">
-          <label> First Name (required)<br />
+      <div 
+        class="container form-group row" 
+        :class="{ formEnlarge: enlargeFont }"
+      >
+        <div>
+          <label> First Name*<br />
             <span class="wpcf7-form-control-wrap firstname">
-              <input type="text" name="firstname" value="hello" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" v-model="formData.firstname" required/>
+              <input type="text" name="firstname" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" required/>
             </span> 
           </label>
         </div>
-        <div class="ml-md-3 ml-lg-3">
-          <label> Last Name (required)<br />
+        <div class="ml-sm-4 ml-md-0 ml-lg-4">
+          <label> Last Name*<br />
             <span class="wpcf7-form-control-wrap lastname">
-              <input type="text" name="lastname" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" v-model="formData.lastname" required/>
+              <input type="text" name="lastname" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" required/>
             </span> 
           </label>
         </div>
       </div>
       
-      <div class="form-group row">
+      <div 
+        class="form-group row"
+        :class="{ formEnlarge: enlargeFont }"
+      >
         <div class="col-md-6">
-          <label> Your Email (required)<br />
+          <label> Your Email*<br />
             <span class="wpcf7-form-control-wrap email">
-              <input type="email" name="email" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" v-model="formData.email" required/>
+              <input type="email" name="email" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" required/>
             </span> 
           </label>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div 
+        class="form-group row"
+        :class="{ formEnlarge: enlargeFont }"
+      >
         <div class="col-md-6">
-          <label> Phone (required)<br />
+          <label> Phone*<br />
             <span class="wpcf7-form-control-wrap phone">
-              <input type="tel" name="phone" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control" aria-invalid="false" v-model="formData.phone" required/>
+              <input type="tel" name="phone" placeholder="123-456-7890" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control" aria-invalid="false" required/>
             </span> 
           </label>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div 
+        class="form-group row"
+        :class="{ formEnlarge: enlargeFont }"
+      >
         <div class="col-md-6">
           <label> Company/Organization<br />
             <span class="wpcf7-form-control-wrap orgs">
-              <input type="text" name="orgs" size="40" class="wpcf7-form-control wpcf7-text form-control" aria-invalid="false" v-model="formData.orgs"/>
+              <input type="text" name="orgs" size="40" class="wpcf7-form-control wpcf7-text form-control" aria-invalid="false"/>
             </span> 
           </label>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div 
+        class="form-group row"
+        :class="{ formEnlarge: enlargeFont }"
+      >
         <div class="col-md-12">
           <label> Your Message<br />
             <span class="wpcf7-form-control-wrap yourmessage">
-              <textarea name="yourmessage" cols="100" rows="10" class="wpcf7-form-control wpcf7-textarea form-control" aria-invalid="false" v-model="formData.yourmessage"></textarea>
+              <textarea name="yourmessage" cols="100" rows="10" class="wpcf7-form-control wpcf7-textarea form-control" aria-invalid="false"></textarea>
             </span> 
           </label>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div 
+        class="form-group row"
+        :class="{ formEnlarge: enlargeFont }"
+      >
         <div class="col-12 d-flex">
-          <button name="submit" type="submit" class="wpcf7-form-control wpcf7-submit btn btn-primary">Submit</button>
+          <button :class="{ formEnlarge: enlargeFont }" name="submit" type="submit" class="wpcf7-form-control wpcf7-submit btn btn-primary">Submit</button>
         </div>
       </div>
     </form>
@@ -129,43 +147,21 @@ import axios from 'axios'
 
 export default {
   name: "contact",
+  props: ['enlargeFont'],
   data() {
     return {
       info: null,
-      errors: [],
-      message: null,
-      formData: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        phone: '',
-        orgs: '',
-        yourmessage: '',
-      }
+      errors: []
     }
   },
   mounted() {
-    axios.get("https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/32", this.formData)
+    axios.get("https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/32")
     .then(response => {
       this.info = response.data.content.rendered;
-      console.log(this.info)
     })
     .catch(e => {
       this.errors.push(e);
     })
-  },
-  methods: {
-    submitForm: function() {
-      axios.post("https://agefriendlysea.wpengine.com/wp-json/contact-form-7/v1/contact-forms/215/feedback")
-      .then(function (response) {
-        console.log(response);
-        this.message = response;
-      })
-      .catch(e => {
-        console.log(e)
-        this.errors.push(e);
-      })
-    }
   }
 };
 </script>
@@ -188,5 +184,9 @@ export default {
     padding-left: 0;
     padding-right: 0;
   }
+}
+
+.formEnlarge {
+  font-size: calc(15px + 0.8vw);
 }
 </style>

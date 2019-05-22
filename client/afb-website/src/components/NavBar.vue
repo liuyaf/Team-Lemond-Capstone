@@ -91,30 +91,30 @@
 
     <!-- sub tab for about -->
     <div v-if="$route.name == 'about'" v-show="aboutIsHidden" class="div_top_hypers">
-      <ul class="ul_top_hypers">
+      <ul class="ul_top_hypers" :class="{ subtabEnlarge: enlargeFont }">
         <li>
-          <router-link to="/" v-scroll-to="'#about-1'" class="a_top_hypers">What is Age Friendly ?</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-1', offset: -110 }" class="a_top_hypers">What is Age Friendly ?</router-link>
         </li>
         <li>
-          <router-link to="/" v-scroll-to="'#about-2'" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-2', offset: -50 }" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
         </li>
         <li>
-          <router-link to="/" v-scroll-to="'#about-3'" class="a_top_hypers">How to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-3', offset: -110 }" class="a_top_hypers">How to become Age Friendly</router-link>
         </li>
       </ul>
     </div>
 
     <!-- sub tab for resource -->
     <div v-if="$route.name == 'resources'" v-show="resourceIsHidden" class="div_top_hypers">
-      <ul class="ul_top_hypers">
+      <ul class="ul_top_hypers" :class="{ subtabEnlarge: enlargeFont }">
         <li>
-          <router-link to="/resources" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-1', offset: -100 }" class="a_top_hypers">Resource Guide</router-link>
         </li>
         <li>
-          <router-link to="/resources" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-2', offset: -50 }" class="a_top_hypers">Age Friendly Seattle</router-link>
         </li>
         <li>
-          <router-link to="/resources" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-3', offset: -100 }" class="a_top_hypers">5 reasons to be age-friendly</router-link>
         </li>
       </ul>
     </div>
@@ -264,6 +264,10 @@ nav {
   border: none;
   padding: 0;
   background-color: white;
+}
+
+.subtabEnlarge {
+  font-size: calc(8px + 1vw);
 }
 </style>
 

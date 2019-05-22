@@ -47,9 +47,12 @@
           color="#8e71c7"
           status="text"
           :width="circleSize"
-        >{{correctCount}} / {{totalQ}}</el-progress>
+        >
+          <span :style="{fontSize: '36px'}">{{correctCount}} / {{totalQ}}</span>
+        </el-progress>
       </dir>
     </div>
+
     <el-tabs class="tabs" v-model="activeName" :stretch="true">
       <el-tab-pane
         class="tab-pane"
@@ -200,7 +203,7 @@ export default {
 </script>
 <style scoped>
 .result-container {
-  /* overflow: scroll; */
+  overflow: scroll;
 }
 .top-bar {
   padding-top: 50px;

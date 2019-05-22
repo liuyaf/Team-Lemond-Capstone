@@ -2,12 +2,19 @@
     <div class="col-lg-6 d-flex pl-0">
         <div class="paddingSection testBoxes">
             <!-- header -->
-            <span class="testTextHeaders" v-html="content.headerHTML"></span>
+            <span 
+                :class="{assessmentEnlarge: enlargeFont}" 
+                class="testTextHeaders" 
+                v-html="content.headerHTML"
+            ></span>
             <hr class="testHeaderLine">
             <br>
             
             <!-- paragraph -->
-            <p class="textParagraphs" v-html="content.paragraph"></p>
+            <p 
+                :class="{assessmentEnlarge: enlargeFont}" 
+                class="textParagraphs" v-html="content.paragraph"
+            ></p>
             <br>
             <br>
             
@@ -29,7 +36,7 @@ import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
     name: 'AssessmentCard',
-    props: ['content'],
+    props: ['content', 'enlargeFont'],
     components: {
         DynamicButton
     },
@@ -56,6 +63,14 @@ export default {
 
 .testTextHeaders >>> h4 {
     font-size: calc(18px + 1vw);
+}
+
+.assessmentEnlarge >>> h4 { /* on enlarge button */
+    font-size: calc(30px + 1vw);
+}
+
+.assessmentEnlarge.textParagraphs { /* on enlarge button */
+    font-size: calc(15px + 0.8vw);
 }
 
 @media (max-width: 992px) {
