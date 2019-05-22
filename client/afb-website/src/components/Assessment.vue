@@ -125,6 +125,13 @@
         v-else-if="showOnboard && !skipOnboardNextTime"
         @skipOnboard="setSkipOnboardTimeStamp"
       ></OnboardCard>
+      <ResultMobile
+        v-else-if="isMobile"
+        :Result="result"
+        :Questions="sections.slice(1)"
+        :enlarge="enlargeFont"
+        :generalTips="generalTips"
+      ></ResultMobile>
       <Result
         v-else
         :Result="result"
@@ -145,6 +152,7 @@ import Radiogroup from "./Raidogroup";
 import Result from "./Result";
 import OnboardCard from "./OnboardCard";
 import ResumeTest from "./ResumeTest";
+import ResultMobile from "./ResultMobile";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips"],
@@ -155,7 +163,8 @@ export default {
     Radiogroup,
     Result,
     OnboardCard,
-    ResumeTest
+    ResumeTest,
+    ResultMobile
   },
 
   data() {
@@ -186,6 +195,9 @@ export default {
     };
   },
   computed: {
+    isMobile: function() {
+      return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
+    },
     reachHead: function() {
       return this.currentQuestionNum === 0;
     },
@@ -310,7 +322,7 @@ export default {
             this.currentSectionNum < this.sectionLength - 1 &&
             this.finishCurrentSection
           ) {
-            this.moveToNextSection;
+            this.moveToNextSection();
           }
         }
       }
@@ -428,7 +440,11 @@ export default {
 
 <style scoped>
 .main-container {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* justify-content: space-evenly; */
+  /* align-items: stretch; */
   overflow: scroll;
   position: absolute;
   top: 0;
@@ -508,10 +524,12 @@ export default {
 }
 
 .question-btn {
-  border-color: #409eff;
   width: 40px;
   height: 40px;
   color: #000000;
+}
+.prev-section {
+  align-self: flex-start;
 }
 
 .next-section {
@@ -541,9 +559,11 @@ export default {
 }
 
 .section-control {
+  align-self: flex-end;
   padding-top: 60px;
   width: 100%;
-  position: absolute;
+  /* height: 50px; */
+  /* position: absolute; */
   display: flex;
   justify-content: space-between;
   padding-left: 5%;
@@ -553,6 +573,15 @@ export default {
 @media (min-width: 768px) {
   .section-control {
     bottom: 30px;
+  }
+}
+
+@media (max-width: 414px) {
+  .question-select {
+    padding-top: 40px;
+  }
+  .section-control {
+    padding-top: 20px;
   }
 }
 </style>
