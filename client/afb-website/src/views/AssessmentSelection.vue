@@ -5,9 +5,16 @@
       <div class="intro paddingSection">
         <div class="row">
           <div class="col-sm-12 col-lg-6">
-            <span class="intro-h" v-html="introSection.header"></span>
+            <span 
+              :class="{ introEnlarge: enlargeFont }"
+              class="intro-h" 
+              v-html="introSection.header"
+            ></span>
             <br>
-            <p class="intro-p">{{ introSection.paragraph }}</p>
+            <p 
+              :class="{ introEnlarge: enlargeFont }"
+              class="intro-p"
+              >{{ introSection.paragraph }}</p>
           </div>
 
           <div class="col-sm-12 col-lg-6">
@@ -30,7 +37,8 @@
           <AssessmentCard
             v-for="(item) in howToBecomeAfbSection.assessmentCards"
             :key="item.id"
-            v-bind:content="item"
+            :content="item"
+            :enlargeFont="enlargeFont"
           />
         </div>
       </div>
@@ -50,6 +58,7 @@ import AssessmentCard from "@/components/AssessmentCard.vue";
 
 export default {
   name: "assessmentSelection",
+  props: ['enlargeFont'],
   components: {
     AssessmentCard
   },
@@ -170,6 +179,14 @@ main {
 .intro-p {
   font-family: "DDINRegular";
   font-size: calc(10px + 0.8vw);
+}
+
+.introEnlarge >>> h2 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.introEnlarge.intro-p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 /*Assessment selection section*/

@@ -13,11 +13,21 @@
             <div class="applySticker">
 
                 <!-- header -->
-                <span class="sticker-h" v-html="content.header"></span>
+                <span 
+                    :class="{stickerEnlarge: enlargeFont}" 
+                    class="sticker-h" 
+                    v-html="content.header"
+                >
+                </span>
                 <br>
 
                 <!-- paragraph -->
-                <p class="textParagraphs">{{ content.paragraph }}</p>
+                <p 
+                    :class="{stickerEnlarge: enlargeFont}" 
+                    class="textParagraphs"
+                >
+                    {{ content.paragraph }}
+                </p>
                 <br>
                 <br>
                 <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'https://www.seattle.gov/agefriendly/about/discount-program', isUrl: true }"/>
@@ -37,7 +47,7 @@ import DynamicButton from '@/components/DynamicButton.vue'
 
 export default {
     name: 'ApplyStickerCard',
-    props: ['content'],
+    props: ['content', 'enlargeFont'],
     components: {
         DynamicButton
     },
@@ -64,6 +74,14 @@ export default {
 .textParagraphs {
     font-size: calc(10px + .8vw);
     font-family: 'DDINRegular';
+}
+
+.stickerEnlarge >>> h3 { /* on enlarge button */
+    font-size: calc(30px + 1vw);
+}
+
+.stickerEnlarge.textParagraphs { /* on enlarge button */
+    font-size: calc(15px + .8vw);
 }
 
 .discountContent {

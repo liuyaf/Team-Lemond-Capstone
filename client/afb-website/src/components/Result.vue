@@ -50,6 +50,7 @@
         >{{correctCount}} / {{totalQ}}</el-progress>
       </dir>
     </div>
+
     <el-tabs class="tabs" v-model="activeName" :stretch="true">
       <el-tab-pane
         class="tab-pane"

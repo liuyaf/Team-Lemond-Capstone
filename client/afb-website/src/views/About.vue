@@ -9,10 +9,10 @@
       <div class="container mx-0">
         <div class="mainHeader">
           <div class="col-xl-8 col-lg-9 col-md-11">
-            <span class="intro-h" v-html="introSection.heading"></span>
+            <span :class="{introEnlarge: enlargeFont}" class="intro-h" v-html="introSection.heading"></span>
           </div>
           <div class="col-lg-12 col-md-12 mt-3">
-            <span class="intro-p" v-html="introSection.text"></span>
+            <span :class="{introEnlarge: enlargeFont}" class="intro-p" v-html="introSection.text"></span>
           </div>
           <div class="col-lg-7 col-md-8 mt-3">
             <DynamicButton
@@ -29,8 +29,8 @@
         <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
           <div class="fact-body">
             <hr class="factLine">
-            <div class="fact-h" v-html="item.header"></div>
-            <p class="fact-p">{{ item.text }}</p>
+            <div :class="{factEnlarge: enlargeFont}" class="fact-h" v-html="item.header"></div>
+            <p :class="{factEnlarge: enlargeFont}" class="fact-p">{{ item.text }}</p>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
       <div class="row mx-auto">
         <div class="col-sm-12 col-md-6">
           <div>
-            <div class="missionContent" v-html="missionSection.paragraphs"></div>
+            <div :class="{missionEnlarge: enlargeFont}" class="missionContent" v-html="missionSection.paragraphs"></div>
             <DynamicButton
               class="mb-4"
               v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources', isUrl: false }"
@@ -69,7 +69,8 @@
       <MediaTextCard
         v-for="(item) in fiveReasonsSection"
         :key="item.reasonId"
-        v-bind:content="item"
+        :content="item"
+        :enlargeFont="enlargeFont"
       />
     </div>
 
@@ -77,21 +78,35 @@
     <a id="about-3"></a>
     <div class="how-to-become-afb paddingSection">
       <hr class="testLine">
-      <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
-      <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
+      <h3 
+        :class="{assessmentEnlarge: enlargeFont}" 
+        class="textHeaders"
+      >
+        {{ howToBecomeAfbSection.header[0] }}
+      </h3>
+      <p 
+        :class="{assessmentEnlarge: enlargeFont}" 
+        class="textParagraphs"
+      >
+        {{ howToBecomeAfbSection.header[1] }}
+      </p>
       <br>
       <div class="row mx-auto">
         <AssessmentCard
           v-for="(item) in howToBecomeAfbSection.assessmentCards"
           :key="item.id"
           v-bind:content="item"
+          :enlargeFont="enlargeFont"
         />
       </div>
     </div>
 
     <!-- apply for sticker -->
     <div class="apply-for-sticker paddingSection">
-      <ApplyStickerCard v-bind:content="applyStickerSection"/>
+      <ApplyStickerCard 
+        :content="applyStickerSection"
+        :enlargeFont="enlargeFont"
+      />
     </div>
   </div>
 </template>
@@ -317,9 +332,6 @@ export default {
 
 <style scoped>
 /* general styling for the page */
-.fontSize {
-  font-size: 32px;
-}
 
 .paddingSection {
   padding-left: 5%;
@@ -352,6 +364,14 @@ export default {
 .intro-p >>> p {
   font-family: "Fjalla One";
   font-size: 18px;
+}
+
+.introEnlarge >>> h3 { /* on enlarge button */
+  font-size: 32px;
+}
+
+.introEnlarge >>> p { /* on enlarge button */
+  font-size: 22px;
 }
 
 @media (max-width: 992px) {
@@ -391,7 +411,7 @@ export default {
   margin-left: 0;
 }
 
-.fact-h >>> h3 {
+.fact-h >>> h3 { 
   font-size: calc(18px + 1vw);
 }
 
@@ -405,6 +425,19 @@ export default {
   font-size: calc(10px + 0.8vw);
 }
 
+
+.factEnlarge >>> h3 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.factEnlarge >>> span { /* on enlarge button */
+  font-size: calc(45px + 1vw);
+}
+
+.factEnlarge[data-v-039c5b43] { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
+}
+
 /* mission content */
 .mission {
   position: relative;
@@ -414,6 +447,7 @@ export default {
 .missionImage img {
   display: block; /*remove inline-block spaces*/
   width: 80%; /*make image streatch*/
+  margin-left: auto;
 }
 
 @media (max-width: 1200px) {
@@ -436,6 +470,14 @@ export default {
 .missionContent >>> p {
   font-family: "DDINRegular";
   font-size: calc(10px + 0.8vw);
+}
+
+.missionEnlarge >>> h3 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.missionEnlarge >>> p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 /* five reasons content */
@@ -473,6 +515,14 @@ export default {
 .textParagraphs {
   font-family: "DDINRegular";
   font-size: calc(10px + 0.8vw);
+}
+
+.assessmentEnlarge.textHeaders { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.assessmentEnlarge.textParagraphs { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 /* sticker */

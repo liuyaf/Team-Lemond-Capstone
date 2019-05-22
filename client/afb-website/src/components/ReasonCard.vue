@@ -8,7 +8,11 @@
         
 
         <!-- rest of content -->
-        <div class="reasonContent col-sm-10 col-lg-7" v-html="this.content.content"></div>
+        <div
+            :class="{ reasonEnlarge: enlargeFont }"
+            class="reasonContent col-sm-10 col-lg-7" 
+            v-html="this.content.content">
+        </div>
     </div>
 </template>
 
@@ -22,7 +26,7 @@
 
 export default {
     name: 'ReasonCard',
-    props: ['content'],
+    props: ['content', 'enlargeFont'],
     computed: {
         figureClass: function() {
             return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'col-sm-2 col-lg-5 order-last' : 'col-sm-2 col-lg-5';
@@ -54,6 +58,15 @@ p {
 .reasonContent {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.reasonEnlarge.reasonContent[data-v-556e00b8] >>> h3 { /* on enlarge button */
+    font-size: calc(24px + 1vw);
+}
+
+.reasonEnlarge.reasonContent[data-v-556e00b8] >>> p,
+.reasonEnlarge.reasonContent[data-v-556e00b8] >>> ul { /* on enlarge button */
+    font-size: calc(15px + 1vw);
 }
 </style>
 
