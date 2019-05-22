@@ -30,7 +30,13 @@
   <div v-else>
     <transition>
       <div class="cards-mobile">
-        <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
+        <div class="titleAndTabs">
+          <h3 class="review-side-title-mobile">Review {{sectionName}} Answers</h3>
+          <div class="switch-tab-mobile">
+            <p class="mobile-tips">Tips</p>
+          </div>
+        </div>
+
         <ReviewCard
           v-for="(response, index) in tipsAndResponse"
           :key="index"
@@ -107,8 +113,9 @@ export default {
 .tips-li {
   text-align: left;
 }
-/* .white-space {
-  display: block;
-  margin-bottom: 50px;
-} */
+.mobile-tips {
+  display: inline-block;
+  border-bottom: #000;
+  border: solid;
+}
 </style>

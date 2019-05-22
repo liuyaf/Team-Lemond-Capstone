@@ -440,7 +440,11 @@ export default {
 
 <style scoped>
 .main-container {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* justify-content: space-evenly; */
+  /* align-items: stretch; */
   overflow: scroll;
   position: absolute;
   top: 0;
@@ -520,10 +524,12 @@ export default {
 }
 
 .question-btn {
-  border-color: #409eff;
   width: 40px;
   height: 40px;
   color: #000000;
+}
+.prev-section {
+  align-self: flex-start;
 }
 
 .next-section {
@@ -553,9 +559,11 @@ export default {
 }
 
 .section-control {
+  align-self: flex-end;
   padding-top: 60px;
   width: 100%;
-  position: absolute;
+  /* height: 50px; */
+  /* position: absolute; */
   display: flex;
   justify-content: space-between;
   padding-left: 5%;
@@ -565,6 +573,15 @@ export default {
 @media (min-width: 768px) {
   .section-control {
     bottom: 30px;
+  }
+}
+
+@media (max-width: 414px) {
+  .question-select {
+    padding-top: 40px;
+  }
+  .section-control {
+    padding-top: 20px;
   }
 }
 </style>
