@@ -1,5 +1,6 @@
 <template>
   <div class="contact">
+    <!-- formspree version -->
     <!-- <form method="POST" action="https://formspree.io/muhammadhariz206@gmail.com">
       <div class="form-group row justify-content-center d-flex">
         <div class="col-md-6 justify-content-center">
@@ -53,16 +54,17 @@
       </div>
     </form> -->
 
+    <!-- contact form 7 version -->
     <form method="POST" action="https://agefriendlysea.wpengine.com/wp-json/contact-form-7/v1/contact-forms/215/feedback">
-      <div class="form-group row">
-        <div class="col-md-6">
+      <div class="container form-group row">
+        <div class="">
           <label> First Name (required)<br />
             <span class="wpcf7-form-control-wrap firstname">
               <input type="text" name="firstname" value="hello" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" v-model="formData.firstname" required/>
             </span> 
           </label>
         </div>
-        <div class="col-md-6">
+        <div class="ml-md-3 ml-lg-3">
           <label> Last Name (required)<br />
             <span class="wpcf7-form-control-wrap lastname">
               <input type="text" name="lastname" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" v-model="formData.lastname" required/>

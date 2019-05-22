@@ -1,6 +1,6 @@
 <template>
-    <div class="paddingSection testBoxes col-lg-6 d-flex">
-        <div>
+    <div class="col-lg-6 d-flex pl-0">
+        <div class="paddingSection testBoxes">
             <!-- header -->
             <span class="testTextHeaders" v-html="content.headerHTML"></span>
             <hr class="testHeaderLine">
@@ -56,6 +56,12 @@ export default {
 
 .testTextHeaders >>> h4 {
     font-size: calc(18px + 1vw);
+}
+
+@media (max-width: 992px) {
+    .testBoxes {
+        margin-top: 10px;
+    }
 }
 
 .textParagraphs {

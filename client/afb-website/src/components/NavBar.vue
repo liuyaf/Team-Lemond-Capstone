@@ -34,10 +34,10 @@
       <!-- desktop navbar -->
       <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
         <div id="nav">
-          <router-link class="navSpacing navDisplay" to="/" exact>About</router-link>
-          <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
+          <router-link class="navSpacing navDisplay" to="/" exact v-on:click.native="aboutIsHidden = !aboutIsHidden, resourceIsHidden = false">About</router-link>
+          <router-link class="navSpacing navDisplay" to="/resources" v-on:click.native="resourceIsHidden = !resourceIsHidden, aboutIsHidden = false">Resources</router-link>
           <a
-            href="https://www.seattle.gov/agefriendly/about/discount-program"
+            href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank"
             class="navSpacing navDisplay"
           >Discount Program</a>
           <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
@@ -77,7 +77,7 @@
             <router-link to="/resources">Resources</router-link>
           </li>
           <li class="nav-item">
-            <a href="https://www.seattle.gov/agefriendly/about/discount-program">Discount Program</a>
+            <a href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank">Discount Program</a>
           </li>
           <li class="nav-item">
             <router-link to="/contact-us">Contact Us</router-link>
@@ -90,7 +90,7 @@
     </nav>
 
     <!-- sub tab for about -->
-    <div v-if="$route.name == 'about'" class="div_top_hypers">
+    <div v-if="$route.name == 'about'" v-show="aboutIsHidden" class="div_top_hypers">
       <ul class="ul_top_hypers">
         <li>
           <router-link to="/" v-scroll-to="'#about-1'" class="a_top_hypers">What is Age Friendly ?</router-link>
@@ -105,7 +105,7 @@
     </div>
 
     <!-- sub tab for resource -->
-    <div v-if="$route.name == 'resources'" class="div_top_hypers">
+    <div v-if="$route.name == 'resources'" v-show="resourceIsHidden" class="div_top_hypers">
       <ul class="ul_top_hypers">
         <li>
           <router-link to="/resources" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
@@ -135,12 +135,15 @@ export default {
   name: "NavBar",
   data () {
     return {
-      enlargeFont: false
+      enlargeFont: false,
+      aboutIsHidden: true,
+      resourceIsHidden: false
     }
   },
   methods: {
     toggleFontSize: function() {
       this.enlargeFont = !this.enlargeFont
+      // console.log(this.enlargeFont)
       this.$emit('fontToggled', this.enlargeFont)
     }
   }

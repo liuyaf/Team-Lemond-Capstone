@@ -5,7 +5,6 @@
       <div class="btn-group">
         <el-button type="danger" @click="$emit('startover')">Start Over</el-button>
         <el-button type="success" @click="$emit('resumeTest')">Resume</el-button>
-        <el-button type="success" @click="$emit('del')">del</el-button>
       </div>
     </div>
     <div v-else class="flex-container">
