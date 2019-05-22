@@ -47,7 +47,9 @@
           color="#8e71c7"
           status="text"
           :width="circleSize"
-        >{{correctCount}} / {{totalQ}}</el-progress>
+        >
+          <span :style="{fontSize: '36px'}">{{correctCount}} / {{totalQ}}</span>
+        </el-progress>
       </dir>
     </div>
 
@@ -158,7 +160,7 @@ export default {
 </script>
 <style scoped>
 .result-container {
-  /* overflow: scroll; */
+  overflow: scroll;
 }
 .top-bar {
   padding-top: 50px;
