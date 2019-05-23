@@ -347,7 +347,7 @@ export default {
 
 /* intro content */
 .mainImage {
-  background-position: center;
+  background-position-x: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 600px;
