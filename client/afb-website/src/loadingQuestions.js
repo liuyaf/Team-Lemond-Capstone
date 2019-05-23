@@ -153,11 +153,7 @@ let employerTest = [businessInfo,
             {
                 questionID: 2,
                 type: "radio",
-<<<<<<< HEAD
-                title: "Do you offer transitional work options for retirement-eligible employees such as lateral transfers, or phased retirement?",
-=======
                 title: "Do you offer transitional work options for retirement-eligible employees such as lateral transfers or phased retirement?",
->>>>>>> 8ce979a46841266b305c3c1c805786fcaecd8b05
                 questionContent: {
                     yes: "Great — you recognize the value of your older employees’ wisdom and experience.",
                     no: "Older workers have wisdom and experience that is valuable to your organization. Flexibility is essential for retention."
@@ -242,11 +238,7 @@ let employerTest = [businessInfo,
         }, {
             questionID: 3,
             type: "radio",
-<<<<<<< HEAD
             title: "Do you offer similar benefits to both part- and full-time employees ? ",
-=======
-            title: "Do you offer similar benefits to both part-time and full-time employees ? ",
->>>>>>> 8ce979a46841266b305c3c1c805786fcaecd8b05
             questionContent: {
                 yes: "Glad to hear it! Flexibility is key to retaining the wisdom and experience of older workers. ",
                 no: "Part-time employment can be a beneficial transitional step toward retirement for older workers. "
@@ -466,11 +458,7 @@ let customerGeneralTips = new Map([
             tipsTitle: "Promotion",
             tipsLi: [
                 "Promote products, services, and business features that could be of interest to older adults in printed and web advertisements. ",
-<<<<<<< HEAD
-                "Create inclusive marketing materials. Include older adults in ads featuring customers using your products/ services (if applicable) and make sure your print and web ads reach older adults. ",
-=======
                 "Create inclusive marketing materials. Include older adults in ads featuring customers using your products/services (if applicable) and make sure your print and web ads reach older adults.",
->>>>>>> 8ce979a46841266b305c3c1c805786fcaecd8b05
                 "Place discounts or promoted products for older adult shoppers in places where they will be seen by the right audience. ",
                 "Provide menus/brochures both online and in print if you offer delivery services. Many people don’ t have regular access to a computer. ",
             ]
@@ -490,22 +478,14 @@ let customerGeneralTips = new Map([
             tipsLi: [
                 "Design easy-to-read materials that clearly highlight key information.",
                 "Use simple language in your materials that can be understood by as many people as possible",
-<<<<<<< HEAD
-                "Offer materials in multiple languages — think about what languages are spoken in your neighborhood. After English, top-tier languages in Seattle are Cantonese (written: Traditional Chinese), Korean, Mandarin(written: Simplified Chinese), Somali, Spanish, Tagalog, and Vietnamese."
-=======
                 "Offer materials in multiple languages — think about what languages are spoken in your neighborhood. After English, top-tier languages in Seattle are Cantonese (written: Traditional Chinese), Korean, Mandarin (written: Simplified Chinese), Somali, Tagalog, and Vietnamese."
->>>>>>> 8ce979a46841266b305c3c1c805786fcaecd8b05
             ]
         },
         {
             tipsTitle: "Tips",
             tipsLi: [
                 "Use sans serif type fonts like Helvetica and Calibri, which don’t have small features at the end of their strokes. Serif fonts like Times New Roman have decorative end strokes and can be hard to read in small sizes.",
-<<<<<<< HEAD
                 "Always use a 12-point font or higher when possible. The body of this website is set in 16 - point.",
-=======
-                "Always use a 12-point font or higher when possible.",
->>>>>>> 8ce979a46841266b305c3c1c805786fcaecd8b05
                 "Leave 1-inch margins and space between lines of text.",
                 "Use vivid colors. Avoid light shades like pastels and greys.",
                 "Create a high contrast between text and the background of your materials. Avoid using text and a background of the same/similar color as they tend to fade together when viewed.",
