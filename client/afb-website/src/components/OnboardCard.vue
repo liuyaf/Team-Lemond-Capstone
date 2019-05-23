@@ -80,7 +80,7 @@ export default {
       cards: [
         {
           cardId: 1,
-          headline: "Welcome to the Assessment",
+          headline: "Welcome to the assessment",
           text:
             "There are many age-friendly practices that many business leaders miss. Take our assessment to find out if your business applies age-friendly practices!",
           imgName: "onboard-image-1.svg"
@@ -94,7 +94,7 @@ export default {
         },
         {
           cardId: 3,
-          headline: "After completing the Assessment...",
+          headline: "After completing the assessment...",
           text:
             "After submitting your assessment, you will get a final score, along with relevant age-friendly tips. If you would like to keep your result and tips, be sure to hit the download button on the result page.",
           imgName: "onboard-image-3.svg"
