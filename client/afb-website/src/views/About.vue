@@ -334,6 +334,9 @@ export default {
 
 <style scoped>
 /* general styling for the page */
+#about {
+  margin-top: 80px;
+}
 
 .paddingSection {
   padding-left: 5%;
