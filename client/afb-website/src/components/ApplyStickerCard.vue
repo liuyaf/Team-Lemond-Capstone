@@ -2,7 +2,7 @@
     <div class="discountCard row py-5">
 
         <!-- sticker image -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 d-flex">
+        <div class="discountFrame col-xs-12 col-sm-12 col-md-12 col-lg-4 d-flex">
             <div class="mx-auto">
                 <img class="stickerImage" v-bind:src="content.image">
             </div>
@@ -30,7 +30,7 @@
                 </p>
                 <br>
                 <br>
-                <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'https://www.seattle.gov/agefriendly/about/discount-program', isUrl: true }"/>
+                <DynamicButton :enlargeFont="enlargeFont" v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'https://www.seattle.gov/agefriendly/about/discount-program', isUrl: true }"/>
             </div>
         </div>
     </div>
@@ -87,6 +87,16 @@ export default {
 .discountContent {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.stickerImage {
+    width: 100%;
+}
+
+@media(max-width: 992px) {
+    .discountFrame {
+        margin-bottom: 20px;
+    }
 }
 
 </style>

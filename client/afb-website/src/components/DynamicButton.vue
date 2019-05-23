@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
+        <button :class="{ buttonEnlarge: enlargeFont }" class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
             <!-- if the destination is a route, then it will render a router link -->
             <router-link v-if="!this.buttonInfo.isUrl" v-bind:style="{ color: this.buttonInfo.color }" v-bind:to="this.buttonInfo.destination">
                 {{ this.buttonInfo.text }}
@@ -52,13 +52,27 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default {
     name: 'DynamicButton',
-    props: ['buttonInfo']
+    props: ['buttonInfo', 'enlargeFont'],
+    data () {
+        return {
+            hoverState: false
+        }
+    },
+    methods: {
+        updateHoverState(isHover) {
+            this.hoverState = isHover;
+        }
+    }
 }
 </script>
 
 <style scoped>
     button {
         font-family: "Fjalla One";
+    }
+
+    .buttonEnlarge a {
+        font-size: calc(12px + 0.8vw);
     }
 </style>
 

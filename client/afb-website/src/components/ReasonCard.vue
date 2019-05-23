@@ -10,7 +10,7 @@
         <!-- rest of content -->
         <div
             :class="{ reasonEnlarge: enlargeFont }"
-            class="reasonContent col-sm-10 col-lg-7" 
+            class="reasonContent col-sm-10 col-lg-9" 
             v-html="this.content.content">
         </div>
     </div>
@@ -29,7 +29,7 @@ export default {
     props: ['content', 'enlargeFont'],
     computed: {
         figureClass: function() {
-            return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'col-sm-2 col-lg-5 order-last' : 'col-sm-2 col-lg-5';
+            return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'col-sm-2 col-lg-3 order-last' : 'col-sm-2 col-lg-3';
         },
         imageFloat: function() {
             return this.content.className === "wp-block-media-text alignwide has-media-on-the-right" ? 'right' : '';

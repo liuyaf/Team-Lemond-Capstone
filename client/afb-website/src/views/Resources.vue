@@ -16,7 +16,7 @@
                 :class="{ introEnlarge: enlargeFont }"
                 class="intro-p"
               >{{ introSection.paragraph }}</p>
-              <DynamicUrlButton class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
+              <DynamicUrlButton :enlargeFont="enlargeFont" class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
             </div>
             <div class="col-sm-12 col-lg-6">
                 <img v-bind:src="introSection.image" class="introImage" alt="5 adults sitting and smiling at the camera">
@@ -62,7 +62,7 @@
 
       <!-- download button -->
       <div class="row paddingSection">
-        <DynamicUrlButton class="mb-4 mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
+        <DynamicUrlButton :enlargeFont="enlargeFont" class="mb-4 mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
       </div>
     
   </div>

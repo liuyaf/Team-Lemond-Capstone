@@ -16,6 +16,7 @@
           </div>
           <div class="col-lg-7 col-md-8 mt-3">
             <DynamicButton
+              :enlargeFont="enlargeFont"
               v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection', isUrl: false }"
             />
           </div>
@@ -44,6 +45,7 @@
           <div>
             <div :class="{missionEnlarge: enlargeFont}" class="missionContent" v-html="missionSection.paragraphs"></div>
             <DynamicButton
+              :enlargeFont="enlargeFont"
               class="mb-4"
               v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources', isUrl: false }"
             />

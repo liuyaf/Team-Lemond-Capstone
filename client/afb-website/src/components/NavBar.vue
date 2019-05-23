@@ -33,7 +33,7 @@
 
       <!-- desktop navbar -->
       <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
-        <div id="nav">
+        <div id="nav" :class="{ navbarEnlarge: enlargeFont }">
           <router-link class="navSpacing navDisplay" to="/" exact v-on:click.native="aboutIsHidden = !aboutIsHidden, resourceIsHidden = false">About</router-link>
           <router-link class="navSpacing navDisplay" to="/resources" v-on:click.native="resourceIsHidden = !resourceIsHidden, aboutIsHidden = false">Resources</router-link>
           <a
@@ -266,8 +266,12 @@ nav {
   background-color: white;
 }
 
-.subtabEnlarge {
+.subtabEnlarge { /* on enlarge button */
   font-size: calc(8px + 1vw);
+}
+
+#nav.navbarEnlarge > a { /* on enlarge button */
+  font-size: calc(10px + 1vw);
 }
 </style>
 
