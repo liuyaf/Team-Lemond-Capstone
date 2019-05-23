@@ -19,6 +19,7 @@
     <!-- footer -->
     <Footer
       v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"
+      :enlargeFont="enlargeFont"
     />
 
     <!-- back to top button -->

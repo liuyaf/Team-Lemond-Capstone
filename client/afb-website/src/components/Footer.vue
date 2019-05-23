@@ -101,12 +101,13 @@
           <div>
             <h3
               class="footerTag footerText"
+              :class="{ footerEnlarge: enlargeFont }"
             >Working to make Seattle a great place to grow up and grow old!</h3>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
-          <ul id="leftList">
-            <li id="listHeader" class="footerListText">Local Resources</li>
+          <ul id="leftList" :class="{ footerEnlarge: enlargeFont }">
+            <li id="listHeader" class="footerListText" :class="{ footerEnlarge: enlargeFont }">Local Resources</li>
             <li class="footerListText">
               <a href="http://www.seattle.gov/agefriendly/" target="_blank">Age Friendly Seattle</a>
             </li>
@@ -116,10 +117,10 @@
           </ul>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
-          <ul id="rightList">
-            <li id="listHeader" class="footerListText">Community Partners</li>
+          <ul id="rightList" :class="{ footerEnlarge: enlargeFont }">
+            <li id="listHeader" class="footerListText" :class="{ footerEnlarge: enlargeFont }">Community Partners</li>
             <li class="footerListText">
-              <a data-toggle="modal" data-target="#acknowledgementModal">Acknowledgements</a>
+              <a id="modal-text" data-toggle="modal" data-target="#acknowledgementModal">Acknowledgements</a>
             </li>
             <li class="footerListText">
               <a
@@ -130,7 +131,7 @@
         </div>
       </div>
       <div class="copyrightSection container-fluid row justify-content-center">
-        <p class="copyrightText text-center">
+        <p class="copyrightText text-center" :class="{ footerEnlarge: enlargeFont }">
           © Copyright 2019 City of Seattle
           <br>
           <a href="http://www.seattle.gov/americans-with-disabilities-act" target="_blank">ADA Notice</a> |
@@ -155,11 +156,29 @@
 
 
 export default {
-  name: "Footer"
+  name: "Footer",
+  props: ['enlargeFont']
 };
 </script>
 
 <style scoped>
+#listHeader.footerListText.footerEnlarge { /* on enlarge button */ 
+  font-size: calc(12px + 0.8vw);
+}
+
+#leftList.footerEnlarge > li, /* on enlarge button */ 
+#rightList.footerEnlarge > li {
+  font-size: calc(10px + 0.8vw);
+}
+
+.copyrightText.footerEnlarge { /* on enlarge button */ 
+  font-size: calc(10px + 0.8vw);
+}
+
+.footerTag.footerText.footerEnlarge { /* on enlarge button */ 
+  font-size: calc(10px + 0.8vw);
+}
+
 .modal-content {
   color: black;
 }
@@ -254,6 +273,10 @@ li,
 
 .footerListText {
   font-size: calc(12px + 0.2vw);
+}
+
+#modal-text:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 992px) {

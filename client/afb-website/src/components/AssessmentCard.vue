@@ -19,7 +19,7 @@
             <br>
             
             <!-- DynamicButton component that leads to the 'resources' route -->
-            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route, isUrl: false }"/>
+            <DynamicButton :enlargeFont="enlargeFont" v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route, isUrl: false }"/>
         </div>
     </div>
 </template>
