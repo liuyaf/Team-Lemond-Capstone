@@ -138,6 +138,7 @@
         :Questions="sections.slice(1)"
         :enlarge="enlargeFont"
         :generalTips="generalTips"
+        :testType="testType"
         @retryWithBusInfo="retryWithBusInfo"
       ></Result>
     </transition>
@@ -155,7 +156,7 @@ import ResumeTest from "./ResumeTest";
 import ResultMobile from "./ResultMobile";
 export default {
   name: "assessment",
-  props: ["TOA", "sections", "generalTips"],
+  props: ["TOA", "sections", "generalTips", "testType"],
   components: {
     TermOA,
     Dropdown,
@@ -170,7 +171,6 @@ export default {
   data() {
     return {
       cachedResult: "",
-      testType: "employer",
       hasStoredResult: "",
       name: "customer",
       showOnboard: false,

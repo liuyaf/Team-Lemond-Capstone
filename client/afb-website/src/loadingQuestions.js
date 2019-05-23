@@ -153,7 +153,7 @@ let employerTest = [businessInfo,
             {
                 questionID: 2,
                 type: "radio",
-                title: "Do you offer transitional work options for retirement-eligible employees such as lateral transfers, bridge employment, or phased retirement?",
+                title: "Do you offer transitional work options for retirement-eligible employees such as lateral transfers, or phased retirement?",
                 questionContent: {
                     yes: "Great — you recognize the value of your older employees’ wisdom and experience.",
                     no: "Older workers have wisdom and experience that is valuable to your organization. Flexibility is essential for retention."
@@ -176,7 +176,7 @@ let employerTest = [businessInfo,
         questions: [{
             questionID: 1,
             type: "radio",
-            title: "Do you have training programs to keep employee’ s technical and computer skills current?",
+            title: "Do you have training programs to keep employees' technical and computer skills current?",
             questionContent: {
                 yes: " Glad to hear it! Training keeps the work fresh and new.",
                 no: "Consider how training programs can keep employees at the top of their game. "
@@ -192,7 +192,7 @@ let employerTest = [businessInfo,
         }, {
             questionID: 3,
             type: "radio",
-            title: "Do you have programs to capitalize on the experience of older workers? (e.g. Mentorships, Job rotation, Knowledge transfer training)",
+            title: "Do you have programs to capitalize on the experience of older workers (e.g., mentorships, job rotation, and knowledge transfer training)?",
             questionContent: {
                 yes: "Great — you recognize the value of your older employees’ wisdom and experience. ",
                 no: "Consider how valuable on-the-job experience can be transferred to younger staff."
@@ -238,7 +238,7 @@ let employerTest = [businessInfo,
         }, {
             questionID: 3,
             type: "radio",
-            title: "Do you offer similar benefits to both parttime and full - time employees ? ",
+            title: "Do you offer similar benefits to both part- and full-time employees ? ",
             questionContent: {
                 yes: "Glad to hear it! Flexibility is key to retaining the wisdom and experience of older workers. ",
                 no: "Part-time employment can be a beneficial transitional step toward retirement for older workers. "
@@ -262,7 +262,7 @@ let employerTest = [businessInfo,
         }, {
             questionID: 6,
             type: "radio",
-            title: "Do you provide information or support for employees in a caregiver role ? ",
+            title: "Do you provide information or support for employees in a caregiver role?",
             questionContent: {
                 yes: "Thank you for recognizing that family caregiving responsibilities can cause a lot of stress. ",
                 no: "A little flexibility goes a long way to helping family caregivers manage the stress of caring for anyone with special needs. "
@@ -391,7 +391,7 @@ let customerTest = [businessInfo,
         }, {
             questionID: 3,
             type: "radio",
-            title: "Are your doors easy to open and wide enough for a large wheelchair to pass through(36” + )? ",
+            title: "Are your doors easy to open and wide enough for a large wheelchair to pass through(36”+)? ",
             questionContent: {
                 yes: "Thank you for making it easy for people to get in the door!",
                 no: "It’s hard to do business with someone who cannot get through your door.It’ s also the law that doorways have to be accessible. "
@@ -458,7 +458,7 @@ let customerGeneralTips = new Map([
             tipsTitle: "Promotion",
             tipsLi: [
                 "Promote products, services, and business features that could be of interest to older adults in printed and web advertisements. ",
-                "Create inclusive marketing materials. Include older adults in ads featuring customers using your products/ services(if applicable) and make sure your print and web ads reach older adults. ",
+                "Create inclusive marketing materials. Include older adults in ads featuring customers using your products/ services (if applicable) and make sure your print and web ads reach older adults. ",
                 "Place discounts or promoted products for older adult shoppers in places where they will be seen by the right audience. ",
                 "Provide menus/brochures both online and in print if you offer delivery services. Many people don’ t have regular access to a computer. ",
             ]
@@ -478,14 +478,14 @@ let customerGeneralTips = new Map([
             tipsLi: [
                 "Design easy-to-read materials that clearly highlight key information.",
                 "Use simple language in your materials that can be understood by as many people as possible",
-                "Offer materials in multiple languages — think about what languages are spoken in your neighborhood. After English, the most common language in Seattle is Spanish."
+                "Offer materials in multiple languages — think about what languages are spoken in your neighborhood. After English, top-tier languages in Seattle are Cantonese (written: Traditional Chinese), Korean, Mandarin(written: Simplified Chinese), Somali, Spanish, Tagalog, and Vietnamese."
             ]
         },
         {
             tipsTitle: "Tips",
             tipsLi: [
                 "Use sans serif type fonts like Helvetica and Calibri, which don’t have small features at the end of their strokes. Serif fonts like Times New Roman have decorative end strokes and can be hard to read in small sizes.",
-                "Always use a 12-point font or higher when possible. The body of this document is set in 12 - point Calibri. ",
+                "Always use a 12-point font or higher when possible. The body of this website is set in 16 - point.",
                 "Leave 1-inch margins and space between lines of text.",
                 "Use vivid colors. Avoid light shades like pastels and greys.",
                 "Create a high contrast between text and the background of your materials. Avoid using text and a background of the same/similar color as they tend to fade together when viewed.",

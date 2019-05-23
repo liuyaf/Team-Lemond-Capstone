@@ -10,17 +10,25 @@
         src="@/assets/font-change-button.svg"
         class="navBtnImg ml-2 svgButton navDisplay font-change-icon-mobile"
         alt="Assessment font change button"
+        @click="enlarge=!enlarge"
       >
     </div>
     <div class="score-section">
       <div class="text-section">
-        <h3>asd</h3>
-        <p>asdasd</p>
-        <p>asdasdasd</p>
+        <h3
+          :style="enlarge? {fontSize: '36px'}:{}"
+        >Here’s your Age-Friendly {{testType=='employer'? "Employer":"Customer Service"}} score</h3>
+        <p :style="enlarge? {fontSize: '22px'}:{}">Congratulations– you completed the assessment!</p>
+        <p
+          :style="enlarge? {fontSize: '22px'}:{}"
+        >Taking the time to complete this assessment shows your commitment to {{testType=="employer"?"being an age-friendly employer":"providing age-friendly customer service"}}.</p>
+        <p
+          :style="enlarge? {fontSize: '22px'}:{}"
+        >Please take a moment to review your results and get tips to make your business even more age-friendly.</p>
       </div>
-      <dir class="score-circle">
-        <el-progress type="circle" :percentage="80" color="#8e71c7" status="text">123/ 456</el-progress>
-      </dir>
+      <el-progress type="circle" :percentage="correctPercent" color="#cc3e16" status="text">
+        <span :style="{fontSize: '28px'}">{{correctCount}} / {{totalQ}}</span>
+      </el-progress>
     </div>
     <el-tabs v-model="activeName" class="tabs" :stretch="true">
       <el-tab-pane
@@ -35,23 +43,34 @@
           :sectionTitle="section.sectionTitle"
           :enlarge="enlarge"
           :generalTips="findTipsFromMap(section.sectionTitle)"
+          :color="color[index]"
         ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import ResultDetail from "./ResultDetail";
-
+import Footer from "./Footer";
 export default {
   name: "resultmobile",
   props: ["Result", "Questions", "generalTips"],
   components: {
-    ResultDetail
+    ResultDetail,
+    Footer
   },
   data() {
     return {
+      color: [
+        "#FFF4F1",
+        "#f5f7fe",
+        "#F1EBF3",
+        "rgba(95,69,133,0.12)",
+        "#E7E6F4",
+        "#F4E8F2"
+      ],
       testType: "Employer",
       activeName: "n0",
       totalQ: 0,
@@ -130,6 +149,13 @@ export default {
   width: 230px;
 }
 
+.text-section {
+  text-align: center;
+  font-family: "DDINRegular";
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .top-bar-mobile {
   padding-top: 15px;
   padding-left: 20px;
@@ -148,5 +174,12 @@ export default {
 .tabs {
   width: 95%;
   margin: auto;
+}
+
+.score-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

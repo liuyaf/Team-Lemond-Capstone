@@ -1,17 +1,5 @@
 <template>
   <div class="result-container">
-    <!-- <div class="top-bar-mobile" v-if="isMobile">
-      <div class="logo-bar">
-        <router-link to="/">
-          <img class="logo-image" src="../assets/AgeFriendlyBusinessLogo2.svg" alt="logo">
-        </router-link>
-      </div>
-      <img
-        src="@/assets/font-change-button.svg"
-        class="navBtnImg ml-2 svgButton navDisplay font-change-icon-mobile"
-        alt="Assessment font change button"
-      >
-    </div>-->
     <div class="top-bar">
       <div class="logo-bar">
         <router-link to="/">
@@ -30,9 +18,16 @@
     <div class="score-section">
       <div class="left-section">
         <div class="text-area">
-          <h1 :style="enlarge? {fontSize:'42px'}:{}">Here's your {{testType}} score</h1>
-          <h2 :style="enlarge? {fontSize:'38px'}:{}">{{summary}}</h2>
-          <h2 :style="enlarge? {fontSize:'38px'}:{}">Congratulations! You finished the test!</h2>
+          <h1
+            :style="enlarge? {fontSize:'42px'}:{}"
+          >Here’s your Age-Friendly {{testType=='employer'? "Employer":"Customer Service"}} score</h1>
+          <h4 :style="enlarge? {fontSize:'38px'}:{}">Congratulations– you completed the assessment!</h4>
+          <h4
+            :style="enlarge? {fontSize:'38px'}:{}"
+          >Taking the time to complete this assessment shows your commitment to {{testType=="employer"?"being an age-friendly employer":"providing age-friendly customer service"}}.</h4>
+          <h4
+            :style="enlarge? {fontSize: '38px'}:{}"
+          >Please take a moment to review your results and get tips to make your business even more age-friendly.</h4>
         </div>
         <div class="btn-section">
           <el-button size="mini" @click="$emit('retryWithBusInfo', Result[0])">retry</el-button>
@@ -44,7 +39,7 @@
         <el-progress
           type="circle"
           :percentage="correctPercent"
-          color="#8e71c7"
+          color="#cc3e16"
           status="text"
           :width="circleSize"
         >
@@ -66,6 +61,7 @@
           :sectionTitle="section.sectionTitle"
           :enlarge="enlarge"
           :generalTips="findTipsFromMap(section.sectionTitle)"
+          :color="color[index]"
         ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
@@ -86,6 +82,14 @@ export default {
   props: ["Result", "Questions", "generalTips"],
   data() {
     return {
+      color: [
+        "#FFF4F1",
+        "#f5f7fe",
+        "#F1EBF3",
+        "rgba(95,69,133,0.12)",
+        "#E7E6F4",
+        "#F4E8F2"
+      ],
       testType: "Employer",
       summary: "Your business is very age-friendly!",
       activeName: "n0",
@@ -156,7 +160,7 @@ export default {
     },
     exportPdf() {
       var doc = new jsPDF({
-        orientation: 'landscape'
+        orientation: "landscape"
       });
 
       var body = [];
@@ -167,33 +171,41 @@ export default {
           QApair.question = this.questions[i].questions[j].title;
           QApair.tips = this.questions[i].questions[j].questionContent;
           QApair.response = this.questionResponse[i][j];
-          if(QApair.response == 'yes') {
-            body.push({question: QApair.question, tips: QApair.tips.yes, response: QApair.response});
+          if (QApair.response == "yes") {
+            body.push({
+              question: QApair.question,
+              tips: QApair.tips.yes,
+              response: QApair.response
+            });
           } else {
-            body.push({question: QApair.question, tips: QApair.tips.no, response: QApair.response});
+            body.push({
+              question: QApair.question,
+              tips: QApair.tips.no,
+              response: QApair.response
+            });
           }
         }
       }
 
       console.log(body);
 
-      doc.text('Your Results:',10,10);
+      doc.text("Your Results:", 10, 10);
 
       doc.autoTable({
         body: body,
         columns: [
           { header: "Response", dataKey: "response" },
           { header: "Question", dataKey: "question" },
-          { header: "Tips", dataKey: "tips"}
+          { header: "Tips", dataKey: "tips" }
         ],
         columnStyles: {
-          response: {cellWidth: 5},
-          question: {cellWidth: 40},
-          tips: {cellWidth:40}
+          response: { cellWidth: 5 },
+          question: { cellWidth: 40 },
+          tips: { cellWidth: 40 }
         },
-        theme: 'grid'
+        theme: "grid"
       });
-      doc.save('table.pdf');
+      doc.save("table.pdf");
     }
   },
   mounted: function() {

@@ -42,7 +42,8 @@ export default new Router({
       props: {
         TOA: questions.TOA,
         sections: questions.customerTest,
-        generalTips: questions.customerGeneralTips
+        generalTips: questions.customerGeneralTips,
+        testType: "customer"
       }
     },
     {
@@ -52,7 +53,8 @@ export default new Router({
       props: {
         TOA: questions.TOA,
         sections: questions.employerTest,
-        generalTips: questions.customerGeneralTips
+        generalTips: questions.customerGeneralTips,
+        testType: "employer"
       }
 
     },
