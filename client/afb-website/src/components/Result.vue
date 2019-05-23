@@ -36,7 +36,7 @@
         </div>
         <div class="btn-section">
           <el-button size="mini" @click="$emit('retryWithBusInfo', Result[0])">retry</el-button>
-          <el-button size="mini">download tips</el-button>
+          <el-button size="mini" @click="exportPdf">download tips</el-button>
         </div>
       </div>
 
@@ -75,6 +75,8 @@
 <script>
 import ResultDetail from "./ResultDetail";
 import Footer from "./Footer";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 export default {
   name: "result",
   components: {
@@ -151,6 +153,47 @@ export default {
     },
     findTipsFromMap: function(key) {
       return this.generalTips.get(key);
+    },
+    exportPdf() {
+      var doc = new jsPDF({
+        orientation: 'landscape'
+      });
+
+      var body = [];
+
+      for (let i = 0; i < this.questionResponse.length; i++) {
+        for (let j = 0; j < this.questionResponse[i].length; j++) {
+          let QApair = {};
+          QApair.question = this.questions[i].questions[j].title;
+          QApair.tips = this.questions[i].questions[j].questionContent;
+          QApair.response = this.questionResponse[i][j];
+          if(QApair.response == 'yes') {
+            body.push({question: QApair.question, tips: QApair.tips.yes, response: QApair.response});
+          } else {
+            body.push({question: QApair.question, tips: QApair.tips.no, response: QApair.response});
+          }
+        }
+      }
+
+      console.log(body);
+
+      doc.text('Your Results:',10,10);
+
+      doc.autoTable({
+        body: body,
+        columns: [
+          { header: "Response", dataKey: "response" },
+          { header: "Question", dataKey: "question" },
+          { header: "Tips", dataKey: "tips"}
+        ],
+        columnStyles: {
+          response: {cellWidth: 5},
+          question: {cellWidth: 40},
+          tips: {cellWidth:40}
+        },
+        theme: 'grid'
+      });
+      doc.save('table.pdf');
     }
   },
   mounted: function() {

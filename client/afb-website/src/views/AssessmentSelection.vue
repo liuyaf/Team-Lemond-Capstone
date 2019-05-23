@@ -21,7 +21,7 @@
             <img
               v-bind:src="introSection.image"
               class="introImage"
-              alt="Two older adults sitting around a table high fiving each other"
+              alt="6 adults sitting around a table having a meeting"
             >
           </div>
         </div>
