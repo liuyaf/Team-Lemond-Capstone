@@ -363,7 +363,7 @@ let customerTest = [businessInfo,
         }, {
             questionID: 2,
             type: "radio",
-            title: "If music maintained at a level that allows for easy conversation?",
+            title: "Is music maintained at a level that allows for easy conversation?",
             questionContent: {
                 yes: "Excellent—everyone is more comfortable when they can communicate with ease. ",
                 no: "Many people avoid businesses that play loud music or have poor acoustical buffers."

@@ -94,9 +94,9 @@
         :class="{ formEnlarge: enlargeFont }"
       >
         <div class="col-md-6">
-          <label> Phone*<br />
+          <label> Phone<br />
             <span class="wpcf7-form-control-wrap phone">
-              <input type="tel" name="phone" placeholder="123-456-7890" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control" aria-invalid="false" required/>
+              <input type="tel" name="phone" placeholder="123-456-7890" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control" aria-invalid="false"/>
             </span> 
           </label>
         </div>
