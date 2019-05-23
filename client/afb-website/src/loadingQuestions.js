@@ -238,7 +238,7 @@ let employerTest = [businessInfo,
         }, {
             questionID: 3,
             type: "radio",
-            title: "Do you offer similar benefits to both part-time and full-time employees ? ",
+            title: "Do you offer similar benefits to both part- and full-time employees ? ",
             questionContent: {
                 yes: "Glad to hear it! Flexibility is key to retaining the wisdom and experience of older workers. ",
                 no: "Part-time employment can be a beneficial transitional step toward retirement for older workers. "
@@ -262,7 +262,7 @@ let employerTest = [businessInfo,
         }, {
             questionID: 6,
             type: "radio",
-            title: "Do you provide information or support for employees in a caregiver role ? ",
+            title: "Do you provide information or support for employees in a caregiver role?",
             questionContent: {
                 yes: "Thank you for recognizing that family caregiving responsibilities can cause a lot of stress. ",
                 no: "A little flexibility goes a long way to helping family caregivers manage the stress of caring for anyone with special needs. "
@@ -391,7 +391,7 @@ let customerTest = [businessInfo,
         }, {
             questionID: 3,
             type: "radio",
-            title: "Are your doors easy to open and wide enough for a large wheelchair to pass through(36” + )? ",
+            title: "Are your doors easy to open and wide enough for a large wheelchair to pass through(36”+)? ",
             questionContent: {
                 yes: "Thank you for making it easy for people to get in the door!",
                 no: "It’s hard to do business with someone who cannot get through your door.It’ s also the law that doorways have to be accessible. "
@@ -485,7 +485,7 @@ let customerGeneralTips = new Map([
             tipsTitle: "Tips",
             tipsLi: [
                 "Use sans serif type fonts like Helvetica and Calibri, which don’t have small features at the end of their strokes. Serif fonts like Times New Roman have decorative end strokes and can be hard to read in small sizes.",
-                "Always use a 12-point font or higher when possible.",
+                "Always use a 12-point font or higher when possible. The body of this website is set in 16 - point.",
                 "Leave 1-inch margins and space between lines of text.",
                 "Use vivid colors. Avoid light shades like pastels and greys.",
                 "Create a high contrast between text and the background of your materials. Avoid using text and a background of the same/similar color as they tend to fade together when viewed.",

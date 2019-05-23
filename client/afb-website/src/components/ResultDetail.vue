@@ -1,6 +1,6 @@
 <template>
   <div class="result-container" v-if="!isMobile">
-    <div class="review-side">
+    <div class="review-side" :style="{backgroundColor:color}">
       <h1 class="review-side-title">Review {{sectionName}} Answers</h1>
       <ReviewCard
         v-for="(response, index) in tipsAndResponse"
@@ -27,10 +27,19 @@
   </div>
   <div v-else>
     <transition name="slide-fade" mode="out-in">
-      <div class="cards-mobile" v-if="!displayMobileTips" key="card">
+      <div
+        class="cards-mobile"
+        :style="{backgroundColor:color}"
+        v-if="!displayMobileTips"
+        key="card"
+      >
         <div class="titleAndTabs">
           <h3 class="review-side-title-mobile">Review {{sectionName}} Answers</h3>
-          <div class="switch-tab-mobile" @click="mobileSwitchToTips">
+          <div
+            class="switch-tab-mobile"
+            @click="mobileSwitchToTips"
+            :style="{display: 'flex', alignItems: 'baseline'}"
+          >
             <p class="mobile-tips">Tips</p>
             <i class="el-icon-arrow-right"></i>
           </div>
@@ -44,15 +53,28 @@
         ></ReviewCard>
         <br>
       </div>
-      <div v-else key="tips">
-        <div @click="mobileSwitchToTips">click bait</div>
-        <div class="tips">
-          <h1
-            style="{fontSize: 48px}"
-            :style="enlarge? {fontSize:'56px'}:{}"
-          >Tips for {{sectionName}}</h1>
-          <div class="tips-detail" v-for="tip in generalTips" :key="tip.tipsTitle">
-            <h3 class="tips-title" :style="enlarge? {fontSize:'32px'}:{}">{{tip.tipsTitle}}</h3>
+      <div v-else key="tips" class="tips-mobile">
+        <div class="tips-container-mobile">
+          <div class="tips-title-mobile">
+            <div
+              @click="mobileSwitchToTips"
+              class="back-to-cards-mobile"
+              :style="{paddingRight: '20px'}"
+            >
+              <i class="el-icon-arrow-left"></i>
+              <p class="mobile-tips">Back</p>
+            </div>
+            <p
+              class="mobile-tips-section-name"
+              :style="enlarge? {fontSize:'48px'}:{}"
+            >Tips for {{sectionName}}</p>
+          </div>
+
+          <div class="tips-detail-mobile" v-for="tip in generalTips" :key="tip.tipsTitle">
+            <h3
+              class="tips-subtitle-mobile"
+              :style="enlarge? {fontSize:'32px'}:{}"
+            >{{tip.tipsTitle}}</h3>
             <ul>
               <li
                 class="tips-li"
@@ -107,15 +129,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f5f7fe;
   min-height: 1000px;
 }
 
 .cards-mobile {
-  background: #f5f7fe;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "DDINRegular";
 }
 
 .review-side-title {
@@ -150,7 +171,7 @@ export default {
   width: 95%;
 }
 .review-side-title-mobile {
-  font-size: 24px;
+  font-size: 30px;
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease;
@@ -162,5 +183,28 @@ export default {
 /* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+.tips-mobile {
+  font-family: "DDINRegular";
+}
+
+.mobile-tips-section-name {
+  font-size: 30px;
+}
+
+.tips-title-mobile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.tips-container-mobile {
+  padding-left: 0;
+}
+
+.tips-subtitle-mobile {
+  font-size: 24px;
+}
+.switch-tab-mobile {
+  padding-left: 10px;
 }
 </style>

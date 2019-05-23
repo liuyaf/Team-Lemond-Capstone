@@ -4,7 +4,6 @@
     class="card"
     :style="{ 'background-image': 'url(' + require(`@/assets/onboard-background.svg`) + ')'}"
   >
-
     <!-- a skip button that goes straight tot he assessment -->
     <span class="skip">
       <el-button size="medium" @click="$emit('skipOnboard')">Skip</el-button>
@@ -25,7 +24,6 @@
 
     <!-- onboard navigation -->
     <div class="bottom-control">
-      
       <!-- the dot indicators -->
       <div class="row">
         <ul class="indicator pl-0 mx-auto">

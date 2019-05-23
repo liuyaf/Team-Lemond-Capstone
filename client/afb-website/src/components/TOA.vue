@@ -57,7 +57,7 @@ h3 {
 }
 
 .confirm-text {
-  padding-left: 10px;
+  padding-left: 5px;
   margin: 0;
 }
 </style>
