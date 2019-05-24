@@ -133,7 +133,8 @@
         :class="{ formEnlarge: enlargeFont }"
       >
         <div class="col-12 d-flex">
-          <button :class="{ formEnlarge: enlargeFont }" name="submit" type="submit" class="wpcf7-form-control wpcf7-submit btn btn-primary">Submit</button>
+          <!-- <button :class="{ formEnlarge: enlargeFont }" name="submit" type="submit" class="wpcf7-form-control wpcf7-submit btn btn-primary">Submit</button> -->
+          <input type="submit" value="Send" class="wpcf7-form-control wpcf7-submit form-control" />
         </div>
       </div>
     </form>
@@ -158,6 +159,7 @@ export default {
     axios.get("https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/32")
     .then(response => {
       this.info = response.data.content.rendered;
+      console.log(this.info)
     })
     .catch(e => {
       this.errors.push(e);
