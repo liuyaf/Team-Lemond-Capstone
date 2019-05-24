@@ -26,7 +26,7 @@
                   <br>
                   <br>We also recognize the importance of feedback from ordinary visitors to our site. We invite you
                   to give us suggestions and feedback based on your experience visiting our site. E-mail
-                  <a href=mailto:agefriendly@seattle.gov>agefriendly@seattle.gov</a> with specific feedback about:
+                  <a href="mailto:agefriendly@seattle.gov?subject=Inquiry From goagefriendly.org">agefriendly@seattle.gov</a> with specific feedback about:
                 </p>
                 <br>
                 <ul>
