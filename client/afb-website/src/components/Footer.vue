@@ -26,10 +26,9 @@
                   <br>
                   <br>We also recognize the importance of feedback from ordinary visitors to our site. We invite you
                   to give us suggestions and feedback based on your experience visiting our site. E-mail
-                  agefriendly@seattle.gov with specific feedback about:
+                  <a href=mailto:agefriendly@seattle.gov>agefriendly@seattle.gov</a> with specific feedback about:
                 </p>
                 <br>
-
                 <ul>
                   <li>The page, content, or function you would like us to check.</li>
                   <li>The difficulty you are experiencing.</li>
@@ -41,8 +40,8 @@
                   To access aging or disability services in the greater Seattle area, visit
                   <a
                     href="https://www.communitylivingconnections.org"
-                  >Community Living</a>
-                  Connections or call 1-844-348-5464. Elsewhere in the United States, visit
+                  >Community Living Connections </a>
+                   or call 1-844-348-5464. Elsewhere in the United States, visit
                   <a
                     href="https://eldercare.acl.gov/Public/Index.aspx"
                   >Eldercare Locator</a> or
