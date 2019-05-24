@@ -174,6 +174,10 @@
         </div>
       </div>
 
+      <transition name="slide-fade" mode="out-in">
+        <p v-if="submitted">Thank you. Your message has been received.</p>
+      </transition>
+
       <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
         <div class="col-12 d-flex">
           <button
@@ -204,7 +208,8 @@ export default {
       emailAddr: "",
       phone: "",
       company: "",
-      msgBody: ""
+      msgBody: "",
+      submitted: false
     };
   },
   mounted() {},
@@ -225,9 +230,15 @@ export default {
         data: formInfo,
         config: { headers: { "Content-Type": "multipart/form-data" } }
       })
-        .then(function(response) {
+        .then(function() {
           //handle success
-          console.log(response);
+          this.submitted = true;
+          this.fName = "";
+          this.lName = "";
+          this.emailAddr = "";
+          this.phone = "";
+          this.company = "";
+          this.msgBody = "";
         })
         .catch(function(response) {
           //handle error
@@ -260,5 +271,17 @@ export default {
 
 .formEnlarge {
   font-size: calc(15px + 0.8vw);
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

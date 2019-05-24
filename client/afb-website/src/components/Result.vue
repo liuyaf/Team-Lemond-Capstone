@@ -30,8 +30,8 @@
           >Please take a moment to review your results and get tips to make your business even more age-friendly.</h4>
         </div>
         <div class="btn-section">
-          <el-button size="mini" @click="$emit('retryWithBusInfo', Result[0])">retry</el-button>
-          <el-button size="mini" @click="exportPdf">download tips</el-button>
+          <el-button @click="$emit('retryWithBusInfo', Result[0])" type="primary" plain>retry</el-button>
+          <el-button @click="exportPdf" type="primary" plain>download tips</el-button>
         </div>
       </div>
 
