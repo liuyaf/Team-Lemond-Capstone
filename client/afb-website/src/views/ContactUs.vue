@@ -204,9 +204,9 @@ export default {
     return {
       info: null,
       errors: [],
-      fName: "hi",
-      lName: "hi",
-      emailAddr: "hi@hi.com",
+      fName: "",
+      lName: "",
+      emailAddr: "",
       phone: "",
       company: "",
       msgBody: ""
