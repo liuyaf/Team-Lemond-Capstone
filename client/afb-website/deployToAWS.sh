@@ -10,3 +10,12 @@ docker run -d --name test -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencry
 
 exit
 EOF
+
+# ssh -i ~/.ssh/afbIlluminage.pem ec2-user@ec2-3-15-66-213.us-east-2.compute.amazonaws.com 'bash -s' <<EOF
+# docker rm -f afbclient
+# docker pull liuyaf/afb-website
+
+# docker run -d --name test -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/letsencrypt:ro liuyaf/afb-website
+
+# exit
+# EOF

@@ -1,0 +1,19 @@
+version: "1"
+services:
+  app:
+    image: liuyaf/afbserver
+    container_name: afbserver
+    restart: always
+    build: .
+    ports:
+      - "443:5100"
+    # links:
+    #   - mongodb
+  # mongo:
+  #   container_name: mongodb
+  #   imamge: mongo
+  #   ports:
+  #     - '27017:27017'
+# networks:
+#   default:
+#     driver: messages
