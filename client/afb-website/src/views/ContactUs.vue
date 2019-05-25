@@ -174,6 +174,11 @@
         </div>
       </div>
 
+      <transition name="slide-fade" mode="out-in">
+        <p v-if="submitted">{{ success }}</p>
+        <p v-if="errorSubmit">{{ failed }}</p>
+      </transition>
+
       <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
         <div class="col-12 d-flex">
           <button
@@ -183,10 +188,6 @@
             class="wpcf7-form-control wpcf7-submit btn btn-primary"
           >Submit</button>
         </div>
-      </div>
-
-      <div>
-        
       </div>
     </form>
   </div>
@@ -209,7 +210,10 @@ export default {
       phone: "",
       company: "",
       msgBody: "",
-      submittedMsg: null
+      submitted: false,
+      errorSubmit: false,
+      success: null,
+      failed: null
     };
   },
   mounted() {},
@@ -222,7 +226,7 @@ export default {
       formInfo.set("phone", this.phone);
       formInfo.set("orgs", this.company);
       formInfo.set("yourmessage", this.msgBody);
-      // console.log(formInfo);
+      
       axios({
         method: "post",
         url:
@@ -230,14 +234,22 @@ export default {
         data: formInfo,
         config: { headers: { "Content-Type": "multipart/form-data" } }
       })
-        .then(function(response) {
-          //handle success
-          console.log(response);
-        })
-        .catch(function(response) {
-          //handle error
-          console.log(response);
-        });
+      .then(response => {
+        //handle success
+        this.submitted = true
+        this.success = response.data.message
+        this.fName = "";
+        this.lName = "";
+        this.emailAddr = "";
+        this.phone = "";
+        this.company = "";
+        this.msgBody = "";
+      })
+      .catch(error => {
+        //handle error
+        this.errorSubmit = true
+        this.failed = error.data.message
+      });
     }
   }
 };
@@ -265,5 +277,17 @@ export default {
 
 .formEnlarge {
   font-size: calc(15px + 0.8vw);
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

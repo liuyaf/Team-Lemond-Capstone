@@ -15,8 +15,16 @@
           >
         </router-link>
 
-        <!-- hamburger menu button -->
+        <!-- font enlarge and hamburger menu button -->
         <div class="hamburgerMenu justify-content-end pr-2">
+          <button class="navbar-toggler"  v-on:click="toggleFontSize">
+            <img
+              src="@/assets/font-change-button.svg"
+              class="svgButton"
+              alt="Enlarge font button"
+            >
+          </button>
+
           <button
             class="navbar-toggler"
             type="button"
@@ -51,7 +59,7 @@
             <img
               src="@/assets/font-change-button.svg"
               class="navBtnImg ml-2 svgButton navDisplay"
-              alt="Assessment test button"
+              alt="Font enlarge button"
             >
           </button>
           
@@ -272,6 +280,21 @@ nav {
 
 #nav.navbarEnlarge > a { /* on enlarge button */
   font-size: calc(10px + 1vw);
+}
+
+/* for mobile screen width */
+@media (max-width: 400px) {
+  .navbar-toggler img {
+    width: 30px;
+  }
+
+  .navbar-toggler {
+    padding: 12px 8px;
+  }
+
+  #phoneDisplay {
+    padding-left: 0;
+  }
 }
 </style>
 
