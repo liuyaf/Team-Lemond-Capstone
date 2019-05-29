@@ -225,7 +225,7 @@ export default {
       });
       doc.save(
         this.testType == "employer"
-          ? "Employer"
+          ? "Employer" + "_Results.pdf"
           : "Customer_Service" + "_Results.pdf"
       );
     }
