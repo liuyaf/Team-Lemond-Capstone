@@ -63,7 +63,7 @@
             >
           </button>
           
-          <button class="take-assessment">
+          <button class="take-assessment" @click="gotosite('/assessment-selection')">
             <router-link class="navSpacing navDisplay" to="/assessment-selection">
               <img
                 src="@/assets/navbar-assessment-button.svg"
@@ -153,6 +153,9 @@ export default {
       this.enlargeFont = !this.enlargeFont
       // console.log(this.enlargeFont)
       this.$emit('fontToggled', this.enlargeFont)
+    },
+    gotosite(producturl){
+      this.$router.push(producturl);      
     }
   }
 };

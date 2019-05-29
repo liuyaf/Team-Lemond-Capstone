@@ -1,9 +1,10 @@
 <template>
     <div>
-        <button :class="{ buttonEnlarge: enlargeFont }" class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
+        <button :class="{ buttonEnlarge: enlargeFont }" class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }" @click="gotosite(assignDestination,isExternalUrl)">
             <!-- if the destination is a route, then it will render a router link -->
-            <router-link v-if="!this.buttonInfo.isUrl" v-bind:style="{ color: this.buttonInfo.color }" v-bind:to="this.buttonInfo.destination">
+            <router-link v-if="!this.buttonInfo.isUrl" v-bind:style="{ color: this.buttonInfo.color }" :to="this.buttonInfo.destination">
                 {{ this.buttonInfo.text }}
+                
 
                 <!-- svg for the right arrow -->
                 <svg v-bind:style="{ width: '40px', height: '30px', padding: '0' }" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -15,7 +16,7 @@
             </router-link>
 
             <!-- if destination is a url, then it will render an a tag with href to the url -->
-            <a v-if="this.buttonInfo.isUrl" v-bind:style="{ color: this.buttonInfo.color }" v-bind:href="this.buttonInfo.destination">
+            <a v-if="this.buttonInfo.isUrl" v-bind:style="{ color: this.buttonInfo.color }" :href="this.buttonInfo.destination">
                 {{ this.buttonInfo.text }}
 
                 <!-- svg for the right arrow -->
@@ -61,6 +62,22 @@ export default {
     methods: {
         updateHoverState(isHover) {
             this.hoverState = isHover;
+        },
+        gotosite(producturl,isExternalUrl){
+            if (isExternalUrl) {
+                location.href = producturl;
+            } else {
+                this.$router.push(producturl); 
+            }
+            
+        }
+    },
+    computed: {
+        assignDestination: function() {
+            return this.buttonInfo.destination;
+        },
+        isExternalUrl: function() {
+            return this.buttonInfo.isUrl;
         }
     }
 }
