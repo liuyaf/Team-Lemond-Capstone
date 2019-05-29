@@ -25,13 +25,12 @@ docker run -d \
 --network serverNET \
 --name afbserver \
 --link mongodb:mongodb \
--p 80:80 \
 -p 443:443 \
 -v /etc/letsencrypt:/etc/letsencrypt:ro \
 -e TLSCERT=$TLSCERT \
 -e TLSKEY=$TLSKEY \
 liuyaf/afbserver
 
-# docker run -d --network serverNET --name afbserver --link mongodb:mongodb -p 80:5100 liuyaf/afbserver
+# docker run -d --network serverNET --name afbserver --link mongodb:mongodb -p 443:5100 liuyaf/afbserver
 exit
 EOF

@@ -79,7 +79,7 @@ export default {
     ResultDetail,
     Footer
   },
-  props: ["Result", "Questions", "generalTips"],
+  props: ["Result", "Questions", "generalTips", "testType"],
   data() {
     return {
       color: [
@@ -90,7 +90,6 @@ export default {
         "#E7E6F4",
         "#F4E8F2"
       ],
-      testType: "Employer",
       summary: "Your business is very age-friendly!",
       activeName: "n0",
       totalQ: 0,
@@ -205,7 +204,11 @@ export default {
         },
         theme: "grid"
       });
-      doc.save(this.testType=='employer'? "Employer":"Customer_Service" + "_Results.pdf");
+      doc.save(
+        this.testType == "employer"
+          ? "Employer"
+          : "Customer_Service" + "_Results.pdf"
+      );
     }
   },
   mounted: function() {

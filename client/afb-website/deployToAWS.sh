@@ -2,7 +2,7 @@
 sh pushDocker.sh
 
 # ssh -i ~/.ssh/afbAWSkeypair.pem ec2-user@ec2-3-15-53-39.us-east-2.compute.amazonaws.com 'bash -s' <<EOF
-ssh -i ~/.ssh/afbAWSkeypair.pem ec2-user@ec2-3-15-66-213.us-east-2.compute.amazonaws.com 'bash -s' <<EOF
+ssh -i ~/.ssh/afbIlluminage.pem ec2-user@ec2-3-15-66-213.us-east-2.compute.amazonaws.com 'bash -s' <<EOF
 
 docker rm -f afb-website
 docker pull agefriendlysea/afb-website
