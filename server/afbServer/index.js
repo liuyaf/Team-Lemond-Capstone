@@ -11,23 +11,23 @@ app.use(bodyParser.json());
 Employer = require("./models/employer");
 Customer = require("./models/customer");
 
-// const TLSCERT = fs.readFileSync(
-//   "/etc/letsencrypt/live/api.liuyaf.me/fullchain.pem"
-// );
-// const TLSKEY = fs.readFileSync(
-//   "/etc/letsencrypt/live/api.liuyaf.me/privkey.pem"
-// );
-// const httpsOptions = {
-//   cert: TLSCERT,
-//   key: TLSKEY
-// };
+const TLSCERT = fs.readFileSync(
+    "/etc/letsencrypt/live/api.liuyaf.me/fullchain.pem"
+);
+const TLSKEY = fs.readFileSync(
+    "/etc/letsencrypt/live/api.liuyaf.me/privkey.pem"
+);
+const httpsOptions = {
+    cert: TLSCERT,
+    key: TLSKEY
+};
 
-mongoose.connect("mongodb://localhost/afbserver", {
+// mongoose.connect("mongodb://localhost/afbserver", {
+//     useNewUrlParser: true
+// });
+mongoose.connect("mongodb://mongodb/afbserver", {
     useNewUrlParser: true
 });
-// mongoose.connect("mongodb://mongodb/afbserver", {
-//   useNewUrlParser: true
-// });
 var db = mongoose.connection;
 
 app.all("/v1/customer-result", (req, res) => {
@@ -89,8 +89,8 @@ function adjustFormatToRelational(jsonResult) {
     return formatted;
 }
 
-app.listen(5100);
-// https.createServer(httpsOptions, app).listen(443);
+// app.listen(5100);
+https.createServer(httpsOptions, app).listen(443);
 // http
 //   .createServer((req, res) => {
 //     res.writeHead(301, {
