@@ -31,7 +31,7 @@
         </div>
         <div class="btn-section">
           <el-button @click="$emit('retryWithBusInfo', Result[0])" type="primary" plain>retry</el-button>
-          <el-button @click="exportPdf" type="primary" plain>download tips</el-button>
+          <el-button @click="exportPdf" type="primary" plain>download results</el-button>
         </div>
       </div>
 
@@ -196,7 +196,7 @@ export default {
         columns: [
           { header: "Response", dataKey: "response" },
           { header: "Question", dataKey: "question" },
-          { header: "Tips", dataKey: "tips" }
+          { header: "Feedback", dataKey: "tips" }
         ],
         columnStyles: {
           response: { cellWidth: 5 },
@@ -205,7 +205,7 @@ export default {
         },
         theme: "grid"
       });
-      doc.save("table.pdf");
+      doc.save(this.testType=='employer'? "Employer":"Customer_Service" + "_Results.pdf");
     }
   },
   mounted: function() {
