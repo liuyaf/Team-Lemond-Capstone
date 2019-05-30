@@ -1,6 +1,6 @@
 <template>
   <div class="radio-group-container" id="radio-group">
-    <h3 :style="enlarge? {fontSize:'32px'}:{}">{{Content.title}}</h3>
+    <h3 :style="enlarge? {fontSize:'calc(20px + 1vw)'}:{}">{{Content.title}}</h3>
     <div class="radio-btn-c">
       <el-radio
         v-model="radio1"
@@ -62,6 +62,7 @@ export default {
 <style scoped>
 h3 {
   text-align: center;
+  font-size: calc(15px + 1vw);
 }
 .test {
   color: black;
@@ -75,6 +76,6 @@ h3 {
 }
 
 .radio-btn-c {
-  padding-top: 20px;
+  margin-top: 10px;
 }
 </style>

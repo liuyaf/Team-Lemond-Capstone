@@ -9,6 +9,7 @@
         :testType="testType"
         :Result="isPreviousTestFinished"
       ></ResumeTest>
+
       <div class="main-container" v-else-if="!isFinished && !showOnboard">
         <div class="top-panel">
           <div class="title-panel">
@@ -26,6 +27,7 @@
               {{sectionTitle}}
             </p>
           </div>
+
           <div class="control-panel">
             <el-button size="mini" @click="enlargeFont=!enlargeFont">
               <img
@@ -36,6 +38,7 @@
             </el-button>
           </div>
         </div>
+
         <div class="question-select" v-if="currentSectionLength>0">
           <button
             id="triangle-left"
@@ -64,6 +67,7 @@
             <i class="el-icon-caret-right"></i>
           </button>
         </div>
+
         <transition name="slide-fade" mode="out-in">
           <keep-alive>
             <TermOA
@@ -100,6 +104,7 @@
             ></Radiogroup>
           </keep-alive>
         </transition>
+
         <div class="section-control" v-if="TOADone">
           <el-button
             :style="reachSectionHead?{visibility: 'hidden'}:{}"
@@ -121,10 +126,12 @@
           >Submit</el-button>
         </div>
       </div>
+
       <OnboardCard
         v-else-if="showOnboard && !skipOnboardNextTime"
         @skipOnboard="setSkipOnboardTimeStamp"
       ></OnboardCard>
+
       <ResultMobile
         v-else-if="isMobile"
         :Result="result"
@@ -132,6 +139,7 @@
         :enlarge="enlargeFont"
         :generalTips="generalTips"
       ></ResultMobile>
+
       <Result
         v-else
         :Result="result"

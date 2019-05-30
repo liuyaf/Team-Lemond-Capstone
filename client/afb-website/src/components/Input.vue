@@ -1,6 +1,6 @@
 <template>
   <div class="input-container">
-    <h3 :style="enlarge? {fontSize:'32px'}:{}">{{Content.title}}</h3>
+    <h3 :style="enlarge? {fontSize:'calc(20px + 1vw)'}:{}">{{Content.title}}</h3>
     <el-input
       class="input"
       v-model="response"
@@ -40,9 +40,11 @@ export default {
 <style scoped>
 h3 {
   text-align: center;
+  font-size: calc(15px + 1vw);
 }
 .input {
-  width: 350px !important;
+  /* width: 350px !important; */
+  width: 250px !important;
 }
 .input-container {
   display: flex;
