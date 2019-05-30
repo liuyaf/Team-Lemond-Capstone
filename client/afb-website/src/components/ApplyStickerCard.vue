@@ -30,7 +30,7 @@
                 </p>
                 <br>
                 <br>
-                <DynamicButton :enlargeFont="enlargeFont" v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'https://www.seattle.gov/agefriendly/about/discount-program', isUrl: true }"/>
+                <DynamicButton :enlargeFont="enlargeFont" v-bind:buttonInfo="{ color: '#CC3E16', text: content.button.text , destination: content.button.url, isUrl: true }"/>
             </div>
         </div>
     </div>

@@ -472,7 +472,6 @@ export default {
 
 #title-vertical {
   border-radius: 15px;
-
   padding-top: 8px;
   padding-right: 5px;
   padding-bottom: 8px;

@@ -183,6 +183,7 @@ img {
 
 .navigation {
   display: flex;
+  margin-bottom: 4%;
 }
 
 .onboard-button:first-child {
@@ -196,6 +197,10 @@ img {
 .row {
   padding-top: 45px;
   width: 100%;
+}
+
+.bottom-control > .row {
+  margin: 0;
 }
 </style>
 
