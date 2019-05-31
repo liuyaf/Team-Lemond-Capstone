@@ -100,6 +100,12 @@ export default {
   width: 100px;
 }
 
+@font-face {
+  font-family: "DDINRegular";
+  src: url("./assets/D-DIN.otf"),
+  url("https://yoursite.com/css/fonts/CustomFont.otf") format("opentype");
+}
+
 @media (max-width: 768px) {
   .btt-button {
     width: 15vw;

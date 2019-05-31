@@ -161,6 +161,8 @@ export default {
 
 img {
   height: 244px;
+  display: inline-block;
+  width:100%;
 }
 
 .el-button {

@@ -182,15 +182,16 @@ export default {
   color: black;
 }
 
-.modal-content li {
+.modal-body li {
   list-style-type: initial;
   margin-left: 30px;
 }
 
-.modal-cotent li,
+.modal-body li,
 p {
   color: black;
   font-size: 18px;
+  font-family: "DDINRegular";
 }
 
 .modal-content p a {
@@ -201,6 +202,10 @@ a {
   color: white;
   padding: 5px 0;
   cursor: pointer;
+}
+
+.copyrightText {
+  font-family: "Fjalla One";
 }
 
 .copyrightText a:hover {
