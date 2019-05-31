@@ -11,7 +11,7 @@
       ></ResumeTest>
 
       <div class="main-container" v-else-if="!isFinished && !showOnboard">
-        <div class="top-panel">
+        <div class="top-panel" :style="isIOS&&!TOADone?{'padding-top':'60px'}:{}">
           <div class="title-panel">
             <p
               id="title-vertical"
@@ -76,6 +76,7 @@
               :key="TOA.id"
               :TOAContent="TOA.content"
               :enlarge="enlargeFont"
+              :style="isIOS&&!TOADone?{'padding-top':'30px'}:{}"
             ></TermOA>
             <Dropdown
               v-if="currentQuestion.type === 'dropdown'"
@@ -208,6 +209,10 @@ export default {
     isMobile: function() {
       return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
     },
+    isIOS: function() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    },
+
     reachHead: function() {
       return this.currentQuestionNum === 0;
     },
@@ -453,8 +458,6 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
-  /* justify-content: space-evenly; */
-  /* align-items: stretch; */
   overflow: scroll;
   position: absolute;
   top: 0;
@@ -492,18 +495,15 @@ export default {
   color: #fff;
 }
 .top-panel {
-  padding-top: 30px;
+  /* padding-top: 30px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .section-title {
-  /* border-left: 5px solid black; */
   padding-left: 0.5rem;
   font-weight: bold;
-  /* border-left-color: black;
-  font-size: 5rem; */
 }
 
 .control-panel {
@@ -513,7 +513,6 @@ export default {
 .title-panel {
   display: flex;
   align-items: center;
-  /* justify-content: space-between */
   padding-left: 2rem;
 }
 
