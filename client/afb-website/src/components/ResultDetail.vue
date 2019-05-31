@@ -207,4 +207,7 @@ export default {
 .switch-tab-mobile {
   padding-left: 10px;
 }
+.back-to-cards-mobile {
+  display: flex;
+}
 </style>

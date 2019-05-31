@@ -138,6 +138,8 @@
         :Questions="sections.slice(1)"
         :enlarge="enlargeFont"
         :generalTips="generalTips"
+        :testType="testType"
+        @retryWithBusInfo="retryWithBusInfo"
       ></ResultMobile>
 
       <Result
