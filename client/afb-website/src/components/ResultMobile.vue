@@ -29,6 +29,15 @@
       <el-progress type="circle" :percentage="correctPercent" color="#cc3e16" status="text">
         <span :style="{fontSize: '28px'}">{{correctCount}} / {{totalQ}}</span>
       </el-progress>
+      <div class="btn-section">
+        <el-button
+          size="small"
+          @click="$emit('retryWithBusInfo', Result[0])"
+          type="primary"
+          plain
+        >retry</el-button>
+        <el-button size="small" @click="exportPdf" type="primary" plain>download results</el-button>
+      </div>
     </div>
     <el-tabs v-model="activeName" class="tabs" :stretch="true">
       <el-tab-pane
@@ -54,6 +63,8 @@
 <script>
 import ResultDetail from "./ResultDetail";
 import Footer from "./Footer";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 export default {
   name: "resultmobile",
   props: ["Result", "Questions", "generalTips", "testType"],
@@ -135,6 +146,97 @@ export default {
     },
     findTipsFromMap: function(key) {
       return this.generalTips.get(key);
+    },
+    exportPdf() {
+      var doc = new jsPDF({
+        orientation: "landscape"
+      });
+
+      var body = [];
+
+      for (let i = 0; i < this.questionResponse.length; i++) {
+        for (let j = 0; j < this.questionResponse[i].length; j++) {
+          let QApair = {};
+          QApair.question = this.questions[i].questions[j].title;
+          QApair.tips = this.questions[i].questions[j].questionContent;
+          QApair.response = this.questionResponse[i][j];
+          if (QApair.response == "yes") {
+            body.push({
+              question: QApair.question,
+              tips: QApair.tips.yes,
+              response: QApair.response
+            });
+          } else {
+            body.push({
+              question: QApair.question,
+              tips: QApair.tips.no,
+              response: QApair.response
+            });
+          }
+        }
+      }
+
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = mm + "/" + dd + "/" + yyyy;
+
+      doc.setFontSize(12);
+      doc.text(
+        this.testType == "employer"
+          ? "Assessment type: Employer"
+          : "Assessment type: Customer Service" + " Assessment",
+        10,
+        10
+      );
+      doc.text("Date completed: " + today, 10, 15);
+
+      doc.setFontType("bold");
+      doc.setFontSize(16);
+      doc.text(
+        "Here's your Results: You got " +
+          this.correctCount +
+          "/" +
+          this.totalQ +
+          " right",
+        10,
+        25
+      );
+
+      doc.setFontType("normal");
+      doc.setFontSize(12);
+      doc.text("Congratulations-you completed the assessment test!", 10, 35);
+      doc.text(
+        this.testType == "employer"
+          ? "Taking the time to complete this assessment shows your commitment to being an age-friendly employer."
+          : "Taking the time to complete this assessment shows your commitment to providing age-friendly customer service.",
+        10,
+        40
+      );
+
+      doc.autoTable({
+        body: body,
+        columns: [
+          { header: "Response", dataKey: "response" },
+          { header: "Question", dataKey: "question" },
+          { header: "Feedback", dataKey: "tips" }
+        ],
+        columnStyles: {
+          response: { cellWidth: 5 },
+          question: { cellWidth: 40 },
+          tips: { cellWidth: 40 }
+        },
+        theme: "grid",
+        margin: { top: 45, left: 10 },
+        headStyles: { fillColor: "#155777" }
+      });
+      doc.save(
+        this.testType == "employer"
+          ? "Employer" + "_Results.pdf"
+          : "Customer_Service" + "_Results.pdf"
+      );
     }
   },
   mounted() {
@@ -180,5 +282,13 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.btn-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
 }
 </style>
