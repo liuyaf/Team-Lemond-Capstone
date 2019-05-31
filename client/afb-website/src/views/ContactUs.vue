@@ -125,6 +125,7 @@
               <input
                 v-model="phone"
                 type="tel"
+                maxlength="12"
                 name="phone"
                 placeholder="123-456-7890"
                 size="40"

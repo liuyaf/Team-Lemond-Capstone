@@ -65,7 +65,7 @@
       <a id="about-2"></a>
       <img
         class="five-reasons-image-header"
-        v-bind:src="fiveReasonsHeaderImage"
+        src="../assets/5reason.svg"
         alt="five reasons to become age friendly"
       >
       <MediaTextCard
