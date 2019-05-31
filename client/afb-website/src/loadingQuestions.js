@@ -114,7 +114,7 @@ let employerTest = [businessInfo,
                 type: "radio",
                 title: "Do you know the age profile of your workforce and what percentage of your employees is age 50+?",
                 questionContent: {
-                    yes: "Excellent—this is important information for both employee retention and succession planning. ",
+                    yes: "Excellent—this is important information for both employee retention and succession planning.",
                     no: "Experienced workers carry institutional knowledge and wisdom that is beneficial to your organization."
                 }
             },
@@ -124,7 +124,7 @@ let employerTest = [businessInfo,
                 title: "Do you have a method to get feedback about the needs and interests of mature and other workers?",
                 questionContent: {
                     yes: "Great—it’s always good to know what motivates your employees.",
-                    no: "Sometimes the best course of action is to just ask! "
+                    no: "Sometimes the best course of action is to just ask!"
                 }
             },
             {
@@ -133,7 +133,7 @@ let employerTest = [businessInfo,
                 title: "Have you determined the timing and impact of retirements and identified knowledge gaps to be filled?",
                 questionContent: {
                     yes: "Excellent—with this information, you can invite older employees to share and contribute knowledge during their remaining years in your organization.",
-                    no: "Don’t miss the opportunity to involve older employees in planning for their eventual transition. "
+                    no: "Don’t miss the opportunity to involve older employees in planning for their eventual transition."
                 }
             }
         ]
@@ -179,130 +179,130 @@ let employerTest = [businessInfo,
             title: "Do you have training programs to keep employees' technical and computer skills current?",
             questionContent: {
                 yes: " Glad to hear it! Training keeps the work fresh and new.",
-                no: "Consider how training programs can keep employees at the top of their game. "
+                no: "Consider how training programs can keep employees at the top of their game."
             }
         }, {
             questionID: 2,
             type: "radio",
-            title: "Do older workers have equal access to training programs and promotional opportunities ? ",
+            title: "Do older workers have equal access to training programs and promotional opportunities?",
             questionContent: {
-                yes: "Excellent — we hope you tap older employees with on-the-job experience, transferable skills, and proven commitment to your organization. ",
-                no: "Too many employers forget that on-the-job experience can often outweigh education or forget to look for transferable skills and lateral job opportunities. "
+                yes: "Excellent — we hope you tap older employees with on-the-job experience, transferable skills, and proven commitment to your organization.",
+                no: "Too many employers forget that on-the-job experience can often outweigh education or forget to look for transferable skills and lateral job opportunities."
             }
         }, {
             questionID: 3,
             type: "radio",
             title: "Do you have programs to capitalize on the experience of older workers (e.g., mentorships, job rotation, and knowledge transfer training)?",
             questionContent: {
-                yes: "Great — you recognize the value of your older employees’ wisdom and experience. ",
+                yes: "Great — you recognize the value of your older employees’ wisdom and experience.",
                 no: "Consider how valuable on-the-job experience can be transferred to younger staff."
             }
         }, {
             questionID: 4,
             type: "radio",
-            title: "Do you provide financial and retirement planning information to retirement - eligible employees ? ",
+            title: "Do you provide financial and retirement planning information to retirement-eligible employees?",
             questionContent: {
-                yes: "Glad to hear it — helping older workers ease into retirement on their own terms reduces stress in the workplace. ",
-                no: "It’s a win-win when you help older employees ease into retirement on their own terms. "
+                yes: "Glad to hear it — helping older workers ease into retirement on their own terms reduces stress in the workplace.",
+                no: "It’s a win-win when you help older employees ease into retirement on their own terms."
             }
         }, {
             questionID: 5,
             type: "radio",
-            title: "Do you offer employees information about or connections with community service opportunities ? ",
+            title: "Do you offer employees information about or connections with community service opportunities?",
             questionContent: {
-                yes: "Excellent — this effort benefits you through staff satisfaction and community good will. ",
-                no: "When your employees get involved in community service that they enjoy, it builds good will— theirs and the community’ s. "
+                yes: "Excellent — this effort benefits you through staff satisfaction and community good will.",
+                no: "When your employees get involved in community service that they enjoy, it builds good will— theirs and the community’s."
             }
 
         }]
     },
     {
         sectionID: 5,
-        sectionTitle: "Health and Benefits ",
+        sectionTitle: "Health and Benefits",
         questions: [{
             questionID: 1,
             type: "radio",
-            title: "Do you offer healthcare options to address the needs of older workers such as cafeteria plan benefits, prescription coverage, or eldercare ? ",
+            title: "Do you offer healthcare options to address the needs of older workers such as cafeteria plan benefits, prescription coverage, or eldercare? ",
             questionContent: {
-                yes: "Thank you! Flexibility is key to retaining the wisdom and experience of older workers. ",
-                no: "Benefits are an important component of your overall compensation package, and flexibility is key. "
+                yes: "Thank you! Flexibility is key to retaining the wisdom and experience of older workers.",
+                no: "Benefits are an important component of your overall compensation package, and flexibility is key."
             }
         }, {
             questionID: 2,
             type: "radio",
             title: "Is your retirement plan structured to encourage older workers to select phased retirement or work beyond normal retirement age?",
             questionContent: {
-                yes: "Great! Often valuable older employees will choose to stay on, given a little flexibility. ",
-                no: "It’s a win-win when you help older employees ease into retirement on their own terms. "
+                yes: "Great! Often valuable older employees will choose to stay on, given a little flexibility.",
+                no: "It’s a win-win when you help older employees ease into retirement on their own terms."
             }
         }, {
             questionID: 3,
             type: "radio",
-            title: "Do you offer similar benefits to both part- and full-time employees ? ",
+            title: "Do you offer similar benefits to both part-time and full-time employees?",
             questionContent: {
-                yes: "Glad to hear it! Flexibility is key to retaining the wisdom and experience of older workers. ",
-                no: "Part-time employment can be a beneficial transitional step toward retirement for older workers. "
+                yes: "Glad to hear it! Flexibility is key to retaining the wisdom and experience of older workers.",
+                no: "Part-time employment can be a beneficial transitional step toward retirement for older workers."
             }
         }, {
             questionID: 4,
             type: "radio",
-            title: "Have you reviewed the physical requirements of your workplace and identified special needs? ",
+            title: "Have you reviewed the physical requirements of your workplace and identified special needs?",
             questionContent: {
-                yes: "Excellent! Sometimes very modest adjustment can make a world of difference for someone whose vision, hearing, or joints aren’ t as strong as they used to be. ",
-                no: "It’s worthwhile to ensure that physical stress isn’ t causing valuable older workers to leave. "
+                yes: "Excellent! Sometimes very modest adjustment can make a world of difference for someone whose vision, hearing, or joints aren’ t as strong as they used to be.",
+                no: "It’s worthwhile to ensure that physical stress isn’ t causing valuable older workers to leave."
             }
         }, {
             questionID: 5,
             type: "radio",
-            title: "Do you have wellness programs to encourage health maintenance ? ",
+            title: "Do you have wellness programs to encourage health maintenance?",
             questionContent: {
-                yes: "Glad to hear it! Staying healthy is a worthy goal for everyone. ",
-                no: "There are some wonderful workplace wellness resources. "
+                yes: "Glad to hear it! Staying healthy is a worthy goal for everyone.",
+                no: "There are some wonderful workplace wellness resources."
             }
         }, {
             questionID: 6,
             type: "radio",
             title: "Do you provide information or support for employees in a caregiver role?",
             questionContent: {
-                yes: "Thank you for recognizing that family caregiving responsibilities can cause a lot of stress. ",
-                no: "A little flexibility goes a long way to helping family caregivers manage the stress of caring for anyone with special needs. "
+                yes: "Thank you for recognizing that family caregiving responsibilities can cause a lot of stress.",
+                no: "A little flexibility goes a long way to helping family caregivers manage the stress of caring for anyone with special needs."
             }
         }]
     },
     {
         sectionID: 6,
-        sectionTitle: "Age-Friendly Culture ",
+        sectionTitle: "Age-Friendly Culture",
         questions: [{
             questionID: 1,
             type: "radio",
-            title: "Do you have age diversity training for your supervisory and lead staff that covers age discrimination laws, the value of older workers in the workforce, and how to eliminate age - related stereotypes?",
+            title: "Do you have age diversity training for your supervisory and lead staff that covers age discrimination laws, the value of older workers in the workforce, and how to eliminate age-related stereotypes?",
             questionContent: {
                 yes: "Wonderful — this isn’t common yet so you’re leading the way!",
-                no: "This is definitely worth considering. "
+                no: "This is definitely worth considering."
             }
         }, {
             questionID: 2,
             type: "radio",
             title: "Do you periodically review hiring, evaluation, and promotion policies to assure that they are age neutral?",
             questionContent: {
-                yes: "Excellent — this task keeps elimination of potential age discrimination as a priority. ",
-                no: "This is relatively easy to do and helps prioritize elimination of potential age discrimination. "
+                yes: "Excellent — this task keeps elimination of potential age discrimination as a priority.",
+                no: "This is relatively easy to do and helps prioritize elimination of potential age discrimination."
             }
         }, {
             questionID: 3,
             type: "radio",
             title: "Are your downsizing practices age-neutral?",
             questionContent: {
-                yes: "Glad to hear it. The federal Age Discrimination in Employment Act forbids discrimination against people who are age 40 or older. ",
-                no: "Be sure you have objective criteria for downsizing that does not violate the law. "
+                yes: "Glad to hear it. The federal Age Discrimination in Employment Act forbids discrimination against people who are age 40 or older.",
+                no: "Be sure you have objective criteria for downsizing that does not violate the law."
             }
         }, {
             questionID: 4,
             type: "radio",
-            title: "Are your training programs and work teams crossgenerational?",
+            title: "Are your training programs and work teams cross-generational?",
             questionContent: {
                 yes: "Great—there’s so much value in diversity!",
-                no: "Cross-generational trainings and teams are another way that workers can transfer knowledge. "
+                no: "Cross-generational trainings and teams are another way that workers can transfer knowledge."
             }
         }]
     }
@@ -327,16 +327,16 @@ let customerTest = [businessInfo,
                 title: "Is your website easy to navigate with zoom / text resize features?",
                 questionContent: {
                     yes: "Glad to hear it! Your customers are glad to see it!",
-                    no: "Text size is a basic element of an age - friendly website. There are many ways to make your website easy to use. "
+                    no: "Text size is a basic element of an age-friendly website. There are many ways to make your website easy to use."
                 }
             },
             {
                 questionID: 3,
                 type: "radio",
-                title: "Are your signs, printed materials, and website fonts large and easy to read? ",
+                title: "Are your signs, printed materials, and website fonts large and easy to read?",
                 questionContent: {
                     yes: "Excellent — you want customers to get the information they need!",
-                    no: "Make it easy for all people to get the information they need. "
+                    no: "Make it easy for all people to get the information they need."
                 }
             },
             {
@@ -345,7 +345,7 @@ let customerTest = [businessInfo,
                 title: "Are your materials available in different languages?",
                 questionContent: {
                     yes: "Thanks for letting customers who don’t read English know that you care!",
-                    no: "Consider whether you have potential customers who were not born here. "
+                    no: "Consider whether you have potential customers who were not born here."
                 }
             }
         ]
@@ -355,10 +355,10 @@ let customerTest = [businessInfo,
         questions: [{
             questionID: 1,
             type: "radio",
-            title: "Do you have adequate non-glare lighting throughout your place of business, illuminating products and/or work spaces? ",
+            title: "Do you have adequate non-glare lighting throughout your place of business, illuminating products and/or work spaces?",
             questionContent: {
                 yes: "Great—thanks for making your place of business easy on the eyes!",
-                no: "Good lighting not only feels better but makes everything look better. "
+                no: "Good lighting not only feels better but makes everything look better."
             }
         }, {
             questionID: 2,
@@ -375,31 +375,31 @@ let customerTest = [businessInfo,
         questions: [{
             questionID: 1,
             type: "radio",
-            title: "Have you marked stairs, inclines, and drops that could be safety hazards? ",
+            title: "Have you marked stairs, inclines, and drops that could be safety hazards?",
             questionContent: {
                 yes: "Great — safety is paramount!",
-                no: "Employee and customer safety is paramount. "
+                no: "Employee and customer safety is paramount."
             }
         }, {
             questionID: 2,
             type: "radio",
-            title: "Are your aisles wide enough for two people to pass easily? ",
+            title: "Are your aisles wide enough for two people to pass easily?",
             questionContent: {
-                yes: "Glad to hear it! Ample space makes everyone more comfortable.It’s especially important for anyone who uses a wheelchair. ",
+                yes: "Glad to hear it! Ample space makes everyone more comfortable.It’s especially important for anyone who uses a wheelchair.",
                 no: "Paths and aisles are required to be 36” or wider."
             }
         }, {
             questionID: 3,
             type: "radio",
-            title: "Are your doors easy to open and wide enough for a large wheelchair to pass through(36”+)? ",
+            title: "Are your doors easy to open and wide enough for a large wheelchair to pass through (36”+)?",
             questionContent: {
                 yes: "Thank you for making it easy for people to get in the door!",
-                no: "It’s hard to do business with someone who cannot get through your door.It’ s also the law that doorways have to be accessible. "
+                no: "It’s hard to do business with someone who cannot get through your door.It’ s also the law that doorways have to be accessible."
             }
         }, {
             questionID: 4,
             type: "radio",
-            title: "Do you place products within reach on shelves or offer help reaching items? ",
+            title: "Do you place products within reach on shelves or offer help reaching items?",
             questionContent: {
                 yes: "Great—that’s just common sense, right?",
                 no: "What’s within reach for one person may be a huge or impossible stretch for someone else."
@@ -407,18 +407,18 @@ let customerTest = [businessInfo,
         }, {
             questionID: 5,
             type: "radio",
-            title: "Do you provide a publicly accessible bathroom? ",
+            title: "Do you provide a publicly accessible bathroom?",
             questionContent: {
-                yes: "Many thanks! This is so important for customer comfort and loyalty. ",
-                no: "The availability of clean, conveniently located, wellsigned, accessible toilets is generally regarded as an important age - friendly feature in our built environment. "
+                yes: "Many thanks! This is so important for customer comfort and loyalty.",
+                no: "The availability of clean, conveniently located, wellsigned, accessible toilets is generally regarded as an important age-friendly feature in our built environment."
             }
         }, {
             questionID: 6,
             type: "radio",
-            title: "Do you have a place where customers can sit and rest? ",
+            title: "Do you have a place where customers can sit and rest?",
             questionContent: {
                 yes: "Excellent—this is good for older people, parents of young children, bored significant others — just about everyone!",
-                no: "Particularly as people age, they may have difficulty standing for long periods of time but some seating is good for everyone. "
+                no: "Particularly as people age, they may have difficulty standing for long periods of time but some seating is good for everyone."
             }
         }]
     },
@@ -428,26 +428,26 @@ let customerTest = [businessInfo,
         questions: [{
             questionID: 1,
             type: "radio",
-            title: "Have you trained staff to practice respect and patience with all customers, in person and on the phone? ",
+            title: "Have you trained staff to practice respect and patience with all customers, in person and on the phone?",
             questionContent: {
-                yes: "Thank you—empathy, patience, and respect are core customer service skills. ",
-                no: "Customer service training is needed in most workplaces to ensure that staff are trained to communicate in a respectful, noncondescending tone. "
+                yes: "Thank you — empathy, patience, and respect are core customer service skills.",
+                no: "Customer service training is needed in most workplaces to ensure that staff are trained to communicate in a respectful, non-condescending tone."
             }
         }, {
             questionID: 2,
             type: "radio",
-            title: "Have you trained staff to be mindful when speaking to people who have low vision or hearing loss? ",
+            title: "Have you trained staff to be mindful when speaking to people who have low vision or hearing loss?",
             questionContent: {
-                yes: "Thank you—we know your customers appreciate consideration from your staff. ",
+                yes: "Thank you — we know your customers appreciate consideration from your staff.",
                 no: "Disability language and etiquette is a skill."
             }
         }, {
             questionID: 3,
             type: "radio",
-            title: "Have you trained staff to assist those with physical challenges and how to handle any incidents that may occur? ",
+            title: "Have you trained staff to assist those with physical challenges and how to handle any incidents that may occur?",
             questionContent: {
-                yes: "Thank you — we know your customers appreciate consideration from your staff. ",
-                no: "Disability language and etiquette is a skill. "
+                yes: "Thank you — we know your customers appreciate consideration from your staff.",
+                no: "Disability language and etiquette is a skill."
             }
         }]
     }

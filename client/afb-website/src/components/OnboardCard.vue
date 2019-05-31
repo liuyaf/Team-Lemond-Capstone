@@ -204,6 +204,10 @@ img {
 .bottom-control > .row {
   margin: 0;
 }
+
+.bottom-control {
+  margin-top: auto;
+}
 </style>
 
 
