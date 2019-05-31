@@ -226,7 +226,7 @@ export default {
         // parsing content for the mission section of the landing page
         // grabbing the image src
         this.missionSection.image =
-          mediaTextBlocks[0].firstElementChild.children[0].src;
+          mediaTextBlocks[0].firstElementChild.children[0].src.replace(/^http:\/\//i, 'https://');
         // grabbing the paragraph for the mission section
         this.missionSection.paragraphs =
           mediaTextBlocks[0].children[1].innerHTML;
@@ -256,7 +256,7 @@ export default {
           };
           reason.reasonId = "reason-" + s;
           reason.className = mediaTextBlocks[s].className;
-          reason.bigImage = mediaTextBlocks[s].children[0].children[0].src;
+          reason.bigImage = mediaTextBlocks[s].children[0].children[0].src.replace(/^http:\/\//i, 'https://');
           reason.buttonColor = reasonCardColors[s - 1];
           reason.content = mediaTextBlocks[s].children[1].innerHTML;
           this.fiveReasonsSection.push(reason);
@@ -310,7 +310,7 @@ export default {
         this.applyStickerSection.image =
           mediaTextBlocks[
             mediaTextBlocks.length - 1
-          ].children[0].children[0].src;
+          ].children[0].children[0].src.replace(/^http:\/\//i, 'https://');
         // paragraph
         this.applyStickerSection.paragraph =
           mediaTextBlocks[

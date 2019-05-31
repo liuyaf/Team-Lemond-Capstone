@@ -103,7 +103,7 @@ export default {
           mediaTextBlocks[0].children[1].children[0].outerHTML;
         // image
         this.introSection.image =
-          mediaTextBlocks[0].children[0].children[0].src;
+          mediaTextBlocks[0].children[0].children[0].src.replace(/^http:\/\//i, 'https://');
         // paragraph
         this.introSection.paragraph =
           mediaTextBlocks[0].children[1].children[1].innerText;

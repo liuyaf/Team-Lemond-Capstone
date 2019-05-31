@@ -136,7 +136,7 @@ export default {
       // header
       this.introSection.header = mediaTextBlocks[0].children[1].children[0].outerHTML
       // image
-      this.introSection.image = mediaTextBlocks[0].children[0].children[0].src
+      this.introSection.image = mediaTextBlocks[0].children[0].children[0].src.replace(/^http:\/\//i, 'https://')
       // paragraph
       this.introSection.paragraph = mediaTextBlocks[0].children[1].children[1].innerText
       // button
@@ -177,7 +177,7 @@ export default {
 
         card.reasonId = 'reason-' + j
         card.className = mediaTextBlocks[j].className
-        card.image = mediaTextBlocks[j].children[0].children[0].src
+        card.image = mediaTextBlocks[j].children[0].children[0].src.replace(/^http:\/\//i, 'https://')
         card.content = mediaTextBlocks[j].children[1].innerHTML
 
         this.fiveReasonsSection.reasonContents.push(card)
