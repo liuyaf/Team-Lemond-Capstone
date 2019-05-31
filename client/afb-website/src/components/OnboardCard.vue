@@ -89,7 +89,7 @@ export default {
           cardId: 2,
           headline: "During the assessment...",
           text:
-            "You will first answer three basic business question. Then, you will need to complete multiple sets of questions about age-friendly practices. This Assessment will take roughly about 15 minutes to complete.",
+            "You will first answer three basic business questions. Then, you will need to complete multiple sets of questions about age-friendly practices. This Assessment will take roughly about 15 minutes to complete.",
           imgName: "onboard-image-2.svg"
         },
         {

@@ -26,9 +26,9 @@
       
       <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
       <a id="resource-2"></a>
-      <div class="age-friendly paddingSection">
+      <div class="age-friendly paddingSection2">
         <div class="row">
-          <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
+          <div class="col-sm-12 col-lg-6" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
             <span 
               :class="{ agefriendlyEnlarge: enlargeFont }"
               v-html="item.header"
@@ -45,7 +45,7 @@
 
       <!-- five reasons to be age friendly -->
       <a id="resource-3"></a>
-      <div class="five-reasons-to-become-afb paddingSection">
+      <div class="five-reasons-to-become-afb paddingSection2">
         <span 
           :class="{ agefriendlyEnlarge: enlargeFont }"
           v-html="fiveReasonsSection.header"
@@ -205,6 +205,12 @@ export default {
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.paddingSection2 {
+  padding-left: 5%;
+  padding-right: 5%;
   padding-bottom: 3%;
 }
 

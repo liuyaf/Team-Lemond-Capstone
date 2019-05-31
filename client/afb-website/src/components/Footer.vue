@@ -129,7 +129,8 @@
           </ul>
         </div>
       </div>
-      <div class="copyrightSection container-fluid row justify-content-center">
+      <div class="copyrightSection container-fluid justify-content-center">
+        <img class="cos-logo" src="https://www.seattle.gov/Images/Council/Logos/City-of-Seattle-Logo_Color-on-White.png" alt="City of Seattle logo">
         <p class="copyrightText text-center" :class="{ footerEnlarge: enlargeFont }">
           © Copyright 2019 City of Seattle
           <br>
@@ -206,6 +207,7 @@ a {
 
 .copyrightText {
   font-family: "Fjalla One";
+  margin-top: 20px;
 }
 
 .copyrightText a:hover {
@@ -281,6 +283,12 @@ li,
 
 #modal-text:hover {
   text-decoration: underline;
+}
+
+.cos-logo {
+  display: block;
+  max-width: 60px;
+  margin: auto;
 }
 
 @media (max-width: 992px) {
