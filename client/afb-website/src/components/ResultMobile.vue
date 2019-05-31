@@ -56,7 +56,7 @@ import ResultDetail from "./ResultDetail";
 import Footer from "./Footer";
 export default {
   name: "resultmobile",
-  props: ["Result", "Questions", "generalTips"],
+  props: ["Result", "Questions", "generalTips", "testType"],
   components: {
     ResultDetail,
     Footer
@@ -71,7 +71,6 @@ export default {
         "#E7E6F4",
         "#F4E8F2"
       ],
-      testType: "Employer",
       activeName: "n0",
       totalQ: 0,
       correctCount: 0,
