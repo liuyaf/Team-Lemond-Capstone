@@ -11,7 +11,7 @@
       ></ResumeTest>
 
       <div class="main-container" v-else-if="!isFinished && !showOnboard">
-        <div class="top-panel" :style="isIOS&&!TOADone?{'padding-top':'60px'}:{}">
+        <div class="top-panel" :style="isIOS&&!TOADone?{'padding-top':'90px'}:{}">
           <div class="title-panel">
             <p
               id="title-vertical"
@@ -440,13 +440,10 @@ export default {
           finished: false
         };
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-        //console.log("set from resultWatcher if", this.getStoredTest());
       } else {
         let obj = JSON.parse(localStorage.getItem(this.testType + "TestCache"));
         obj.result = this.result;
-        // obj.finished = false;
         localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-        //console.log("set from resultWatcher else", this.getStoredTest());
       }
     }
   }
@@ -495,7 +492,7 @@ export default {
   color: #fff;
 }
 .top-panel {
-  /* padding-top: 30px; */
+  padding-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;

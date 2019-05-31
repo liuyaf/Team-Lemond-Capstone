@@ -33,6 +33,13 @@ export default {
     ) {
       this.response = this.oldVal;
     }
+  },
+  watch: {
+    response: function() {
+      if (this.response.length > 5) {
+        this.response = this.response.slice(0, 5);
+      }
+    }
   }
 };
 </script>
