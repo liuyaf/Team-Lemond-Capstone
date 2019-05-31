@@ -214,6 +214,7 @@ nav {
 
 .navImg {
   width: 240px;
+  display: inline-block;
 }
 
 @media (max-width: 930px) {
