@@ -64,8 +64,8 @@ p {
     font-size: calc(24px + 1vw);
 }
 
-.reasonEnlarge.reasonContent[data-v-556e00b8] >>> p,
-.reasonEnlarge.reasonContent[data-v-556e00b8] >>> ul { /* on enlarge button */
+.reasonContent.col-sm-10.col-lg-9.reasonEnlarge >>> p,
+.reasonContent.col-sm-10.col-lg-9.reasonEnlarge >>> ul { /* on enlarge button */
     font-size: calc(15px + 1vw);
 }
 </style>

@@ -439,7 +439,7 @@ export default {
   font-size: calc(45px + 1vw);
 }
 
-.factEnlarge[data-v-039c5b43] { /* on enlarge button */
+p.fact-p.factEnlarge { /* on enlarge button */
   font-size: calc(15px + 0.8vw);
 }
 
