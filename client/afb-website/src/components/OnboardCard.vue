@@ -2,7 +2,7 @@
   <!-- onboard card -->
   <div
     class="card"
-    :style="{ 'background-image': 'url(' + require(`@/assets/onboard-background.svg`) + ')'}"
+    :style="{ 'background-image': 'url(' + require(`@/assets/` + this.currentElement.backgroundImage) + ')'}"
   >
     <!-- a skip button that goes straight tot he assessment -->
     <span class="skip">
@@ -19,7 +19,7 @@
     <!-- a dynamic onboard card content -->
     <div class="card-content mt-4">
       <h3 class="headline text-center">{{this.currentElement.headline}}</h3>
-      <p class="text-center mt-4">{{this.currentElement.text}}</p>
+      <p class="text-center mt-4" v-html="this.currentElement.text"></p>
     </div>
 
     <!-- onboard navigation -->
@@ -83,21 +83,33 @@ export default {
           headline: "Welcome to the assessment",
           text:
             "There are many age-friendly practices that many business leaders miss. Take our assessment to find out if your business applies age-friendly practices!",
-          imgName: "onboard-image-1.svg"
+          imgName: "onboard-image-1.svg",
+          backgroundImage: "onboarding-bg-1.svg"
         },
         {
           cardId: 2,
           headline: "During the assessment...",
           text:
             "You will first answer three basic business questions. Then, you will need to complete multiple sets of questions about age-friendly practices. This Assessment will take roughly about 15 minutes to complete.",
-          imgName: "onboard-image-2.svg"
+          imgName: "onboard-image-2.svg",
+          backgroundImage: "onboarding-bg-2.svg"
         },
         {
           cardId: 3,
           headline: "After completing the assessment...",
           text:
             "After submitting your assessment, you will get a final score, along with relevant age-friendly tips. If you would like to keep your result and tips, be sure to hit the download button on the result page.",
-          imgName: "onboard-image-3.svg"
+          imgName: "onboard-image-3.svg",
+          backgroundImage: "onboarding-bg-3.svg"
+
+        },
+        {
+          cardId: 4,
+          headline: "Navigation with your keyboard...",
+          text:
+            "You can move through the next or previous question using the <strong>LEFT</strong> and <strong>RIGHT</strong> arrow key on your keyboard and answer yes or no using the <strong>Y</strong> and <strong>N</strong> key.",
+          imgName: "onboard-image-4.svg",
+          backgroundImage: "onboarding-bg-4.svg"
         }
       ]
     };
@@ -133,6 +145,7 @@ export default {
   font-size: 24px;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position-y: -30vh;
 }
 
 .skip {
