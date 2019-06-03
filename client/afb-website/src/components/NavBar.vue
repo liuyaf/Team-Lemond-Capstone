@@ -20,7 +20,6 @@
           <button class="navbar-toggler"  v-on:click="toggleFontSize">
             <img
               src="@/assets/font-change-button.svg"
-              class="svgButton"
               alt="Enlarge font button"
             >
           </button>
@@ -33,8 +32,10 @@
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            @click="navBarExpanded = !navBarExpanded"
           >
-            <img src="@/assets/hamburger-menu.svg" class="svgButton" alt="Hamburger Button">
+            <img v-if="!navBarExpanded" src="@/assets/hamburger-menu.svg" alt="Hamburger Button">
+            <img v-if="navBarExpanded" src="@/assets/exit.svg" alt="Collapse Hamburger Button">
           </button>
         </div>
       </div>
@@ -58,7 +59,7 @@
           <button class="font-enlarge"  v-on:click="toggleFontSize">
             <img
               src="@/assets/font-change-button.svg"
-              class="navBtnImg ml-2 svgButton navDisplay"
+              class="navBtnImg ml-2 navDisplay"
               alt="Font enlarge button"
             >
           </button>
@@ -67,7 +68,7 @@
             <router-link class="navSpacing navDisplay" to="/assessment-selection">
               <img
                 src="@/assets/navbar-assessment-button.svg"
-                class="navBtnImg ml-2 svgButton navDisplay"
+                class="navBtnImg ml-2 navDisplay"
                 alt="Assessment test button"
               >
             </router-link>
@@ -78,20 +79,20 @@
       <!-- collapsing on the mobile navbar -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="hamburgerNav navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link to="/" exact>About</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/" data-toggle="collapse" data-target="#navbarSupportedContent" exact>About</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/resources">Resources</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/resources" data-toggle="collapse" data-target="#navbarSupportedContent">Resources</router-link>
           </li>
-          <li class="nav-item">
-            <a href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank">Discount Program</a>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <a href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank" >Discount Program</a>
           </li>
-          <li class="nav-item">
-            <router-link to="/contact-us">Contact Us</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/contact-us" data-toggle="collapse" data-target="#navbarSupportedContent">Contact Us</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/assessment-selection">Assessment Test</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/assessment-selection" data-toggle="collapse" data-target="#navbarSupportedContent">Assessment Test</router-link>
           </li>
         </ul>
       </div>
@@ -145,7 +146,8 @@ export default {
     return {
       enlargeFont: false,
       aboutIsHidden: true,
-      resourceIsHidden: false
+      resourceIsHidden: false,
+      navBarExpanded: false
     }
   },
   methods: {
@@ -213,6 +215,7 @@ nav {
 }
 
 .navImg {
+  height: auto;
   width: 240px;
   display: inline-block;
 }

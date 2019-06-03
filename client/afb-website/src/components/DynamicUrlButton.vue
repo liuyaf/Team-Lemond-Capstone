@@ -1,7 +1,7 @@
 <template>
     <div>
         <button :class="{ buttonEnlarge: enlargeFont }" class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }" @click="gotosite(assignDestination)">
-            <a v-bind:style="{ color: this.buttonInfo.color }" :href="this.buttonInfo.Url" target="_blank">
+            <a v-bind:style="{ color: this.buttonInfo.color }">
                 {{ this.buttonInfo.text }}
 
                 <!-- the svg for a download button -->
@@ -39,7 +39,7 @@ export default {
     props: ['buttonInfo', 'enlargeFont'],
     methods: {
         gotosite(producturl){
-            location.href = producturl;     
+            window.open(producturl);   
         }
     },
     computed: {

@@ -199,7 +199,7 @@ export default {
 
       doc.setFontType("bold");
       doc.setFontSize(16);
-      doc.text("Here's your Results: You got "+ this.correctCount +"/"+ this.totalQ + " right",10, 25)
+      doc.text("Here's your results: You got "+ this.correctCount +"/"+ this.totalQ + " right",10, 25)
 
       doc.setFontType("normal");
       doc.setFontSize(12);

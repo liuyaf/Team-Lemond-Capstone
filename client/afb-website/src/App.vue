@@ -102,8 +102,12 @@ export default {
 
 @font-face {
   font-family: "DDINRegular";
-  src: url("./assets/D-DIN.otf"),
-  url("https://yoursite.com/css/fonts/CustomFont.otf") format("opentype");
+  src: url('./assets/D-DIN.eot'); /* IE9 Compat Modes */
+  src: url('./assets/D-DIN.eot?#iefix') format('embedded-opentype'); /* IE6-IE8 */
+  src: url("./assets/D-DIN.otf") format('opentype'),
+  url('./assets/D-DIN.woff2') format('woff2'), /* Super Modern Browsers */
+  url('./assets/D-DIN.woff') format('woff'), /* Pretty Modern Browsers */
+  url('./assets/D-DIN.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
 @media (max-width: 768px) {
