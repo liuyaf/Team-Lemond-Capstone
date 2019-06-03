@@ -173,7 +173,7 @@ export default {
   },
   mounted() {
     axios
-      // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
+      // JSON object from the WordPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
       .get("https://agefriendlysea.wpengine.com/wp-json/wp/v2/pages/37")
       .then(response => {
         // RAW HTML
