@@ -2,7 +2,6 @@
   <footer>
     <div>
       <div class="row">
-        
         <!-- Bootstrap Modal for Accessibility information -->
         <div class="modal" id="accessibilityModal">
           <div class="modal-dialog modal-lg">
@@ -26,7 +25,9 @@
                   <br>
                   <br>We also recognize the importance of feedback from ordinary visitors to our site. We invite you
                   to give us suggestions and feedback based on your experience visiting our site. E-mail
-                  <a href="mailto:agefriendly@seattle.gov?subject=Inquiry From goagefriendly.org">agefriendly@seattle.gov</a> with specific feedback about:
+                  <a
+                    href="mailto:agefriendly@seattle.gov?subject=Inquiry From goagefriendly.org"
+                  >agefriendly@seattle.gov</a> with specific feedback about:
                 </p>
                 <br>
                 <ul>
@@ -40,8 +41,8 @@
                   To access aging or disability services in the greater Seattle area, visit
                   <a
                     href="https://www.communitylivingconnections.org"
-                  >Community Living Connections </a>
-                   or call 1-844-348-5464. Elsewhere in the United States, visit
+                  >Community Living Connections</a>
+                  or call 1-844-348-5464. Elsewhere in the United States, visit
                   <a
                     href="https://eldercare.acl.gov/Public/Index.aspx"
                   >Eldercare Locator</a> or
@@ -106,37 +107,61 @@
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
           <ul id="leftList" :class="{ footerEnlarge: enlargeFont }">
-            <li id="listHeader" class="footerListText" :class="{ footerEnlarge: enlargeFont }">Local Resources</li>
+            <li
+              id="listHeader"
+              class="footerListText"
+              :class="{ footerEnlarge: enlargeFont }"
+            >Local Resources</li>
             <li class="footerListText">
               <a href="http://www.seattle.gov/agefriendly/" target="_blank">Age Friendly Seattle</a>
             </li>
             <li class="footerListText">
-              <a href="https://www.communitylivingconnections.org/" target="_blank">Community Living Connections</a>
+              <a
+                href="https://www.communitylivingconnections.org/"
+                target="_blank"
+              >Community Living Connections</a>
             </li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 footerLinks footerContent">
           <ul id="rightList" :class="{ footerEnlarge: enlargeFont }">
-            <li id="listHeader" class="footerListText" :class="{ footerEnlarge: enlargeFont }">Community Partners</li>
+            <li
+              id="listHeader"
+              class="footerListText"
+              :class="{ footerEnlarge: enlargeFont }"
+            >Community Partners</li>
             <li class="footerListText">
-              <a id="modal-text" data-toggle="modal" data-target="#acknowledgementModal">Acknowledgements</a>
+              <a
+                id="modal-text"
+                data-toggle="modal"
+                data-target="#acknowledgementModal"
+              >Acknowledgements</a>
             </li>
             <li class="footerListText">
               <a
-                href="https://www.agingkingcounty.org/age-friendly-coalition/" target="_blank"
+                href="https://www.agingkingcounty.org/age-friendly-coalition/"
+                target="_blank"
               >Age Friendly Coalition for Seattle and King County</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="copyrightSection container-fluid justify-content-center">
-        <img class="cos-logo" src="https://www.seattle.gov/Images/Council/Logos/City-of-Seattle-Logo_Color-on-White.png" alt="City of Seattle logo">
+        <img
+          class="cos-logo"
+          src="https://www.seattle.gov/Images/Council/Logos/City-of-Seattle-Logo_Black-on-White.png"
+          alt="City of Seattle logo"
+        >
         <p class="copyrightText text-center" :class="{ footerEnlarge: enlargeFont }">
           © Copyright 2019 City of Seattle
           <br>
-          <a href="http://www.seattle.gov/americans-with-disabilities-act" target="_blank">ADA Notice</a> |
           <a
-            href="http://www.seattle.gov/civilrights/civil-rights/title-vi-notice-of-nondiscrimination" target="_blank"
+            href="http://www.seattle.gov/americans-with-disabilities-act"
+            target="_blank"
+          >ADA Notice</a> |
+          <a
+            href="http://www.seattle.gov/civilrights/civil-rights/title-vi-notice-of-nondiscrimination"
+            target="_blank"
           >Notice of Non-discrimination</a> |
           <a data-toggle="modal" data-target="#accessibilityModal">Accessibility</a>
         </p>
@@ -146,7 +171,6 @@
 </template>
 
 <script>
-
 // This component is present in all the landing pages routes, and the assessment result page
 // It is at the bottom of the page
 
@@ -154,15 +178,15 @@
 //  - App.vue
 //  - Result.vue
 
-
 export default {
   name: "Footer",
-  props: ['enlargeFont']
+  props: ["enlargeFont"]
 };
 </script>
 
 <style scoped>
-#listHeader.footerListText.footerEnlarge { /* on enlarge button */ 
+#listHeader.footerListText.footerEnlarge {
+  /* on enlarge button */
   font-size: calc(12px + 0.8vw);
 }
 
@@ -171,11 +195,13 @@ export default {
   font-size: calc(10px + 0.8vw);
 }
 
-.copyrightText.footerEnlarge { /* on enlarge button */ 
+.copyrightText.footerEnlarge {
+  /* on enlarge button */
   font-size: calc(10px + 0.8vw);
 }
 
-.footerTag.footerText.footerEnlarge { /* on enlarge button */ 
+.footerTag.footerText.footerEnlarge {
+  /* on enlarge button */
   font-size: calc(10px + 0.8vw);
 }
 

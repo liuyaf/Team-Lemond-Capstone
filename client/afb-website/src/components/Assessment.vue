@@ -165,6 +165,7 @@ import Result from "./Result";
 import OnboardCard from "./OnboardCard";
 import ResumeTest from "./ResumeTest";
 import ResultMobile from "./ResultMobile";
+import axios from "axios";
 export default {
   name: "assessment",
   props: ["TOA", "sections", "generalTips", "testType"],
@@ -351,7 +352,6 @@ export default {
     },
     restartTest: function() {
       localStorage.removeItem(this.testType + "TestCache");
-      //console.log("set from restartTEst", this.getStoredTest());
       this.hasStoredResult = false;
       this.TOADone = true;
     },
@@ -407,15 +407,32 @@ export default {
       let obj = this.getStoredTest();
       obj.finished = true;
       this.updateStoredTest(obj);
-
       this.isFinished = true;
+      let data = {
+        info: this.result[0],
+        result: this.result.slice(1)
+      };
+      axios({
+        method: "post",
+        url: "https://api.liuyaf.me/v1/" + this.testType + "-result",
+        data: data
+      })
+        .then(response => {
+          if (response.status == 200) {
+            console.log("successfully sent");
+          }
+        })
+        .catch(err => {
+          if (err.response) {
+            console.log("got error");
+          }
+        });
     },
     getStoredTest: function() {
       return JSON.parse(localStorage.getItem(this.testType + "TestCache"));
     },
     updateStoredTest: function(obj) {
       localStorage.setItem(this.testType + "TestCache", JSON.stringify(obj));
-      //console.log("set from updateStoredTest", this.getStoredTest());
     },
     viewPreviousResult: function() {
       this.result = this.getStoredTest().result;
