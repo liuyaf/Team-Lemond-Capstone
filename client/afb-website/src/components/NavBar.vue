@@ -215,7 +215,7 @@ nav {
 }
 
 .navImg {
-  height: auto;
+  min-height: 1px; /* ie fix???? */
   width: 240px;
   display: inline-block;
 }
