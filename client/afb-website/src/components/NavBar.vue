@@ -119,10 +119,10 @@
           <router-link to="/resources" v-scroll-to="{ el: '#resource-1', offset: -100 }" class="a_top_hypers">Resource Guide</router-link>
         </li>
         <li>
-          <router-link to="/resources" v-scroll-to="{ el: '#resource-2', offset: -50 }" class="a_top_hypers">Age Friendly Seattle</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-2', offset: -150 }" class="a_top_hypers">Age Friendly Seattle</router-link>
         </li>
         <li>
-          <router-link to="/resources" v-scroll-to="{ el: '#resource-3', offset: -100 }" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-3', offset: -140 }" class="a_top_hypers">5 reasons to be age-friendly</router-link>
         </li>
       </ul>
     </div>

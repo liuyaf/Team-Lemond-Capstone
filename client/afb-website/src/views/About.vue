@@ -232,11 +232,6 @@ export default {
           mediaTextBlocks[0].children[1].innerHTML;
 
         // FIVE REASONS
-        // grabbing the header image
-        this.fiveReasonsHeaderImage = this.parsedHTML.getElementsByClassName(
-          "five-reasons-header-image"
-        )[0].children[0].src;
-
         // getting the five reasons to age friendly section
         var reasonCardColors = [
           "#CC3E16",
