@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div>
+    <div class="pb-1">
       <div class="row">
         
         <!-- Bootstrap Modal for Accessibility information -->
