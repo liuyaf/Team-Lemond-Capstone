@@ -32,7 +32,8 @@ let employerSchema = mongoose.Schema({
         transform: function (doc, ret) {
             delete ret._id;
         }
-    }
+    },
+    versionKey: false
 })
 
 
