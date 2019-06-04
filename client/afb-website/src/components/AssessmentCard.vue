@@ -1,13 +1,25 @@
 <template>
-    <div class="paddingSection testBoxes col-lg-6 d-flex">
-        <div>
-            <span class="testTextHeaders" v-html="content.headerHTML"></span>
+    <div class="col-lg-6 d-flex pl-0">
+        <div class="paddingSection testBoxes">
+            <!-- header -->
+            <span 
+                :class="{assessmentEnlarge: enlargeFont}" 
+                class="testTextHeaders" 
+                v-html="content.headerHTML"
+            ></span>
             <hr class="testHeaderLine">
             <br>
-            <p class="textParagraphs" v-html="content.paragraph"></p>
+            
+            <!-- paragraph -->
+            <p 
+                :class="{assessmentEnlarge: enlargeFont}" 
+                class="textParagraphs" v-html="content.paragraph"
+            ></p>
             <br>
             <br>
-            <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route }"/>
+            
+            <!-- DynamicButton component that leads to the 'resources' route -->
+            <DynamicButton :enlargeFont="enlargeFont" v-bind:buttonInfo="{ color: '#CC3E16', text:buttonText, destination:'/' + content.route, isUrl: false }"/>
         </div>
     </div>
 </template>
@@ -15,9 +27,16 @@
 <script>
 import DynamicButton from '@/components/DynamicButton.vue'
 
+// This components receives props that were parsed from the WordPress API
+// See About.vue to see how the contents were parsed
+
+// Components that use it
+//  - About.vue
+//  - AssessmentSelection.vue
+
 export default {
     name: 'AssessmentCard',
-    props: ['content'],
+    props: ['content', 'enlargeFont'],
     components: {
         DynamicButton
     },
@@ -44,6 +63,20 @@ export default {
 
 .testTextHeaders >>> h4 {
     font-size: calc(18px + 1vw);
+}
+
+.assessmentEnlarge >>> h4 { /* on enlarge button */
+    font-size: calc(30px + 1vw);
+}
+
+.assessmentEnlarge.textParagraphs { /* on enlarge button */
+    font-size: calc(15px + 0.8vw);
+}
+
+@media (max-width: 992px) {
+    .testBoxes {
+        margin-top: 10px;
+    }
 }
 
 .textParagraphs {

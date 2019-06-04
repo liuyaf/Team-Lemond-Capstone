@@ -1,18 +1,36 @@
 <template>
     <div class="discountCard row py-5">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 d-flex">
+
+        <!-- sticker image -->
+        <div class="discountFrame col-xs-12 col-sm-12 col-md-12 col-lg-4 d-flex">
             <div class="mx-auto">
                 <img class="stickerImage" v-bind:src="content.image">
             </div>
         </div>
+
+        <!-- the card content -->
         <div class="discountContent col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <div class="applySticker">
-                <span class="sticker-h" v-html="content.header"></span>
+
+                <!-- header -->
+                <span 
+                    :class="{stickerEnlarge: enlargeFont}" 
+                    class="sticker-h" 
+                    v-html="content.header"
+                >
+                </span>
                 <br>
-                <p class="textParagraphs">{{ content.paragraph }}</p>
+
+                <!-- paragraph -->
+                <p 
+                    :class="{stickerEnlarge: enlargeFont}" 
+                    class="textParagraphs"
+                >
+                    {{ content.paragraph }}
+                </p>
                 <br>
                 <br>
-                <DynamicButton v-bind:buttonInfo="{ color: '#CC3E16', text:'More Info', destination:'/#' }"/>
+                <DynamicButton :enlargeFont="enlargeFont" v-bind:buttonInfo="{ color: '#CC3E16', text: content.button.text , destination: content.button.url, isUrl: true }"/>
             </div>
         </div>
     </div>
@@ -21,9 +39,15 @@
 <script>
 import DynamicButton from '@/components/DynamicButton.vue'
 
+// This components receives props that were parsed from the Wordpress API. 
+// See About.vue to see how the contents were parsed
+
+// Components that uses it:
+//  - About.vue
+
 export default {
     name: 'ApplyStickerCard',
-    props: ['content'],
+    props: ['content', 'enlargeFont'],
     components: {
         DynamicButton
     },
@@ -52,9 +76,27 @@ export default {
     font-family: 'DDINRegular';
 }
 
+.stickerEnlarge >>> h3 { /* on enlarge button */
+    font-size: calc(30px + 1vw);
+}
+
+.stickerEnlarge.textParagraphs { /* on enlarge button */
+    font-size: calc(15px + .8vw);
+}
+
 .discountContent {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.stickerImage {
+    width: 100%;
+}
+
+@media(max-width: 992px) {
+    .discountFrame {
+        margin-bottom: 20px;
+    }
 }
 
 </style>

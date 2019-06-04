@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown">
-    <h3 :style="enlarge? {fontSize:'36px'}:{}">{{Content.title}}</h3>
+    <h3 :style="enlarge? {fontSize:'calc(20px + 1vw)'}:{}">{{Content.title}}</h3>
     <el-select
       v-model="value"
       placeholder="Select"
@@ -33,7 +33,11 @@ export default {
     };
   },
   activated() {
-    if (this.oldVal !== undefined && this.oldVal.length !== 0) {
+    if (
+      this.oldVal !== undefined &&
+      this.oldVal !== null &&
+      this.oldVal.length !== 0
+    ) {
       this.value = this.oldVal;
     }
   }
@@ -44,6 +48,7 @@ export default {
 h3 {
   text-align: center;
   padding-bottom: 15px;
+  font-size: calc(15px + 1vw);
 }
 .dropdown {
   display: flex;

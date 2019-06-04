@@ -12,10 +12,10 @@
       <div class="reasons reasonDivs">
         <!-- small icon and button -->
         <div class="paddingSection container-fluid row">
-          <div class="mediaContent paddingSection" v-html="content.content"></div>
+          <div :class="{ reasonEnlarge: enlargeFont }" class="mediaContent paddingSection" v-html="content.content"></div>
           <div class="paddingSection">
             <DynamicButton
-              v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources'}"
+              v-bind:buttonInfo="{ color:content.buttonColor, text: '', destination:'/resources', isUrl: false}"
             ></DynamicButton>
           </div>
         </div>
@@ -29,9 +29,15 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DynamicButton from "@/components/DynamicButton.vue";
 
+// This component receives props that were parsed from the Wordpress API
+// See About.vue to see how the contents were parsed
+
+// Components that use it:
+//  - About.vue
+
 export default {
   name: "MediaTextCard",
-  props: ["content"],
+  props: ["content", "enlargeFont"],
   components: {
     DynamicButton
   },
@@ -68,6 +74,25 @@ export default {
   list-style-type: initial;
   font-size: calc(10px + 0.8vw);
   line-height: 2rem;
+}
+
+@media(max-width: 991px) {
+  .mediaContent >>> ul {
+    line-height: 1.5rem;
+  }
+}
+
+.reasonEnlarge >>> h3 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.reasonEnlarge >>> ul { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
+  line-height: 2.5rem;
+} 
+
+.reasonEnlarge >>> p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 .reasonRow {

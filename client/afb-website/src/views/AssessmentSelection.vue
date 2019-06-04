@@ -5,16 +5,23 @@
       <div class="intro paddingSection">
         <div class="row">
           <div class="col-sm-12 col-lg-6">
-            <span class="intro-h" v-html="introSection.header"></span>
+            <span 
+              :class="{ introEnlarge: enlargeFont }"
+              class="intro-h" 
+              v-html="introSection.header"
+            ></span>
             <br>
-            <p class="intro-p">{{ introSection.paragraph }}</p>
+            <p 
+              :class="{ introEnlarge: enlargeFont }"
+              class="intro-p"
+              >{{ introSection.paragraph }}</p>
           </div>
 
           <div class="col-sm-12 col-lg-6">
             <img
               v-bind:src="introSection.image"
               class="introImage"
-              alt="Two older adults sitting around a table high fiving each other"
+              alt="6 adults sitting around a table having a meeting"
             >
           </div>
         </div>
@@ -30,7 +37,8 @@
           <AssessmentCard
             v-for="(item) in howToBecomeAfbSection.assessmentCards"
             :key="item.id"
-            v-bind:content="item"
+            :content="item"
+            :enlargeFont="enlargeFont"
           />
         </div>
       </div>
@@ -43,9 +51,14 @@
 import axios from "axios";
 import AssessmentCard from "@/components/AssessmentCard.vue";
 
+// This component has parsed content coming from the WordPress API.
+// It represents the Assessment Selection page in the landing page.
+// More info about WordPress API: https://developer.wordpress.org/rest-api/
+// URL to the page content on the WordPress API: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/206
 
 export default {
   name: "assessmentSelection",
+  props: ['enlargeFont'],
   components: {
     AssessmentCard
   },
@@ -72,7 +85,7 @@ export default {
   },
   mounted() {
     axios
-      // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/30
+      // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/206
       .get("https://agefriendlysea.wpengine.com/wp-json/wp/v2/pages/206")
       .then(response => {
         // RAW HTML
@@ -90,7 +103,7 @@ export default {
           mediaTextBlocks[0].children[1].children[0].outerHTML;
         // image
         this.introSection.image =
-          mediaTextBlocks[0].children[0].children[0].src;
+          mediaTextBlocks[0].children[0].children[0].src.replace(/^http:\/\//i, 'https://');
         // paragraph
         this.introSection.paragraph =
           mediaTextBlocks[0].children[1].children[1].innerText;
@@ -166,6 +179,14 @@ main {
 .intro-p {
   font-family: "DDINRegular";
   font-size: calc(10px + 0.8vw);
+}
+
+.introEnlarge >>> h2 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.introEnlarge.intro-p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 /*Assessment selection section*/

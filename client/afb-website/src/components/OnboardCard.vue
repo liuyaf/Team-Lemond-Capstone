@@ -1,23 +1,28 @@
 <template>
+  <!-- onboard card -->
   <div
     class="card"
-    :style="{ 'background-image': 'url(' + require(`@/assets/onboard-background.svg`) + ')'}"
+    :style="{ 'background-image': 'url(' + require(`@/assets/` + this.currentElement.backgroundImage) + ')'}"
   >
+    <!-- a skip button that goes straight tot he assessment -->
     <span class="skip">
       <el-button size="medium" @click="$emit('skipOnboard')">Skip</el-button>
     </span>
 
+    <!-- a dynamic onboard image -->
     <img
       class="pl-3 pr-3"
       :src="require(`@/assets/${this.currentElement.imgName}`)"
       alt="onboard image"
     >
 
+    <!-- a dynamic onboard card content -->
     <div class="card-content mt-4">
       <h3 class="headline text-center">{{this.currentElement.headline}}</h3>
-      <p class="text-center mt-4">{{this.currentElement.text}}</p>
+      <p class="text-center mt-4" v-html="this.currentElement.text"></p>
     </div>
 
+    <!-- onboard navigation -->
     <div class="bottom-control">
       <!-- the dot indicators -->
       <div class="row">
@@ -31,6 +36,7 @@
         </ul>
       </div>
 
+      <!-- back button, next button, and start button -->
       <div class="navigation">
         <!-- back button -->
         <el-button
@@ -61,6 +67,11 @@
 </template>
 
 <script>
+// This component is used for the assessment and it is rendered at the beginning of the assessment after the terms of agreement.
+
+// Components that use it:
+//  - Assessment.vue
+
 export default {
   name: "OnboardCard",
   data() {
@@ -69,24 +80,36 @@ export default {
       cards: [
         {
           cardId: 1,
-          headline: "Welcome to the Assessment",
+          headline: "Welcome to the assessment",
           text:
             "There are many age-friendly practices that many business leaders miss. Take our assessment to find out if your business applies age-friendly practices!",
-          imgName: "onboard-image-1.svg"
+          imgName: "onboard-image-1.svg",
+          backgroundImage: "onboarding-bg-1.svg"
         },
         {
           cardId: 2,
-          headline: "During the Assessment...",
+          headline: "During the assessment...",
           text:
-            "You will first answer three basic business question. Then, you will need to complete multiple sets of questions about age-friendly practices. This Assessment will take roughly about 15 minutes to complete.",
-          imgName: "onboard-image-2.svg"
+            "You will first answer three basic business questions. Then, you will need to complete multiple sets of questions about age-friendly practices. This Assessment will take roughly about 15 minutes to complete.",
+          imgName: "onboard-image-2.svg",
+          backgroundImage: "onboarding-bg-2.svg"
         },
         {
           cardId: 3,
-          headline: "After completing the Assessment...",
+          headline: "After completing the assessment...",
           text:
             "After submitting your assessment, you will get a final score, along with relevant age-friendly tips. If you would like to keep your result and tips, be sure to hit the download button on the result page.",
-          imgName: "onboard-image-3.svg"
+          imgName: "onboard-image-3.svg",
+          backgroundImage: "onboarding-bg-3.svg"
+
+        },
+        {
+          cardId: 4,
+          headline: "Navigation with your keyboard...",
+          text:
+            "You can move through the next or previous question using the <strong>LEFT</strong> and <strong>RIGHT</strong> arrow key on your keyboard and answer yes or no using the <strong>Y</strong> and <strong>N</strong> key.",
+          imgName: "onboard-image-4.svg",
+          backgroundImage: "onboarding-bg-4.svg"
         }
       ]
     };
@@ -120,10 +143,9 @@ export default {
   position: absolute;
   font-family: "DDINRegular";
   font-size: 24px;
-  /* -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
   background-repeat: no-repeat;
   background-size: cover;
+  background-position-y: -30vh;
 }
 
 .skip {
@@ -152,6 +174,8 @@ export default {
 
 img {
   height: 244px;
+  display: inline-block;
+  width:100%;
 }
 
 .el-button {
@@ -174,6 +198,11 @@ img {
 
 .navigation {
   display: flex;
+  margin-bottom: 4%;
+}
+
+.onboard-button:first-child {
+  margin-left: 2%;
 }
 
 .onboard-button {
@@ -183,6 +212,14 @@ img {
 .row {
   padding-top: 45px;
   width: 100%;
+}
+
+.bottom-control > .row {
+  margin: 0;
+}
+
+.bottom-control {
+  margin-top: auto;
 }
 </style>
 

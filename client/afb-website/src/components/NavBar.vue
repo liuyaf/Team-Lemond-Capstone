@@ -15,8 +15,15 @@
           >
         </router-link>
 
-        <!-- hamburger menu button -->
+        <!-- font enlarge and hamburger menu button -->
         <div class="hamburgerMenu justify-content-end pr-2">
+          <button class="navbar-toggler"  v-on:click="toggleFontSize">
+            <img
+              src="@/assets/font-change-button.svg"
+              alt="Enlarge font button"
+            >
+          </button>
+
           <button
             class="navbar-toggler"
             type="button"
@@ -25,19 +32,21 @@
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            @click="navBarExpanded = !navBarExpanded"
           >
-            <img src="@/assets/hamburger-menu.svg" class="svgButton" alt="Hamburger Button">
+            <img v-if="!navBarExpanded" src="@/assets/hamburger-menu.svg" alt="Hamburger Button">
+            <img v-if="navBarExpanded" src="@/assets/exit.svg" alt="Collapse Hamburger Button">
           </button>
         </div>
       </div>
 
       <!-- desktop navbar -->
       <div class="container col-lg-6 col-md-6 align-self-center justify-content-center">
-        <div id="nav">
-          <router-link class="navSpacing navDisplay" to="/" exact>About</router-link>
-          <router-link class="navSpacing navDisplay" to="/resources">Resources</router-link>
+        <div id="nav" :class="{ navbarEnlarge: enlargeFont }">
+          <router-link class="navSpacing navDisplay" to="/" exact v-on:click.native="aboutIsHidden = !aboutIsHidden, resourceIsHidden = false">About</router-link>
+          <router-link class="navSpacing navDisplay" to="/resources" v-on:click.native="resourceIsHidden = !resourceIsHidden, aboutIsHidden = false">Resources</router-link>
           <a
-            href="https://www.seattle.gov/agefriendly/about/discount-program"
+            href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank"
             class="navSpacing navDisplay"
           >Discount Program</a>
           <router-link class="navSpacing navDisplay" to="/contact-us">Contact Us</router-link>
@@ -47,69 +56,74 @@
       <!-- change font button and take assessment button -->
       <div class="container d-flex col-lg-3 col-md-3 align-self-center pl-0">
         <div class="col-12 px-1 d-flex justify-content-end">
-          <img
-            src="@/assets/font-change-button.svg"
-            class="navBtnImg ml-2 svgButton navDisplay"
-            alt="Assessment test button"
-          >
-          <router-link class="navSpacing navDisplay" to="/assessment-selection">
+          <button class="font-enlarge"  v-on:click="toggleFontSize">
             <img
-              src="@/assets/navbar-assessment-button.svg"
-              class="navBtnImg ml-2 svgButton navDisplay"
-              alt="Assessment test button"
+              src="@/assets/font-change-button.svg"
+              class="navBtnImg ml-2 navDisplay"
+              alt="Font enlarge button"
             >
-          </router-link>
+          </button>
+          
+          <button class="take-assessment" @click="gotosite('/assessment-selection')">
+            <router-link class="navSpacing navDisplay" to="/assessment-selection">
+              <img
+                src="@/assets/navbar-assessment-button.svg"
+                class="navBtnImg ml-2 navDisplay"
+                alt="Assessment test button"
+              >
+            </router-link>
+          </button>
         </div>
       </div>
 
       <!-- collapsing on the mobile navbar -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="hamburgerNav navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link to="/" exact>About</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/" data-toggle="collapse" data-target="#navbarSupportedContent" exact>About</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/resources">Resources</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/resources" data-toggle="collapse" data-target="#navbarSupportedContent">Resources</router-link>
           </li>
-          <li class="nav-item">
-            <a href="https://www.seattle.gov/agefriendly/about/discount-program">Discount Program</a>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <a href="https://www.seattle.gov/agefriendly/about/discount-program/" target="_blank" >Discount Program</a>
           </li>
-          <li class="nav-item">
-            <router-link to="/contact-us">Contact Us</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/contact-us" data-toggle="collapse" data-target="#navbarSupportedContent">Contact Us</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/assessment-selection">Assessment Test</router-link>
+          <li class="nav-item" @click="navBarExpanded = false">
+            <router-link to="/assessment-selection" data-toggle="collapse" data-target="#navbarSupportedContent">Assessment Test</router-link>
           </li>
         </ul>
       </div>
     </nav>
 
     <!-- sub tab for about -->
-    <div v-if="$route.name == 'about'" class="div_top_hypers">
-      <ul class="ul_top_hypers">
+    <div v-if="$route.name == 'about'" v-show="aboutIsHidden" class="div_top_hypers">
+      <ul class="ul_top_hypers" :class="{ subtabEnlarge: enlargeFont }">
         <li>
-          <router-link to="/" v-scroll-to="'#about-1'" class="a_top_hypers">What is Age Friendly ?</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-1', offset: -110 }" class="a_top_hypers">What is Age-Friendly ?</router-link>
         </li>
         <li>
-          <router-link to="/" v-scroll-to="'#about-2'" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-2', offset: -50 }" class="a_top_hypers">5 reasons to become Age-Friendly</router-link>
         </li>
         <li>
-          <router-link to="/" v-scroll-to="'#about-3'" class="a_top_hypers">How to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-3', offset: -110 }" class="a_top_hypers">How to become Age-Friendly</router-link>
         </li>
       </ul>
     </div>
 
     <!-- sub tab for resource -->
-    <div v-if="$route.name == 'resources'" class="div_top_hypers">
-      <ul class="ul_top_hypers">
+    <div v-if="$route.name == 'resources'" v-show="resourceIsHidden" class="div_top_hypers">
+      <ul class="ul_top_hypers" :class="{ subtabEnlarge: enlargeFont }">
         <li>
-          <router-link to="#" v-scroll-to="'#resource-1'" class="a_top_hypers">Resource Guide</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-1', offset: -100 }" class="a_top_hypers">Resource Guide</router-link>
         </li>
         <li>
-          <router-link to="#" v-scroll-to="'#resource-2'" class="a_top_hypers">Age Friendly Seattle</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-2', offset: -150 }" class="a_top_hypers">Age Friendly Seattle</router-link>
         </li>
         <li>
-          <router-link to="#" v-scroll-to="'#resource-3'" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-3', offset: -140 }" class="a_top_hypers">5 reasons to be Age-Friendly</router-link>
         </li>
       </ul>
     </div>
@@ -121,8 +135,31 @@
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// This components is visible in all the landing page routes
+
+// Components that use it:
+//  - App.vue
+
 export default {
-  name: "NavBar"
+  name: "NavBar",
+  data () {
+    return {
+      enlargeFont: false,
+      aboutIsHidden: true,
+      resourceIsHidden: false,
+      navBarExpanded: false
+    }
+  },
+  methods: {
+    toggleFontSize: function() {
+      this.enlargeFont = !this.enlargeFont
+      // console.log(this.enlargeFont)
+      this.$emit('fontToggled', this.enlargeFont)
+    },
+    gotosite(producturl){
+      this.$router.push(producturl);      
+    }
+  }
 };
 </script>
 
@@ -178,7 +215,9 @@ nav {
 }
 
 .navImg {
+  min-height: 1px; /* ie fix???? */
   width: 240px;
+  display: inline-block;
 }
 
 @media (max-width: 930px) {
@@ -198,10 +237,6 @@ nav {
 }
 
 @media (max-width: 992px) {
-  .navBtnImg {
-    width: 150px;
-  }
-
   #phoneDisplay {
     padding-left: 10px;
   }
@@ -238,6 +273,35 @@ nav {
 
 .ul_top_hypers li a {
   color: black;
+}
+
+.take-assessment, .font-enlarge {
+  border: none;
+  padding: 0;
+  background-color: white;
+}
+
+.subtabEnlarge { /* on enlarge button */
+  font-size: calc(8px + 1vw);
+}
+
+#nav.navbarEnlarge > a { /* on enlarge button */
+  font-size: calc(10px + 1vw);
+}
+
+/* for mobile screen width */
+@media (max-width: 400px) {
+  .navbar-toggler img {
+    width: 30px;
+  }
+
+  .navbar-toggler {
+    padding: 12px 8px;
+  }
+
+  #phoneDisplay {
+    padding-left: 0;
+  }
 }
 </style>
 

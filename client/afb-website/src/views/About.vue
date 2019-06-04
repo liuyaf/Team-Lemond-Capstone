@@ -1,5 +1,6 @@
 <template>
   <div id="about">
+
     <!-- intro section -->
     <div
       class="mainImage jumbotron jumbotron-fluid"
@@ -8,33 +9,33 @@
       <div class="container mx-0">
         <div class="mainHeader">
           <div class="col-xl-8 col-lg-9 col-md-11">
-            <span class="intro-h" v-html="introSection.heading"></span>
+            <span :class="{introEnlarge: enlargeFont}" class="intro-h" v-html="introSection.heading"></span>
           </div>
           <div class="col-lg-12 col-md-12 mt-3">
-            <span class="intro-p" v-html="introSection.text"></span>
+            <span :class="{introEnlarge: enlargeFont}" class="intro-p" v-html="introSection.text"></span>
           </div>
           <div class="col-lg-7 col-md-8 mt-3">
             <DynamicButton
-              v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection' }"
+              :enlargeFont="enlargeFont"
+              v-bind:buttonInfo="{ color: 'white', text:'Assessment Test', destination:'/assessment-selection', isUrl: false }"
             />
           </div>
         </div>
       </div>
     </div>
-
+    
     <!-- fact section -->
     <div class="facts">
       <div class="row mx-auto paddingSection">
         <div class="col-sm-12 col-md-6 d-flex" v-for="(item) in factSection" :key="item.id">
           <div class="fact-body">
             <hr class="factLine">
-            <div class="fact-h enlarge" v-html="item.header"></div>
-            <!-- <p><span v-html="item.text"></span></p> -->
-            <p class="fact-p">{{ item.text }}</p>
+            <div :class="{factEnlarge: enlargeFont}" class="fact-h" v-html="item.header"></div>
+            <p :class="{factEnlarge: enlargeFont}" class="fact-p">{{ item.text }}</p>
           </div>
         </div>
       </div>
-    </div>
+    </div>  
 
     <!-- misson section -->
     <a id="about-1"></a>
@@ -42,10 +43,11 @@
       <div class="row mx-auto">
         <div class="col-sm-12 col-md-6">
           <div>
-            <div class="missionContent" v-html="missionSection.paragraphs"></div>
+            <div :class="{missionEnlarge: enlargeFont}" class="missionContent" v-html="missionSection.paragraphs"></div>
             <DynamicButton
+              :enlargeFont="enlargeFont"
               class="mb-4"
-              v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources' }"
+              v-bind:buttonInfo="{ color:'#CC3E16', text:'Resource Guide', destination:'/resources', isUrl: false }"
             />
           </div>
         </div>
@@ -63,13 +65,14 @@
       <a id="about-2"></a>
       <img
         class="five-reasons-image-header"
-        v-bind:src="fiveReasonsHeaderImage"
+        src="../assets/5reason.svg"
         alt="five reasons to become age friendly"
       >
       <MediaTextCard
         v-for="(item) in fiveReasonsSection"
         :key="item.reasonId"
-        v-bind:content="item"
+        :content="item"
+        :enlargeFont="enlargeFont"
       />
     </div>
 
@@ -77,21 +80,35 @@
     <a id="about-3"></a>
     <div class="how-to-become-afb paddingSection">
       <hr class="testLine">
-      <h3 class="textHeaders">{{ howToBecomeAfbSection.header[0] }}</h3>
-      <p class="textParagraphs">{{ howToBecomeAfbSection.header[1] }}</p>
+      <h3 
+        :class="{assessmentEnlarge: enlargeFont}" 
+        class="textHeaders"
+      >
+        {{ howToBecomeAfbSection.header[0] }}
+      </h3>
+      <p 
+        :class="{assessmentEnlarge: enlargeFont}" 
+        class="textParagraphs"
+      >
+        {{ howToBecomeAfbSection.header[1] }}
+      </p>
       <br>
       <div class="row mx-auto">
         <AssessmentCard
           v-for="(item) in howToBecomeAfbSection.assessmentCards"
           :key="item.id"
           v-bind:content="item"
+          :enlargeFont="enlargeFont"
         />
       </div>
     </div>
 
     <!-- apply for sticker -->
     <div class="apply-for-sticker paddingSection">
-      <ApplyStickerCard v-bind:content="applyStickerSection"/>
+      <ApplyStickerCard 
+        :content="applyStickerSection"
+        :enlargeFont="enlargeFont"
+      />
     </div>
   </div>
 </template>
@@ -106,8 +123,14 @@ import AssessmentCard from "@/components/AssessmentCard.vue";
 import DynamicButton from "@/components/DynamicButton.vue";
 import ApplyStickerCard from "@/components/ApplyStickerCard.vue";
 
+// This component has parsed content coming from the WordPress API.
+// It represents the About page in the landing page.
+// More info about WordPress API: https://developer.wordpress.org/rest-api/
+// URL to the page content on the WordPress API: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
+
 export default {
   name: "about",
+  props: ['enlargeFont'],
   components: {
     MediaTextCard,
     AssessmentCard,
@@ -150,7 +173,7 @@ export default {
   },
   mounted() {
     axios
-      // JSON object from the WprdPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
+      // JSON object from the WordPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/37
       .get("https://agefriendlysea.wpengine.com/wp-json/wp/v2/pages/37")
       .then(response => {
         // RAW HTML
@@ -203,17 +226,12 @@ export default {
         // parsing content for the mission section of the landing page
         // grabbing the image src
         this.missionSection.image =
-          mediaTextBlocks[0].firstElementChild.children[0].src;
+          mediaTextBlocks[0].firstElementChild.children[0].src.replace(/^http:\/\//i, 'https://');
         // grabbing the paragraph for the mission section
         this.missionSection.paragraphs =
           mediaTextBlocks[0].children[1].innerHTML;
 
         // FIVE REASONS
-        // grabbing the header image
-        this.fiveReasonsHeaderImage = this.parsedHTML.getElementsByClassName(
-          "five-reasons-header-image"
-        )[0].children[0].src;
-
         // getting the five reasons to age friendly section
         var reasonCardColors = [
           "#CC3E16",
@@ -233,7 +251,7 @@ export default {
           };
           reason.reasonId = "reason-" + s;
           reason.className = mediaTextBlocks[s].className;
-          reason.bigImage = mediaTextBlocks[s].children[0].children[0].src;
+          reason.bigImage = mediaTextBlocks[s].children[0].children[0].src.replace(/^http:\/\//i, 'https://');
           reason.buttonColor = reasonCardColors[s - 1];
           reason.content = mediaTextBlocks[s].children[1].innerHTML;
           this.fiveReasonsSection.push(reason);
@@ -287,7 +305,7 @@ export default {
         this.applyStickerSection.image =
           mediaTextBlocks[
             mediaTextBlocks.length - 1
-          ].children[0].children[0].src;
+          ].children[0].children[0].src.replace(/^http:\/\//i, 'https://');
         // paragraph
         this.applyStickerSection.paragraph =
           mediaTextBlocks[
@@ -311,6 +329,10 @@ export default {
 
 <style scoped>
 /* general styling for the page */
+#about {
+  margin-top: 80px;
+}
+
 .paddingSection {
   padding-left: 5%;
   padding-right: 5%;
@@ -320,7 +342,7 @@ export default {
 
 /* intro content */
 .mainImage {
-  background-position: center;
+  background-position-x: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 600px;
@@ -342,6 +364,14 @@ export default {
 .intro-p >>> p {
   font-family: "Fjalla One";
   font-size: 18px;
+}
+
+.introEnlarge >>> h3 { /* on enlarge button */
+  font-size: 32px;
+}
+
+.introEnlarge >>> p { /* on enlarge button */
+  font-size: 22px;
 }
 
 @media (max-width: 992px) {
@@ -381,7 +411,7 @@ export default {
   margin-left: 0;
 }
 
-.fact-h >>> h3 {
+.fact-h >>> h3 { 
   font-size: calc(18px + 1vw);
 }
 
@@ -395,6 +425,19 @@ export default {
   font-size: calc(10px + 0.8vw);
 }
 
+
+.factEnlarge >>> h3 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.factEnlarge >>> span { /* on enlarge button */
+  font-size: calc(45px + 1vw);
+}
+
+p.fact-p.factEnlarge { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
+}
+
 /* mission content */
 .mission {
   position: relative;
@@ -404,6 +447,7 @@ export default {
 .missionImage img {
   display: block; /*remove inline-block spaces*/
   width: 80%; /*make image streatch*/
+  margin-left: auto;
 }
 
 @media (max-width: 1200px) {
@@ -426,6 +470,14 @@ export default {
 .missionContent >>> p {
   font-family: "DDINRegular";
   font-size: calc(10px + 0.8vw);
+}
+
+.missionEnlarge >>> h3 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.missionEnlarge >>> p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 /* five reasons content */
@@ -463,6 +515,14 @@ export default {
 .textParagraphs {
   font-family: "DDINRegular";
   font-size: calc(10px + 0.8vw);
+}
+
+.assessmentEnlarge.textHeaders { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.assessmentEnlarge.textParagraphs { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 /* sticker */

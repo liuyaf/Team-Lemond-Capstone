@@ -6,10 +6,22 @@
       <div class="intro paddingSection">
         <div class="row">
             <div class="col-sm-12 col-lg-6">
-              <span class="intro-h" v-html="introSection.header"></span>
+              <span 
+                :class="{ introEnlarge: enlargeFont }"
+                class="intro-h" 
+                v-html="introSection.header"
+              ></span>
               <br>
-              <p class="intro-p">{{ introSection.paragraph }}</p>
-              <DynamicUrlButton class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
+              <p 
+                :class="{ introEnlarge: enlargeFont }"
+                class="intro-p"
+              >{{ introSection.paragraph }}</p>
+              <DynamicUrlButton :enlargeFont="enlargeFont" class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
+              <p 
+                :class="{ introEnlarge: enlargeFont }"
+                class="intro-p" 
+                v-html="introSection.paragraph2">
+              </p>
             </div>
             <div class="col-sm-12 col-lg-6">
                 <img v-bind:src="introSection.image" class="introImage" alt="5 adults sitting and smiling at the camera">
@@ -19,12 +31,17 @@
       
       <!-- Age Friendly Seattle and Age Friendly Business Seattle -->
       <a id="resource-2"></a>
-      <div class="age-friendly paddingSection">
+      <div class="age-friendly paddingSection2">
         <div class="row">
-          <div class="col-sm-12 col-lg-6 mt-5" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
-            <span v-html="item.header"></span>
+          <div class="col-sm-12 col-lg-6" v-for="(item) in ageFriendlyTextBlocks" :key="item.id">
+            <span 
+              :class="{ agefriendlyEnlarge: enlargeFont }"
+              v-html="item.header"
+            ></span>
             <hr class="headerLine">
-            <p class="intro-p">
+            <p 
+              :class="{ introEnlarge: enlargeFont }"
+              class="intro-p">
               {{ item.paragraph }}
             </p>
           </div>
@@ -33,16 +50,24 @@
 
       <!-- five reasons to be age friendly -->
       <a id="resource-3"></a>
-      <div class="five-reasons-to-become-afb paddingSection">
-        <span v-html="fiveReasonsSection.header"></span>
+      <div class="five-reasons-to-become-afb paddingSection2">
+        <span 
+          :class="{ agefriendlyEnlarge: enlargeFont }"
+          v-html="fiveReasonsSection.header"
+        ></span>
         <hr class="headerLine">
 
-        <ReasonCard class="content" v-for="(item) in fiveReasonsSection.reasonContents" :key="item.reasonId" v-bind:content="item"/>
+        <ReasonCard 
+          :enlargeFont="enlargeFont"
+          class="content" 
+          v-for="(item) in fiveReasonsSection.reasonContents" 
+          :key="item.reasonId" 
+          :content="item"/>
       </div>
 
       <!-- download button -->
       <div class="row paddingSection">
-        <DynamicUrlButton class="mb-4 mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
+        <DynamicUrlButton :enlargeFont="enlargeFont" class="mb-4 mx-auto" v-bind:buttonInfo="{ color:'#155777', text: downloadResGuide.text, Url: downloadResGuide.url }"/>
       </div>
     
   </div>
@@ -56,8 +81,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import ReasonCard from '@/components/ReasonCard.vue'
 import DynamicUrlButton from '@/components/DynamicUrlButton.vue'
 
+// This component has parsed content coming from the WordPress API.
+// It represents the Resources page in the landing page.
+// More info about WordPress API: https://developer.wordpress.org/rest-api/
+// URL to the page content on the WordPress API: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/30
+
 export default {
   name: 'resources',
+  props: ['enlargeFont'],
   components: {
     ReasonCard,
     DynamicUrlButton
@@ -75,7 +106,8 @@ export default {
         button: {
           url: null,
           text: null
-        }
+        },
+        paragraph2: null
       },
       ageFriendlyTextBlocks: [],
       fiveReasonsSection: {
@@ -110,15 +142,15 @@ export default {
       // header
       this.introSection.header = mediaTextBlocks[0].children[1].children[0].outerHTML
       // image
-      this.introSection.image = mediaTextBlocks[0].children[0].children[0].src
+      this.introSection.image = mediaTextBlocks[0].children[0].children[0].src.replace(/^http:\/\//i, 'https://')
       // paragraph
       this.introSection.paragraph = mediaTextBlocks[0].children[1].children[1].innerText
       // button
       this.introSection.button.text = WPbuttons[0].innerText
       this.introSection.button.url = WPbuttons[0].attributes[1].nodeValue
+      // second paragraph after the download button
+      this.introSection.paragraph2 = mediaTextBlocks[0].children[1].children[3].innerHTML      
       
-
-
 
       // AGE FRIENDLY SEATTLE AND AGE FRIENDLY BUSINESS SEATTLE
       // tags with class name 'resource-header' contains the header "Age Friendly Seattle", "Age Friendly Business Seatlle", and "5 Reasons to be Age Friendly"
@@ -151,7 +183,7 @@ export default {
 
         card.reasonId = 'reason-' + j
         card.className = mediaTextBlocks[j].className
-        card.image = mediaTextBlocks[j].children[0].children[0].src
+        card.image = mediaTextBlocks[j].children[0].children[0].src.replace(/^http:\/\//i, 'https://')
         card.content = mediaTextBlocks[j].children[1].innerHTML
 
         this.fiveReasonsSection.reasonContents.push(card)
@@ -182,8 +214,10 @@ export default {
   padding-bottom: 3%;
 }
 
-.intro-h >>> h2 {
-  font-size: calc(18px + 1vw);
+.paddingSection2 {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 3%;
 }
 
 .intro-p, .content >>> .reasonContent p, .content >>> .reasonContent ul {
@@ -195,9 +229,25 @@ export default {
   font-size: calc(18px + 1vw);
 }
 
+.agefriendlyEnlarge >>> .resource-header { /* on enlarge button */
+  font-size: calc(24px + 1vw);
+}
+
 /* intro section */
 .introImage {
   width: 100%;
+}
+
+.intro-h >>> h2 {
+  font-size: calc(18px + 1vw);
+}
+
+.introEnlarge >>> h2 { /* on enlarge button */
+  font-size: calc(30px + 1vw);
+}
+
+.introEnlarge.intro-p { /* on enlarge button */
+  font-size: calc(15px + 0.8vw);
 }
 
 

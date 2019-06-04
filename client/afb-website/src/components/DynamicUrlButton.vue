@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button class="btn" v-bind:style="{ border: '2px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }">
-            <a v-bind:style="{ color: this.buttonInfo.color }" v-bind:href="this.buttonInfo.Url">
+        <button :class="{ buttonEnlarge: enlargeFont }" class="btn" v-bind:style="{ border: '4px ' + this.buttonInfo.color + ' solid', color: this.buttonInfo.color, 'border-radius': '0px' }" @click="gotosite(assignDestination)">
+            <a v-bind:style="{ color: this.buttonInfo.color }">
                 {{ this.buttonInfo.text }}
 
                 <!-- the svg for a download button -->
@@ -22,24 +22,41 @@
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default {
-    // A button components that goes to an external website
+// A button components that goes to an external website
     // parameters:
-    //  - color
-    //  - text
-    //  - Url
+    //  - color: String
+    //  - text: String
+    //  - Url: String
 
     // how to use:
     //      <DynamicUrlButton v-bind:buttonInfo="{ color:'black', text: 'button text', Url:'the url' }"/>
 
+    // Components that uses it
+    //  - Resources.vue
+
+export default {
     name: 'DynamicUrlButton',
-    props: ['buttonInfo']
+    props: ['buttonInfo', 'enlargeFont'],
+    methods: {
+        gotosite(producturl){
+            window.open(producturl);   
+        }
+    },
+    computed: {
+        assignDestination: function() {
+            return this.buttonInfo.Url;
+        }
+    }
 }
 </script>
 
 <style scoped>
     button {
         font-family: "Fjalla One";
+    }
+
+    .buttonEnlarge a {
+        font-size: calc(12px + 0.8vw);
     }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- nav bar -->
-    <NavBar v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"/>
+    <NavBar @fontToggled="setEnlargeBoolean($event)" v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"/>
 
     <!-- the views -->
     <main>
@@ -12,12 +12,15 @@
         @enter="enter"
         @afterEnter="afterEnter"
        >
-        <router-view/>
+        <router-view :enlargeFont="enlargeFont"/>
       </transition>
     </main>
 
     <!-- footer -->
-    <Footer v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"/>
+    <Footer
+      v-if="$route.name == 'about' || $route.name == 'resources' || $route.name == 'selection' || $route.name == 'contact'"
+      :enlargeFont="enlargeFont"
+    />
 
     <!-- back to top button -->
     <back-to-top visibleoffset="1500">
@@ -27,17 +30,18 @@
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue'
-import NavBar from '@/components/NavBar.vue'
+import Footer from "@/components/Footer.vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   components: {
     Footer,
-    NavBar,
+    NavBar
   },
   data() {
     return {
       prevHeight: 0,
+      enlargeFont: false
     };
   },
   methods: {
@@ -56,6 +60,9 @@ export default {
     afterEnter(element) {
       element.style.height = 'auto';
     },
+    setEnlargeBoolean(e) {
+      this.enlargeFont = e;
+    }
   }
 };
 </script>
@@ -73,26 +80,34 @@ export default {
   overflow-x: hidden;
 }
 
-
 /* transition animation */
 .fade-enter-active,
 .fade-leave-active {
-   transition-duration: 0.3s;
+  transition-duration: 0.3s;
   transition-property: opacity;
   transition-property: height, opacity;
-   transition-timing-function: ease;
+  transition-timing-function: ease;
   overflow: hidden;
 }
 
 .fade-enter,
 .fade-leave-active {
-  opacity: 0
+  opacity: 0;
 }
-
 
 /* back to top button */
 .btt-button {
   width: 100px;
+}
+
+@font-face {
+  font-family: "DDINRegular";
+  src: url('./assets/D-DIN.eot'); /* IE9 Compat Modes */
+  src: url('./assets/D-DIN.eot?#iefix') format('embedded-opentype'); /* IE6-IE8 */
+  src: url("./assets/D-DIN.otf") format('opentype'),
+  url('./assets/D-DIN.woff2') format('woff2'), /* Super Modern Browsers */
+  url('./assets/D-DIN.woff') format('woff'), /* Pretty Modern Browsers */
+  url('./assets/D-DIN.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
 @media (max-width: 768px) {
