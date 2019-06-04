@@ -102,13 +102,13 @@
     <div v-if="$route.name == 'about'" v-show="aboutIsHidden" class="div_top_hypers">
       <ul class="ul_top_hypers" :class="{ subtabEnlarge: enlargeFont }">
         <li>
-          <router-link to="/" v-scroll-to="{ el: '#about-1', offset: -110 }" class="a_top_hypers">What is Age Friendly ?</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-1', offset: -110 }" class="a_top_hypers">What is Age-Friendly ?</router-link>
         </li>
         <li>
-          <router-link to="/" v-scroll-to="{ el: '#about-2', offset: -50 }" class="a_top_hypers">5 reasons to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-2', offset: -50 }" class="a_top_hypers">5 reasons to become Age-Friendly</router-link>
         </li>
         <li>
-          <router-link to="/" v-scroll-to="{ el: '#about-3', offset: -110 }" class="a_top_hypers">How to become Age Friendly</router-link>
+          <router-link to="/" v-scroll-to="{ el: '#about-3', offset: -110 }" class="a_top_hypers">How to become Age-Friendly</router-link>
         </li>
       </ul>
     </div>
@@ -123,7 +123,7 @@
           <router-link to="/resources" v-scroll-to="{ el: '#resource-2', offset: -150 }" class="a_top_hypers">Age Friendly Seattle</router-link>
         </li>
         <li>
-          <router-link to="/resources" v-scroll-to="{ el: '#resource-3', offset: -140 }" class="a_top_hypers">5 reasons to be age-friendly</router-link>
+          <router-link to="/resources" v-scroll-to="{ el: '#resource-3', offset: -140 }" class="a_top_hypers">5 reasons to be Age-Friendly</router-link>
         </li>
       </ul>
     </div>
