@@ -55,144 +55,201 @@
     </form>-->
 
     <!-- contact form 7 version -->
-    <form @submit.prevent="submitForm">
-      <div class="container form-group row" :class="{ formEnlarge: enlargeFont }">
-        <div>
-          <label>
-            First Name*
-            <br>
-            <span class="wpcf7-form-control-wrap firstname">
-              <input
-                v-model="fName"
-                type="text"
-                name="firstname"
-                size="40"
-                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
-                aria-required="true"
-                aria-invalid="false"
-                required
-              >
-            </span>
-          </label>
-        </div>
-        <div class="ml-sm-4 ml-md-0 ml-lg-4">
-          <label>
-            Last Name*
-            <br>
-            <span class="wpcf7-form-control-wrap lastname">
-              <input
-                v-model="lName"
-                type="text"
-                name="lastname"
-                size="40"
-                class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
-                aria-required="true"
-                aria-invalid="false"
-                required
-              >
-            </span>
-          </label>
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <form @submit.prevent="submitForm">
+          <div class="container form-group row" :class="{ formEnlarge: enlargeFont }">
+            <div>
+              <label>
+                First Name*
+                <br>
+                <span class="wpcf7-form-control-wrap firstname">
+                  <input
+                    v-model="fName"
+                    type="text"
+                    name="firstname"
+                    size="40"
+                    class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                    aria-required="true"
+                    aria-invalid="false"
+                    required
+                  >
+                </span>
+              </label>
+            </div>
+            <div>
+              <label>
+                Last Name*
+                <br>
+                <span class="wpcf7-form-control-wrap lastname">
+                  <input
+                    v-model="lName"
+                    type="text"
+                    name="lastname"
+                    size="40"
+                    class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+                    aria-required="true"
+                    aria-invalid="false"
+                    required
+                  >
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="container form-group row" :class="{ formEnlarge: enlargeFont }">
+            <div>
+              <label>
+                Your Email*
+                <br>
+                <span class="wpcf7-form-control-wrap email">
+                  <input
+                    v-model="emailAddr"
+                    type="email"
+                    name="email"
+                    size="40"
+                    class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control"
+                    aria-required="true"
+                    aria-invalid="false"
+                    required
+                  >
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="container form-group row" :class="{ formEnlarge: enlargeFont }">
+            <div>
+              <label>
+                Phone
+                <br>
+                <span class="wpcf7-form-control-wrap phone">
+                  <input
+                    v-model="phone"
+                    type="tel"
+                    maxlength="12"
+                    name="phone"
+                    placeholder="123-456-7890"
+                    size="40"
+                    class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control"
+                    aria-invalid="false"
+                  >
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="container form-group row" :class="{ formEnlarge: enlargeFont }">
+            <div>
+              <label>
+                Company/Organization
+                <br>
+                <span class="wpcf7-form-control-wrap orgs">
+                  <input
+                    v-model="company"
+                    type="text"
+                    name="orgs"
+                    size="40"
+                    class="wpcf7-form-control wpcf7-text form-control"
+                    aria-invalid="false"
+                  >
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="container form-group row" :class="{ formEnlarge: enlargeFont }">
+            <div>
+              <label>
+                Your Message
+                <br>
+                <span class="wpcf7-form-control-wrap yourmessage">
+                  <textarea
+                    v-model="msgBody"
+                    name="yourmessage"
+                    cols="100"
+                    rows="10"
+                    class="wpcf7-form-control wpcf7-textarea form-control"
+                    aria-invalid="false"
+                  ></textarea>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <transition name="slide-fade" mode="out-in">
+            <p v-if="submitted">{{ success }}</p>
+            <p v-if="errorSubmit">{{ failed }}</p>
+          </transition>
+
+          <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
+            <div class="col-12 d-flex">
+              <button
+                :class="{ formEnlarge: enlargeFont }"
+                name="submit"
+                type="submit"
+                class="wpcf7-form-control wpcf7-submit btn btn-primary"
+              >Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="card">
+          <div class="card-header titleHeader">Seattle Business Resources</div>
+          <div class="card-body">
+            <ul>
+              <li>
+                <a
+                  class="card-title"
+                  href="http://www.seattle.gov/economicdevelopment/business-district-organizations-x76248"
+                >Business District Organizations (Seattle)</a>
+              </li>
+              <li>
+                <a
+                  class="card-title"
+                  href="http://www.seattle.gov/economicdevelopment"
+                >Office of Economic Development, City of Seattle</a>
+              </li>
+              <li>
+                <a
+                  class="card-title"
+                  href="https://www.spl.org/programs-and-services/business/business-resources"
+                >Seattle Public Library Business Resources</a>
+              </li>
+              <li>
+                <a
+                  class="card-title"
+                  href="https://www.sba.gov/offices/district/wa/seattle"
+                >U.S. Small Business Administration, Seattle Office</a>
+              </li>
+              <li>
+                <a
+                  class="card-title"
+                  href="http://wsbdc.org/"
+                >Washington Small Business Development Center</a>
+              </li>
+              <li>
+                <a
+                  class="card-title"
+                  href="http://www.seakingwdc.org/"
+                >Workforce Development Council of Seattle-King County</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
-        <div class="col-md-6">
-          <label>
-            Your Email*
-            <br>
-            <span class="wpcf7-form-control-wrap email">
-              <input
-                v-model="emailAddr"
-                type="email"
-                name="email"
-                size="40"
-                class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control"
-                aria-required="true"
-                aria-invalid="false"
-                required
-              >
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
-        <div class="col-md-6">
-          <label>
-            Phone
-            <br>
-            <span class="wpcf7-form-control-wrap phone">
-              <input
-                v-model="phone"
-                type="tel"
-                maxlength="12"
-                name="phone"
-                placeholder="123-456-7890"
-                size="40"
-                class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel form-control"
-                aria-invalid="false"
-              >
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
-        <div class="col-md-6">
-          <label>
-            Company/Organization
-            <br>
-            <span class="wpcf7-form-control-wrap orgs">
-              <input
-                v-model="company"
-                type="text"
-                name="orgs"
-                size="40"
-                class="wpcf7-form-control wpcf7-text form-control"
-                aria-invalid="false"
-              >
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
-        <div class="col-md-12">
-          <label>
-            Your Message
-            <br>
-            <span class="wpcf7-form-control-wrap yourmessage">
-              <textarea
-                v-model="msgBody"
-                name="yourmessage"
-                cols="100"
-                rows="10"
-                class="wpcf7-form-control wpcf7-textarea form-control"
-                aria-invalid="false"
-              ></textarea>
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <transition name="slide-fade" mode="out-in">
-        <p v-if="submitted">{{ success }}</p>
-        <p v-if="errorSubmit">{{ failed }}</p>
-      </transition>
-
-      <div class="form-group row" :class="{ formEnlarge: enlargeFont }">
-        <div class="col-12 d-flex">
-          <button
-            :class="{ formEnlarge: enlargeFont }"
-            name="submit"
-            type="submit"
-            class="wpcf7-form-control wpcf7-submit btn btn-primary"
-          >Submit</button>
-        </div>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
+
+Business District Organizations (Seattle)
+Office of Economic Development, City of Seattle
+Seattle Public Library Business Resources
+U.S. Small Business Administration, Seattle Office
+Washington Small Business Development Center
+Workforce Development Council of Seattle-King County
+
 
 <script>
 // @ is an alias to /src
@@ -227,7 +284,7 @@ export default {
       formInfo.set("phone", this.phone);
       formInfo.set("orgs", this.company);
       formInfo.set("yourmessage", this.msgBody);
-      
+
       axios({
         method: "post",
         url:
@@ -235,22 +292,22 @@ export default {
         data: formInfo,
         config: { headers: { "Content-Type": "multipart/form-data" } }
       })
-      .then(response => {
-        //handle success
-        this.submitted = true
-        this.success = response.data.message
-        this.fName = "";
-        this.lName = "";
-        this.emailAddr = "";
-        this.phone = "";
-        this.company = "";
-        this.msgBody = "";
-      })
-      .catch(error => {
-        //handle error
-        this.errorSubmit = true
-        this.failed = error.data.message
-      });
+        .then(response => {
+          //handle success
+          this.submitted = true;
+          this.success = response.data.message;
+          this.fName = "";
+          this.lName = "";
+          this.emailAddr = "";
+          this.phone = "";
+          this.company = "";
+          this.msgBody = "";
+        })
+        .catch(error => {
+          //handle error
+          this.errorSubmit = true;
+          this.failed = error.data.message;
+        });
     }
   }
 };
@@ -264,15 +321,10 @@ export default {
   margin-right: 125px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .contact {
     margin-left: 50px;
     margin-right: 50px;
-  }
-
-  .phoneDisplay {
-    padding-left: 0;
-    padding-right: 0;
   }
 }
 
@@ -290,5 +342,15 @@ export default {
 /* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+
+li {
+  font-size: calc(10px + 0.8vw);
+  font-family: "DDINRegular";
+}
+
+.titleHeader {
+  font-size: calc(12px + .8vw);
+  font-family: "DDINRegular";
 }
 </style>
