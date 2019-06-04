@@ -20,7 +20,7 @@
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "https": "^1.0.0",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.5.12",
     "mongoose-auto-increment": "^5.0.1"
   },
   "private": true

@@ -43,6 +43,6 @@ module.exports.addCustomerResult = function (result, callback) {
     Customer.create(obj, callback);
 }
 
-module.exports.getEmployerResults = function (callback) {
-    Employer.find(callback)
+module.exports.getCustomerResults = function (callback) {
+    Customer.find(callback)
 }

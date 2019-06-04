@@ -23,10 +23,10 @@ Customer = require("./models/customer");
 User = require("./models/user");
 
 const TLSCERT = fs.readFileSync(
-    "/etc/letsencrypt/live/api.liuyaf.me/fullchain.pem"
+    "/etc/letsencrypt/live/api.goagefriendly.org/fullchain.pem"
 );
 const TLSKEY = fs.readFileSync(
-    "/etc/letsencrypt/live/api.liuyaf.me/privkey.pem"
+    "/etc/letsencrypt/live/api.goagefriendly.org/privkey.pem"
 );
 const httpsOptions = {
     cert: TLSCERT,
@@ -47,7 +47,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     cookie: {
-        maxAge: 60000,
+        maxAge: 600000,
         httpOnly: false
     },
     name: "asdb",
@@ -64,7 +64,7 @@ app.all("/v1/customer-result", (req, res) => {
                 throw err;
             }
             result = adjustFormatToRelational(result);
-
+            res.json(result);
         });
     } else if (method == "POST") {
         let result = req.body;
@@ -140,21 +140,30 @@ app.all("/v1/sessions", (req, res) => {
     let body = req.body
     if (method == "GET") {
         let authUser = req.headers.user
+        console.log(req.session)
         if (req.session.isLoggedIn && req.session.userName == authUser) {
             res.send("alreay logged in");
         } else {
-            res.status(401).send("no logged in user")
+            res.status(201).send("no logged in user")
         }
     } else if (method == "POST") {
+        console.log(req.session)
+        if (req.session.isLoggedIn && req.session.userName == body.userName) {
+            return res.status(301).send("already logged in")
+        }
         User.findUser(body.userName, (err, result) => {
             if (err) throw err;
+            if (result == null) return res.status(401).send("no matching user")
             let passHash = result.passHash
-            bcrypt.compare(body.password, passHash, (err, sessres) => {
+            bcrypt.compare(body.password, passHash, (errCompare, sessres) => {
+                if (err) throw errCompare
                 if (sessres === true) {
                     req.session.isLoggedIn = true
                     req.session.userName = body.userName
                     res.set('user', body.userName)
                     res.status(201).send("logged in")
+                } else {
+                    res.status(403).send("wrong credentials")
                 }
             })
         })
@@ -180,6 +189,24 @@ app.use(function (err, req, res, next) {
 
 function adjustFormatToRelational(jsonResult) {
     let formatted = [];
+    let titles = {
+        id: {
+            title: 'id'
+        },
+        submittedAt: {
+            title: 'submittedAt'
+        },
+        businessType: {
+            title: 'businessType'
+        },
+        busniessSize: {
+            title: 'busniessSize'
+        },
+        zipcode: {
+            title: 'zipcode'
+        }
+    }
+    formatted.push(titles)
     for (let i = 0; i < jsonResult.length; i++) {
         let oneRecord = jsonResult[i];
         let obj = {};
@@ -192,6 +219,11 @@ function adjustFormatToRelational(jsonResult) {
             let title = "s" + (j + 1);
             for (let k = 0; k < oneRecord.responses[j].length; k++) {
                 let a = title + "q" + (k + 1);
+                if (titles[a] == undefined) {
+                    titles[a] = {
+                        title: a
+                    }
+                }
                 obj[a] = oneRecord.responses[j][k];
             }
         }
