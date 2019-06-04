@@ -61,7 +61,7 @@
           :sectionTitle="section.sectionTitle"
           :enlarge="enlarge"
           :generalTips="findTipsFromMap(section.sectionTitle)"
-          :color="color[index]"
+          :color="color[index%color.length]"
         ></ResultDetail>
       </el-tab-pane>
     </el-tabs>
@@ -187,25 +187,44 @@ export default {
       }
 
       var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
       var yyyy = today.getFullYear();
 
-      today = mm + '/' + dd + '/' + yyyy;
+      today = mm + "/" + dd + "/" + yyyy;
 
       doc.setFontSize(12);
-      doc.text(this.testType=='employer'? "Assessment type: Employer":"Assessment type: Customer Service"+" Assessment", 10, 10);
-      doc.text("Date completed: " + today, 10, 15)
+      doc.text(
+        this.testType == "employer"
+          ? "Assessment type: Employer"
+          : "Assessment type: Customer Service" + " Assessment",
+        10,
+        10
+      );
+      doc.text("Date completed: " + today, 10, 15);
 
       doc.setFontType("bold");
       doc.setFontSize(16);
-      doc.text("Here's your results: You got "+ this.correctCount +"/"+ this.totalQ + " right",10, 25)
+      doc.text(
+        "Here's your results: You got " +
+          this.correctCount +
+          "/" +
+          this.totalQ +
+          " right",
+        10,
+        25
+      );
 
       doc.setFontType("normal");
       doc.setFontSize(12);
-      doc.text("Congratulations-you completed the assessment test!", 10, 35)
-      doc.text(this.testType=='employer'? "Taking the time to complete this assessment shows your commitment to being an age-friendly employer.":"Taking the time to complete this assessment shows your commitment to providing age-friendly customer service.", 10, 40)
-
+      doc.text("Congratulations-you completed the assessment test!", 10, 35);
+      doc.text(
+        this.testType == "employer"
+          ? "Taking the time to complete this assessment shows your commitment to being an age-friendly employer."
+          : "Taking the time to complete this assessment shows your commitment to providing age-friendly customer service.",
+        10,
+        40
+      );
 
       doc.autoTable({
         body: body,
@@ -220,8 +239,8 @@ export default {
           tips: { cellWidth: 40 }
         },
         theme: "grid",
-        margin: {top: 45, left: 10},
-        headStyles: {fillColor: "#155777"}
+        margin: { top: 45, left: 10 },
+        headStyles: { fillColor: "#155777" }
       });
       doc.save(
         this.testType == "employer"

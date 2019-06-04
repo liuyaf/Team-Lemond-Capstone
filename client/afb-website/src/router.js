@@ -53,7 +53,7 @@ export default new Router({
       props: {
         TOA: questions.TOA,
         sections: questions.employerTest,
-        generalTips: questions.customerGeneralTips,
+        generalTips: questions.employerGeneralTips,
         testType: "employer"
       }
 

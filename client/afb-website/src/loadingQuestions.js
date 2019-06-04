@@ -598,10 +598,71 @@ let customerGeneralTips = new Map([
     }]]
 ])
 
+let employerGeneralTips = new Map([
+    ['Workforce Planning', [{
+            tipsTitle: "Workforce Planning",
+            tipsLi: [
+                "Analyze and forecast your workforce, tracking the age profile of your workforce, including those age 50+.",
+                "Encourage experienced staff to stay on by working with them to develop a plan and timeline that ensures a good transition. Ask if they want less responsibility, fewer hours,or a different schedule. Flexibility is key.",
+                "Conduct exit interviews to assess interest in post-retirement work options (e.g., consulting or temporary work) that saves on onboarding and training costs.",
+                "Explore alumni meetings and/or social media accounts (e.g., LinkedIn) that keep retirees linked to your organization."
+            ]
+        },
+        {
+            tipsTitle: "Hiring",
+            tipsLi: [
+                "On-the-job experience often outweighs education. Look for opportunities to promote before hiring new staff.",
+                "Include adjectives such as “mature,” “experienced,” and “reliable” in job ads to indicate your interest in age diversity.",
+                "Advertise openings with organizations that specialize in helping older jobseekers locate work opportunities.",
+                "Instruct hiring managers not to label anyone as “overqualified,” which too often means “too old.”"
+            ]
+        }
+    ]],
+    ['Flexible Work Arrangements', [{
+        tipsTitle: "Flexible Work Arrangements",
+        tipsLi: [
+            "Structure retirement plans to encourage older workers to work beyond the normal retirement age.",
+            "Consider flexible work arrangements (hours and/or location) for employees considering retirement, to retain their institutionalized knowledge.",
+            "Study opportunities for transitional work options (e.g., lateral transfers, job sharing, part-time or seasonal employment, and phased retirement—a gradual reduction of hours over time)."
+        ]
+    }]],
+    ['Training and Learning Opportunities', [{
+        tipsTitle: "Training and Learning Opportunities",
+        tipsLi: [
+            "Most older employees want to keep their skills up to date. Provide equal access to technical and computer training that helps them stay fresh.",
+            "Look at transferable skills among older staff who have an established work ethic. Encourage them to “reinvent” themselves if a new opportunity is on the horizon for your organization.",
+            "Ask experienced employees to contribute job-specific knowledge to younger staff through mentorships and intergenerational work teams.",
+            "Consider community service opportunities that increase staff satisfaction, help staff better understand your clientele, and build community good will.",
+        ]
+
+    }]],
+    ['Health and Benefits', [{
+        tipsTitle: "Health and Benefits",
+        tipsLi: [
+            "Encourage workplace wellness and health maintenance for employees of all ages (e.g., walking groups, yoga, nutrition classes).",
+            "Review physical requirements and ensure that physical stress isn’t causing valuable older workers to leave. Sometimes a simple cushioned floor mat can make a difference.",
+            "Identify and accommodate special needs (e.g., adjustable workstations, screen magnifiers, assisted listening devices).",
+            "Provide information and flexibility for employees who are caregivers (i.e., managing daily activities or a household with children, grandchildren, or elders who cannot manage on their own).",
+            "Allow employees to donate unused leave (i.e., paid time off) to colleagues who are caregivers."
+        ]
+
+    }]],
+    ['Age-Friendly Culture', [{
+        tipsTitle: "Age Diversity",
+        tipsLi: [
+            "People age 40 or older are in a “protected class.” Age discrimination in any aspect of employment—including hiring, firing, pay, job assignments, promotions, layoff, training, benefits—is against the law. Learn more at eeoc.gov.",
+            "Review hiring, evaluation, promotion, and layoff policies to ensure that they are age neutral.",
+            "Ensure that managers, supervisors, and lead staff understand age-discrimination laws and how to eliminate age-related stereotypes.",
+            "Train younger leaders to embrace age diversity, to value the wisdom and experience of older workers, and to manage people effectively across multiple generations."
+        ]
+
+    }]]
+])
 export default {
     TOA,
     businessInfo,
     employerTest,
     customerTest,
-    customerGeneralTips
+    customerGeneralTips,
+    employerGeneralTips
 }

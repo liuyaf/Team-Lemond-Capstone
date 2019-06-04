@@ -15,11 +15,11 @@
           <div class="title-panel">
             <p
               id="title-vertical"
-              :style="[{background: color[currentSectionNum]},  isAtTOA? {background:'#9F2B00'}:{}]"
+              :style="[{background: color[currentSectionNum%color.length]},  isAtTOA? {background:'#9F2B00'}:{}]"
             ></p>
             <p
               class="section-title"
-              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum]}, isAtTOA? {color:'#9F2B00'}:{}]"
+              :style="[enlargeFont? {fontSize:'32px'}:{}, {color:color[currentSectionNum%color.length]}, isAtTOA? {color:'#9F2B00'}:{}]"
             >
               <span
                 v-if="TOADone && currentSectionNum!==0"
@@ -50,9 +50,9 @@
           <el-button
             type="mini"
             class="question-btn"
-            :style="[isSelected(x)?{'background-color':color[currentSectionNum]}:{},
-                      currentQuestionNum===x-1?{'background-color':color[currentSectionNum]}:{},
-                      {'border-color': color[currentSectionNum]},
+            :style="[isSelected(x)?{'background-color':color[currentSectionNum%color.length]}:{},
+                      currentQuestionNum===x-1?{'background-color':color[currentSectionNum%color.length]}:{},
+                      {'border-color': color[currentSectionNum%color.length]},
                       enlargeFont?{'width':'50px', 'height':'50px', 'fontSize':'22px'}:{}]"
             :class="{selected: isSelected(x), selecting: currentQuestionNum===x-1}"
             v-for="x in currentSectionLength"
@@ -220,7 +220,7 @@ export default {
     reachTail: function() {
       return this.currentQuestionNum === this.currentSectionLength - 1;
     },
-    // TODO: fix numbering;
+
     sectionTitle: function() {
       if (this.isAtTOA) {
         return this.TOA.title;
@@ -331,7 +331,6 @@ export default {
             this.moveToPrevSection();
           }
         } else if (e.keyCode == 39) {
-          // debugger;
           if (this.currentQuestionNum < this.currentSectionLength - 1)
             this.currentQuestionNum++;
           else if (
@@ -357,7 +356,6 @@ export default {
     },
     // unfinished test means tests that happends within a timespan (e.g. 24 hours)
     checkUnfinishedTest: function() {
-      // debugger;
       let obj = localStorage.getItem(this.testType + "TestCache");
       if (obj == null) this.hasStoredResult = false;
       else {
@@ -414,7 +412,7 @@ export default {
       };
       axios({
         method: "post",
-        url: "https://api.liuyaf.me/v1/" + this.testType + "-result",
+        url: "https://api.goagefriendly.org/v1/" + this.testType + "-result",
         data: data
       })
         .then(response => {

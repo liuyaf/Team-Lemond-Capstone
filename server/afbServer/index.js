@@ -110,25 +110,32 @@ app.all("/v1/users", (req, res) => {
     if (method == "POST") {
         let user = req.body
         let newUser = {}
+
         newUser.fName = user.fName
         newUser.lName = user.lName
         newUser.userName = user.userName
         newUser.email = user.email
-        User.findExistingUser(user.userName, user.email, (err, result) => {
-            if (err) throw err
-            if (result == null) {
-                bcrypt.hash(user.password, saltRounds, (errHash, hash) => {
-                    if (errHash) throw errHash;
-                    newUser.passHash = hash
-                    User.createUser(newUser, (createErr, result) => {
-                        if (createErr) throw createErr
-                        res.status(201).json(result)
+        let authUser = req.headers.user
+        if (req.session.isLoggedIn && req.session.userName == authUser) {
+            User.findExistingUser(user.userName, user.email, (err, result) => {
+                if (err) throw err
+                if (result == null) {
+                    bcrypt.hash(user.password, saltRounds, (errHash, hash) => {
+                        if (errHash) throw errHash;
+                        newUser.passHash = hash
+                        User.createUser(newUser, (createErr, result) => {
+                            if (createErr) throw createErr
+                            res.status(201).json(result)
+                        })
                     })
-                })
-            } else {
-                res.status(400).send("user already existed")
-            }
-        })
+                } else {
+                    res.status(400).send("user already existed")
+                }
+            })
+        } else {
+            res.status(403).send("not authorized user");
+        }
+
     } else {
         res.status(405).send("invalid request type");
     }
@@ -140,14 +147,14 @@ app.all("/v1/sessions", (req, res) => {
     let body = req.body
     if (method == "GET") {
         let authUser = req.headers.user
-        console.log(req.session)
+
         if (req.session.isLoggedIn && req.session.userName == authUser) {
             res.send("alreay logged in");
         } else {
             res.status(201).send("no logged in user")
         }
     } else if (method == "POST") {
-        console.log(req.session)
+
         if (req.session.isLoggedIn && req.session.userName == body.userName) {
             return res.status(301).send("already logged in")
         }
