@@ -196,59 +196,14 @@
       </div>
       <div class="col-md-6 col-sm-12">
         <div class="card">
-          <div class="card-header titleHeader">Seattle Business Resources</div>
-          <div class="card-body">
-            <ul>
-              <li>
-                <a
-                  class="card-title"
-                  href="http://www.seattle.gov/economicdevelopment/business-district-organizations-x76248"
-                >Business District Organizations (Seattle)</a>
-              </li>
-              <li>
-                <a
-                  class="card-title"
-                  href="http://www.seattle.gov/economicdevelopment"
-                >Office of Economic Development, City of Seattle</a>
-              </li>
-              <li>
-                <a
-                  class="card-title"
-                  href="https://www.spl.org/programs-and-services/business/business-resources"
-                >Seattle Public Library Business Resources</a>
-              </li>
-              <li>
-                <a
-                  class="card-title"
-                  href="https://www.sba.gov/offices/district/wa/seattle"
-                >U.S. Small Business Administration, Seattle Office</a>
-              </li>
-              <li>
-                <a
-                  class="card-title"
-                  href="http://wsbdc.org/"
-                >Washington Small Business Development Center</a>
-              </li>
-              <li>
-                <a
-                  class="card-title"
-                  href="http://www.seakingwdc.org/"
-                >Workforce Development Council of Seattle-King County</a>
-              </li>
-            </ul>
+          <div class="card-header titleHeader">{{ businessResourcesheader }}</div>
+          <div class="card-body" v-html="ul">
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-Business District Organizations (Seattle)
-Office of Economic Development, City of Seattle
-Seattle Public Library Business Resources
-U.S. Small Business Administration, Seattle Office
-Washington Small Business Development Center
-Workforce Development Council of Seattle-King County
 
 
 <script>
@@ -261,6 +216,8 @@ export default {
   data() {
     return {
       info: null,
+      parser: new DOMParser(),
+      parsedHTML: null,
       errors: [],
       fName: "",
       lName: "",
@@ -271,10 +228,30 @@ export default {
       submitted: false,
       errorSubmit: false,
       success: null,
-      failed: null
+      failed: null,
+      businessResourcesheader: null,
+      ul: null
     };
   },
-  mounted() {},
+  mounted() {
+    axios
+    // JSON object from the WordPress API for this page: https://agefriendlysea.wpengine.com/?rest_route=/wp/v2/pages/32
+    .get("https://agefriendlysea.wpengine.com/wp-json/wp/v2/pages/32")
+    .then(response => {
+      // RAW HTML
+      this.info = response.data.content.rendered;
+      this.parsedHTML = this.parser.parseFromString(this.info, "text/html");
+
+      // business resources header
+      this.businessResourcesheader = this.parsedHTML.getElementsByClassName("header-text")[0].innerText
+
+      // business resource ul
+      this.ul = this.parsedHTML.getElementsByTagName("ul")[0].outerHTML
+    })
+    .catch(e => {
+        this.errors.push(e);
+      });
+  },
   methods: {
     submitForm: function() {
       let formInfo = new FormData();
@@ -344,7 +321,7 @@ export default {
   opacity: 0;
 }
 
-li {
+.card-body >>> ul {
   font-size: calc(10px + 0.8vw);
   font-family: "DDINRegular";
 }

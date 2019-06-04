@@ -17,6 +17,11 @@
                 class="intro-p"
               >{{ introSection.paragraph }}</p>
               <DynamicUrlButton :enlargeFont="enlargeFont" class="mb-4" v-bind:buttonInfo="{ color:'#155777', text: introSection.button.text, Url: introSection.button.url }"/>
+              <p 
+                :class="{ introEnlarge: enlargeFont }"
+                class="intro-p" 
+                v-html="introSection.paragraph2">
+              </p>
             </div>
             <div class="col-sm-12 col-lg-6">
                 <img v-bind:src="introSection.image" class="introImage" alt="5 adults sitting and smiling at the camera">
@@ -101,7 +106,8 @@ export default {
         button: {
           url: null,
           text: null
-        }
+        },
+        paragraph2: null
       },
       ageFriendlyTextBlocks: [],
       fiveReasonsSection: {
@@ -142,9 +148,9 @@ export default {
       // button
       this.introSection.button.text = WPbuttons[0].innerText
       this.introSection.button.url = WPbuttons[0].attributes[1].nodeValue
+      // second paragraph after the download button
+      this.introSection.paragraph2 = mediaTextBlocks[0].children[1].children[3].innerHTML      
       
-
-
 
       // AGE FRIENDLY SEATTLE AND AGE FRIENDLY BUSINESS SEATTLE
       // tags with class name 'resource-header' contains the header "Age Friendly Seattle", "Age Friendly Business Seatlle", and "5 Reasons to be Age Friendly"
