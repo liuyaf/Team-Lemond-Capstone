@@ -56,6 +56,24 @@
           <el-button type="success">Download Ready</el-button>
         </VueJsonToCsv>
       </div>
+      <div class="download-employer-questions">
+        <VueJsonToExcel
+          class="dl"
+          :data="employer_question"
+          :name="'Employer_Questions_at_'+getDate+'.xls'"
+        >
+          <el-button type="success">Download Employer Test Question</el-button>
+        </VueJsonToExcel>
+      </div>
+      <div class="download-customer-questions">
+        <VueJsonToExcel
+          class="dl"
+          :data="customer_question"
+          :name="'Customer_Questions_at_'+getDate+'.xls'"
+        >
+          <el-button type="success">Download Customer Test Question</el-button>
+        </VueJsonToExcel>
+      </div>
     </div>
     <div v-else-if="activeIndex==2">
       <form @submit.prevent="handleSubmit" class="form-signin">
@@ -135,11 +153,14 @@
 </template>
 <script>
 import VueJsonToCsv from "vue-json-to-csv";
+import questions from "../loadingQuestions";
+import VueJsonToExcel from "vue-json-excel";
 const axios = require("axios");
 export default {
   name: "mainPage",
   components: {
-    VueJsonToCsv
+    VueJsonToCsv,
+    VueJsonToExcel
   },
   data() {
     return {
@@ -152,6 +173,8 @@ export default {
       customerLoading: false,
       customer_json_data: null,
       customer_no_data: false,
+      employer_question: [],
+      customer_question: [],
       email: "",
       firstName: "",
       lastName: "",
@@ -165,31 +188,12 @@ export default {
       return this.password != this.passconf;
     },
     getCustomerTitle: function() {
-      let date = new Date();
-      let monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ];
-
-      let day = date.getDate();
-      let monthIndex = date.getMonth();
-      let year = date.getFullYear();
-
-      return (
-        "customer_get_at_" + year + "_" + monthNames[monthIndex] + "_" + day
-      );
+      return "customer_get_at_" + this.getDate();
     },
     getEmployerTitle: function() {
+      return "employer_get_at_" + this.getDate();
+    },
+    getDate: function() {
       let date = new Date();
       let monthNames = [
         "January",
@@ -209,10 +213,7 @@ export default {
       let day = date.getDate();
       let monthIndex = date.getMonth();
       let year = date.getFullYear();
-
-      return (
-        "employer_get_at_" + year + "_" + monthNames[monthIndex] + "_" + day
-      );
+      return year + "_" + monthNames[monthIndex] + "_" + day;
     }
   },
   methods: {
@@ -240,7 +241,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch(() => {
           this.employerLoading = false;
           this.$message.error("There's an error retrieving employer result");
         });
@@ -268,7 +269,7 @@ export default {
             }
           }
         })
-        .catch(err => {
+        .catch(() => {
           this.customerLoading = false;
           this.$message.error("There's an error retrieving customer result");
         });
@@ -321,6 +322,31 @@ export default {
             this.$message.error(err.response.data);
           });
       }
+    },
+    formatEmployerQuestion: function() {
+      // debugger;
+      let obj = {};
+      for (let i = 1; i < questions.employerTest.length; i++) {
+        let _questions = questions.employerTest[i].questions;
+        for (let j = 0; j < _questions.length; j++) {
+          let key = "s" + i + "q" + (j + 1);
+          let value = _questions[j].title;
+          obj[key] = value;
+        }
+      }
+      this.$set(this.employer_question, 0, obj);
+    },
+    formatCustomerQuestion: function() {
+      let obj = {};
+      for (let i = 1; i < questions.customerTest.length; i++) {
+        let _questions = questions.customerTest[i].questions;
+        for (let j = 0; j < _questions.length; j++) {
+          let key = "s" + i + "q" + (j + 1);
+          let value = _questions[j].title;
+          obj[key] = value;
+        }
+      }
+      this.$set(this.customer_question, 0, obj);
     }
   },
   beforeMount() {
@@ -340,6 +366,8 @@ export default {
         }
       })
       .catch();
+    this.formatEmployerQuestion();
+    this.formatCustomerQuestion();
   }
 };
 </script>
@@ -360,5 +388,9 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 40px;
+}
+
+.download-employer-questions {
+  margin-top: 30px;
 }
 </style>
