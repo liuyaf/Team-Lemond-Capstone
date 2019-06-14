@@ -142,16 +142,45 @@ After logging in, you will see a dashboard. Click on top left “Services”, yo
 To create new instance, follow the instructions:
 ##### 1. Go to EC2 dashboard from services and click launch instance
 ![Step 1](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image7.png)
-##### 2. In **1. Choose AMI** Select Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type
+##### 2. In ***1. Choose AMI*** Select Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type
 ![Step 2](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image5.png)
-##### 3. Use **default setting** step **2. Choose Instance Type** and **3. Configure Instance**
-##### 4. Click **4. Add Storage** and change the storage to 12 GBs
+##### 3. Use "default setting" step ***2. Choose Instance Type*** and ***3. Configure Instance***
+##### 4. Click ***4. Add Storage*** and change the storage to 12 GBs
 ![Step 4](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image19.png)
-##### 5. In **5. Add tags**, give the instance a name
+##### 5. In ***5. Add tags***, give the instance a name
 ![Step 5](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image9.png)
-##### 6. In **6. Configure Security Group**, add the following types
+##### 6. In ***6. Configure Security Group***, add the following types
 ![Step 6](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image14.png)
-##### 7. In **7. Review**, click launch and make sure select the correct private key (it is recommended to use the same private key for all servers, for better management purpose.) The afbIlluminage.pem private key will be provided in email.
+##### 7. In ***7. Review***, click launch and make sure select the correct private key (it is recommended to use the same private key for all servers, for better management purpose.) The afbIlluminage.pem private key will be provided in email.
 ![Step 7](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image16.png)
 
+#### Create Elastic IP for new instance
+##### 1. At the console, go to Elastic IPs
+![Step 1](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image17.png)
+##### 2. Click Allocate new address, then click Allocate
+##### 3. You should get a new IP not associated with any instance
+##### 4. Click on new IP, actions: associate address
+![Step 4](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image2.png)
+then select the instance you want to associate with.
+
+#### Route Traffic to new instance using Route 53
+Once you create a new instance, you need to add the ruleset in Route 53 to route traffic to it. To do that:
+##### 1. You need to first copy the Public DNS address of the instance that you want to route. You can find it at ec2 dashboard
+![Step 1](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image21.png)
+##### 2. Go to Route 53 -> hosted zones -> goagefriendly.org. You should see several rules set about the domain
+![Step 2](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image13.png)
+##### 3. Click Create Record Set, put the sub domain name at the name, change type to CNAME and paste the public DNS name at Value
+![Step 3](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image4.png)
+
+#### Access AWS EC2 instances with command line:
+In order to update environment of the server/ troubleshooting server issue, you need to ssh into the EC2 instance using command line tool like: bash, masOS terminal, Windows cmd.
+1. First, you need to have access to the private key mentioned above (afbIlluminage.pem), store it in a secure folder (it is recommended to put it in ~/.ssh/  folder)
+2. Open the command line tool and type in `ssh -i ~/.ssh/afbIlluminage.pem ec2-user@THEPUBLICDNSADDRESS`
+3. Here’s the list of the server and its public DNS:
+a. Landing page (address: https://goagefriendly.org): ec2-3-15-66-213.us-east-2.compute.amazonaws.com 
+b. Nodejs server (address: https://api.goagefriendly.org): ec2-3-15-111-64.us-east-2.compute.amazonaws.com
+c. Dashboard server (address: https://staff.goagefriendly.org): ec2-18-218-203-136.us-east-2.compute.amazonaws.com
+4. Type yes if you are prompted.
+5. Then you should successfully ssh into the server
+![Step 5](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image11.png)
 
