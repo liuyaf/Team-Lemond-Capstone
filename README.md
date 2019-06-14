@@ -60,12 +60,13 @@ image here
 image here
 Save your changes by clicking on the blue “update” button.
 **NOTE: While the contents for these webpages are editable through the WordPress, the preview version of the page are not the actual representation of the web page edited, so below we provide a table that shows the name of the pages from the WordPress dashboard and the pages associated with it on the goagefriendly.org website.**
-| WordPress page name | Where the edits are affected |
-|---------------------|------------------------------|
-| Landing Page  |  https://goagefriendly.org/ |
-|  Resources | https://goagefriendly.org/resources  |
-|  Assessment Test |  https://goagefriendly.org/assessment-selection |
-| Contact Us | https://goagefriendly.org/contact-us |
+
+|WordPress page name|Where the edits are affected                  |
+|-------------------|----------------------------------------------|
+|Landing Page       |https://goagefriendly.org/                    |
+|Resources          |https://goagefriendly.org/resources           |
+|Assessment Test    |https://goagefriendly.org/assessment-selection|
+|Contact Us         |https://goagefriendly.org/contact-us          |
 
 ### Vue.js
 To create the website we use Vue.js as the javascript library to create majority of the website functionalities.
