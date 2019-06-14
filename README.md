@@ -1,16 +1,19 @@
 # Team-Lemond-Capstone
 
-### Servers side API end points
-
-database: mysql? mongo?
-
-general stats: how many survey tests taken; demographcis, busniess size
-
-GET:
-
-
-`\v1\`
-
+### Running the website in your localhost
+Once you cloned this repository to you local machine
+```
+cd client
+cd afb-website
+```
+Run this command once to install all the dependencies. You will need to run this again if a new npm package has been installed
+```
+npm install
+```
+To run the website in your localhost
+```
+npm run serve
+```
 
 
 ![Age Friendly Business Logo](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image20.png)
@@ -174,13 +177,51 @@ Once you create a new instance, you need to add the ruleset in Route 53 to route
 
 #### Access AWS EC2 instances with command line:
 In order to update environment of the server/ troubleshooting server issue, you need to ssh into the EC2 instance using command line tool like: bash, masOS terminal, Windows cmd.
-1. First, you need to have access to the private key mentioned above (afbIlluminage.pem), store it in a secure folder (it is recommended to put it in ~/.ssh/  folder)
-2. Open the command line tool and type in `ssh -i ~/.ssh/afbIlluminage.pem ec2-user@THEPUBLICDNSADDRESS`
-3. Here’s the list of the server and its public DNS:
-a. Landing page (address: https://goagefriendly.org): ec2-3-15-66-213.us-east-2.compute.amazonaws.com 
-b. Nodejs server (address: https://api.goagefriendly.org): ec2-3-15-111-64.us-east-2.compute.amazonaws.com
-c. Dashboard server (address: https://staff.goagefriendly.org): ec2-18-218-203-136.us-east-2.compute.amazonaws.com
-4. Type yes if you are prompted.
-5. Then you should successfully ssh into the server
+##### 1. First, you need to have access to the private key mentioned above (afbIlluminage.pem), store it in a secure folder (it is recommended to put it in ~/.ssh/  folder)
+##### 2. Open the command line tool and type in `ssh -i ~/.ssh/afbIlluminage.pem ec2-user@THEPUBLICDNSADDRESS`
+##### 3. Here’s the list of the server and its public DNS:
++ Landing page (address: https://goagefriendly.org): ec2-3-15-66-213.us-east-2.compute.amazonaws.com 
++ Nodejs server (address: https://api.goagefriendly.org): ec2-3-15-111-64.us-east-2.compute.amazonaws.com
++ Dashboard server (address: https://staff.goagefriendly.org): ec2-18-218-203-136.us-east-2.compute.amazonaws.com
+##### 4. Type yes if you are prompted
+##### 5. Then you should successfully ssh into the server
 ![Step 5](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image11.png)
 
+#### Routine maintenance of EC2 instance:
+This is to make sure the environment in the servers are all up to date. We have provided a bash script that will automatically do it for you. The bash script file should be find at the root directory of the GitHub repo with the name **installEC2updates.sh** To run the bash script, you should first store the **AWS private key at ~/.ssh/ folder or you will need to modify the path to the private key**. Then you can either click on the bash script or run it in command line: `sh installEC2updates.sh` (you will need to first go to the directory where the bash script is located)
+
+It is recommended to run the update every **2 week**.
+
+#### Applying loadingQuestion.js
+The Aging and Disability Services will modify/ add new questions through the file loadingQuestion.js. Right now the process is 1) The Aging and Disability Services updates the file in text editor and 2) send to Illuminage to update. 
+
+Once you receive the update, replace the loadingQuestions.js file at **Team-Lemond-Capstone/client/afb-website/src**
+And at
+**Team-Lemond-Capstone/client/dashboard/src**
+Then redeploy to see the changes
+
+#### Deploying websites/server after making changes:
+We have created the bash script that allows auto redeployment. You will first need to first store the docker account credential file somewhere and change the file path liking to that file (it is currently named afbdockerpw.txt). To change the file path, you’ll need to open the **pushToDocker.sh** bash script in text editor (but don’t double click! It will automatically run). They can be found at the GitHub repository: **Team-Lemond-Capstone/client/afb-website/ Team-Lemond-Capstone/client/dashboard Team-Lemond-Capstone/server/afbServer**
+![Command line](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image10.png)
+Then run the bash script call deployToAWS.sh by clicking or through command line, you should start redeploying.
+
+#### Routine maintenance of the project
+Since the dependencies and environment we use to create the website will be updated routinely, to avoid potential vulnerability, we should update those accordingly. To update dependencies, you need to go the project folder using command line tool. Locations are the same as those listed at **Deploying websites/server after making changes** section. When you’re at the folder, **run npm audit fix** for each project folder and **redeploy the changes**. 
+
+It is recommended to run the update every **2 week**.
+
+**NOTE**: when installing udpates for Team-Lemond-Capstone/server/afbServer, you might get the warning:
+![Warning](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image1.png)
+This can be ignored
+
+#### Server DBMS:
+We use mongodb to store and manage results data, user data and login session. They are saved at ec2 instance hard drive at location **/home/ec2-user/mongodblocal**. To reach the file location run cd `/home/ec2-user/mongodblocal` in command line. If you need to clear the db files, run `rm -rf /home/ec2-user/mongodblocal/*`
+So changes, redeployment of the server will not cause the loss of data.
+
+#### Troubleshooting:
+**This site can’t be reached**: this normally could be solved with redeployment. If not, ssh into the EC2 instance, run `docker ps -a` and see if there’s any image that’s exited out. If so, type `docker logs IMAGENAME` and see the error messages. Fix it locally, and redeploy.
+
+The name of the image could be found at **docker ps -a**
+![docker](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image3.png)
+
+**The website can no longer be accessed via https://** We have set up the auto renew of the https certificate for the website. But if there’s error renewing, please check here https://certbot.eff.org/docs/using.html
