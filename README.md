@@ -87,7 +87,7 @@ Assessment contents such as the questions, the tips, and terms of agreement text
 
 Fixing typos will be easy as just changing the text, however if you want to add or remove a question then this will be how you do it:
 
-##### Adding/Removing Questions:
+#### Adding/Removing Questions:
 To add or remove questions on either of the customer or employer assessment tests, scroll to either the customerTest or employerTest variable depending on where you want to add/remove questions.
 
 Once you are at the variable go the specific section you want to make edits too and following this json format: 
@@ -109,7 +109,7 @@ Using a json formatter after this to make sure you did it correctly will be help
 
 Because this maybe be confusing we suggest only adding new questions at the end so keeping track of questions, however, if it is a must, make sure to keep track of the dates when new sections are added so you know what is referring to what.
 
-##### Adding/Removing Sections:
+#### Adding/Removing Sections:
 To add or remove sections on either of the customer or employer assessment tests, scroll to either the customerTest or employerTest variable depending on where you want to add/remove questions.
 
 Once you are there add a section by following the format from the ones currently implemented. Remember to make sure to fix the question IDs so they are in order after doing so.
@@ -120,7 +120,7 @@ Using a json formatter after this to make sure you did it correctly will be help
 
 Because this might be confusing, we suggest only adding new sections at the end so keeping track of questions and sections don’t become confusing, however, if it is a must, make sure to keep track of the dates when new sections are added so you know what is referring to what.
 
-##### Adding/Removing tips:
+#### Adding/Removing tips:
 To add or remove tips for either of the result pages of the customer or employer assessment test, scroll to either the “customerGeneralTips” variable or “employerGeneralTips” where they will be all stored in a json format. 
 
 To add tips under a specific section such as “Marketing” simply add another block with
@@ -133,5 +133,25 @@ A GitHub repository containing all the source code of the goagefriendly.org webs
 
 **After editing, please send the updated loadingQuestion.js to Illuminage and have them deploy the change.**
 
+### Amazon Web Services
+To access Amazon Web Services (AWS) console, you need to go to https://signin.aws.amazon.com/ with the email: agefriendlyseattle@illuminage.com and credential.
+
+After logging in, you will see a dashboard. Click on top left “Services”, you should find EC2 under compute and Route53 under network. EC2 is the section where you manage existing afb servers, creating new server. Route 53 is for routing inbound traffic to specific server.
+
+#### Creating New EC2 Instance
+To create new instance, follow the instructions:
+##### 1. Go to EC2 dashboard from services and click launch instance
+![Step 1](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image7.png)
+##### 2. In **1. Choose AMI** Select Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type
+![Step 2](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image5.png)
+##### 3. Use **default setting** step **2. Choose Instance Type** and **3. Configure Instance**
+##### 4. Click **4. Add Storage** and change the storage to 12 GBs
+![Step 4](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image19.png)
+##### 5. In **5. Add tags**, give the instance a name
+![Step 5](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image9.png)
+##### 6. In **6. Configure Security Group**, add the following types
+![Step 6](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image14.png)
+##### 7. In **7. Review**, click launch and make sure select the correct private key (it is recommended to use the same private key for all servers, for better management purpose.) The afbIlluminage.pem private key will be provided in email.
+![Step 7](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image16.png)
 
 
