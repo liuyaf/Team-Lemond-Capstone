@@ -27,7 +27,7 @@ Features within the goagefriendly.org website include:
 + Two different self-assessments (customer service and employer self-assessment) that business representatives take to find out + how age friendly their business are and also provide ways to improve their businesses.
 
 ### Technology Architecture
-image here
+![Technology Architecture](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image18.png)
 Data within the goagefriendly.org website flows through three different platforms:
 + WordPress [https://wordpress.com/]
 + A content management system for websites.
@@ -48,16 +48,16 @@ Contents within the WordPress are consumed by Vue.js through the WordPress REST 
 
 #### How to edit pages on WordPress
 ##### 1. Log in to the Wordpress admin
-image here
+![Log in to the Wordpress admin](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image8.png)
 Got to https://agefriendlysea.wpengine.com/wp-admin/ and log in using your email and password.
 ##### 2. Click “Pages” on the left navbar
-image here
+![Click “Pages” on the left navbar](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image15.png)
 ##### 3. Select the page that you want to edit
-image here
+![Click “Pages” on the left navbar](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image6.png)
 ##### 4. Make the necessary edit on the page
-image here
+![Make the necessary edit on the page](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image22.png)
 ##### 5. Save your changes
-image here
+![Save your changes](https://github.com/liuyaf/Team-Lemond-Capstone/blob/development/documentation-images/image12.png)
 Save your changes by clicking on the blue “update” button.
 **NOTE: While the contents for these webpages are editable through the WordPress, the preview version of the page are not the actual representation of the web page edited, so below we provide a table that shows the name of the pages from the WordPress dashboard and the pages associated with it on the goagefriendly.org website.**
 
@@ -132,7 +132,6 @@ To remove tips under a specific section, simply remove the block or text that is
 A GitHub repository containing all the source code of the goagefriendly.org website can be found at https://github.com/liuyaf/Team-Lemond-Capstone.
 
 **After editing, please send the updated loadingQuestion.js to Illuminage and have them deploy the change.**
-
 
 
 
